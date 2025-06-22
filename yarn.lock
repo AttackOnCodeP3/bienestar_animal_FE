@@ -41,6 +41,13 @@
     ora "8.2.0"
     rxjs "7.8.2"
 
+"@angular/animations@20.0.4":
+  version "20.0.4"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-20.0.4.tgz#975a674895453bc5cc389cdc7f269753b16f18c3"
+  integrity sha512-s0kRcEply2A1ThvFmb0+o+hEpAbPn08lpK8xjWZryM4cMrwjgsUE0OZHZPBANP4I1xT7Z82l+fmQbH+vX48EyA==
+  dependencies:
+    tslib "^2.3.0"
+
 "@angular/build@^20.0.3":
   version "20.0.3"
   resolved "https://registry.yarnpkg.com/@angular/build/-/build-20.0.3.tgz#6c985c202e8955c9502fc725402da6ca8dc686b3"
@@ -74,6 +81,14 @@
     watchpack "2.4.2"
   optionalDependencies:
     lmdb "3.3.0"
+
+"@angular/cdk@20.0.3":
+  version "20.0.3"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-20.0.3.tgz#d233bcc345cec9a05f1fec3459a4e7bcc3532f07"
+  integrity sha512-70KG8GpK4aV9j5hUkpDZJQ6oMgCuaCRY6JX1axPxkNtQaiK6PAmTfQLiGqF2cYhbQneeq3uGvTorAjRfvp8NPQ==
+  dependencies:
+    parse5 "^7.1.2"
+    tslib "^2.3.0"
 
 "@angular/cli@^20.0.3":
   version "20.0.3"
@@ -136,6 +151,13 @@
   version "20.0.4"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-20.0.4.tgz#ba93a3709d1805db701027fe79015809f4239d6c"
   integrity sha512-bFTMgJSHiLr80ELymRykZW6o5QroDlk+g5AFFiY9yxM8I0DV5YpCNBefv8GiuWubE+Lw6LkQ/HMYeXYJMTue3A==
+  dependencies:
+    tslib "^2.3.0"
+
+"@angular/material@20.0.3":
+  version "20.0.3"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-20.0.3.tgz#8ff22bf0870868c0170d290538c99087b8f1cb0d"
+  integrity sha512-kd5Mi6gVxcjDs1nfm8GG2rId59SXWQjkiBMqrYuhy2Trpb+zG0vrLClrpoe3JdWqoX4GJagxGwl3VRDBIoP/cw==
   dependencies:
     tslib "^2.3.0"
 
@@ -1447,6 +1469,11 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
+
+bootstrap@5.3.7:
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.7.tgz#8640065036124d961d885d80b5945745e1154d90"
+  integrity sha512-7KgiD8UHjfcPBHEpDNg+zGz8L3LqR3GVwqZiBRFX04a1BCArZOz1r2kjly2HQ0WokqTO0v1nF+QAt8dsW4lKlw==
 
 brace-expansion@^1.1.7:
   version "1.1.12"
@@ -3136,7 +3163,7 @@ parse5-sax-parser@^7.0.0:
   dependencies:
     parse5 "^7.0.0"
 
-parse5@^7.0.0:
+parse5@^7.0.0, parse5@^7.1.2:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-7.3.0.tgz#d7e224fa72399c7a175099f45fc2ad024b05ec05"
   integrity sha512-IInvU7fabl34qmi9gY8XOVxhYyMyuH2xUNpb2q8/Y+7552KlejkRvqvD19nMoUW/uQGGbqNpA6Tufu5FL5BZgw==

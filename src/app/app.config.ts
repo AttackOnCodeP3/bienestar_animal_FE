@@ -10,15 +10,17 @@ import localeEs from '@angular/common/locales/es'
 
 import { routes } from './app.routes';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 
 registerLocaleData(localeEs)
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimationsAsync(),
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
+    provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
+    provideZonelessChangeDetection(),
     { provide: LOCALE_ID, useValue: 'es' },
-    provideHttpClient(withInterceptorsFromDi())
   ]
 };
