@@ -1,0 +1,24 @@
+@use 'sass:map';
+
+/// Returns a rem value from a pixel input for scalable typography.
+///
+/// @access public
+/// @param {Number} $px - Pixel value to convert.
+/// @return {Number} rem value
+/// @example scss
+///   font-size: to-rem(24); // returns 1.5rem
+@function to-rem($px) {
+  @return ($px / 16) * 1rem;
+}
+
+/// Returns true if a key exists in a Sass map.
+///
+/// @access public
+/// @param {Map} $map - The Sass map to search.
+/// @param {String | Symbol} $key - The key to check for.
+/// @return {Boolean} true if key exists, false otherwise
+/// @example scss
+///   $result: map-has-key-strict($my-map, "primary");
+@function map-has-key-strict($map, $key) {
+  @return map.has-key($map, $key);
+}

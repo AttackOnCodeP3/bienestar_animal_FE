@@ -1,3 +1,11 @@
+/// Truncates a single line of text with ellipsis and sets a maximum width.
+///
+/// @access public
+/// @param {Length | Percentage} $width - The maximum width of the text container. Defaults to 100%.
+/// @example scss
+///   .title {
+///     @include truncate-text(80%);
+///   }
 @mixin truncate-text($width: 100%) {
   white-space: nowrap;
   overflow: hidden;
@@ -5,10 +13,69 @@
   width: $width;
 }
 
-@mixin limit-lines($num-lines) {
+/// Limits the number of visible lines in a block of text using `-webkit-line-clamp`.
+///
+/// @access public
+/// @param {Number} $lines - Number of lines to display.
+/// @example scss
+///   .description {
+///     @include limit-lines(3);
+///   }
+@mixin limit-lines($lines) {
   display: -webkit-box;
-  -webkit-line-clamp: $num-lines;
+  -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/// Centers content both vertically and horizontally using flexbox.
+///
+/// @access public
+/// @example scss
+///   .centered {
+///     @include flex-center;
+///   }
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/// Applies fill colors individually to each logo part.
+///
+/// This mixin allows specifying separate colors for each part of the logo:
+/// - `.logo-color-paw`
+/// - `.logo-color-word-wellbeing`
+/// - `.logo-color-word-animal`
+/// - `.logo-color-community-care`
+///
+/// @access public
+/// @param {Color} $pawColor - Color for the paw icon.
+/// @param {Color} $wellbeingColor - Color for the word "wellbeing".
+/// @param {Color} $animalColor - Color for the word "animal".
+/// @param {Color} $communityCareColor - Color for the phrase "community and care".
+/// @example scss
+///   @include apply-logo-colors($c1, $c2, $c3, $c4);
+@mixin apply-logo-colors(
+  $pawColor,
+  $wellbeingColor,
+  $animalColor,
+  $communityCareColor
+) {
+  .logo-color-paw {
+    fill: $pawColor;
+  }
+
+  .logo-color-word-wellbeing {
+    fill: $wellbeingColor;
+  }
+
+  .logo-color-word-animal {
+    fill: $animalColor;
+  }
+
+  .logo-color-community-care {
+    fill: $communityCareColor;
+  }
 }

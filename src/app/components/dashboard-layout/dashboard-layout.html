@@ -9,50 +9,45 @@
 
 <mat-sidenav-container>
   <mat-sidenav [opened]="!isScreenSmall()" [mode]="sideNavMode()" [style.width]="'260px'" class="px-1">
+
     <mat-nav-list class="mx-1 ms-lg-1 me-lg-0">
-      <mat-accordion>
-        @for (item of menuItems; track item) {
-          @if ((item?.children?.length ?? 0) > 0) {
-            <mat-expansion-panel class="mb-2" [disabled]="item.isDisabled">
-              <mat-expansion-panel-header class="px-3">
-                <mat-panel-title>
-                  <mat-icon class="material-symbols-outlined">{{ item.icon }}</mat-icon>
-                  <span class="ms-2">{{ item.label }}</span>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+      @for (item of menuItemsSorted(); track item) {
+        @if (item?.children?.length) {
+          <mat-expansion-panel class="mb-2" [disabled]="item?.isDisabled">
+            <mat-expansion-panel-header class="px-3">
+              <mat-panel-title>
+                <mat-icon class="material-symbols-outlined">{{ item?.icon }}</mat-icon>
+                <span class="ms-2">{{ item?.label }}</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
 
-              <mat-action-list>
-                @for (child of item.children; track child) {
-                  <mat-list-item
-                    class="mb-2"
-                    [disabled]="child.isDisabled"
-                    [routerLink]="child.route"
-                    routerLinkActive="mdc-list-item--activated">
-                    <span>{{ child.label }}</span>
-                  </mat-list-item>
-                }
-              </mat-action-list>
-            </mat-expansion-panel>
-          }
-        }
-      </mat-accordion>
-
-      @for (item of menuItems; track item) {
-        @if (!item.children || item.children.length === 0) {
+            <mat-action-list>
+              @for (child of item?.children; track child) {
+                <mat-list-item
+                  class="mb-2"
+                  [disabled]="child.isDisabled"
+                  [routerLink]="child.route"
+                  routerLinkActive="mdc-list-item--activated">
+                  <span>{{ child.label }}</span>
+                </mat-list-item>
+              }
+            </mat-action-list>
+          </mat-expansion-panel>
+        } @else {
           <mat-list-item
             class="mb-2"
-            [disabled]="item.isDisabled"
-            [routerLink]="item.route"
+            [disabled]="item?.isDisabled"
+            [routerLink]="item?.route"
             routerLinkActive="mdc-list-item--activated"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <mat-icon matListItemIcon class="material-symbols-outlined">{{ item.icon }}</mat-icon>
-            <span>{{ item.label }}</span>
+            <mat-icon matListItemIcon class="material-symbols-outlined">{{ item?.icon }}</mat-icon>
+            <span>{{ item?.label }}</span>
           </mat-list-item>
         }
       }
-
     </mat-nav-list>
+
   </mat-sidenav>
 
   <mat-sidenav-content>

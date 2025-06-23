@@ -12,3 +12,9 @@
   }
 }
 
+@for $i from 1 through 5 {
+  .font-size-#{$i} {
+    font-size: to-rem($i * 10); // 10px, 20px, ..., 50px
+  }
+}
+

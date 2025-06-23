@@ -1,4 +1,4 @@
-import {Component, inject, signal, viewChild} from '@angular/core';
+import {Component, computed, inject, signal, viewChild} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatIconButton} from "@angular/material/button";
@@ -40,19 +40,13 @@ export class DashboardLayout {
   readonly sideNavMode = signal<MatDrawerMode>('side');
   readonly matSidenav = viewChild(MatSidenav);
 
-  constructor() {
-    this.breakpointObserver.observe([`(max-width:${BreakpointsEnum.XL}px)`]).subscribe(result => {
-      if (result.matches) {
-        this.sideNavMode.set("over");
-        this.isScreenSmall.set(true);
-      } else {
-        this.sideNavMode.set("side");
-        this.isScreenSmall.set(false);
-      }
-    })
-  }
-
-  menuItems: IMenuItem[] = [
+  readonly menuItems = signal<IMenuItem[]>([
+    {
+      icon: 'home',
+      label: 'Home',
+      route: 'home',
+      isDisabled: false
+    },
     {
       icon: 'home',
       label: 'Gemification',
@@ -105,5 +99,26 @@ export class DashboardLayout {
       route: '',
       isDisabled: false
     }
-  ]
+  ])
+
+  readonly menuItemsSorted = computed(() => {
+    const items = this.menuItems();
+    const home = items.find(item => item.route === 'home');
+    const withChildren = items.filter(item => item !== home && item.children?.length);
+    const withoutChildren = items.filter(item => item !== home && (!item.children || item.children.length === 0));
+    return [home, ...withChildren, ...withoutChildren].filter(Boolean);
+  });
+
+  constructor() {
+    this.breakpointObserver.observe([`(max-width:${BreakpointsEnum.XL}px)`]).subscribe(result => {
+      if (result.matches) {
+        this.sideNavMode.set("over");
+        this.isScreenSmall.set(true);
+      } else {
+        this.sideNavMode.set("side");
+        this.isScreenSmall.set(false);
+      }
+    })
+  }
+
 }
