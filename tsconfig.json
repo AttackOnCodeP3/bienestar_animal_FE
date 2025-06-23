@@ -13,7 +13,27 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["app/components/*"],
+
+      "@services/*": ["app/services/*"],
+      "@services/http/*": ["app/services/http/*"],
+
+      "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
+      "@common/enums/*": ["app/common/enums/*"],
+      "@common/interfaces": ["app/common/interfaces/index.ts"], // Alias for interfaces index file
+      "@common/interfaces/*": ["app/common/interfaces/*"],
+
+      "@animations/fade": ["app/animations/fade/index.ts"], // Alias for animations index fade file
+      "@animations/fade/*": ["app/animations/fade/*"],
+
+      "@animations/slide": ["app/animations/slide/index.ts"], // Alias for animations index slide file
+      "@animations/slide/*": ["app/animations/slide/*"],
+
+      "@pages/*": ["app/pages/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
