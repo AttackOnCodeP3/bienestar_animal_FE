@@ -1,0 +1,19 @@
+@use '@angular/material' as material;
+@use "theme-colors" as theme;
+@use 'sass:map';
+
+:root {
+  @include material.expansion-overrides((
+    container-background-color: map.get(theme.$primary-palette, 60),
+    header-text-color: map.get(theme.$primary-palette, 100),
+    header-indicator-color: map.get(theme.$primary-palette, 100),
+  ));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include material.expansion-overrides((
+      container-background-color: map.get(theme.$primary-palette, 10),
+    ));
+  }
+}

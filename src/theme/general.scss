@@ -1,7 +1,16 @@
+@use"sass:map";
+@use "theme-colors" as theme;
 @use "mixins" as mixins;
 
 .logo {
   width: 1.875rem; // 30px
+
+
+  @media(prefers-color-scheme: light) {
+    &-color-theme {
+      color: map.get(theme.$primary-palette, 100);
+    }
+  }
 }
 
 .cdk-virtual-scroll-content-wrapper {

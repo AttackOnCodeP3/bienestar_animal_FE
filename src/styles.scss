@@ -1,7 +1,7 @@
+@use 'sass:map';
 @use '@angular/material' as material;
 @use "theme/theme-colors" as theme;
-@use "theme/mat-toolbar-overrides";
-@use 'sass:map';
+@use "theme/index" as custom-rules;
 
 html, body {
   height: 100%;
@@ -45,6 +45,6 @@ html {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
-    @include material.all-component-themes($bienestar-animal-dark-theme);
+    @include material.all-component-colors($bienestar-animal-dark-theme);
   }
 }

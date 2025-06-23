@@ -5,9 +5,9 @@
   width: $width;
 }
 
-@mixin limit-lines($num-lineas) {
+@mixin limit-lines($num-lines) {
   display: -webkit-box;
-  -webkit-line-clamp: $num-lineas;
+  -webkit-line-clamp: $num-lines;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

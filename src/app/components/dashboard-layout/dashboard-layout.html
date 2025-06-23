@@ -1,9 +1,9 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <button mat-icon-button (click)="matSidenav()?.toggle()">
-      <mat-icon class="material-symbols-outlined white">menu</mat-icon>
+      <mat-icon class="material-symbols-outlined logo-color-theme">menu</mat-icon>
     </button>
-    <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion" />
+    <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -23,15 +23,13 @@
 
               <mat-action-list>
                 @for (child of item.children; track child) {
-                  <button
-                    mat-list-item
+                  <mat-list-item
+                    class="mb-2"
                     [disabled]="child.isDisabled"
                     [routerLink]="child.route"
-                    routerLinkActive="mdc-list-item--activated"
-                    class="mb-2"
-                  >
+                    routerLinkActive="mdc-list-item--activated">
                     <span>{{ child.label }}</span>
-                  </button>
+                  </mat-list-item>
                 }
               </mat-action-list>
             </mat-expansion-panel>
@@ -58,6 +56,6 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <router-outlet />
+    <router-outlet/>
   </mat-sidenav-content>
 </mat-sidenav-container>
