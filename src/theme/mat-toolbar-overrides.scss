@@ -1,0 +1,17 @@
+@use '@angular/material' as material;
+@use "theme-colors" as theme;
+@use 'sass:map';
+
+:root {
+  @include material.toolbar-overrides((
+    container-background-color: map.get(theme.$primary-palette, 60),
+  ));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include material.toolbar-overrides((
+      container-background-color: map.get(theme.$primary-palette, 10),
+    ));
+  }
+}

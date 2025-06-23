@@ -1,0 +1,14 @@
+@mixin truncate-text($width: 100%) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: $width;
+}
+
+@mixin limit-lines($num-lineas) {
+  display: -webkit-box;
+  -webkit-line-clamp: $num-lineas;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

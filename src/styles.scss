@@ -1,14 +1,19 @@
 @use '@angular/material' as material;
 @use "theme/theme-colors" as theme;
+@use "theme/mat-toolbar-overrides";
 @use 'sass:map';
 
-@include material.core();
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-$custom-theme: material.define-theme((
+$bienestar-animal-light-theme: material.define-theme((
   color: (
     primary: theme.$primary-palette,
     tertiary: theme.$tertiary-palette,
-    theme-type: dark,
+    theme-type: light
   ),
   typography: (
     brand-family: 'Roboto',
@@ -18,12 +23,28 @@ $custom-theme: material.define-theme((
   ),
 ));
 
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+$bienestar-animal-dark-theme: material.define-theme((
+  color: (
+    primary: theme.$primary-palette,
+    tertiary: theme.$tertiary-palette,
+    theme-type: dark
+  ),
+  typography: (
+    brand-family: 'Roboto',
+  ),
+  density: (
+    scale: 0
+  ),
+));
 
 html {
-  @include material.all-component-themes($custom-theme);
+  color-scheme: light;
+  @include material.all-component-themes($bienestar-animal-light-theme);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+    @include material.all-component-themes($bienestar-animal-dark-theme);
+  }
 }

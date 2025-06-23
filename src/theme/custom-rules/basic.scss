@@ -1,0 +1,14 @@
+//Se genera 10 reglas para z-index del 1 al 10
+@for $i from 0 through 10 {
+  .z-index-#{$i} {
+    z-index: $i;
+  }
+}
+
+//se generan 5 reglas de flex-1 a flex-5
+@for $i from 1 through 5 {
+  .flex-#{$i} {
+    flex: $i;
+  }
+}
+

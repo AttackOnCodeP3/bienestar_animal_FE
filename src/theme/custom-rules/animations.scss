@@ -1,0 +1,30 @@
+.fade {
+  &-out{
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+
+    &-none {
+      display: none;
+    }
+  }
+
+  &-in {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+
+    &-block {
+      display: block;
+      opacity: 1;
+
+      //The warnings/errors in the properties are because you are using
+      //new syntax, but it is supported by browsers.
+      transition-property: display opacity;
+      transition-duration: 1s;
+      transition-behavior: allow-discrete;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+}
