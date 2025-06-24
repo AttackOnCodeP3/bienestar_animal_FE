@@ -42,40 +42,44 @@
   justify-content: center;
 }
 
-/// Applies fill colors individually to each logo part.
+/// Applies fill colors to each logo part using CSS variables.
 ///
-/// This mixin allows specifying separate colors for each part of the logo:
-/// - `.logo-color-paw`
-/// - `.logo-color-word-wellbeing`
-/// - `.logo-color-word-animal`
-/// - `.logo-color-community-care`
+/// Uses the following variables:
+/// - `--logo-color-paw`
+/// - `--logo-color-wellbeing`
+/// - `--logo-color-animal`
+/// - `--logo-color-community`
 ///
-/// @access public
-/// @param {Color} $pawColor - Color for the paw icon.
-/// @param {Color} $wellbeingColor - Color for the word "wellbeing".
-/// @param {Color} $animalColor - Color for the word "animal".
-/// @param {Color} $communityCareColor - Color for the phrase "community and care".
+/// These variables must be set globally based on theme mode (light/dark).
+///
 /// @example scss
-///   @include apply-logo-colors($c1, $c2, $c3, $c4);
-@mixin apply-logo-colors(
-  $pawColor,
-  $wellbeingColor,
-  $animalColor,
-  $communityCareColor
-) {
+///   @include apply-logo-colors();
+@mixin apply-logo-colors() {
   .logo-color-paw {
-    fill: $pawColor;
+    fill: var(--logo-color-paw);
   }
 
   .logo-color-word-wellbeing {
-    fill: $wellbeingColor;
+    fill: var(--logo-color-wellbeing);
   }
 
   .logo-color-word-animal {
-    fill: $animalColor;
+    fill: var(--logo-color-animal);
   }
 
   .logo-color-community-care {
-    fill: $communityCareColor;
+    fill: var(--logo-color-community);
+  }
+}
+
+@mixin light-mode($selector: 'body') {
+  #{$selector}.light-mode {
+    @content;
+  }
+}
+
+@mixin dark-mode($selector: 'body') {
+  #{$selector}.dark-mode {
+    @content;
   }
 }

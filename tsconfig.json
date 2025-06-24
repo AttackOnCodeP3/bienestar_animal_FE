@@ -25,6 +25,8 @@
       "@common/enums/*": ["app/common/enums/*"],
       "@common/interfaces": ["app/common/interfaces/index.ts"], // Alias for interfaces index file
       "@common/interfaces/*": ["app/common/interfaces/*"],
+      "@common/types": ["app/common/types/index.ts"], // Alias for types index file
+      "@common/types/*": ["app/common/types/*"],
 
       "@animations/fade": ["app/animations/fade/index.ts"], // Alias for animations index fade file
       "@animations/fade/*": ["app/animations/fade/*"],

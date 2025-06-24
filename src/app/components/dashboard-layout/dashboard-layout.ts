@@ -9,15 +9,22 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {BreakpointsEnum} from '@common/enums';
 import {IMenuItem} from '@common/interfaces';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {TitleCasePipe} from '@angular/common';
+import {Theme} from '@services/theme-service/theme';
 
 @Component({
   selector: 'app-dashboard-layout',
   imports: [
+    MatActionList,
+    MatExpansionModule,
     MatIcon,
     MatIconButton,
     MatListItem,
     MatListItemIcon,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger,
     MatNavList,
     MatSidenav,
     MatSidenavContainer,
@@ -27,14 +34,14 @@ import {MatExpansionModule} from '@angular/material/expansion';
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
-    MatExpansionModule,
-    MatActionList,
+    TitleCasePipe,
   ],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.scss',
 })
 export class DashboardLayout {
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
+  readonly themeService = inject(Theme)
 
   readonly isScreenSmall = signal<boolean>(false);
   readonly sideNavMode = signal<MatDrawerMode>('side');
@@ -120,5 +127,4 @@ export class DashboardLayout {
       }
     })
   }
-
 }
