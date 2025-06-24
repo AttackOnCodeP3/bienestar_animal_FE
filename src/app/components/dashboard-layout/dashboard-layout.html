@@ -6,20 +6,20 @@
     <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
     <div class="d-flex justify-content-end flex-grow-1">
       <button mat-icon-button [matMenuTriggerFor]="themeMenu">
-        <mat-icon class="icon-color-scheme">{{ themeService.selectedTheme()?.icon }}</mat-icon>
+        <mat-icon class="icon-color-scheme">{{ theme.selectedTheme()?.icon }}</mat-icon>
       </button>
     </div>
   </mat-toolbar-row>
   <mat-menu #themeMenu="matMenu">
-    @for (theme of themeService.getThemes(); track theme.name) {
+    @for (themeItem of theme.getThemes(); track themeItem.name) {
       <button
-        [class.selected-theme]="themeService.selectedTheme()?.name === theme.name"
+        [class.selected-theme]="theme.selectedTheme()?.name === themeItem.name"
         class="material-symbols-outlined"
         mat-menu-item
-        (click)="themeService.setTheme(theme.name)"
+        (click)="theme.setTheme(themeItem.name)"
       >
-        <mat-icon>{{ theme.icon }}</mat-icon>
-        <span>{{ theme.name | titlecase }}</span>
+        <mat-icon>{{ themeItem.icon }}</mat-icon>
+        <span>{{ themeItem.name | titlecase }}</span>
       </button>
     }
   </mat-menu>

@@ -1,7 +1,10 @@
 import {animate, style, transition, trigger} from '@angular/animations';
 
 /**
- * Animación de fade in y deslizamiento hacia la derecha
+ * Animation trigger for a fade-in effect combined with a slide-in from the right.
+ * When an element enters the DOM, it starts fully transparent and positioned 100% to the right,
+ * then animates to full opacity and its original position.
+ * Useful for animating the appearance of components or elements in Angular applications.
  * @author dgutierrez
  */
 export const fadeInRight = trigger('fadeInRight', [

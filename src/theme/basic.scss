@@ -1,20 +1,54 @@
-//Se genera 10 reglas para z-index del 1 al 10
+/**
+ * @fileoverview Basic utility classes for the application
+ * @description This file generates utility classes for z-index, flex, and font-size properties
+ * @author Bienestar Animal Team
+ */
+
+/**
+ * Generates z-index utility classes from 0 to 10
+ * @example
+ * // CSS output:
+ * // .z-index-0 { z-index: 0; }
+ * // .z-index-1 { z-index: 1; }
+ * // ...
+ * // .z-index-10 { z-index: 10; }
+ * // @author dgutierrez
+ */
 @for $i from 0 through 10 {
   .z-index-#{$i} {
     z-index: $i;
   }
 }
 
-//se generan 5 reglas de flex-1 a flex-5
+/**
+ * Generates flex utility classes from 1 to 5
+ * @example
+ * // CSS output:
+ * // .flex-1 { flex: 1; }
+ * // .flex-2 { flex: 2; }
+ * // ...
+ * // .flex-5 { flex: 5; }
+ * // @author dgutierrez
+ */
 @for $i from 1 through 5 {
   .flex-#{$i} {
     flex: $i;
   }
 }
 
+/**
+ * Generates font-size utility classes from 1 to 5
+ * Each class sets the font-size to a multiple of 10px, converted to rem units
+ * @example
+ * // CSS output:
+ * // .font-size-1 { font-size: 0.625rem; } (10px)
+ * // .font-size-2 { font-size: 1.25rem; } (20px)
+ * // ...
+ * // .font-size-5 { font-size: 3.125rem; } (50px)
+ * // @author dgutierrez
+ */
 @for $i from 1 through 5 {
   .font-size-#{$i} {
     font-size: to-rem($i * 10); // 10px, 20px, ..., 50px
   }
 }
-

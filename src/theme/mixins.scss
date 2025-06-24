@@ -6,6 +6,7 @@
 ///   .title {
 ///     @include truncate-text(80%);
 ///   }
+/// @author dgutierrez
 @mixin truncate-text($width: 100%) {
   white-space: nowrap;
   overflow: hidden;
@@ -21,6 +22,7 @@
 ///   .description {
 ///     @include limit-lines(3);
 ///   }
+/// @author dgutierrez
 @mixin limit-lines($lines) {
   display: -webkit-box;
   -webkit-line-clamp: $lines;
@@ -36,6 +38,7 @@
 ///   .centered {
 ///     @include flex-center;
 ///   }
+/// @author dgutierrez
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -52,8 +55,10 @@
 ///
 /// These variables must be set globally based on theme mode (light/dark).
 ///
+/// @access public
 /// @example scss
 ///   @include apply-logo-colors();
+/// @author dgutierrez
 @mixin apply-logo-colors() {
   .logo-color-paw {
     fill: var(--logo-color-paw);
@@ -72,12 +77,38 @@
   }
 }
 
+/// Applies styles specifically for light mode theme.
+///
+/// This mixin targets elements with the light-mode class, allowing for theme-specific styling.
+/// It uses the @content directive to include styles passed to the mixin.
+///
+/// @access public
+/// @param {String} $selector - The CSS selector to target. Defaults to 'body'.
+/// @example scss
+///   @include light-mode() {
+///     --primary-color: #0066cc;
+///     --text-color: #333333;
+///   }
+/// @author dgutierrez
 @mixin light-mode($selector: 'body') {
   #{$selector}.light-mode {
     @content;
   }
 }
 
+/// Applies styles specifically for dark mode theme.
+///
+/// This mixin targets elements with the dark-mode class, allowing for theme-specific styling.
+/// It uses the @content directive to include styles passed to the mixin.
+///
+/// @access public
+/// @param {String} $selector - The CSS selector to target. Defaults to 'body'.
+/// @example scss
+///   @include dark-mode() {
+///     --primary-color: #4d94ff;
+///     --text-color: #f5f5f5;
+///   }
+/// @author dgutierrez
 @mixin dark-mode($selector: 'body') {
   #{$selector}.dark-mode {
     @content;
