@@ -1,0 +1,37 @@
+/// @file functions.scss
+/// @description A collection of utility functions for SCSS that provide common functionality
+/// for the theme system. These functions help with unit conversion and map operations.
+/// @author dgutierrez
+
+@use 'sass:map';
+
+/// Returns a rem value from a pixel input for scalable typography.
+///
+/// This function converts pixel values to rem units for better accessibility and responsive design.
+/// The base assumption is that 1rem equals 16px (browser default).
+///
+/// @access public
+/// @param {Number} $px - Pixel value to convert.
+/// @return {Number} The equivalent value in rem units.
+/// @example scss
+///   font-size: to-rem(24); // returns 1.5rem
+/// @author dgutierrez
+@function to-rem($px) {
+  @return ($px / 16) * 1rem;
+}
+
+/// Returns true if a key exists in a Sass map.
+///
+/// This function is a wrapper around the native Sass map.has-key function,
+/// providing a more consistent API for checking key existence in maps.
+///
+/// @access public
+/// @param {Map} $map - The Sass map to search.
+/// @param {String | Symbol} $key - The key to check for.
+/// @return {Boolean} True if key exists in the map, false otherwise.
+/// @example scss
+///   $result: map-has-key-strict($my-map, "primary");
+/// @author dgutierrez
+@function map-has-key-strict($map, $key) {
+  @return map.has-key($map, $key);
+}

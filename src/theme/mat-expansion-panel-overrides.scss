@@ -1,0 +1,20 @@
+@use '@angular/material' as material;
+@use "theme-colors" as theme;
+@use "mixins" as mixins;
+@use 'sass:map';
+
+@include mixins.light-mode {
+  @include material.expansion-overrides((
+    container-background-color: map.get(theme.$primary-palette, 60),
+    header-text-color: map.get(theme.$primary-palette, 100),
+    header-indicator-color: map.get(theme.$primary-palette, 100),
+  ));
+}
+
+@include mixins.dark-mode {
+  @include material.expansion-overrides((
+    container-background-color: map.get(theme.$primary-palette, 10),
+    header-text-color: map.get(theme.$primary-palette, 100),
+    header-indicator-color: map.get(theme.$primary-palette, 100),
+  ));
+}

@@ -1,0 +1,27 @@
+@use"sass:map";
+@use "theme-colors" as theme;
+@use "mixins" as mixins;
+
+.logo {
+  width: 1.875rem; // 30px
+}
+
+@include mixins.light-mode {
+  .icon-color-scheme {
+    color: map.get(theme.$primary-palette, 100);
+  }
+}
+
+.cdk-virtual-scroll-content-wrapper {
+  width: 100%;
+}
+
+@for $i from 1 through 3 {
+  .limit-lines-#{$i} {
+    @include mixins.limit-lines($i);
+  }
+}
+
+.no-pointer-events {
+  pointer-events: none;
+}

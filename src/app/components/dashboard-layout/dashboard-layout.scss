@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+.mat-sidenav-container {
+  height: 100dvh;
+}
+
+.mat-sidenav-content {
+  padding: 20px;
+}
+
+::ng-deep {
+  .mat-expansion-panel-body {
+    padding: 15px !important; /* Adjust padding as needed */
+  }
+}

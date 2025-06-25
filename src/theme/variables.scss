@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use "mixins" as mixins;
+@use "theme-colors" as theme;
+
+@include mixins.light-mode {
+  --logo-color-paw: #{map.get(theme.$primary-palette, 60)};
+  --logo-color-wellbeing: #{map.get(theme.$primary-palette, 0)};
+  --logo-color-animal: #{map.get(theme.$primary-palette, 50)};
+  --logo-color-community: #{map.get(theme.$primary-palette, 0)};
+}
+
+@include mixins.dark-mode {
+  --logo-color-paw: #{map.get(theme.$primary-palette, 60)};
+  --logo-color-wellbeing: #{map.get(theme.$primary-palette, 100)};
+  --logo-color-animal: #{map.get(theme.$primary-palette, 50)};
+  --logo-color-community: #{map.get(theme.$primary-palette, 100)};
+}
+
+@include mixins.apply-logo-colors();

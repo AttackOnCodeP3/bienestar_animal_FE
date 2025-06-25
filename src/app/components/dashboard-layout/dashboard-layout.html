@@ -1,0 +1,74 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="matSidenav()?.toggle()">
+      <mat-icon class="material-symbols-outlined icon-color-scheme">menu</mat-icon>
+    </button>
+    <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
+    <div class="d-flex justify-content-end flex-grow-1">
+      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+        <mat-icon class="icon-color-scheme">{{ theme.selectedTheme()?.icon }}</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar-row>
+  <mat-menu #themeMenu="matMenu">
+    @for (themeItem of theme.getThemes(); track themeItem.name) {
+      <button
+        [class.selected-theme]="theme.selectedTheme()?.name === themeItem.name"
+        class="material-symbols-outlined"
+        mat-menu-item
+        (click)="theme.setTheme(themeItem.name)"
+      >
+        <mat-icon>{{ themeItem.icon }}</mat-icon>
+        <span>{{ themeItem.name | titlecase }}</span>
+      </button>
+    }
+  </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="!isScreenSmall()" [mode]="sideNavMode()" [style.width]="'260px'" class="px-1">
+    <mat-nav-list class="mx-1 ms-lg-1 me-lg-0">
+      <mat-accordion>
+      @for (item of menuItemsSorted(); track item) {
+        @if (item?.children?.length) {
+          <mat-expansion-panel class="mb-2" [disabled]="item?.isDisabled">
+            <mat-expansion-panel-header class="px-3">
+              <mat-panel-title>
+                <mat-icon class="material-symbols-outlined">{{ item?.icon }}</mat-icon>
+                <span class="ms-2">{{ item?.label }}</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-action-list>
+              @for (child of item?.children; track child) {
+                <mat-list-item
+                  class="mb-2"
+                  [disabled]="child.isDisabled"
+                  [routerLink]="child.route"
+                  routerLinkActive="mdc-list-item--activated">
+                  <span>{{ child.label }}</span>
+                </mat-list-item>
+              }
+            </mat-action-list>
+          </mat-expansion-panel>
+        } @else {
+          <mat-list-item
+            class="mb-2"
+            [disabled]="item?.isDisabled"
+            [routerLink]="item?.route"
+            routerLinkActive="mdc-list-item--activated"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <mat-icon matListItemIcon class="material-symbols-outlined">{{ item?.icon }}</mat-icon>
+            <span>{{ item?.label }}</span>
+          </mat-list-item>
+        }
+      }
+      </mat-accordion>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet/>
+  </mat-sidenav-content>
+</mat-sidenav-container>
