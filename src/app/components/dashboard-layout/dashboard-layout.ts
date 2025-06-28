@@ -10,7 +10,7 @@ import {BreakpointsEnum} from '@common/enums';
 import {IMenuItem} from '@common/interfaces';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {NgClass, TitleCasePipe} from '@angular/common';
+import {TitleCasePipe} from '@angular/common';
 import {Theme} from '@services/theme-service/theme';
 
 @Component({
@@ -35,7 +35,6 @@ import {Theme} from '@services/theme-service/theme';
     RouterLinkActive,
     RouterOutlet,
     TitleCasePipe,
-    NgClass,
   ],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.scss',

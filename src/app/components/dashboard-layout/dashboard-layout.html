@@ -44,7 +44,8 @@
                   <mat-list-item
                     class="mb-2"
                     [disabled]="child.isDisabled"
-                    [routerLink]="child.isDisabled? null : child.route" [routerLinkActiveOptions]="{ exact: true }"
+                    [routerLink]="child.isDisabled? null : child.route"
+                    [routerLinkActiveOptions]="{ exact: true }"
                     [tabindex]="child.isDisabled? -1 : 0"
                     routerLinkActive="mdc-list-item--activated"
                   >
