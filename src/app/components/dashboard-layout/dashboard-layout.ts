@@ -1,5 +1,5 @@
 import {Component, computed, inject, signal, viewChild} from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatIconButton} from "@angular/material/button";
 import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
@@ -10,7 +10,7 @@ import {BreakpointsEnum} from '@common/enums';
 import {IMenuItem} from '@common/interfaces';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {TitleCasePipe} from '@angular/common';
+import {NgClass, TitleCasePipe} from '@angular/common';
 import {Theme} from '@services/theme-service/theme';
 
 @Component({
@@ -35,12 +35,14 @@ import {Theme} from '@services/theme-service/theme';
     RouterLinkActive,
     RouterOutlet,
     TitleCasePipe,
+    NgClass,
   ],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.scss',
 })
 export class DashboardLayout {
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
+  private readonly router = inject(Router);
   readonly theme = inject(Theme)
 
   readonly isScreenSmall = signal<boolean>(false);
@@ -63,7 +65,7 @@ export class DashboardLayout {
         {
           label: 'Gemification',
           route: 'gamification/rewards-system',
-          isDisabled: false,
+          isDisabled: true,
         },
         {
           label: 'Reports',
@@ -86,17 +88,17 @@ export class DashboardLayout {
         {
           label: 'Gemification',
           route: 'gamification/rewards-system',
-          isDisabled: false,
+          isDisabled: true,
         },
         {
           label: 'Reports',
           route: 'reports/report-1',
-          isDisabled: false
+          isDisabled: true
         },
         {
           label: 'Logout',
           route: 'reports/report-1',
-          isDisabled: false
+          isDisabled: true
         }
       ]
     },
@@ -104,7 +106,7 @@ export class DashboardLayout {
       icon: 'logout',
       label: 'Logout',
       route: '',
-      isDisabled: false
+      isDisabled: true
     }
   ])
 
