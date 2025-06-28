@@ -2,7 +2,7 @@ import {computed, inject, Injectable, signal} from '@angular/core';
 import {IAppTheme} from '@common/interfaces';
 import {ThemeName} from '@common/types/theme-name.type';
 import {Constants} from '@common/constants/constants';
-import {Log} from '@services/log-service/log';
+import {Log} from '@services/general';
 
 /**
  * Service for managing application themes (light, dark, system).

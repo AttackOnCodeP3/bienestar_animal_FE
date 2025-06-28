@@ -1,0 +1,8 @@
+{
+  "================== Etiquetas de páginas ==================" : "",
+
+  "================== Lista de errores BL ==================" : "",
+  "Gen_0": "Unknown error",
+  "AdmUsuario_1_Usuario": "The given user already exists",
+  "AdmCiudadano_0_Usuario": "Added error to test responses with BLException from Padron_AppWeb"
+}

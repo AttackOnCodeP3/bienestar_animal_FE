@@ -18,7 +18,7 @@
     "paths": {
       "@components/*": ["app/components/*"],
 
-      "@services/*": ["app/services/*"],
+      "@services/general": ["app/services/index.ts"],
       "@services/http/*": ["app/services/http/*"],
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file

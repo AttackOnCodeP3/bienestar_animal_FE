@@ -1,5 +1,5 @@
 import {Component, computed, inject, signal, viewChild} from '@angular/core';
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatIconButton} from "@angular/material/button";
 import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
@@ -11,7 +11,7 @@ import {IMenuItem} from '@common/interfaces';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {TitleCasePipe} from '@angular/common';
-import {Theme} from '@services/theme-service/theme';
+import {Theme} from '@services/general';
 
 @Component({
   selector: 'app-dashboard-layout',
