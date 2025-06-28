@@ -30,6 +30,4 @@ export class App {
     const theme = this.theme.appTheme();
     this.theme.applyTheme(theme);
   });
-
-  protected title = 'bienestar_animal';
 }

@@ -55,7 +55,10 @@ export class Theme {
    * @author dgutierrez
    */
   applyTheme(theme: ThemeName): boolean {
-    console.log("Applying theme:", theme);
+    this.log.debug({
+      message: 'Applying theme',
+      data: {theme},
+    })
 
     // Get the body html element
     const body = document.querySelector('body') as HTMLBodyElement;

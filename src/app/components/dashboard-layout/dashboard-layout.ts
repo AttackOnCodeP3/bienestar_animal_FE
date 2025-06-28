@@ -63,7 +63,7 @@ export class DashboardLayout {
         {
           label: 'Gemification',
           route: 'gamification/rewards-system',
-          isDisabled: true,
+          isDisabled: false,
         },
         {
           label: 'Reports',
@@ -86,17 +86,17 @@ export class DashboardLayout {
         {
           label: 'Gemification',
           route: 'gamification/rewards-system',
-          isDisabled: true,
+          isDisabled: false,
         },
         {
           label: 'Reports',
           route: 'reports/report-1',
-          isDisabled: true
+          isDisabled: false
         },
         {
           label: 'Logout',
           route: 'reports/report-1',
-          isDisabled: true
+          isDisabled: false
         }
       ]
     },
@@ -104,7 +104,7 @@ export class DashboardLayout {
       icon: 'logout',
       label: 'Logout',
       route: '',
-      isDisabled: true
+      isDisabled: false
     }
   ])
 
