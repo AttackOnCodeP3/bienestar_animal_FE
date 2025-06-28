@@ -42,7 +42,6 @@ import {Theme} from '@services/theme-service/theme';
 })
 export class DashboardLayout {
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
-  private readonly router = inject(Router);
   readonly theme = inject(Theme)
 
   readonly isScreenSmall = signal<boolean>(false);
