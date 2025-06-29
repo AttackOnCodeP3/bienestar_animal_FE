@@ -1,8 +1,9 @@
 import {Component, effect, inject} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import { RouterOutlet } from '@angular/router';
-import {Theme, Log} from '@services/general';
+import {RouterOutlet} from '@angular/router';
+import {Theme, Log, I18n} from '@services/general';
 import {LanguagesEnum} from '@common/enums';
+import {MatIconRegistry} from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,13 @@ import {LanguagesEnum} from '@common/enums';
 export class App {
   private readonly log = inject(Log);
   private readonly translate = inject(TranslateService);
+  private readonly i18n = inject(I18n);
+  private readonly matIconReg = inject(MatIconRegistry);
   readonly theme = inject(Theme);
 
   constructor() {
     this.setDefaultLanguage();
+    this.setDefaultFontSetClass();
   }
 
   /**
@@ -30,11 +34,19 @@ export class App {
   readonly themeEffect = effect(() => {
     this.log.debug({
       message: 'Theme effect triggered',
-      data: { theme: this.theme.appTheme() },
+      data: {theme: this.theme.appTheme()},
     });
     const theme = this.theme.appTheme();
     this.theme.applyTheme(theme);
   });
+
+  /**
+   * Sets the default font set class for Material Icons.
+   * @author dgutierrez
+   */
+  private setDefaultFontSetClass(): void {
+    this.matIconReg.setDefaultFontSetClass('material-symbols-outlined');
+  }
 
   /**
    * Sets the default language for the application based on the browser's language.
@@ -43,28 +55,22 @@ export class App {
    * @author dgutierrez
    */
   private setDefaultLanguage(): void {
-    let browserLanguage: string = navigator.language;
+    const preferredLanguage: string = this.i18n.getPreferenceLanguage();
     this.log.debug({
-      message: 'Browser language: ' + browserLanguage,
+      message: `Preferred language: ${preferredLanguage}`,
     });
 
-    let defaultLanguage: string;
+    const supportedLanguages = this.i18n.supportedLanguages();
+    const matchedLanguage = supportedLanguages.find(lang =>
+      preferredLanguage.startsWith(lang.code)
+    );
 
-    defaultLanguage = LanguagesEnum.SPANISH;
-    if (browserLanguage.startsWith(LanguagesEnum.SPANISH)) {
-      defaultLanguage = LanguagesEnum.SPANISH;
-    } else if (browserLanguage.startsWith(LanguagesEnum.ENGLISH)) {
-      defaultLanguage = LanguagesEnum.ENGLISH;
-    } else {
-      this.log.debug({
-        message: 'Unsupported language: ' + browserLanguage,
-      });
-      defaultLanguage = LanguagesEnum.SPANISH;
-    }
+    const languageCode = matchedLanguage ? matchedLanguage.code : LanguagesEnum.SPANISH;
 
-    this.translate.setDefaultLang(defaultLanguage);
+    this.translate.setDefaultLang(languageCode);
+    this.i18n.setPreferenceLanguage(this.i18n.getPrefenceLenguageByCode(languageCode) || null);
     this.log.debug({
-      message: 'Default language set to: ' + defaultLanguage.toUpperCase(),
+      message: `Default language set to: ${languageCode.toUpperCase()}`,
     });
   }
 }

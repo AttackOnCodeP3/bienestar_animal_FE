@@ -1,6 +1,14 @@
 {
   "================== GLOBAL ==================": "",
-
+  "themes": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "languages": {
+    "english": "Inglés",
+    "spanish": "Español"
+  },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
     "noInternetConnection": "Sin conexión a internet, compruebe primero su conexión, e intente nuevamente"

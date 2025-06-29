@@ -7,14 +7,12 @@ import {
 import {registerLocaleData} from '@angular/common';
 import { provideRouter } from '@angular/router';
 import localeEn from '@angular/common/locales/en'
-
 import { routes } from './app.routes';
 import {HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MissingTranslationHandler, provideTranslateService, TranslateLoader} from '@ngx-translate/core';
-import {MissingI18n} from './services/i18n';
+import {MissingI18n} from '@services/general';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {LanguagesEnum} from '@common/enums';
 
 registerLocaleData(localeEn)
 
@@ -31,7 +29,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideZonelessChangeDetection(),
     provideTranslateService({
-      defaultLanguage: LanguagesEnum.ENGLISH,
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,

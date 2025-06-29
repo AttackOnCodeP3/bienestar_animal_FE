@@ -16,9 +16,9 @@ export class Theme {
   readonly appTheme = signal<ThemeName>('system');
 
   themes: IAppTheme[] = [
-    { name: 'light', icon: 'light_mode' },
-    { name: 'dark', icon: 'dark_mode' },
-    { name: 'system', icon: 'desktop_windows' },
+    { name: 'light', icon: 'light_mode', label: "themes.light" },
+    { name: 'dark', icon: 'dark_mode', label: "themes.dark" },
+    { name: 'system', icon: 'desktop_windows', label: "themes.system" },
   ];
 
   /**
