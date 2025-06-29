@@ -9,6 +9,17 @@
     "english": "English",
     "spanish": "Spanish"
   },
+  "================== COMPONENT LABELS ==================": "",
+  "menu": {
+    "home": "Home",
+    "gamification": "Gamification",
+    "reports": "Reports",
+    "logout": "Logout"
+  },
+  "================== PAGES LABELS ==================": "",
+  "login-page": {
+    "title": "Login"
+  },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
     "noInternetConnection": "No internet connection, check your connection first, and try again"

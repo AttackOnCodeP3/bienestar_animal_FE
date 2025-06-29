@@ -5,6 +5,7 @@ import {Constants} from '@common/constants/constants';
 import {LanguagesEnum} from '@common/enums';
 import {ISupportedLanguage} from '@common/interfaces';
 import {Log} from '@services/general';
+import {I18nGeneralKeysEnum} from '@common/enums/i18n';
 
 /**
  * Interface that defines the literal object for label parameters.
@@ -28,12 +29,12 @@ export class I18n {
     {
       code: LanguagesEnum.SPANISH,
       icon: "language_spanish",
-      label: 'languages.spanish',
+      label: I18nGeneralKeysEnum.SPANISH,
     },
     {
       code: LanguagesEnum.ENGLISH,
       icon: "language_us",
-      label: 'languages.english',
+      label: I18nGeneralKeysEnum.ENGLISH,
     }
   ]);
 

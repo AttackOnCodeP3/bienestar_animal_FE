@@ -23,6 +23,7 @@
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
       "@common/enums/*": ["app/common/enums/*"],
+      "@common/enums/i18n": ["app/common/enums/i18n/index.ts"], // Alias for i18n enums index file
       "@common/interfaces": ["app/common/interfaces/index.ts"], // Alias for interfaces index file
       "@common/interfaces/*": ["app/common/interfaces/*"],
       "@common/types": ["app/common/types/index.ts"], // Alias for types index file

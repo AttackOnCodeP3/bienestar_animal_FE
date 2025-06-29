@@ -12,6 +12,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {BreakpointsEnum} from '@common/enums';
 import {IMenuItem} from '@common/interfaces';
 import {Theme, I18n} from '@services/general';
+import {I18nMenuEnum} from '@common/enums/i18n';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -51,28 +52,28 @@ export class DashboardLayout {
   readonly menuItems = signal<IMenuItem[]>([
     {
       icon: 'home',
-      label: 'Home',
+      label: I18nMenuEnum.HOME,
       route: 'home',
       isDisabled: false
     },
     {
       icon: 'home',
-      label: 'Gemification',
+      label: I18nMenuEnum.GAMIFICATION,
       route: 'gamification/rewards-system',
       isDisabled: false,
       children: [
         {
-          label: 'Gemification',
+          label: I18nMenuEnum.GAMIFICATION,
           route: 'gamification/rewards-system',
           isDisabled: false,
         },
         {
-          label: 'Reports',
+          label: I18nMenuEnum.REPORTS,
           route: 'reports/report-1',
           isDisabled: false
         },
         {
-          label: 'Logout',
+          label: I18nMenuEnum.LOGOUT,
           route: 'reports/report-1',
           isDisabled: false
         }
@@ -80,22 +81,22 @@ export class DashboardLayout {
     },
     {
       icon: 'assessment',
-      label: 'Reports',
+      label: I18nMenuEnum.REPORTS,
       route: 'reports/report-1',
       isDisabled: false,
       children: [
         {
-          label: 'Gemification',
+          label: I18nMenuEnum.GAMIFICATION,
           route: 'gamification/rewards-system',
           isDisabled: false,
         },
         {
-          label: 'Reports',
+          label: I18nMenuEnum.REPORTS,
           route: 'reports/report-1',
           isDisabled: false
         },
         {
-          label: 'Logout',
+          label: I18nMenuEnum.LOGOUT,
           route: 'reports/report-1',
           isDisabled: false
         }
@@ -103,7 +104,7 @@ export class DashboardLayout {
     },
     {
       icon: 'logout',
-      label: 'Logout',
+      label: I18nMenuEnum.LOGOUT,
       route: '',
       isDisabled: false
     }

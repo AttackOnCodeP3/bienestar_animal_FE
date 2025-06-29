@@ -9,6 +9,17 @@
     "english": "Inglés",
     "spanish": "Español"
   },
+  "================== COMPONENT LABELS ==================": "",
+  "menu": {
+    "home": "Inicio",
+    "gamification": "Gamificación",
+    "reports": "Reportes",
+    "logout": "Cerrar sesión"
+  },
+  "================== PAGES LABELS ==================": "",
+  "login-page": {
+    "title": "Iniciar sesión"
+  },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
     "noInternetConnection": "Sin conexión a internet, compruebe primero su conexión, e intente nuevamente"
