@@ -54,59 +54,21 @@ export class DashboardLayout {
       icon: 'home',
       label: I18nMenuEnum.HOME,
       route: 'home',
-      isDisabled: false
     },
     {
-      icon: 'home',
+      icon: "pets",
       label: I18nMenuEnum.GAMIFICATION,
       route: 'gamification/rewards-system',
-      isDisabled: false,
-      children: [
-        {
-          label: I18nMenuEnum.GAMIFICATION,
-          route: 'gamification/rewards-system',
-          isDisabled: false,
-        },
-        {
-          label: I18nMenuEnum.REPORTS,
-          route: 'reports/report-1',
-          isDisabled: false
-        },
-        {
-          label: I18nMenuEnum.LOGOUT,
-          route: 'reports/report-1',
-          isDisabled: false
-        }
-      ]
     },
     {
-      icon: 'assessment',
+      icon: 'analytics',
       label: I18nMenuEnum.REPORTS,
       route: 'reports/report-1',
-      isDisabled: false,
-      children: [
-        {
-          label: I18nMenuEnum.GAMIFICATION,
-          route: 'gamification/rewards-system',
-          isDisabled: false,
-        },
-        {
-          label: I18nMenuEnum.REPORTS,
-          route: 'reports/report-1',
-          isDisabled: false
-        },
-        {
-          label: I18nMenuEnum.LOGOUT,
-          route: 'reports/report-1',
-          isDisabled: false
-        }
-      ]
     },
     {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: '',
-      isDisabled: false
     }
   ])
 
