@@ -8,4 +8,5 @@ import {ThemeName} from '@common/types/theme-name.type';
 export interface IAppTheme {
   name: ThemeName;
   icon: string;
+  label: string;
 }

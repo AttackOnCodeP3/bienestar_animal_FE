@@ -2,7 +2,8 @@ import {computed, inject, Injectable, signal} from '@angular/core';
 import {IAppTheme} from '@common/interfaces';
 import {ThemeName} from '@common/types/theme-name.type';
 import {Constants} from '@common/constants/constants';
-import {Log} from '@services/log-service/log';
+import {Log} from '@services/general';
+import {I18nGeneralKeysEnum} from '@common/enums/i18n';
 
 /**
  * Service for managing application themes (light, dark, system).
@@ -16,9 +17,9 @@ export class Theme {
   readonly appTheme = signal<ThemeName>('system');
 
   themes: IAppTheme[] = [
-    { name: 'light', icon: 'light_mode' },
-    { name: 'dark', icon: 'dark_mode' },
-    { name: 'system', icon: 'desktop_windows' },
+    {name: 'light', icon: 'light_mode', label: I18nGeneralKeysEnum.LIGHT},
+    {name: 'dark', icon: 'dark_mode', label: I18nGeneralKeysEnum.DARK},
+    {name: 'system', icon: 'desktop_windows', label: I18nGeneralKeysEnum.SYSTEM},
   ];
 
   /**
@@ -55,7 +56,10 @@ export class Theme {
    * @author dgutierrez
    */
   applyTheme(theme: ThemeName): boolean {
-    console.log("Applying theme:", theme);
+    this.log.debug({
+      message: 'Applying theme',
+      data: {theme},
+    })
 
     // Get the body html element
     const body = document.querySelector('body') as HTMLBodyElement;
@@ -89,7 +93,7 @@ export class Theme {
    * @author dgutierrez
    */
   private loadThemePreference(): ThemeName | null {
-    return  localStorage.getItem(Constants.LS_APP_PREFERENCE_SCHEME) as ThemeName | null;
+    return localStorage.getItem(Constants.LS_APP_PREFERENCE_SCHEME) as ThemeName | null;
   }
 
   constructor() {
@@ -101,7 +105,7 @@ export class Theme {
 
     this.log.debug({
       message: 'Theme service initialized',
-      data: { theme: this.appTheme() },
+      data: {theme: this.appTheme()},
     })
   }
 }

@@ -9,7 +9,7 @@ import {UnmutableConstants} from './unmutable-constants';
  */
 export class Constants extends UnmutableConstants {
   static readonly appHost: string = 'https://development.atack_on_code.cr/'
-  
+
   static readonly apiBaseUrl: string =
     Constants.appHost + 'BienestarAnimalWS/api/launion'
 
@@ -17,7 +17,7 @@ export class Constants extends UnmutableConstants {
    * Enables console.log for API and services
    * Used for debugging purposes
    */
-  static readonly debugMode: boolean = false
+  static readonly debugMode: boolean = true
 
   /**
    * Enables debug mode for cache storage

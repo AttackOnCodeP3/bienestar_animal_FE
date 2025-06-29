@@ -1,7 +1,9 @@
-import {Component, effect, inject, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {Theme} from '@services/theme-service/theme';
-import {Log} from '@services/log-service/log';
+import {Component, effect, inject} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {RouterOutlet} from '@angular/router';
+import {Theme, Log, I18n} from '@services/general';
+import {LanguagesEnum} from '@common/enums';
+import {MatIconRegistry} from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,15 @@ import {Log} from '@services/log-service/log';
 })
 export class App {
   private readonly log = inject(Log);
+  private readonly translate = inject(TranslateService);
+  private readonly i18n = inject(I18n);
+  private readonly matIconReg = inject(MatIconRegistry);
   readonly theme = inject(Theme);
 
+  constructor() {
+    this.setDefaultLanguage();
+    this.setDefaultFontSetClass();
+  }
 
   /**
    * Effect that watches for theme changes and applies the appropriate CSS classes to the body element.
@@ -25,11 +34,43 @@ export class App {
   readonly themeEffect = effect(() => {
     this.log.debug({
       message: 'Theme effect triggered',
-      data: { theme: this.theme.appTheme() },
+      data: {theme: this.theme.appTheme()},
     });
     const theme = this.theme.appTheme();
     this.theme.applyTheme(theme);
   });
 
-  protected title = 'bienestar_animal';
+  /**
+   * Sets the default font set class for Material Icons.
+   * @author dgutierrez
+   */
+  private setDefaultFontSetClass(): void {
+    this.matIconReg.setDefaultFontSetClass('material-symbols-outlined');
+  }
+
+  /**
+   * Sets the default language for the application based on the browser's language.
+   * If the browser language is not supported, it defaults to Spanish.
+   * Supported languages: Spanish (es), English (en)
+   * @author dgutierrez
+   */
+  private setDefaultLanguage(): void {
+    const preferredLanguage: string = this.i18n.getPreferenceLanguage();
+    this.log.debug({
+      message: `Preferred language: ${preferredLanguage}`,
+    });
+
+    const supportedLanguages = this.i18n.supportedLanguages();
+    const matchedLanguage = supportedLanguages.find(lang =>
+      preferredLanguage.startsWith(lang.code)
+    );
+
+    const languageCode = matchedLanguage ? matchedLanguage.code : LanguagesEnum.SPANISH;
+
+    this.translate.setDefaultLang(languageCode);
+    this.i18n.setPreferenceLanguage(this.i18n.getPrefenceLenguageByCode(languageCode) || null);
+    this.log.debug({
+      message: `Default language set to: ${languageCode.toUpperCase()}`,
+    });
+  }
 }

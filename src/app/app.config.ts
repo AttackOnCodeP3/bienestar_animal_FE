@@ -6,13 +6,20 @@ import {
 } from '@angular/core';
 import {registerLocaleData} from '@angular/common';
 import { provideRouter } from '@angular/router';
-import localeEs from '@angular/common/locales/es'
-
+import localeEn from '@angular/common/locales/en'
 import { routes } from './app.routes';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {MissingTranslationHandler, provideTranslateService, TranslateLoader} from '@ngx-translate/core';
+import {MissingI18n} from '@services/general';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-registerLocaleData(localeEs)
+registerLocaleData(localeEn)
+
+// AoT requires an exported function for factories
+const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
+  new TranslateHttpLoader(http, './i18n/', '.json');
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +28,17 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
     provideZonelessChangeDetection(),
-    { provide: LOCALE_ID, useValue: 'es' },
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: MissingI18n,
+      },
+    }),
+    { provide: LOCALE_ID, useValue: 'en' },
   ]
 };

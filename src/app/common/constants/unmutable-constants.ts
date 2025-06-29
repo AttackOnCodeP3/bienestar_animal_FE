@@ -18,7 +18,10 @@ export abstract class UnmutableConstants {
   static readonly LS_TOKEN_BIENESTAR_ANIMAL: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'token'
 
   static readonly LS_USER_DATA_ID: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'userDataId'
-  static readonly LS_APP_PREFERENCE_SCHEME: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'app-theme-preference'
+
+  static readonly LS_APP_PREFERENCE_PREFIX: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'app-preference-'
+  static readonly LS_APP_PREFERENCE_SCHEME: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + UnmutableConstants.LS_APP_PREFERENCE_PREFIX + 'scheme'
+  static readonly LS_APP_PREFERENCE_LANGUAGE: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + UnmutableConstants.LS_APP_PREFERENCE_PREFIX + 'language'
 
   static readonly IMAGE_QUALITY: number = 50
 

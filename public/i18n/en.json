@@ -1,0 +1,40 @@
+{
+  "================== GLOBAL ==================": "",
+  "themes": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "languages": {
+    "english": "English",
+    "spanish": "Spanish"
+  },
+  "================== COMPONENT LABELS ==================": "",
+  "menu": {
+    "home": "Home",
+    "gamification": "Gamification",
+    "reports": "Reports",
+    "logout": "Logout"
+  },
+  "================== PAGES LABELS ==================": "",
+  "login-page": {
+    "title": "Login"
+  },
+  "================== HTTP ERROR LIST ==================": "",
+  "httpErrors": {
+    "noInternetConnection": "No internet connection, check your connection first, and try again"
+  },
+  "================== BL ERROR LIST ==================": "",
+  "generalServices": {
+    "errorQueryingData": "An error occurred while consulting the data",
+    "errorInsertingData": "An error occurred while inserting the data",
+    "serviceError": "An error occurred with the service, please contact the administrator"
+  },
+  "Gen_0": "Unknown error",
+  "Gen_1": "An unexpected error has occurred. Please contact the administrator.",
+  "================== BL AdmFoto ERROR LIST ==================": "",
+  "AdmFoto_1": "Photo not found",
+  "badCredentialsException": "Incorrect username or password",
+  "AdmUser_1_Usuario": "The indicated user already exists",
+  "AdmAnimal_0_Usuario": "Error added to test responses with BLException from Bienestar Animal"
+}
