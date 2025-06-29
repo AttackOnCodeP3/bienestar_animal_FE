@@ -1,0 +1,21 @@
+{
+  "================== GLOBAL ==================": "",
+
+  "================== HTTP ERROR LIST ==================": "",
+  "httpErrors": {
+    "noInternetConnection": "Sin conexión a internet, compruebe primero su conexión, e intente nuevamente"
+  },
+  "================== BL ERROR LIST ==================": "",
+  "generalServices": {
+    "errorQueryingData": "Ocurrió un error al consultar los datos",
+    "errorInsertingData": "Ocurrió un error al insertar los datos",
+    "serviceError": "Ocurrió un error con el servicio, por favor contacte al administrador"
+  },
+  "Gen_0": "Error desconocido",
+  "Gen_1": "Ha ocurrido un error inesperado. Por favor, contacte con el administrador.",
+  "================== BL AdmFoto ERROR LIST ==================": "",
+  "AdmFoto_1": "Foto no encontrada",
+  "badCredentialsException": "Usuario o contraseña incorrectos",
+  "AdmUsuario_1_Usuario": "El usuario indicado ya existe",
+  "AdmCiudadano_0_Usuario": "Error agregado para probar las respuestas con BLException desde Bienestar Animal"
+}
