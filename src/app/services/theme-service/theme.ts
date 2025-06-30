@@ -1,6 +1,6 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
 import {IAppTheme} from '@common/interfaces';
-import {ThemeName} from '@common/types/theme-name.type';
+import {ThemeName} from '@common/types';
 import {Constants} from '@common/constants/constants';
 import {Log} from '@services/general';
 import {I18nGeneralKeysEnum} from '@common/enums/i18n';

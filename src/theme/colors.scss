@@ -1,0 +1,64 @@
+@use 'sass:map';
+@use 'theme-colors' as theme;
+@use '@angular/material' as mat;
+
+.on-primary {
+  color: var(--mat-sys-on-primary);
+}
+
+.primary-container {
+  background-color: var(--mat-sys-on-surface)
+}
+
+$matSysColors: (
+  primary,
+  on-primary,
+  primary-container,
+  on-primary-container,
+  secondary,
+  on-secondary,
+  secondary-container,
+  on-secondary-container,
+  tertiary,
+  on-tertiary,
+  tertiary-container,
+  on-tertiary-container,
+  error,
+  on-error,
+  error-container,
+  on-error-container,
+  surface,
+  on-surface,
+  surface-dim,
+  surface-bright,
+  surface-container-lowest,
+  surface-container-low,
+  surface-container,
+  surface-container-high,
+  surface-container-highest,
+  outline,
+  outline-variant,
+  primary-fixed,
+  on-primary-fixed,
+  primary-fixed-dim,
+  secondary-fixed,
+  on-secondary-fixed,
+  secondary-fixed-dim,
+  tertiary-fixed,
+  on-tertiary-fixed,
+  tertiary-fixed-dim,
+);
+
+@each $colorName in $matSysColors {
+  .color-#{$colorName} {
+    color: var(--mat-sys-#{$colorName});
+  }
+
+  .bg-#{$colorName} {
+    background-color: var(--mat-sys-#{$colorName});
+  }
+
+  .border-#{$colorName} {
+    border-color: var(--mat-sys-#{$colorName});
+  }
+}

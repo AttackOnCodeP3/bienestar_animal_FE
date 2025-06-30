@@ -29,6 +29,8 @@
       "@common/types": ["app/common/types/index.ts"], // Alias for types index file
       "@common/types/*": ["app/common/types/*"],
       "@common/constants/*": ["app/common/constants/*"],
+      "common/forms/*": ["app/common/forms/*"], // Alias for forms directory
+      "@common/forms": ["app/common/forms/index.ts"], // Alias for forms index file
 
       "@animations/fade": ["app/animations/fade/index.ts"], // Alias for animations index fade file
       "@animations/fade/*": ["app/animations/fade/*"],

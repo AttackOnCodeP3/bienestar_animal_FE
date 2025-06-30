@@ -5,7 +5,7 @@ import {Constants} from '@common/constants/constants';
 import {LanguagesEnum} from '@common/enums';
 import {ISupportedLanguage} from '@common/interfaces';
 import {Log} from '@services/general';
-import {I18nGeneralKeysEnum} from '@common/enums/i18n';
+import {I18nFormsEnum, I18nGeneralKeysEnum, I18nPagesEnum} from '@common/enums/i18n';
 
 /**
  * Interface that defines the literal object for label parameters.
@@ -25,6 +25,7 @@ interface ILabelParameters {
 export class I18n {
   private readonly translateService: TranslateService = inject(TranslateService);
   private readonly log = inject(Log);
+
   readonly supportedLanguages = signal<ISupportedLanguage[]>([
     {
       code: LanguagesEnum.SPANISH,
@@ -39,6 +40,18 @@ export class I18n {
   ]);
 
   readonly currentLanguage = signal<ISupportedLanguage | null>(null);
+
+  get i18nPagesEnum() {
+    return I18nPagesEnum;
+  }
+
+  get i18nGeneralEnum() {
+    return I18nGeneralKeysEnum;
+  }
+
+  get i18nFormsEnum(){
+    return I18nFormsEnum
+  }
 
   /**
    * Gets the translated value of a label from the internationalization file.

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LogoBienestarAnimal} from '@components/icons/logo-bienestar-animal/logo-bienestar-animal';
+import {LogoBienestarAnimal} from '@components/icons';
 
 @Component({
   selector: 'app-home',
