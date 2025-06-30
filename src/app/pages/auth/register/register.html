@@ -55,7 +55,7 @@
               (click)="onNavigateToRegister()">
               {{ i18n.i18nButtonsEnum.BUTTON_NO_ACCOUNT | translate }}
             </button>
-            <button type="button" matButton="text" (click)="onNavigateToForgotPassword()">
+            <button type="submit" matButton="text">
               {{i18n.i18nButtonsEnum.BUTTON_FORGOT_PASSWORD | translate}}
             </button>
           </div>
@@ -67,6 +67,8 @@
               <mat-icon svgIcon="google-sign-in"></mat-icon>
             </button>
           </div>
+
+
         </form>
       </div>
     </div>

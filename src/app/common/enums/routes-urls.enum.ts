@@ -10,7 +10,7 @@ const VOID_PATH = '';
  * @author dgutierrez
  */
 export enum RoutesUrlsEnum {
-  // utility routes
+  // Utility routes
   VOID_ROUTE = VOID_PATH,
   SLASH = '/',
   DASHBOARD = PATH_DASHBOARD_ROUTES,
@@ -20,6 +20,11 @@ export enum RoutesUrlsEnum {
   AUTH = PATH_AUTH_ROUTES,
   GAMIFICATION = PATH_GAMIFICATION_ROUTES,
   REPORTS = PATH_REPORTS_ROUTES,
+
+  // Auth routes
+  LOGIN = 'login',
+  REGISTER = 'register',
+  FORGOT_PASSWORD = 'forgot-password',
 
   // Gemification routes
   REWARDS_SYSTEM = 'rewards-system',

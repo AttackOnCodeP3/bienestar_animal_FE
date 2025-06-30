@@ -10,6 +10,8 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {LogoBienestarAnimal} from '@components/icons';
 import {LoginController} from '@pages/auth/login/login.controller';
 import {Forms, I18n} from '@services/general';
+import {Router} from '@angular/router';
+import {PagesUrlsEnum} from '@common/enums';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +33,7 @@ import {Forms, I18n} from '@services/general';
   providers: [LoginController]
 })
 export class Login {
-
+  private readonly router = inject(Router);
   private readonly pageController = inject(LoginController);
   readonly i18n = inject(I18n);
   readonly forms = inject(Forms);
@@ -47,7 +49,19 @@ export class Login {
     }
   }
 
-  onRegister() {
+  /**
+   * Navigates to the forgot password page.
+   * @author dgutierrez
+   */
+  onNavigateToForgotPassword() {
+    this.router.navigate([PagesUrlsEnum.FORGOT_PASSWORD]);
+  }
 
+  /**
+   * Navigates to the registration page.
+   * @author dgutierrez
+   */
+  onNavigateToRegister() {
+    this.router.navigate([PagesUrlsEnum.REGISTER]);
   }
 }
