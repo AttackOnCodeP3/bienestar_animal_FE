@@ -6,6 +6,7 @@ import {LanguagesEnum} from '@common/enums';
 import {ISupportedLanguage} from '@common/interfaces';
 import {Log} from '@services/general';
 import {I18nFormsEnum, I18nGeneralKeysEnum, I18nPagesEnum} from '@common/enums/i18n';
+import {I18nButtonsEnum} from '@common/enums/i18n/i18n-buttons.enum';
 
 /**
  * Interface that defines the literal object for label parameters.
@@ -51,6 +52,10 @@ export class I18n {
 
   get i18nFormsEnum(){
     return I18nFormsEnum
+  }
+
+  get i18nButtonsEnum() {
+    return I18nButtonsEnum;
   }
 
   /**

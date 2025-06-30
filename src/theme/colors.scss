@@ -1,13 +1,27 @@
-@use 'sass:map';
-@use 'theme-colors' as theme;
+@use 'sass:map' as map;
 @use '@angular/material' as mat;
+@use 'theme-colors' as theme;
+@use 'mixins' as mixins;
 
-.on-primary {
-  color: var(--mat-sys-on-primary);
+.background {
+  background-color: var(--mat-sys-surface);
 }
 
-.primary-container {
-  background-color: var(--mat-sys-on-surface)
+.on-background {
+  color: var(--mat-sys-on-surface);
+}
+
+
+@include mixins.light-mode{
+  .bg-primary-contrast {
+    background-color: var(--mat-sys-inverse-on-surface);
+  }
+}
+
+@include mixins.dark-mode {
+  .bg-primary-contrast {
+    background-color: #1A1A1A;
+  }
 }
 
 $matSysColors: (

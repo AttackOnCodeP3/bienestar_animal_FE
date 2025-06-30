@@ -78,7 +78,17 @@
   },
   "================== PAGES LABELS ==================": "",
   "login-page": {
-    "title": "Login"
+    "title": "Login",
+    "orRegisterWith": "Or register with"
+  },
+  "================== BUTTON TEXT ===========================": "",
+  "buttons": {
+   "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "createYourAccountHere": "Create your account here"
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {

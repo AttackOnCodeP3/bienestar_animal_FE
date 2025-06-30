@@ -1,57 +1,77 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <!-- Email -->
-  <div class="mb-3">
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Email</mat-label>
-      <input
-        type="email"
-        matInput
-        formControlName="email"
-        [errorStateMatcher]="forms.matcher"
-        [placeholder]="i18n.i18nFormsEnum.EMAIL_PLACEHOLDER | translate" />
-      @let emailControl = form.get('email');
-      @if (forms.isFieldInvalid(emailControl)) {
-        <mat-error>{{ forms.getErrorMessage(emailControl) }}</mat-error>
-      }
-    </mat-form-field>
+<div class="d-flex justify-content-center align-items-center min-vh-100 ">
+  <div class="container">
+    <div class="row justify-content-center rounded py-5 bg-primary-contrast">
+      <div class="col-md-6 col-lg-5">
+        <div class="text-center">
+          <app-logo-bienestar-animal listCssClasses="max-width-500px" />
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5">
+        <h1 class="text-center mb-4">{{i18n.i18nPagesEnum.LOGIN_PAGE_TITLE | translate}}</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                [errorStateMatcher]="forms.matcher"
+                [placeholder]="i18n.i18nFormsEnum.EMAIL_PLACEHOLDER | translate" />
+              @let emailControl = form.get('email');
+              @if (forms.isFieldInvalid(emailControl)) {
+                <mat-error>{{ forms.getErrorMessage(emailControl) }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ i18n.i18nFormsEnum.PASSWORD_LABEL | translate }}</mat-label>
+              <input
+                type="password"
+                matInput
+                formControlName="password"
+                [errorStateMatcher]="forms.matcher"
+                [placeholder]="i18n.i18nFormsEnum.PASSWORD_PLACEHOLDER | translate" />
+              @let passwordControl = form.get('password');
+              @if (forms.isFieldInvalid(passwordControl)) {
+                <mat-error>{{ forms.getErrorMessage(passwordControl) }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="mb-4">
+            <button type="submit" matButton="filled" class="w-100">
+              {{i18n.i18nButtonsEnum.BUTTON_LOGIN | translate}}
+            </button>
+          </div>
+
+          <div class="mb-4 d-flex justify-content-between">
+            <button
+              mat-button
+              matTooltip="{{ i18n.i18nButtonsEnum.BUTTON_CREATE_YOUR_ACCOUNT_HERE | translate }}"
+              (click)="onRegister()">
+              {{ i18n.i18nButtonsEnum.BUTTON_NO_ACCOUNT | translate }}
+            </button>
+            <button type="submit" matButton="text">
+              {{i18n.i18nButtonsEnum.BUTTON_FORGOT_PASSWORD | translate}}
+            </button>
+          </div>
+          <mat-divider/>
+          <p class="text-center text-secondary mb-3">{{i18n.i18nPagesEnum.LOGIN_PAGE_OR_REGISTER_WITH | translate}}</p>
+
+          <div class="text-center">
+            <button matIconButton type="button">
+              <mat-icon svgIcon="google-sign-in"></mat-icon>
+            </button>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
   </div>
+</div>
 
-  <!-- Password -->
-  <div class="mb-3">
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>{{ i18n.i18nFormsEnum.PASSWORD_LABEL | translate }}</mat-label>
-      <input
-        type="password"
-        matInput
-        formControlName="password"
-        [errorStateMatcher]="forms.matcher"
-        [placeholder]="i18n.i18nFormsEnum.PASSWORD_PLACEHOLDER | translate" />
-      @let passwordControl = form.get('password');
-      @if (forms.isFieldInvalid(passwordControl)) {
-        <mat-error>{{ forms.getErrorMessage(passwordControl) }}</mat-error>
-      }
-    </mat-form-field>
-  </div>
-
-  <!-- Terms -->
-  <div class="form-check mb-3">
-    <input class="form-check-input" type="checkbox" id="termsCheck" required />
-    <label class="form-check-label" for="termsCheck">
-      I agree to the <a href="#" class="text-info">Terms & Conditions</a>
-    </label>
-  </div>
-
-  <!-- Submit -->
-  <button type="submit" class="btn btn-primary w-100 mb-3">
-    Create account
-  </button>
-
-  <div class="text-center text-secondary mb-2">or register with</div>
-
-  <!-- Social Buttons -->
-  <div>
-    <button matIconButton>
-      <mat-icon>google</mat-icon>
-    </button>
-  </div>
-</form>

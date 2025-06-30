@@ -2,12 +2,14 @@ import {Component, inject} from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
-import {LoginController} from '@pages/auth/login/login.controller';
-import {LogoBienestarAnimal} from '@components/icons';
 import {MatInputModule} from '@angular/material/input';
-import {Forms, I18n} from '@services/general';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
+import {MatDivider} from '@angular/material/divider';
+import {MatTooltip} from '@angular/material/tooltip';
+import {LogoBienestarAnimal} from '@components/icons';
+import {LoginController} from '@pages/auth/login/login.controller';
+import {Forms, I18n} from '@services/general';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,9 @@ import {MatIcon} from '@angular/material/icon';
     ReactiveFormsModule,
     MatIcon,
     MatIconButton,
+    MatButton,
+    MatDivider,
+    MatTooltip,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
@@ -37,6 +42,12 @@ export class Login {
   })
 
   onSubmit(): void {
+    if (this.form.invalid) {
+      this.forms.markFormTouchedAndDirty(this.form);
+    }
+  }
+
+  onRegister() {
 
   }
 }
