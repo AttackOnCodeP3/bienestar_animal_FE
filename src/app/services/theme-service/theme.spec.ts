@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { Theme } from './theme';
+import { ThemeService } from './theme.service';
 import { ThemeName } from '@common/types';
 
 describe('Theme', () => {
-  let service: Theme;
+  let service: ThemeService;
   let localStorageSpy: jasmine.SpyObj<Storage>;
   let documentSpy: jasmine.SpyObj<Document>;
   let bodyElement: HTMLBodyElement;
@@ -22,7 +22,7 @@ describe('Theme', () => {
     spyOn(document, 'querySelector').and.callFake(documentSpy.querySelector);
 
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Theme);
+    service = TestBed.inject(ThemeService);
   });
 
   it('should be created', () => {
@@ -74,7 +74,7 @@ describe('Theme', () => {
     localStorageSpy.getItem.and.returnValue('dark');
 
     // Re-create the service to trigger constructor
-    service = TestBed.inject(Theme);
+    service = TestBed.inject(ThemeService);
 
     expect(localStorageSpy.getItem).toHaveBeenCalledWith('app-theme-preference');
     expect(service.selectedTheme()?.name).toBe('dark');

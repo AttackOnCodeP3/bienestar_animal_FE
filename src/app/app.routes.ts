@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import {DashboardLayout} from '@components/dashboard-layout/dashboard-layout';
+import {DashboardLayoutComponent} from '@components/dashboard-layout/dashboard-layout.component';
 import {RoutesUrlsEnum} from '@common/enums/routes-urls.enum';
 
 export const routes: Routes = [
@@ -14,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: RoutesUrlsEnum.DASHBOARD,
-    component: DashboardLayout,
+    component: DashboardLayoutComponent,
     children: [
       {
         path: '',
@@ -23,7 +23,7 @@ export const routes: Routes = [
       },
       {
         path: RoutesUrlsEnum.HOME,
-        loadComponent: () => import('@pages/home/home').then(m => m.Home),
+        loadComponent: () => import('@pages/home/home.page').then(m => m.HomePage),
       },
       {
         path: RoutesUrlsEnum.GAMIFICATION,

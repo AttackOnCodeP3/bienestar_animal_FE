@@ -20,6 +20,6 @@ export const REPORTS_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.REPORT_1,
-    loadComponent: () => import('@pages/reports/report-1/report-1').then(m => m.Report1),
+    loadComponent: () => import('@pages/reports/report-1/report-1.page').then(m => m.Report1Page),
   }
 ] as const;

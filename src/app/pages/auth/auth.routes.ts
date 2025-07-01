@@ -19,14 +19,14 @@ export const AUTH_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.LOGIN,
-    loadComponent: () => import('@pages/auth/login/login').then(m => m.Login),
+    loadComponent: () => import('@pages/auth/login/login.page').then(m => m.LoginPage),
   },
   {
     path: RoutesUrlsEnum.REGISTER,
-    loadComponent: () => import('@pages/auth/register/register').then(m => m.Register),
+    loadComponent: () => import('@pages/auth/register/register.page').then(m => m.RegisterPage),
   },
   {
     path: RoutesUrlsEnum.FORGOT_PASSWORD,
-    loadComponent: () => import('@pages/auth/forgot-password/forgot-password').then(m => m.ForgotPassword),
+    loadComponent: () => import('@pages/auth/forgot-password/forgot-password.page').then(m => m.ForgotPasswordPage),
   }
 ] as const

@@ -11,7 +11,7 @@ import { routes } from './app.routes';
 import {HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MissingTranslationHandler, provideTranslateService, TranslateLoader} from '@ngx-translate/core';
-import {MissingI18n} from '@services/general';
+import {MissingI18nService} from '@services/general';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 registerLocaleData(localeEn)
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       },
       missingTranslationHandler: {
         provide: MissingTranslationHandler,
-        useClass: MissingI18n,
+        useClass: MissingI18nService,
       },
     }),
     { provide: LOCALE_ID, useValue: 'en' },

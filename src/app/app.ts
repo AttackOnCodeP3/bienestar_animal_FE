@@ -1,7 +1,7 @@
 import {Component, effect, inject} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {RouterOutlet} from '@angular/router';
-import {Theme, Log, I18n} from '@services/general';
+import {ThemeService, LogService, I18nService} from '@services/general';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {LanguagesEnum, SvgIconsEnum} from '@common/enums';
@@ -15,12 +15,12 @@ import {Constants} from '@common/constants/constants';
   changeDetection: Constants.changeDetectionStrategy
 })
 export class App {
-  private readonly log = inject(Log);
+  private readonly log = inject(LogService);
   private readonly translate = inject(TranslateService);
-  private readonly i18n = inject(I18n);
+  private readonly i18n = inject(I18nService);
   private readonly matIconReg = inject(MatIconRegistry);
   private readonly sanitizer = inject(DomSanitizer);
-  readonly theme = inject(Theme);
+  readonly theme = inject(ThemeService);
 
   constructor() {
     this.setDefaultLanguage();

@@ -25,11 +25,6 @@ export abstract class UnmutableConstants {
 
   static readonly IMAGE_QUALITY: number = 50
 
-
-  // ==================================================================
-  // PARTIAL ROUTES FOR SERVICES
-  // ==================================================================
-
   // ==================================================================
   // ROUTES FOR SECURITY/AUTH SERVICES
   // ==================================================================
@@ -39,8 +34,7 @@ export abstract class UnmutableConstants {
     UnmutableConstants.SECURITY + '/requestPasswordChange'
 
   // ==================================================================
-  // ROUTES FOR COMPANION ANIMAL SERVICES
+  // ROUTES FOR INTEREST SERVICES
   // =================================================================
-  private static readonly COMPANION_ANIMAL: string = '/CompanionAnimal'
-  static readonly REGISTER_COMPANION_ANIMAL_URL: string = UnmutableConstants.COMPANION_ANIMAL + '/registerCompanionAnimal'
+  static readonly INTEREST: string = '/interest'
 }
