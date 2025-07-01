@@ -13,6 +13,7 @@ import {BreakpointsEnum} from '@common/enums';
 import {IMenuItem} from '@common/interfaces';
 import {Theme, I18n} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
+import {Constants} from '@common/constants/constants';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -39,6 +40,7 @@ import {I18nMenuEnum} from '@common/enums/i18n';
   ],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.scss',
+  changeDetection: Constants.changeDetectionStrategy
 })
 export class DashboardLayout {
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);

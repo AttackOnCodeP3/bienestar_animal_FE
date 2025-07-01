@@ -1,76 +1,50 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100 ">
   <div class="container">
     <div class="row justify-content-center rounded py-5 bg-primary-contrast">
-      <div class="col-md-6 col-lg-5">
+      <div class="col-12">
         <div class="text-center">
-          <app-logo-bienestar-animal listCssClasses="max-width-500px" />
+          <app-logo-bienestar-animal listCssClasses="max-width-500px"/>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-5">
-        <h1 class="text-center mb-4">{{i18n.i18nPagesEnum.LOGIN_PAGE_TITLE | translate}}</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Email</mat-label>
-              <input
-                type="email"
-                matInput
-                formControlName="email"
-                [errorStateMatcher]="forms.matcher"
-                [placeholder]="i18n.i18nFormsEnum.EMAIL_PLACEHOLDER | translate" />
-              @let emailControl = form.get('email');
-              @if (forms.isFieldInvalid(emailControl)) {
-                <mat-error>{{ forms.getErrorMessage(emailControl) }}</mat-error>
-              }
-            </mat-form-field>
-          </div>
+      <h1 class="text-center mb-4">{{ i18n.i18nPagesEnum.REGISTER_PAGE_TITLE | translate }}</h1>
 
-          <div class="mb-3">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>{{ i18n.i18nFormsEnum.PASSWORD_LABEL | translate }}</mat-label>
-              <input
-                type="password"
-                matInput
-                formControlName="password"
-                [errorStateMatcher]="forms.matcher"
-                [placeholder]="i18n.i18nFormsEnum.PASSWORD_PLACEHOLDER | translate" />
-              @let passwordControl = form.get('password');
-              @if (forms.isFieldInvalid(passwordControl)) {
-                <mat-error>{{ forms.getErrorMessage(passwordControl) }}</mat-error>
-              }
-            </mat-form-field>
-          </div>
-
-          <div class="mb-4">
-            <button type="submit" matButton="filled" class="w-100">
-              {{i18n.i18nButtonsEnum.BUTTON_LOGIN | translate}}
-            </button>
-          </div>
-
-          <div class="mb-4 d-flex justify-content-between">
-            <button
-              matButton="text"
-              matTooltip="{{ i18n.i18nButtonsEnum.BUTTON_CREATE_YOUR_ACCOUNT_HERE | translate }}"
-              (click)="onNavigateToRegister()">
-              {{ i18n.i18nButtonsEnum.BUTTON_NO_ACCOUNT | translate }}
-            </button>
-            <button type="submit" matButton="text">
-              {{i18n.i18nButtonsEnum.BUTTON_FORGOT_PASSWORD | translate}}
-            </button>
-          </div>
-          <mat-divider/>
-          <p class="text-center text-secondary mb-3">{{i18n.i18nPagesEnum.LOGIN_PAGE_OR_REGISTER_WITH | translate}}</p>
-
-          <div class="text-center">
-            <button matIconButton type="button">
-              <mat-icon svgIcon="google-sign-in"></mat-icon>
-            </button>
-          </div>
-
-
-        </form>
+      <h2>{{i18n.i18nGeneralEnum.PERSONAL_INFORMATION | translate}}</h2>
+      <div class="col-12">
+        <app-personal-data-user-registration-form
+          [form]="formPersonalDataUser"
+          [i18n]="i18n"
+          [forms]="forms"
+        />
       </div>
+
+      <mat-divider class="my-4"/>
+      <h2>{{i18n.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate}}</h2>
+      <div class="col-12">
+        <app-it-worked-as-nursery-home
+          (checkedChange)="checkedChangeIsNurseryHome($event)"
+          [i18n]="i18n"
+          [forms]="forms"
+        />
+      </div>
+      <mat-divider class="my-4"/>
+
+      <div class="mb-4 text-center">
+        <button type="submit" matButton="filled" class="w-100">
+          {{ i18n.i18nButtonsEnum.BUTTON_REGISTER_NOW | translate }}
+        </button>
+      </div>
+
+      <div class="mb-4 text-end">
+        <button
+          matButton="text"
+          (click)="navigateToLogin()"
+        >
+          {{ i18n.i18nButtonsEnum.BUTTON_ALREADY_HAVE_AN_ACCOUNT | translate }}
+          {{ i18n.i18nButtonsEnum.BUTTON_LOGIN | translate }}
+        </button>
+      </div>
+
     </div>
   </div>
 </div>

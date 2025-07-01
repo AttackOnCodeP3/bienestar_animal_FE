@@ -1,5 +1,6 @@
 import {Component, input} from '@angular/core';
 import {NgClass} from '@angular/common';
+import {Constants} from '@common/constants/constants';
 
 @Component({
   selector: 'app-logo-bienestar-animal',
@@ -7,7 +8,8 @@ import {NgClass} from '@angular/common';
     NgClass
   ],
   templateUrl: './logo-bienestar-animal.html',
-  styleUrl: './logo-bienestar-animal.scss'
+  styleUrl: './logo-bienestar-animal.scss',
+  changeDetection: Constants.changeDetectionStrategy
 })
 export class LogoBienestarAnimal {
   /**

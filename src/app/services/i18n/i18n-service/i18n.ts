@@ -5,7 +5,7 @@ import {Constants} from '@common/constants/constants';
 import {LanguagesEnum} from '@common/enums';
 import {ISupportedLanguage} from '@common/interfaces';
 import {Log} from '@services/general';
-import {I18nFormsEnum, I18nGeneralKeysEnum, I18nPagesEnum} from '@common/enums/i18n';
+import {I18nComponentsEnum, I18nFormsEnum, I18nGeneralKeysEnum, I18nPagesEnum} from '@common/enums/i18n';
 import {I18nButtonsEnum} from '@common/enums/i18n/i18n-buttons.enum';
 
 /**
@@ -56,6 +56,10 @@ export class I18n {
 
   get i18nButtonsEnum() {
     return I18nButtonsEnum;
+  }
+
+  get i18nComponentsEnum() {
+    return I18nComponentsEnum;
   }
 
   /**

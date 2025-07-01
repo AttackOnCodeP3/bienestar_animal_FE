@@ -5,10 +5,12 @@
 export enum  I18nButtonsEnum {
   BUTTONS = "buttons.",
 
-  BUTTON_CREATE_YOUR_ACCOUNT_HERE = "buttons.createYourAccountHere",
-  BUTTON_FORGOT_PASSWORD = "buttons.forgotPassword",
-  BUTTON_LOGIN = "buttons.login",
-  BUTTON_LOGOUT = "buttons.logout",
-  BUTTON_NO_ACCOUNT = "buttons.noAccount",
-  BUTTON_REGISTER = "buttons.register",
+  BUTTON_ALREADY_HAVE_AN_ACCOUNT = I18nButtonsEnum.BUTTONS + "alreadyHaveAnAccount",
+  BUTTON_CREATE_YOUR_ACCOUNT_HERE = I18nButtonsEnum.BUTTONS + "createYourAccountHere",
+  BUTTON_FORGOT_PASSWORD = I18nButtonsEnum.BUTTONS + "forgotPassword",
+  BUTTON_LOGIN = I18nButtonsEnum.BUTTONS + "login",
+  BUTTON_LOGOUT = I18nButtonsEnum.BUTTONS + "logout",
+  BUTTON_NO_ACCOUNT = I18nButtonsEnum.BUTTONS + "noAccount",
+  BUTTON_REGISTER = I18nButtonsEnum.BUTTONS + "register",
+  BUTTON_REGISTER_NOW = I18nButtonsEnum.BUTTONS + "registerNow",
 }

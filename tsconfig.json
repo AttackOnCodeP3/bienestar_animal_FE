@@ -38,6 +38,8 @@
       "@animations/slide": ["app/animations/slide/index.ts"], // Alias for animations index slide file
       "@animations/slide/*": ["app/animations/slide/*"],
 
+      "@components/user": ["app/components/user/index.ts"], // Alias for user component index file
+
       "@pages/*": ["app/pages/*"],
     }
   },

@@ -5,12 +5,14 @@ import {Theme, Log, I18n} from '@services/general';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {LanguagesEnum, SvgIconsEnum} from '@common/enums';
+import {Constants} from '@common/constants/constants';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection: Constants.changeDetectionStrategy
 })
 export class App {
   private readonly log = inject(Log);

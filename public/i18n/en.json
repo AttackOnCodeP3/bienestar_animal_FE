@@ -16,6 +16,14 @@
     "reports": "Reports",
     "logout": "Logout"
   },
+  "general": {
+    "provideTemporaryShelter": "Provide a temporary shelter",
+    "personalInformation": "Personal Information"
+  },
+  "it-worked-as-nursery-home": {
+    "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
+    "descriptionNurseryHome": "Temporary homes that provide adequate space, food, hygiene, and shelter for pets (dogs and cats) that need a family to offer them a temporary home while a permanent home is found."
+  },
   "================== INPUT LABELS =====================": "",
   "inputs": {
     "labels": {
@@ -42,7 +50,11 @@
       "pleaseSelectACanton": "Please select a canton",
       "pleaseSelectADistrict": "Please select a district",
       "sex": "Sex",
-      "phone": "Phone"
+      "phone": "Phone",
+      "identificationCard": "Identification Card",
+      "phoneNumber": "Phone Number",
+      "birthDate": "Birth Date",
+      "isNurseryHome": "Is Nursery Home?"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -55,25 +67,29 @@
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
-      "lastName": "Enter last name",
-      "neighborhoodCommunityOrVillage": "Enter neighborhood/community or village",
-      "canton": "Enter canton",
-      "animalCondition": "Select animal condition",
-      "confirmPassword": "Confirm your password",
-      "currentPassword": "Enter current password",
-      "password": "Enter password",
-      "email": "Enter email",
-      "emailAddress": "Enter email address",
-      "district": "Enter district",
       "age": "Enter age",
       "ageAccordingToObservation": "Enter age according to observation",
-      "species": "Select species",
-      "status": "Select status",
-      "name": "Enter name",
-      "productName": "Enter product name",
-      "newPassword": "Enter new password",
+      "animalCondition": "Select animal condition",
       "approximateWeight": "Enter approximate weight",
-      "breed": "Select breed"
+      "birthDate": "Enter the birth date",
+      "breed": "Select breed",
+      "canton": "Enter canton",
+      "confirmPassword": "Confirm your password",
+      "currentPassword": "Enter current password",
+      "district": "Enter district",
+      "email": "Enter email",
+      "emailAddress": "Enter email address",
+      "identificationCard": "Enter the identification card",
+      "isNurseryHome": "Select if it is a nursery home",
+      "lastName": "Enter last name",
+      "name": "Enter name",
+      "neighborhoodCommunityOrVillage": "Enter neighborhood/community or village",
+      "newPassword": "Enter new password",
+      "password": "Enter password",
+      "phoneNumber": "Enter the phone number",
+      "productName": "Enter product name",
+      "species": "Select species",
+      "status": "Select status"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -81,14 +97,19 @@
     "title": "Login",
     "orRegisterWith": "Or register with"
   },
+  "register-page": {
+    "title": "Register and be part of it"
+  },
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
-   "login": "Login",
-    "register": "Register",
-    "logout": "Logout",
+    "alreadyHaveAnAccount": "¿Already have an account?",
+    "createYourAccountHere": "Create your account here",
     "forgotPassword": "Forgot Password?",
+    "login": "Login",
+    "logout": "Logout",
     "noAccount": "Don't have an account?",
-    "createYourAccountHere": "Create your account here"
+    "register": "Register",
+    "registerNow": "Register Now"
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
