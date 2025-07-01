@@ -48,6 +48,17 @@ export class Register {
     confirmPassword: new FormControl('', [Validators.required]),
   });
 
+  onSubmit() {
+    if(this.formPersonalDataUser.invalid) {
+      this.formPersonalDataUser.markAllAsTouched();
+      return;
+    }
+  }
+
+  private registerUser(){
+
+  }
+
   /**
    * Handles the change event of the "It worked as a nursery home" checkbox.
    * @param checked - The new checked state of the checkbox.
