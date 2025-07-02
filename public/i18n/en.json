@@ -18,7 +18,8 @@
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
-    "personalInformation": "Personal Information"
+    "personalInformation": "Personal Information",
+    "location": "Location"
   },
   "it-worked-as-nursery-home-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",

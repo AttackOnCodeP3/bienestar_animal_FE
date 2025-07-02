@@ -7,10 +7,11 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsService, I18nService} from '@services/general';
 import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-location',
-  imports: [MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './location.component.html',
   styleUrl: './location.component.scss',
   changeDetection: Constants.changeDetectionStrategy

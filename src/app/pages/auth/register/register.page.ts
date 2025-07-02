@@ -5,7 +5,8 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 import {
   InterestsComponent,
-  ItWorkedAsNurseryHomeComponent, LocationComponent,
+  ItWorkedAsNurseryHomeComponent,
+  LocationComponent,
   PersonalDataUserRegistrationFormComponent
 } from '@components/forms/user';
 import {LogoBienestarAnimalComponent} from '@components/icons';
@@ -18,7 +19,7 @@ import {
   CantonHttpService,
   DistrictHttpService,
   InterestHttpService,
-  MunicipalityHttpService, NeighborhoodHttpService
+  MunicipalityHttpService
 } from '@services/http';
 import {Canton, District, Interest, Neighborhood, User} from '@models';
 import {toSignal} from '@angular/core/rxjs-interop';
@@ -51,26 +52,25 @@ export class RegisterPage implements OnInit {
   private readonly municipalityHttpService = inject(MunicipalityHttpService);
   readonly cantonHttpService = inject(CantonHttpService);
   readonly districtHttpService = inject(DistrictHttpService);
-  readonly neighborhoodHttpService = inject(NeighborhoodHttpService);
-  readonly interestHttpService = inject(InterestHttpService);
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
+  readonly interestHttpService = inject(InterestHttpService);
   readonly router = inject(Router);
 
   formPersonalDataUser = this.formsService.formsBuilder.group({
-    identificationCard: new FormControl('117260915', [Validators.required]),
-    name: new FormControl('David', [Validators.required]),
-    lastname: new FormControl('Gutierrez', [Validators.required]),
-    email: new FormControl('wwwdcalderon@gmail.com', [Validators.required, Validators.email]),
-    phoneNumber: new FormControl('81719081', [Validators.required]),
+    identificationCard: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phoneNumber: new FormControl('', [Validators.required]),
     birthDate: new FormControl('', [Validators.required]),
     isNurseryHome: new FormControl(false, [Validators.required]),
     interests: new FormControl<Interest[]>([]),
-    password: new FormControl('Heliosnxp1516', [Validators.required]),
     canton: new FormControl<Canton | null>(null, [Validators.required]),
     district: new FormControl<District | null>(null, [Validators.required]),
     neighborhood: new FormControl<Neighborhood | null>(null, [Validators.required]),
-    confirmPassword: new FormControl('Heliosnxp1516', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    confirmPassword: new FormControl('', [Validators.required]),
   }, {
     validators: matchFieldsValidations('password', 'confirmPassword'),
   });
@@ -83,6 +83,12 @@ export class RegisterPage implements OnInit {
     this.cantonHttpService.getAll();
   }
 
+  /**
+   * Handles the form submission for user registration.
+   * Validates the form and if valid, calls the registerUser method to register the user.
+   * If the form is invalid, it marks the form as touched and dirty to show validation errors.
+   * @author dgutierrez
+   */
   onSubmit() {
     if (this.formPersonalDataUser.invalid) {
       this.formsService.markFormTouchedAndDirty(this.formPersonalDataUser);
@@ -92,6 +98,13 @@ export class RegisterPage implements OnInit {
     this.registerUser();
   }
 
+  /**
+   * Registers a new user with the provided personal data.
+   * It retrieves the form values, constructs a User object, and calls the authService to register the user.
+   * If successful, it navigates to the login page; otherwise, it shows an error message.
+   * TODO: Uncomment i18nService messages when available.
+   * @author dgutierrez
+   */
   private registerUser() {
     const {confirmPassword, ...rest} = this.formPersonalDataUser.getRawValue();
     const user = new User(rest);
@@ -106,6 +119,11 @@ export class RegisterPage implements OnInit {
     });
   }
 
+  /**
+   * Handles the change event of the canton selection.
+   * @param interests - The selected interests.
+   * @author dgutierrez
+   */
   interestsChange(interests: Interest[]) {
     this.formPersonalDataUser.get('interests')?.setValue(interests);
   }
@@ -119,6 +137,10 @@ export class RegisterPage implements OnInit {
     this.formPersonalDataUser.get('isNurseryHome')?.setValue(checked);
   }
 
+  /**
+   * Navigates to the login page.
+   * @author dgutierrez
+   */
   navigateToLogin() {
     this.router.navigate([PagesUrlsEnum.LOGIN])
   }

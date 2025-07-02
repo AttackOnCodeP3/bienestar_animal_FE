@@ -11,7 +11,8 @@
   },
   "general": {
     "provideTemporaryShelter": "Brinda un refugio temporal",
-    "personalInformation": "Información personal"
+    "personalInformation": "Información personal",
+    "location": "Ubicación"
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {

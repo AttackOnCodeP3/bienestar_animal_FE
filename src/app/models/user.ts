@@ -1,5 +1,6 @@
 import {Municipality} from './municipality';
 import {Interest} from './interest';
+import {Neighborhood} from './neighborhood';
 
 /**
  * User model representing a user in the system.
@@ -21,6 +22,7 @@ export class User {
   registeredByCensusTaker: boolean | null;
   interests: Interest[] | null;
   municipality: Municipality | null;
+  neighborhood: Neighborhood | null;
 
   constructor(values: Partial<User> = {}) {
     this.id = values.id || null;
@@ -38,5 +40,6 @@ export class User {
     this.registeredByCensusTaker = values.registeredByCensusTaker || null;
     this.interests = values.interests || null;
     this.municipality = values.municipality || null;
+    this.neighborhood = values.neighborhood || null;
   }
 }
