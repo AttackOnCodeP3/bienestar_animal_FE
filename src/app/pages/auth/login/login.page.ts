@@ -8,11 +8,11 @@ import {MatIcon} from '@angular/material/icon';
 import {MatDivider} from '@angular/material/divider';
 import {MatTooltip} from '@angular/material/tooltip';
 import {LogoBienestarAnimalComponent} from '@components/icons';
-import {LoginController} from '@pages/auth/login/login.controller';
 import {FormsService, I18nService} from '@services/general';
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
 import {Constants} from '@common/constants/constants';
+import {AuthHttpService} from '@services/http';
 
 @Component({
   selector: 'app-login',
@@ -31,14 +31,13 @@ import {Constants} from '@common/constants/constants';
   ],
   templateUrl: './login.page.html',
   styleUrl: './login.page.scss',
-  providers: [LoginController],
   changeDetection: Constants.changeDetectionStrategy
 })
 export class LoginPage {
+  private readonly authService = inject(AuthHttpService);
   private readonly router = inject(Router);
-  private readonly pageController = inject(LoginController);
-  readonly i18nService = inject(I18nService);
   readonly formsService = inject(FormsService);
+  readonly i18nService = inject(I18nService);
 
   readonly form = this.formsService.formsBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -48,7 +47,13 @@ export class LoginPage {
   onSubmit(): void {
     if (this.form.invalid) {
       this.formsService.markFormTouchedAndDirty(this.form);
+      return;
     }
+    this.login();
+  }
+
+  private login(){
+    this.authService
   }
 
   /**
