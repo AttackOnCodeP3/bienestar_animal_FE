@@ -5,14 +5,15 @@ import {
   provideZonelessChangeDetection
 } from '@angular/core';
 import {registerLocaleData} from '@angular/common';
-import { provideRouter } from '@angular/router';
+import {provideRouter} from '@angular/router';
 import localeEn from '@angular/common/locales/en'
-import { routes } from './app.routes';
-import {HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {routes} from './app.routes';
+import {HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MissingTranslationHandler, provideTranslateService, TranslateLoader} from '@ngx-translate/core';
 import {MissingI18nService} from '@services/general';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {baseUrlInterceptor} from '@core/interceptors';
 
 registerLocaleData(localeEn)
 
@@ -25,7 +26,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi(),
+      withInterceptors([
+          baseUrlInterceptor
+        ]
+      )
+    ),
     provideRouter(routes),
     provideZonelessChangeDetection(),
     provideTranslateService({
@@ -39,6 +45,6 @@ export const appConfig: ApplicationConfig = {
         useClass: MissingI18nService,
       },
     }),
-    { provide: LOCALE_ID, useValue: 'en' },
+    {provide: LOCALE_ID, useValue: 'en'},
   ]
 };

@@ -13,8 +13,8 @@
       <div class="col-12">
         <app-personal-data-user-registration-form
           [form]="formPersonalDataUser"
-          [i18n]="i18nService"
-          [forms]="formsService"
+          [i18nService]="i18nService"
+          [formsService]="formsService"
         />
       </div>
 
@@ -22,9 +22,10 @@
       <h2>{{i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate}}</h2>
       <div class="col-12">
         <app-it-worked-as-nursery-home
+          [checked]="isNurseryHome()!"
           (checkedChange)="checkedChangeIsNurseryHome($event)"
-          [i18n]="i18nService"
-          [forms]="formsService"
+          [i18nService]="i18nService"
+          [formsService]="formsService"
         />
       </div>
       <mat-divider class="my-4"/>
@@ -44,7 +45,10 @@
           {{ i18nService.i18nButtonsEnum.BUTTON_LOGIN | translate }}
         </button>
       </div>
-
+      <mat-divider class="my-4"/>
+      <h2>{{i18nService.i18nComponentsEnum.INTERESTS_TITLE | translate}}</h2>
+      <p>{{i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate}}</p>
+      <app-interests [listInterests]="interestHttpService.interestList()" (selectedInterestsChange)="interestsChange($event)" />
     </div>
   </div>
 </div>

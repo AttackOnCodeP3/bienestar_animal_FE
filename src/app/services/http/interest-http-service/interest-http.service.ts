@@ -3,18 +3,19 @@ import {BaseHttpService} from '@services/http';
 import {AlertService} from '@services/general';
 import {ISearch} from '@common/interfaces/http';
 import {Constants} from '@common/constants/constants';
+import {Interest} from '@models';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class InterestHttpService extends BaseHttpService<InterestHttpService> {
+export class InterestHttpService extends BaseHttpService<Interest> {
 
   private alertService: AlertService = inject(AlertService);
 
-  protected override source: string = Constants.INTEREST;
+  protected override source: string = Constants.GET_ALL_INTERESTS_URL;
 
-  interestList = signal<InterestHttpService[]>([]);
+  interestList = signal<Interest[]>([]);
 
   search: ISearch = {
     page: 1,

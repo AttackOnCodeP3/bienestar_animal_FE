@@ -1,4 +1,5 @@
 import {Municipality} from './municipality';
+import {Interest} from './interest';
 
 /**
  * User model representing a user in the system.
@@ -18,6 +19,7 @@ export class User {
   isActive: boolean | null;
   password: string | null;
   registeredByCensusTaker: boolean | null;
+  interests: Interest[] | null;
   municipality: Municipality | null;
 
   constructor(values: Partial<User> = {}) {
@@ -34,6 +36,7 @@ export class User {
     this.isActive = values.isActive || null;
     this.password = values.password || null;
     this.registeredByCensusTaker = values.registeredByCensusTaker || null;
+    this.interests = values.interests || null;
     this.municipality = values.municipality || null;
   }
 }

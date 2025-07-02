@@ -28,13 +28,19 @@ export abstract class UnmutableConstants {
   // ==================================================================
   // ROUTES FOR SECURITY/AUTH SERVICES
   // ==================================================================
-  private static readonly SECURITY: string = '/security'
-  static readonly AUTH_URL: string = UnmutableConstants.SECURITY + '/auth'
-  static readonly REQUEST_PASSWORD_CHANGE_URL: string =
-    UnmutableConstants.SECURITY + '/requestPasswordChange'
+  private static readonly AUTH_URL: string = '/auth'
+  static readonly AUTH_SIGN_UP_URL: string = UnmutableConstants.AUTH_URL + '/signup'
+  static readonly REQUEST_PASSWORD_CHANGE_URL: string ='/requestPasswordChange'
 
   // ==================================================================
   // ROUTES FOR INTEREST SERVICES
   // =================================================================
-  static readonly INTEREST: string = '/interest'
+  private static readonly INTERESTS: string = '/interests'
+  static readonly GET_ALL_INTERESTS_URL: string = UnmutableConstants.INTERESTS;
+
+  // ==================================================================
+  // ROUTES FOR MUNICIPALITY SERVICES
+  // =================================================================
+  private static readonly MUNICIPALITIES: string = '/municipalities'
+  static readonly GET_ALL_MUNICIPALITIES_URL: string = UnmutableConstants.MUNICIPALITIES;
 }

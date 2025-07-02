@@ -20,9 +20,13 @@
     "reports": "Reportes",
     "logout": "Cerrar sesión"
   },
-  "it-worked-as-nursery-home": {
+  "it-worked-as-nursery-home-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
     "descriptionNurseryHome": "Hogares temporales que presentan las condiciones adecuadas de espacio, alimentación, higiene y refugio para mascotas (perros y gatos) que necesitan de una familia que les brinde un hogar temporal mientras se les encuentre una casa definitiva."
+  },
+  "interests-component": {
+    "title": "Intereses",
+    "description": "Seleccione sus intereses asociados para recibir capacitaciones entre otros contenidos personalizados."
   },
   "================== INPUT LABELS =====================": "",
   "inputs": {

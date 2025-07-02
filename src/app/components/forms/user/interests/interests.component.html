@@ -1,0 +1,13 @@
+<mat-list>
+  @for (interest of listInterests(); track interest.id) {
+    <mat-list-item class="px-2">
+      <mat-checkbox
+        [checked]="isInterestSelected(interest.id)"
+        (change)="onSelectInterest($event)"
+        [value]="getIdValueToString(interest)"
+        class="w-100 d-flex justify-between align-items-start">
+        {{ interest.name }}
+      </mat-checkbox>
+    </mat-list-item>
+  }
+</mat-list>

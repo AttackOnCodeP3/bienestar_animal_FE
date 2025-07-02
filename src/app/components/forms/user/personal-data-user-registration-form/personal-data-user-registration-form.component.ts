@@ -31,6 +31,6 @@ import {FormsService, I18nService} from '@services/general';
 })
 export class PersonalDataUserRegistrationFormComponent {
     readonly form = input.required<FormGroup>();
-    readonly forms = input.required<FormsService>();
-    readonly i18n = input.required<I18nService>();
+    readonly formsService = input.required<FormsService>();
+    readonly i18nService = input.required<I18nService>();
 }

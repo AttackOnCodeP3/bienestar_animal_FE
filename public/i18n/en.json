@@ -20,9 +20,13 @@
     "provideTemporaryShelter": "Provide a temporary shelter",
     "personalInformation": "Personal Information"
   },
-  "it-worked-as-nursery-home": {
+  "it-worked-as-nursery-home-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
     "descriptionNurseryHome": "Temporary homes that provide adequate space, food, hygiene, and shelter for pets (dogs and cats) that need a family to offer them a temporary home while a permanent home is found."
+  },
+  "interests-component": {
+    "title": "Interests",
+    "description": "Select your associated interests to receive training and other personalized content."
   },
   "================== INPUT LABELS =====================": "",
   "inputs": {

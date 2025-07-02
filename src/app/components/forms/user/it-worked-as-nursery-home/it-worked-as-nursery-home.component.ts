@@ -22,15 +22,15 @@ import {TranslatePipe} from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItWorkedAsNurseryHomeComponent {
-  readonly i18n = input.required<I18nService>()
-  readonly forms = input.required<FormsService>()
-  readonly checkedChange = output<boolean>()
+  readonly i18nService = input.required<I18nService>()
+  readonly formsService = input.required<FormsService>()
+  readonly checked = model.required<boolean>()
 
   /**
    * Handles the change event of the checkbox.
    * @author dgutierrez
    */
   handleCheckedChange(event: MatCheckboxChange): void {
-    this.checkedChange.emit(event.checked);
+    this.checked.set(event.checked);
   }
 }

@@ -2,130 +2,130 @@
   <div class="row">
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{i18n().i18nFormsEnum.EMAIL_LABEL | translate}}</mat-label>
+        <mat-label>{{i18nService().i18nFormsEnum.EMAIL_LABEL | translate}}</mat-label>
         <input
           type="email"
           matInput
           formControlName="email"
-          [errorStateMatcher]="forms().matcher"
-          [placeholder]="i18n().i18nFormsEnum.EMAIL_PLACEHOLDER | translate"/>
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.EMAIL_PLACEHOLDER | translate"/>
         @let emailControl = form().get('email');
-        @if (forms().isFieldInvalid(emailControl)) {
-          <mat-error>{{ forms().getErrorMessage(emailControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(emailControl)) {
+          <mat-error>{{ formsService().getErrorMessage(emailControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ i18n().i18nFormsEnum.PASSWORD_LABEL | translate }}</mat-label>
+        <mat-label>{{ i18nService().i18nFormsEnum.PASSWORD_LABEL | translate }}</mat-label>
         <input
           type="password"
           matInput
           formControlName="password"
-          [errorStateMatcher]="forms().matcher"
-          [placeholder]="i18n().i18nFormsEnum.PASSWORD_PLACEHOLDER | translate"/>
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.PASSWORD_PLACEHOLDER | translate"/>
         @let passwordControl = form().get('password');
-        @if (forms().isFieldInvalid(passwordControl)) {
-          <mat-error>{{ forms().getErrorMessage(passwordControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(passwordControl)) {
+          <mat-error>{{ formsService().getErrorMessage(passwordControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ i18n().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}</mat-label>
+        <mat-label>{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}</mat-label>
         <input
           type="number"
           matInput
           formControlName="identificationCard"
-          [errorStateMatcher]="forms().matcher"
-          [placeholder]="i18n().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"/>
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"/>
         @let idControl = form().get('identificationCard');
-        @if (forms().isFieldInvalid(idControl)) {
-          <mat-error>{{ forms().getErrorMessage(idControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(idControl)) {
+          <mat-error>{{ formsService().getErrorMessage(idControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ i18n().i18nFormsEnum.PHONE_NUMBER_LABEL | translate }}</mat-label>
+        <mat-label>{{ i18nService().i18nFormsEnum.PHONE_NUMBER_LABEL | translate }}</mat-label>
         <input
           type="tel"
           matInput
           formControlName="phoneNumber"
-          [errorStateMatcher]="forms().matcher"
-          [placeholder]="i18n().i18nFormsEnum.PHONE_NUMBER_PLACEHOLDER | translate"/>
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.PHONE_NUMBER_PLACEHOLDER | translate"/>
         @let phoneControl = form().get('phoneNumber');
-        @if (forms().isFieldInvalid(phoneControl)) {
-          <mat-error>{{ forms().getErrorMessage(phoneControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(phoneControl)) {
+          <mat-error>{{ formsService().getErrorMessage(phoneControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ i18n().i18nFormsEnum.NAME_LABEL | translate }}</mat-label>
+        <mat-label>{{ i18nService().i18nFormsEnum.NAME_LABEL | translate }}</mat-label>
         <input
           type="text"
           matInput
           formControlName="name"
-          [errorStateMatcher]="forms().matcher"
-          [placeholder]="i18n().i18nFormsEnum.NAME_PLACEHOLDER | translate"/>
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.NAME_PLACEHOLDER | translate"/>
         @let nameControl = form().get('name');
-        @if (forms().isFieldInvalid(nameControl)) {
-          <mat-error>{{ forms().getErrorMessage(nameControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(nameControl)) {
+          <mat-error>{{ formsService().getErrorMessage(nameControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ i18n().i18nFormsEnum.LAST_NAME_LABEL | translate }}</mat-label>
+        <mat-label>{{ i18nService().i18nFormsEnum.LAST_NAME_LABEL | translate }}</mat-label>
         <input
           type="text"
           matInput
-          formControlName="lastName"
-          [errorStateMatcher]="forms().matcher"
-          [placeholder]="i18n().i18nFormsEnum.LAST_NAME_PLACEHOLDER | translate"/>
+          formControlName="lastname"
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.LAST_NAME_PLACEHOLDER | translate"/>
         @let lastNameControl = form().get('lastName');
-        @if (forms().isFieldInvalid(lastNameControl)) {
-          <mat-error>{{ forms().getErrorMessage(lastNameControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(lastNameControl)) {
+          <mat-error>{{ formsService().getErrorMessage(lastNameControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ i18n().i18nFormsEnum.CONFIRM_PASSWORD_LABEL | translate }}</mat-label>
+        <mat-label>{{ i18nService().i18nFormsEnum.CONFIRM_PASSWORD_LABEL | translate }}</mat-label>
         <input
           type="text"
           matInput
           formControlName="confirmPassword"
-          [errorStateMatcher]="forms().matcher"
-          [placeholder]="i18n().i18nFormsEnum.CONFIRM_PASSWORD_PLACEHOLDER | translate"/>
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.CONFIRM_PASSWORD_PLACEHOLDER | translate"/>
         @let confirmPasswordControl = form().get('confirmPassword');
-        @if (forms().isFieldInvalid(confirmPasswordControl)) {
-          <mat-error>{{ forms().getErrorMessage(confirmPasswordControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(confirmPasswordControl)) {
+          <mat-error>{{ formsService().getErrorMessage(confirmPasswordControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ i18n().i18nFormsEnum.BIRTH_DATE_LABEL | translate }}</mat-label>
+        <mat-label>{{ i18nService().i18nFormsEnum.BIRTH_DATE_LABEL | translate }}</mat-label>
         <input
           matInput
           [matDatepicker]="picker"
           formControlName="birthDate"
-          [errorStateMatcher]="forms().matcher"
+          [errorStateMatcher]="formsService().matcher"
         />
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         @let birthDateControl = form().get('birthDate');
-        @if (forms().isFieldInvalid(birthDateControl)) {
-          <mat-error>{{ forms().getErrorMessage(birthDateControl) }}</mat-error>
+        @if (formsService().isFieldInvalid(birthDateControl)) {
+          <mat-error>{{ formsService().getErrorMessage(birthDateControl) }}</mat-error>
         }
       </mat-form-field>
     </div>
