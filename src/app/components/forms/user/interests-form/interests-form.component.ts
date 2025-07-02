@@ -1,9 +1,9 @@
-import {Component, input, model, output} from '@angular/core';
-import {Constants} from '@common/constants/constants';
-import {Interest} from '@models';
+import {Component, input, model} from '@angular/core';
 import {MatList, MatListItem} from '@angular/material/list';
 import {MatCheckbox, MatCheckboxChange} from '@angular/material/checkbox';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Constants} from '@common/constants/constants';
+import {Interest} from '@models';
 
 @Component({
   selector: 'app-interests',
@@ -22,6 +22,11 @@ export class InterestsFormComponent {
   readonly listInterests = input<Interest[]>()
   readonly selectedInterests = model<Interest[]>([]);
 
+  /**
+   * Converts the ID of an interest to a string.
+   * @param interest The interest object containing the ID.
+   * @author dgutierrez
+   */
   getIdValueToString(interest:Interest): string {
     return interest.id?.toString() || '';
   }

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, input, model, output} from '@angular/core';
+import {Component, input, model} from '@angular/core';
 import {MatCheckbox, MatCheckboxChange} from '@angular/material/checkbox';
 import {FormsModule} from '@angular/forms';
 import {MatHint} from '@angular/material/input';

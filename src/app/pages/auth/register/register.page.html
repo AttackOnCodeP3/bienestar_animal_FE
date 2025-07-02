@@ -50,6 +50,10 @@
       <app-interests [listInterests]="interestHttpService.interestList()" (selectedInterestsChange)="interestsChange($event)" />
       <mat-divider class="my-4"/>
 
+      <h2>{{i18nService.i18nComponentsEnum.PASSWORD_FORM_TITLE | translate}}</h2>
+      <app-password-form [form]="formPersonalDataUser" [i18nService]="i18nService" [formsService]="formsService" />
+      <mat-divider class="my-4"/>
+
       <div class="mb-4 text-center">
         <button type="submit" matButton="filled" class="w-100" (click)="onSubmit()">
           {{ i18nService.i18nButtonsEnum.BUTTON_REGISTER_NOW | translate }}

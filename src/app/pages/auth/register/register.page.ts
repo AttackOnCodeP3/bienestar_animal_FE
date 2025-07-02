@@ -6,7 +6,7 @@ import {MatButton} from '@angular/material/button';
 import {
   InterestsFormComponent,
   ItWorkedAsNurseryHomeFormComponent,
-  LocationFormComponent,
+  LocationFormComponent, PasswordFormComponent,
   PersonalDataUserRegistrationFormComponent
 } from '@components/forms/user';
 import {LogoBienestarAnimalComponent} from '@components/icons';
@@ -41,7 +41,8 @@ import {matchFieldsValidations} from '@common/forms';
     ItWorkedAsNurseryHomeFormComponent,
     MatDivider,
     InterestsFormComponent,
-    LocationFormComponent
+    LocationFormComponent,
+    PasswordFormComponent
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss',
