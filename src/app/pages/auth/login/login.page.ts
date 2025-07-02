@@ -39,21 +39,38 @@ export class LoginPage {
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
 
-  readonly form = this.formsService.formsBuilder.group({
+  readonly loginForm = this.formsService.formsBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   })
 
   onSubmit(): void {
-    if (this.form.invalid) {
-      this.formsService.markFormTouchedAndDirty(this.form);
+    if (this.loginForm.invalid) {
+      this.formsService.markFormTouchedAndDirty(this.loginForm);
       return;
     }
     this.login();
   }
 
+  /**
+   * Handles the login process.
+   * @author dgutierrez
+   */
   private login(){
-    this.authService
+    const {email, password} = this.loginForm.getRawValue();
+    if (!email || !password) {return}
+    this.authService.login({email, password}).subscribe({
+      next: () => {
+        this.onNavigateToDashboard();
+      },
+      error: (error) => {
+        console.error(error.error.description)
+      }
+    })
+  }
+
+  onNavigateToDashboard() {
+    this.router.navigate([PagesUrlsEnum.DASHBOARD]);
   }
 
   /**

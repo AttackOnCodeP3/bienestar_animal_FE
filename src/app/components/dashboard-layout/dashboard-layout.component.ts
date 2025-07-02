@@ -9,11 +9,12 @@ import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/
 import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {BreakpointsEnum} from '@common/enums';
+import {BreakpointsEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem} from '@common/interfaces';
 import {ThemeService, I18nService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
 import {Constants} from '@common/constants/constants';
+import {AuthHttpService} from '@services/http';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -46,6 +47,7 @@ export class DashboardLayoutComponent {
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
   readonly i18n = inject(I18nService);
   readonly theme = inject(ThemeService)
+  private readonly authService = inject(AuthHttpService);
 
   readonly isScreenSmall = signal<boolean>(false);
   readonly sideNavMode = signal<MatDrawerMode>('side');
@@ -71,12 +73,29 @@ export class DashboardLayoutComponent {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: '',
+      click: () => this.authService.logout(),
     }
   ])
 
+  /**
+   * A computed signal that returns the sorted list of menu items with the following order:
+   *
+   * 1. The item with route === 'home' (if it exists) appears first.
+   * 2. Items with children (submenus) come next.
+   * 3. Items without children are listed last.
+   *
+   * This sorting improves the structure and visual grouping of the menu in the UI.
+   * Null or undefined values (if 'home' is not found) are filtered out using `.filter(Boolean)`.
+   *
+   * @example
+   * // Given menuItems = [about, home, dashboard(with children), settings]
+   * // Result: [home, dashboard, about, settings]
+   *
+   * @author dgutierrez
+   */
   readonly menuItemsSorted = computed(() => {
     const items = this.menuItems();
-    const home = items.find(item => item.route === 'home');
+    const home = items.find(item => item.route === RoutesUrlsEnum.HOME);
     const withChildren = items.filter(item => item !== home && item.children?.length);
     const withoutChildren = items.filter(item => item !== home && (!item.children || item.children.length === 0));
     return [home, ...withChildren, ...withoutChildren].filter(Boolean);

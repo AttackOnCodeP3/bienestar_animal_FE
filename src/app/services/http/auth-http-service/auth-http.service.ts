@@ -1,130 +1,152 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable, signal} from '@angular/core';
+import {Route} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
-import {User} from '@models';
 import {Constants} from '@common/constants/constants';
-import {IAuthority, ILoginResponse} from '@common/interfaces/http';
+import {ILoginResponse} from '@common/interfaces/http';
 import {RollsEnum} from '@common/enums';
+import {StorageService} from '@services/general';
+import {User} from '@models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthHttpService {
 
-  private accessToken: string | null;
-  private expiresIn: number | null;
-  private user: User = new User({email: '', authorities: []});
-
+  private readonly storageService = inject(StorageService);
   private readonly httpClient = inject(HttpClient);
 
+  private readonly userSignal = signal<User>(new User({ email: '', authorities: [] }));
+  private readonly accessTokenSignal = signal<string | null>(null);
+  private readonly expiresInSignal = signal<number | null>(null);
+
+  readonly isAuthenticated = computed(() => !!this.accessTokenSignal());
+  readonly user = computed(() => this.userSignal());
+  readonly userAuthorities = computed(() => this.user().authorities ?? []);
+
   constructor() {
-    this.accessToken = null;
-    this.expiresIn = null;
-    this.load();
+    this.loadFromStorage();
   }
 
-  save(): void {
-    if (this.user) localStorage.setItem('auth_user', JSON.stringify(this.user));
-
-    if (this.accessToken)
-      localStorage.setItem('access_token', JSON.stringify(this.accessToken));
-
-    if (this.expiresIn)
-      localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
+  /**
+   * Stores the session data in localStorage.
+   * @author dgutierrez
+   */
+  private saveToStorage(): void {
+     this.storageService.set(Constants.LS_APP_AUTH_USER, JSON.stringify(this.user()));
+    if (this.accessTokenSignal()) {
+       this.storageService.set(Constants.LS_ACCESS_TOKEN, this.accessTokenSignal()!);
+    }
+    if (this.expiresInSignal()) {
+       this.storageService.set(Constants.LS_EXPIRES_IN, this.expiresInSignal()!.toString());
+    }
   }
 
-  private load(): void {
-    let token = localStorage.getItem('access_token');
-    if (token) this.accessToken = token;
-    let exp = localStorage.getItem('expiresIn');
-    if (exp) this.expiresIn = JSON.parse(exp);
-    const user = localStorage.getItem('auth_user');
-    if (user) this.user = JSON.parse(user);
+  /**
+   * Loads the session data from localStorage into signals.
+   * @author dgutierrez
+   */
+  private loadFromStorage(): void {
+    const token = this.storageService.get(Constants.LS_ACCESS_TOKEN);
+    const expires = this.storageService.get(Constants.LS_EXPIRES_IN);
+    const user = this.storageService.get(Constants.LS_APP_AUTH_USER);
+
+    if (token) this.accessTokenSignal.set(token);
+    if (expires) this.expiresInSignal.set(Number(expires));
+    if (user) this.userSignal.set(new User(JSON.parse(user)));
   }
 
-  getUser(): User {
-    return this.user;
-  }
-
-  getAccessToken(): string | null {
-    return this.accessToken;
-  }
-
-  check(): boolean {
-    return !!this.accessToken;
-  }
-
-  login(credentials: {
-    email: string;
-    password: string;
-  }): Observable<ILoginResponse> {
-    return this.httpClient.post<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_LOGIN_URL, credentials).pipe(
-      tap((response: any) => {
-        this.accessToken = response.token;
-        this.user.email = credentials.email;
-        this.expiresIn = response.expiresIn;
-        this.user = response.authUser;
-        this.save();
+  /**
+   * Performs login with given credentials.
+   * @param credentials User email and password
+   * @returns Observable of login response
+   * @author dgutierrez
+   */
+  login(credentials: { email: string; password: string }): Observable<ILoginResponse> {
+    const url = `${Constants.apiBaseUrl}${Constants.AUTH_LOGIN_URL}`;
+    return this.httpClient.post<ILoginResponse>(url, credentials).pipe(
+      tap((response:any) => {
+        console.warn(response);
+        this.accessTokenSignal.set(response.token);
+        this.expiresInSignal.set(response.expiresIn);
+        this.userSignal.set(response.authUser);
+        this.saveToStorage();
       })
     );
   }
 
-  registerUser(user: User) {
+  /**
+   * Registers a new user.
+   * @param user User data
+   * @returns Observable of registration result
+   * @author dgutierrez
+   */
+  registerUser(user: User): Observable<ILoginResponse> {
     return this.httpClient.post<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_SIGN_UP_URL, user);
   }
 
+  /**
+   * Clears session data and localStorage.
+   * @author dgutierrez
+   */
+  logout(): void {
+    this.accessTokenSignal.set(null);
+    this.expiresInSignal.set(null);
+    this.userSignal.set(new User({ email: '', authorities: [] }));
+
+    this.storageService.remove(Constants.LS_ACCESS_TOKEN);
+    this.storageService.remove(Constants.LS_EXPIRES_IN);
+    this.storageService.remove(Constants.LS_APP_AUTH_USER);
+  }
+
+  /**
+   * Verifies if current user has a specific role.
+   * @param role Role string
+   * @returns True if role is present
+   * @author dgutierrez
+   */
   hasRole(role: string): boolean {
-    return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == role) : false;
+    return this.userAuthorities().some(a => a.authority === role);
   }
 
-  isSuperAdmin(): boolean {
-    return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == RollsEnum.SUPER_ADMIN) : false;
-  }
-
-  hasAnyRole(roles: any[]): boolean {
+  /**
+   * Verifies if user has any of given roles.
+   * @param roles List of role strings
+   * @returns True if any match
+   * @author dgutierrez
+   */
+  hasAnyRole(roles: string[]): boolean {
     return roles.some(role => this.hasRole(role));
   }
 
-  getPermittedRoutes(routes: any[]): any[] {
-    let permittedRoutes: any[] = [];
-    for (const route of routes) {
-      if (route.data && route.data.authorities) {
-        if (this.hasAnyRole(route.data.authorities)) {
-          permittedRoutes.unshift(route);
-        }
-      }
-    }
-    return permittedRoutes;
+  /**
+   * Checks if current user has super admin privileges.
+   * @returns True if user is super admin
+   * @author dgutierrez
+   */
+  isSuperAdmin(): boolean {
+    return this.hasRole(RollsEnum.SUPER_ADMIN);
   }
 
-  logout() {
-    this.accessToken = '';
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expiresIn');
-    localStorage.removeItem('auth_user');
+  /**
+   * Filters routes based on user authorities.
+   * @param routes List of routes to evaluate
+   * @returns Only routes the user can access
+   * @author dgutierrez
+   */
+  getPermittedRoutes(routes: Route[]): Route[] {
+    return routes.filter(r => r.data!['authorities'] && this.hasAnyRole(r.data!['authorities']));
   }
 
-  getUserAuthorities(): IAuthority[] | undefined {
-    return this.getUser()?.authorities ?? undefined;
-  }
-
-  areActionsAvailable(routeAuthorities: string[]): boolean {
-    // definición de las variables de validación
-    let allowedUser: boolean = false;
-    let isAdmin: boolean = false;
-    // se obtienen los permisos del usuario
-    let userAuthorities = this.getUserAuthorities();
-    // se valida que sea una ruta permitida para el usuario
-    for (const authority of routeAuthorities) {
-      if (userAuthorities?.some(item => item.authority == authority)) {
-        allowedUser = userAuthorities?.some(item => item.authority == authority)
-      }
-      if (allowedUser) break;
-    }
-    // se valida que el usuario tenga un rol de administración
-    if (userAuthorities?.some(item => item.authority == RollsEnum.SUPER_ADMIN || item.authority == RollsEnum.SUPER_ADMIN)) {
-      isAdmin = userAuthorities?.some(item => item.authority == RollsEnum.ADMIN || item.authority == RollsEnum.SUPER_ADMIN);
-    }
-    return allowedUser && isAdmin;
+  /**
+   * Determines if user has both required route role and admin role.
+   * @param requiredAuthorities List of route-required authorities
+   * @returns True if conditions are met
+   * @author dgutierrez
+   */
+  areActionsAvailable(requiredAuthorities: string[]): boolean {
+    const hasRequiredRole = requiredAuthorities.some(r => this.hasRole(r));
+    const isAdmin = this.hasRole(RollsEnum.ADMIN) || this.hasRole(RollsEnum.SUPER_ADMIN);
+    return hasRequiredRole && isAdmin;
   }
 }

@@ -61,6 +61,7 @@
                     [routerLink]="child.isDisabled? null : child.route"
                     [routerLinkActiveOptions]="{ exact: true }"
                     [tabindex]="child.isDisabled? -1 : 0"
+                    (click)="child?.click()"
                     routerLinkActive="mdc-list-item--activated"
                   >
                     <span>{{ child.label! | translate }}</span>
@@ -73,6 +74,7 @@
               class="mb-2"
               [disabled]="item?.isDisabled"
               [routerLink]="item?.isDisabled? null : item?.route" [tabindex]="item?.isDisabled? -1 : 0"
+              (click)="item?.click()"
               routerLinkActive="mdc-list-item--activated pointer"
               [routerLinkActiveOptions]="{ exact: true }"
             >

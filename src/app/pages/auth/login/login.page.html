@@ -9,7 +9,7 @@
 
       <div class="col-md-6 col-lg-5">
         <h1 class="text-center mb-4">{{i18nService.i18nPagesEnum.LOGIN_PAGE_TITLE | translate}}</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Email</mat-label>
@@ -19,7 +19,7 @@
                 formControlName="email"
                 [errorStateMatcher]="formsService.matcher"
                 [placeholder]="i18nService.i18nFormsEnum.EMAIL_PLACEHOLDER | translate" />
-              @let emailControl = form.get('email');
+              @let emailControl = loginForm.get('email');
               @if (formsService.isFieldInvalid(emailControl)) {
                 <mat-error>{{ formsService.getErrorMessage(emailControl) }}</mat-error>
               }
@@ -35,7 +35,7 @@
                 formControlName="password"
                 [errorStateMatcher]="formsService.matcher"
                 [placeholder]="i18nService.i18nFormsEnum.PASSWORD_PLACEHOLDER | translate" />
-              @let passwordControl = form.get('password');
+              @let passwordControl = loginForm.get('password');
               @if (formsService.isFieldInvalid(passwordControl)) {
                 <mat-error>{{ formsService.getErrorMessage(passwordControl) }}</mat-error>
               }

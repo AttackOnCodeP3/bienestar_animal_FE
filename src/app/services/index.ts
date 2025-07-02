@@ -4,5 +4,6 @@ export * from "./log-service/log.service";
 export * from "./theme-service/theme.service";
 export * from "./forms-service/forms.service";
 export * from "./alert-service/alert-service";
+export * from "./storage-service/storage.service";
 
 
