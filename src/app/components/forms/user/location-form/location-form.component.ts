@@ -12,11 +12,11 @@ import {TranslatePipe} from '@ngx-translate/core';
 @Component({
   selector: 'app-location',
   imports: [MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, TranslatePipe],
-  templateUrl: './location.component.html',
-  styleUrl: './location.component.scss',
+  templateUrl: './location-form.component.html',
+  styleUrl: './location-form.component.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
-export class LocationComponent implements OnInit, OnDestroy {
+export class LocationFormComponent implements OnInit, OnDestroy {
 
   readonly formsService = input.required<FormsService>()
   readonly form = input.required<FormGroup>()

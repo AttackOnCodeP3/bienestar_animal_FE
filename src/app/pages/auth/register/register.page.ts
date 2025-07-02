@@ -4,9 +4,9 @@ import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angula
 import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 import {
-  InterestsComponent,
-  ItWorkedAsNurseryHomeComponent,
-  LocationComponent,
+  InterestsFormComponent,
+  ItWorkedAsNurseryHomeFormComponent,
+  LocationFormComponent,
   PersonalDataUserRegistrationFormComponent
 } from '@components/forms/user';
 import {LogoBienestarAnimalComponent} from '@components/icons';
@@ -38,10 +38,10 @@ import {matchFieldsValidations} from '@common/forms';
     TranslatePipe,
     MatButton,
     PersonalDataUserRegistrationFormComponent,
-    ItWorkedAsNurseryHomeComponent,
+    ItWorkedAsNurseryHomeFormComponent,
     MatDivider,
-    InterestsComponent,
-    LocationComponent
+    InterestsFormComponent,
+    LocationFormComponent
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss',

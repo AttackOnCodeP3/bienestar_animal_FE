@@ -14,11 +14,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  templateUrl: './interests.component.html',
-  styleUrl: './interests.component.scss',
+  templateUrl: './interests-form.component.html',
+  styleUrl: './interests-form.component.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
-export class InterestsComponent {
+export class InterestsFormComponent {
   readonly listInterests = input<Interest[]>()
   readonly selectedInterests = model<Interest[]>([]);
 
