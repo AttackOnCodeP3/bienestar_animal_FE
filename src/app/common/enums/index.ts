@@ -1,4 +1,5 @@
 export * from "./ languages.enum";
+export * from "./alert-type.enum";
 export * from "./breakpoints.enum";
 export * from "./pages-urls.enum";
 export * from "./rollsEnum";

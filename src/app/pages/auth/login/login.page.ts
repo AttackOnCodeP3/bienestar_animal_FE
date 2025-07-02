@@ -8,7 +8,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MatDivider} from '@angular/material/divider';
 import {MatTooltip} from '@angular/material/tooltip';
 import {LogoBienestarAnimalComponent} from '@components/icons';
-import {FormsService, I18nService} from '@services/general';
+import {AlertService, FormsService, I18nService} from '@services/general';
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
 import {Constants} from '@common/constants/constants';
@@ -34,6 +34,7 @@ import {AuthHttpService} from '@services/http';
   changeDetection: Constants.changeDetectionStrategy
 })
 export class LoginPage {
+  private readonly alertService = inject(AlertService);
   private readonly authService = inject(AuthHttpService);
   private readonly router = inject(Router);
   readonly formsService = inject(FormsService);
@@ -64,6 +65,7 @@ export class LoginPage {
         this.onNavigateToDashboard();
       },
       error: (error) => {
+        //this.alertService.displayAlert("",error.error.title);
         console.error(error.error.description)
       }
     })

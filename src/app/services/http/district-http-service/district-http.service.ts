@@ -1,47 +1,69 @@
-import {inject, Injectable, signal} from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {BaseHttpService} from '@services/http';
-import {AlertService} from '@services/general';
 import {Constants} from '@common/constants/constants';
 import {District, Neighborhood} from '@models';
 import {IResponse, ISearch} from '@common/interfaces/http';
+import {AlertTypeEnum} from '@common/enums';
+import {createPageArray} from '@common/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DistrictHttpService extends BaseHttpService<District>{
 
-  private alertService = inject(AlertService);
-
   protected override source = Constants.GET_ALL_DISTRICTS_URL;
 
-  districtList = signal<District[]>([]);
-  neighborhoodsByDistrict = signal<Neighborhood[]>([]);
+  readonly districtList = signal<District[]>([]);
+  readonly neighborhoodsByDistrict = signal<Neighborhood[]>([]);
 
   search: ISearch = { page: 1, size: 10 };
   totalItems: number[] = [];
 
-  getAll() {
-    this.findAllWithParams({ page: this.search.page, size: this.search.size }).subscribe({
-      next: (res) => {
-        this.search = { ...this.search, ...res.meta };
-        this.totalItems = Array.from({ length: this.search.totalPages ?? 0 }, (_, i) => i + 1);
-        this.districtList.set(res.data);
+  /**
+   * Fetches all districts from the server using pagination and updates internal state.
+   *
+   * Updates:
+   * - `districtList` with fetched data
+   * - pagination metadata in `search`
+   * - pages array in `totalItems`
+   *
+   * Displays an alert if the operation fails.
+   *
+   * @returns void
+   * @author dgutierrez
+   */
+  getAll(): void {
+    this.fetchAllPaginated({
+      updateSignal: this.districtList,
+      page: this.search.page || 1,
+      size: this.search.size || 10,
+      setSearchMeta: (meta) => {
+        this.search = { ...this.search, ...meta };
       },
-      error: (err) => {
-        console.error('Error loading districts', err);
-        this.alertService.displayAlert('error', 'Error loading districts');
-      }
+      setTotalItems: (totalPages) => {
+        this.totalItems = createPageArray(totalPages);
+      },
+      context: `${this.constructor.name}#getAll`,
     });
   }
 
+  /**
+   * Fetches neighborhoods for a specific district ID.
+   * Updates signal with the result or shows alert on failure.
+   *
+   * @param districtId ID of the district
+   * @author dgutierrez
+   */
   getNeighborhoodsByDistrictId(districtId: number): void {
     const url = `${this.sourceUrl}/${districtId}/neighborhoods`;
     this.http.get<IResponse<Neighborhood[]>>(url).subscribe({
-      next: res => this.neighborhoodsByDistrict.set(res.data),
-      error: err => {
-        console.error('Error fetching neighborhoods by district', err);
-        this.alertService.displayAlert('error', 'Error loading neighborhoods');
-      }
+      next: (res) => {
+        this.neighborhoodsByDistrict.set(res.data);
+      },
+      error: this.handleError({
+        message: 'Error loading neighborhoods',
+        context: `${this.constructor.name}#getNeighborhoodsByDistrictId`,
+      })
     });
   }
 }

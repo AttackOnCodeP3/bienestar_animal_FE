@@ -32,6 +32,7 @@
       "@common/constants/*": ["app/common/constants/*"],
       "common/forms/*": ["app/common/forms/*"], // Alias for forms directory
       "@common/forms": ["app/common/forms/index.ts"], // Alias for forms index file
+      "@common/utils": ["app/common/utils/index.ts"], // Alias for utils index file
 
       "@animations/fade": ["app/animations/fade/index.ts"], // Alias for animations index fade file
       "@animations/fade/*": ["app/animations/fade/*"],

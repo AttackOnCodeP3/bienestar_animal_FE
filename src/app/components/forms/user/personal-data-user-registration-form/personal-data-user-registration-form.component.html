@@ -73,7 +73,7 @@
           formControlName="lastname"
           [errorStateMatcher]="formsService().matcher"
           [placeholder]="i18nService().i18nFormsEnum.LAST_NAME_PLACEHOLDER | translate"/>
-        @let lastNameControl = form().get('lastName');
+        @let lastNameControl = form().get('lastname');
         @if (formsService().isFieldInvalid(lastNameControl)) {
           <mat-error>{{ formsService().getErrorMessage(lastNameControl) }}</mat-error>
         }

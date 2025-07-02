@@ -10,7 +10,7 @@ import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {BreakpointsEnum, RoutesUrlsEnum} from '@common/enums';
-import {IMenuItem} from '@common/interfaces';
+import {IMenuItem, IMenuItemChild} from '@common/interfaces';
 import {ThemeService, I18nService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
 import {Constants} from '@common/constants/constants';
@@ -111,5 +111,14 @@ export class DashboardLayoutComponent {
         this.isScreenSmall.set(false);
       }
     })
+  }
+
+  /**
+   * Returns the icon for a menu item.
+   * @param item The menu item to get the icon for.
+   * @author dgutierrez
+   */
+  getTabIndex(item: IMenuItem | IMenuItemChild | undefined): number {
+    return item?.isDisabled? -1 : 0
   }
 }

@@ -1,16 +1,14 @@
-import {inject, Injectable, signal} from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {BaseHttpService} from '@services/http';
-import {AlertService} from '@services/general';
 import {Constants} from '@common/constants/constants';
 import {ISearch} from '@common/interfaces/http';
 import {Neighborhood} from '@models';
+import {createPageArray} from '@common/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NeighborhoodHttpService extends BaseHttpService<Neighborhood>{
-
-  private alertService = inject(AlertService);
 
   protected override source = Constants.GET_ALL_NEIGHBORHOODS_URL;
 
@@ -19,17 +17,23 @@ export class NeighborhoodHttpService extends BaseHttpService<Neighborhood>{
   search: ISearch = { page: 1, size: 100 };
   totalItems: number[] = [];
 
-  getAll() {
-    this.findAllWithParams({ page: this.search.page, size: this.search.size }).subscribe({
-      next: (res) => {
-        this.search = { ...this.search, ...res.meta };
-        this.totalItems = Array.from({ length: this.search.totalPages ?? 0 }, (_, i) => i + 1);
-        this.neighborhoodList.set(res.data);
+  /**
+   * Fetches a paginated list of neighborhoods from the server
+   * and updates internal signals and pagination state.
+   * Displays an alert if the operation fails.
+   *
+   * @author dgutierrez
+   */
+  getAll(): void {
+    this.fetchAllPaginated({
+      updateSignal: this.neighborhoodList,
+      page: this.search.page || 1,
+      size: this.search.size || 100,
+      setSearchMeta: (meta) => this.search = { ...this.search, ...meta },
+      setTotalItems: (totalPages) => {
+        createPageArray(totalPages);
       },
-      error: (err) => {
-        console.error('Error loading neighborhoods', err);
-        this.alertService.displayAlert('error', 'Error loading neighborhoods');
-      }
+      context: `${this.constructor.name}#getAll`,
     });
   }
 }
