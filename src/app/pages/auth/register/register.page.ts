@@ -85,13 +85,10 @@ export class RegisterPage implements OnInit {
     const user = new User(rest);
     this.authService.registerUser(user).subscribe({
       next: () => {
-        console.log('User registered successfully');
         /*this.i18nService.showSuccessMessage('auth.register.success');*/
         this.navigateToLogin();
       },
       error: (error) => {
-        debugger
-        console.error('Error registering user:', error);
         /*this.i18nService.showErrorMessage('auth.register.error', error);*/
       }
     });
