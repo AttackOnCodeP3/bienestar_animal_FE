@@ -5,7 +5,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 import {
   InterestsComponent,
-  ItWorkedAsNurseryHomeComponent,
+  ItWorkedAsNurseryHomeComponent, LocationComponent,
   PersonalDataUserRegistrationFormComponent
 } from '@components/forms/user';
 import {LogoBienestarAnimalComponent} from '@components/icons';
@@ -13,9 +13,14 @@ import {Constants} from '@common/constants/constants';
 import {FormsService, I18nService} from '@services/general';
 import {PagesUrlsEnum} from '@common/enums';
 import {MatDivider} from '@angular/material/divider';
-import {AuthHttpService, InterestHttpService, MunicipalityHttpService} from '@services/http';
-import {JsonPipe} from '@angular/common';
-import {Interest, User} from '@models';
+import {
+  AuthHttpService,
+  CantonHttpService,
+  DistrictHttpService,
+  InterestHttpService,
+  MunicipalityHttpService, NeighborhoodHttpService
+} from '@services/http';
+import {Canton, District, Interest, Neighborhood, User} from '@models';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {matchFieldsValidations} from '@common/forms';
 
@@ -34,8 +39,8 @@ import {matchFieldsValidations} from '@common/forms';
     PersonalDataUserRegistrationFormComponent,
     ItWorkedAsNurseryHomeComponent,
     MatDivider,
-    JsonPipe,
-    InterestsComponent
+    InterestsComponent,
+    LocationComponent
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss',
@@ -44,6 +49,9 @@ import {matchFieldsValidations} from '@common/forms';
 export class RegisterPage implements OnInit {
   private readonly authService = inject(AuthHttpService);
   private readonly municipalityHttpService = inject(MunicipalityHttpService);
+  readonly cantonHttpService = inject(CantonHttpService);
+  readonly districtHttpService = inject(DistrictHttpService);
+  readonly neighborhoodHttpService = inject(NeighborhoodHttpService);
   readonly interestHttpService = inject(InterestHttpService);
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
@@ -59,6 +67,9 @@ export class RegisterPage implements OnInit {
     isNurseryHome: new FormControl(false, [Validators.required]),
     interests: new FormControl<Interest[]>([]),
     password: new FormControl('Heliosnxp1516', [Validators.required]),
+    canton: new FormControl<Canton | null>(null, [Validators.required]),
+    district: new FormControl<District | null>(null, [Validators.required]),
+    neighborhood: new FormControl<Neighborhood | null>(null, [Validators.required]),
     confirmPassword: new FormControl('Heliosnxp1516', [Validators.required]),
   }, {
     validators: matchFieldsValidations('password', 'confirmPassword'),
@@ -69,6 +80,7 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.interestHttpService.getAll();
     this.municipalityHttpService.getAll();
+    this.cantonHttpService.getAll();
   }
 
   onSubmit() {

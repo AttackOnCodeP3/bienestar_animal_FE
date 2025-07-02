@@ -1,0 +1,60 @@
+<form [formGroup]="form()">
+  <div class="row">
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Seleccione el canton</mat-label>
+        <mat-select
+          formControlName="canton"
+          [errorStateMatcher]="formsService().matcher">
+          <mat-option>--</mat-option>
+          @for (canton of cantonsList(); track canton.id) {
+            <mat-option [value]="canton">{{ canton.name }}</mat-option>
+          }
+        </mat-select>
+        @let cantonControl = form().get('canton');
+        @if (formsService().isFieldInvalid(cantonControl)) {
+          <mat-error>{{ formsService().getErrorMessage(cantonControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Seleccione el distrito</mat-label>
+        @let districtControl = form().get('district');
+        <mat-select
+          formControlName="district"
+          [errorStateMatcher]="formsService().matcher">
+          <mat-option>--</mat-option>
+          @for (district of districtsList(); track district.id) {
+            <mat-option [value]="district">{{ district.name }}</mat-option>
+          }
+        </mat-select>
+
+        @if (formsService().isFieldInvalid(districtControl)) {
+          <mat-error>{{ formsService().getErrorMessage(districtControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Seleccione el Barrio</mat-label>
+        <mat-select
+          formControlName="neighborhood"
+          [errorStateMatcher]="formsService().matcher"
+        >
+          <mat-option>--</mat-option>
+          @for (neighborhood of neighbourhoodsList(); track neighborhood.id) {
+            <mat-option [value]="neighborhood">{{ neighborhood.name }}</mat-option>
+          }
+        </mat-select>
+        @let neighborhoodControl = form().get('neighborhood');
+        @if (formsService().isFieldInvalid(neighborhoodControl)) {
+          <mat-error>{{ formsService().getErrorMessage(neighborhoodControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+
+</form>

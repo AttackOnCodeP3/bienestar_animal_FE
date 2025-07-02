@@ -130,6 +130,17 @@ export class FormsService {
   }
 
   /**
+   * Returns the form control for a given name within a FormGroup.
+   * @param name The name of the control to retrieve.
+   * @param form The FormGroup containing the control.
+   * @return The AbstractControl if found, otherwise null.
+   * @author dgutierrez
+   */
+  getControl(name: string, form: FormGroup): AbstractControl | null {
+    return form.get(name);
+  }
+
+  /**
    * Returns the formatted error message if the control is invalid,
    * otherwise returns null. Useful for direct binding in templates.
    * @param control The form control to evaluate.

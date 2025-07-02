@@ -43,4 +43,24 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly MUNICIPALITIES: string = '/municipalities'
   static readonly GET_ALL_MUNICIPALITIES_URL: string = UnmutableConstants.MUNICIPALITIES;
+
+  //Canton, District, Neighborhood
+
+  // ==================================================================
+  // ROUTES FOR CANTON SERVICES
+  // =================================================================
+  private static readonly CANTONS: string = '/cantons'
+  static readonly GET_ALL_CANTONS_URL: string = UnmutableConstants.CANTONS;
+
+  // ==================================================================
+  // ROUTES FOR DISTRICT SERVICES
+  // =================================================================
+  private static readonly DISTRICTS: string = '/districts'
+  static readonly GET_ALL_DISTRICTS_URL: string = UnmutableConstants.DISTRICTS;
+
+  // ==================================================================
+  // ROUTES FOR NEIGHBORHOOD SERVICES
+  // =================================================================
+  private static readonly NEIGHBORHOODS: string = '/neighborhoods'
+  static readonly GET_ALL_NEIGHBORHOODS_URL: string = UnmutableConstants.NEIGHBORHOODS;
 }

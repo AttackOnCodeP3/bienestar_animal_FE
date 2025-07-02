@@ -19,6 +19,21 @@
       </div>
 
       <mat-divider class="my-4"/>
+      <h2>Location</h2>
+      <div class="col-12">
+        <app-location
+          [cantonsList]="cantonHttpService.cantonList()"
+          [districtsList]="cantonHttpService.districtsByCanton()"
+          [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
+          (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
+          (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
+          [form]="formPersonalDataUser"
+          [i18nService]="i18nService"
+          [formsService]="formsService"
+        />
+      </div>
+      <mat-divider class="my-4"/>
+
       <h2>{{i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate}}</h2>
       <div class="col-12">
         <app-it-worked-as-nursery-home
