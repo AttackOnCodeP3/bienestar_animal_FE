@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
 import {Constants} from '@common/constants/constants';
 import {AuthHttpService} from '@services/http';
+import {I18nPagesValidationsEnum} from '@common/enums/i18n';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +49,9 @@ export class LoginPage {
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.formsService.markFormTouchedAndDirty(this.loginForm);
+      this.alertService.displayAlert({
+        messageKey: I18nPagesValidationsEnum.GENERAL_INVALID_FIELDS,
+      });
       return;
     }
     this.login();
