@@ -67,19 +67,19 @@ export class RegisterPage implements OnInit {
   readonly volunteerIntent = signal(false);
 
   formPersonalDataUser = this.formsService.formsBuilder.group({
-    identificationCard: new FormControl('117260915', [Validators.required]),
-    name: new FormControl('David', [Validators.required]),
-    lastname: new FormControl('Gutierrez', [Validators.required]),
-    email: new FormControl('ddgutierrezc@gmail.com', [Validators.required, Validators.email]),
-    phoneNumber: new FormControl('86779876', [Validators.required]),
+    identificationCard: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phoneNumber: new FormControl('', [Validators.required]),
     birthDate: new FormControl('', [Validators.required]),
     isNurseryHome: new FormControl(false, [Validators.required]),
     interests: new FormControl<Interest[]>([]),
     canton: new FormControl<Canton | null>(null, [Validators.required]),
     district: new FormControl<District | null>(null, [Validators.required]),
     neighborhood: new FormControl<Neighborhood | null>(null, [Validators.required]),
-    password: new FormControl('Heliosnxp1516', [Validators.required]),
-    confirmPassword: new FormControl('Heliosnxp1516', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    confirmPassword: new FormControl('', [Validators.required]),
     volunteerMunicipality: new FormControl<Municipality | null>(null, [Validators.required]),
   }, {
     validators: matchFieldsValidations('password', 'confirmPassword'),
