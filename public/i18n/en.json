@@ -108,6 +108,15 @@
   "register-page": {
     "title": "Register and be part of it"
   },
+  "================== VALIDATIONS ==================": "",
+  "validations": {
+    "general": {
+      "invalidFields": "There are invalid fields. Please check the entered data."
+    },
+    "register-page": {
+      "registeredSuccessfully": "Successfully registered, please log in"
+    }
+  },
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
     "alreadyHaveAnAccount": "¿Already have an account?",

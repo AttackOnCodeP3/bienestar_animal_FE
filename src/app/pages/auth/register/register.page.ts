@@ -22,9 +22,10 @@ import {
   InterestHttpService,
   MunicipalityHttpService
 } from '@services/http';
-import {Canton, District, Interest, Neighborhood, User} from '@models';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {matchFieldsValidations} from '@common/forms';
+import {I18nPagesValidationsEnum} from '@common/enums/i18n';
+import {Canton, District, Interest, Neighborhood, User} from '@models';
 
 /**
  * Component for the user registration page.
@@ -95,6 +96,9 @@ export class RegisterPage implements OnInit {
   onSubmit() {
     if (this.formPersonalDataUser.invalid) {
       this.formsService.markFormTouchedAndDirty(this.formPersonalDataUser);
+      this.alertService.displayAlert({
+        messageKey: I18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
+      })
       return;
     }
 
@@ -113,7 +117,7 @@ export class RegisterPage implements OnInit {
     this.authService.registerUser(user).subscribe({
       next: () => {
         this.alertService.displayAlert({
-          message: "Registration successful! You can now log in.",
+          messageKey: I18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
           type: AlertTypeEnum.SUCCESS
         })
         this.navigateToLogin();
