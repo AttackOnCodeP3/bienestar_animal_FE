@@ -101,7 +101,7 @@
       "password": "Ingrese la contraseña",
       "phoneNumber": "Ingrese el número de teléfono",
       "productName": "Ingrese el nombre del producto",
-      "municipality": "Select municipality",
+      "municipality": "Seleccione la municipalidad",
       "species": "Seleccione la especie",
       "status": "Seleccione el estado"
     }
