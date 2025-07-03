@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -8,7 +8,8 @@ import {
   ItWorkedAsNurseryHomeFormComponent,
   LocationFormComponent,
   PasswordFormComponent,
-  PersonalDataUserRegistrationFormComponent
+  PersonalDataUserRegistrationFormComponent,
+  VolunteerOptionFormComponent
 } from '@components/forms/user';
 import {LogoBienestarAnimalComponent} from '@components/icons';
 import {Constants} from '@common/constants/constants';
@@ -25,7 +26,8 @@ import {
 import {toSignal} from '@angular/core/rxjs-interop';
 import {matchFieldsValidations} from '@common/forms';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
-import {Canton, District, Interest, Neighborhood, User} from '@models';
+import {Canton, District, Interest, Municipality, Neighborhood, User} from '@models';
+import {RegisterUserRequestDTO} from '@models/dto';
 
 /**
  * Component for the user registration page.
@@ -44,7 +46,8 @@ import {Canton, District, Interest, Neighborhood, User} from '@models';
     MatDivider,
     InterestsFormComponent,
     LocationFormComponent,
-    PasswordFormComponent
+    PasswordFormComponent,
+    VolunteerOptionFormComponent
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss',
@@ -53,13 +56,15 @@ import {Canton, District, Interest, Neighborhood, User} from '@models';
 export class RegisterPage implements OnInit {
   private readonly alertService = inject(AlertService);
   private readonly authService = inject(AuthHttpService);
-  private readonly municipalityHttpService = inject(MunicipalityHttpService);
   readonly cantonHttpService = inject(CantonHttpService);
   readonly districtHttpService = inject(DistrictHttpService);
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
   readonly interestHttpService = inject(InterestHttpService);
+  readonly municipalityHttpService = inject(MunicipalityHttpService);
   readonly router = inject(Router);
+
+  readonly volunteerIntent = signal(false);
 
   formPersonalDataUser = this.formsService.formsBuilder.group({
     identificationCard: new FormControl('', [Validators.required]),
@@ -75,11 +80,16 @@ export class RegisterPage implements OnInit {
     neighborhood: new FormControl<Neighborhood | null>(null, [Validators.required]),
     password: new FormControl('', [Validators.required]),
     confirmPassword: new FormControl('', [Validators.required]),
+    volunteerMunicipality: new FormControl<Municipality | null>(null, [Validators.required]),
   }, {
     validators: matchFieldsValidations('password', 'confirmPassword'),
   });
 
   readonly isNurseryHome = toSignal(this.formPersonalDataUser.controls.isNurseryHome?.valueChanges, {initialValue: this.formPersonalDataUser.controls.isNurseryHome?.value});
+
+  private readonly enableDisableVolunteerMunicipalityEffect = effect(() => {
+    this.enableDisableVolunteerMunicipality(this.volunteerIntent());
+  });
 
   ngOnInit() {
     this.interestHttpService.getAll();
@@ -112,9 +122,13 @@ export class RegisterPage implements OnInit {
    * @author dgutierrez
    */
   private registerUser() {
-    const {confirmPassword, ...rest} = this.formPersonalDataUser.getRawValue();
-    const user = new User(rest);
-    this.authService.registerUser(user).subscribe({
+    const {confirmPassword, volunteerMunicipality, ...rest} = this.formPersonalDataUser.getRawValue();
+    const registerUserRequestDTO = RegisterUserRequestDTO.fromUser(new User({
+      ...rest, municipality: new Municipality({
+        id: volunteerMunicipality?.id
+      })
+    }), this.volunteerIntent());
+    this.authService.registerUser(registerUserRequestDTO).subscribe({
       next: () => {
         this.alertService.displayAlert({
           messageKey: I18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
@@ -144,6 +158,24 @@ export class RegisterPage implements OnInit {
    */
   checkedChangeIsNurseryHome(checked: boolean) {
     this.formPersonalDataUser.get('isNurseryHome')?.setValue(checked);
+  }
+
+  /**
+   * Enables or disables the volunteer municipality field based on the intent.
+   * @param intent - A boolean indicating whether the user intends to volunteer.
+   * @author dgutierrez
+   */
+  private enableDisableVolunteerMunicipality(intent: boolean) {
+    const control = this.formPersonalDataUser.get('volunteerMunicipality');
+
+    if (!control) return;
+
+    if (intent) {
+      control.enable();
+    } else {
+      control.disable();
+      control.setValue(null);
+    }
   }
 
   /**

@@ -6,10 +6,11 @@
  */
 export enum I18nPagesValidationsEnum {
   VALIDATIONS = 'validations.',
-  REGISTER_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'general.',
+  GENERAL = I18nPagesValidationsEnum.VALIDATIONS + 'general.',
+  REGISTER_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'register-page.',
 
   // General
-  GENERAL_INVALID_FIELDS = I18nPagesValidationsEnum.REGISTER_PAGE + "invalidFields",
+  GENERAL_INVALID_FIELDS = I18nPagesValidationsEnum.GENERAL + "invalidFields",
 
   // Register Page
   REGISTER_PAGE_REGISTERED_SUCCESSFULLY = I18nPagesValidationsEnum.REGISTER_PAGE + "registeredSuccessfully",

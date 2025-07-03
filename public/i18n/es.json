@@ -32,6 +32,10 @@
   "password-form-component": {
     "title": "Contraseña"
   },
+  "volunteer-option-form-component": {
+    "title": "Voluntario",
+    "description": "Si desea ser voluntario, por favor indique si lo desea y si es así, seleccione la municipalidad donde quisiera prestar sus servicios."
+  },
   "================== INPUT LABELS =====================": "",
   "inputs": {
     "labels": {
@@ -59,6 +63,7 @@
       "pleaseSelectACanton": "Seleccione un cantón por favor",
       "pleaseSelectADistrict": "Seleccione un distrito por favor",
       "pleaseSelectANeighborhood": "Seleccione un barrio por favor",
+      "pleaseSelectAMunicipality": "Seleccione una municipalidad por favor",
       "productName": "Nombre del producto",
       "sex": "Sexo",
       "species": "Especie",
@@ -96,6 +101,7 @@
       "password": "Ingrese la contraseña",
       "phoneNumber": "Ingrese el número de teléfono",
       "productName": "Ingrese el nombre del producto",
+      "municipality": "Seleccione la municipalidad",
       "species": "Seleccione la especie",
       "status": "Seleccione el estado"
     }

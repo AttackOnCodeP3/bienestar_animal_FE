@@ -9,7 +9,7 @@
 
       <h1 class="text-center mb-4">{{ i18nService.i18nPagesEnum.REGISTER_PAGE_TITLE | translate }}</h1>
 
-      <h2>{{i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate}}</h2>
+      <h2>{{ i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate }}</h2>
       <div class="col-12">
         <app-personal-data-user-registration-form
           [form]="formPersonalDataUser"
@@ -19,7 +19,7 @@
       </div>
 
       <mat-divider class="my-4"/>
-      <h2>{{i18nService.i18nGeneralEnum.LOCATION | translate}}</h2>
+      <h2>{{ i18nService.i18nGeneralEnum.LOCATION | translate }}</h2>
       <div class="col-12">
         <app-location
           [cantonsList]="cantonHttpService.cantonList()"
@@ -34,7 +34,7 @@
       </div>
       <mat-divider class="my-4"/>
 
-      <h2>{{i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate}}</h2>
+      <h2>{{ i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate }}</h2>
       <div class="col-12">
         <app-it-worked-as-nursery-home
           [checked]="isNurseryHome()!"
@@ -45,14 +45,28 @@
       </div>
       <mat-divider class="my-4"/>
 
-      <h2>{{i18nService.i18nComponentsEnum.INTERESTS_TITLE | translate}}</h2>
-      <p>{{i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate}}</p>
-      <app-interests [listInterests]="interestHttpService.interestList()" (selectedInterestsChange)="interestsChange($event)" />
+      <h2>{{ i18nService.i18nComponentsEnum.INTERESTS_TITLE | translate }}</h2>
+      <p>{{ i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate }}</p>
+      <app-interests
+        [listInterests]="interestHttpService.interestList()"
+        (selectedInterestsChange)="interestsChange($event)"/>
       <mat-divider class="my-4"/>
 
-      <h2>{{i18nService.i18nComponentsEnum.PASSWORD_FORM_TITLE | translate}}</h2>
-      <app-password-form [form]="formPersonalDataUser" [i18nService]="i18nService" [formsService]="formsService" />
+      <h2>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_TITLE | translate }}</h2>
+      <p>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_DESCRIPTION | translate }}</p>
+      <app-volunteer-option-form
+        [(checked)]="volunteerIntent"
+        [i18nService]="i18nService"
+        [form]="formPersonalDataUser"
+        [formsService]="formsService"
+        [municipalitiesList]="municipalityHttpService.municipalityList()"/>
       <mat-divider class="my-4"/>
+
+
+      <h2>{{ i18nService.i18nComponentsEnum.PASSWORD_FORM_TITLE | translate }}</h2>
+      <app-password-form [form]="formPersonalDataUser" [i18nService]="i18nService" [formsService]="formsService"/>
+      <mat-divider class="my-4"/>
+
 
       <div class="mb-4 text-center">
         <button type="submit" matButton="filled" class="w-100" (click)="onSubmit()">
