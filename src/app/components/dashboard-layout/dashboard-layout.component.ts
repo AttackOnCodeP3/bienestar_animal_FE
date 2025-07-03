@@ -58,16 +58,22 @@ export class DashboardLayoutComponent {
       icon: 'home',
       label: I18nMenuEnum.HOME,
       route: 'home',
+      click: () => {
+      }
     },
     {
       icon: "pets",
       label: I18nMenuEnum.GAMIFICATION,
       route: 'gamification/rewards-system',
+      click: () => {
+      },
     },
     {
       icon: 'analytics',
       label: I18nMenuEnum.REPORTS,
       route: 'reports/report-1',
+      click: () => {
+      }
     },
     {
       icon: 'logout',
@@ -119,6 +125,6 @@ export class DashboardLayoutComponent {
    * @author dgutierrez
    */
   getTabIndex(item: IMenuItem | IMenuItemChild | undefined): number {
-    return item?.isDisabled? -1 : 0
+    return item?.isDisabled ? -1 : 0
   }
 }

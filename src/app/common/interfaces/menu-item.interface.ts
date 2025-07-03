@@ -29,7 +29,7 @@ export interface IMenuItem {
    */
   children?: IMenuItemChild[];
 
-  click?: () => void;
+  click: VoidFunction;
 }
 
 /**

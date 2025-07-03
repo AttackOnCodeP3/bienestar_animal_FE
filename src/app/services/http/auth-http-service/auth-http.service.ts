@@ -23,6 +23,7 @@ export class AuthHttpService {
   readonly isAuthenticated = computed(() => !!this.accessTokenSignal());
   readonly user = computed(() => this.userSignal());
   readonly userAuthorities = computed(() => this.user().authorities ?? []);
+  readonly accessToken = computed(() => this.accessTokenSignal());
 
   constructor() {
     this.loadFromStorage();
@@ -65,8 +66,7 @@ export class AuthHttpService {
   login(credentials: { email: string; password: string }): Observable<ILoginResponse> {
     const url = `${Constants.apiBaseUrl}${Constants.AUTH_LOGIN_URL}`;
     return this.httpClient.post<ILoginResponse>(url, credentials).pipe(
-      tap((response:any) => {
-        console.warn(response);
+      tap((response:ILoginResponse) => {
         this.accessTokenSignal.set(response.token);
         this.expiresInSignal.set(response.expiresIn);
         this.userSignal.set(response.authUser);
