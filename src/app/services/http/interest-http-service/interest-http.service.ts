@@ -62,7 +62,7 @@ export class InterestHttpService extends BaseHttpService<Interest> {
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
-          message: response.message
+          messageKey: response.message
         });
         this.getAll();
       },
@@ -83,7 +83,7 @@ export class InterestHttpService extends BaseHttpService<Interest> {
     if (!interest.id) {
       this.alertService.displayAlert({
         type: AlertTypeEnum.ERROR,
-        message: 'Interest ID is required for update'
+        messageKey: 'Interest ID is required for update'
       });
       return;
     }
@@ -92,7 +92,7 @@ export class InterestHttpService extends BaseHttpService<Interest> {
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
-          message: response.message
+          messageKey: response.message
         });
         this.getAll();
       },
@@ -114,7 +114,7 @@ export class InterestHttpService extends BaseHttpService<Interest> {
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
-          message: response.message
+          messageKey: response.message
         });
         this.getAll();
       },

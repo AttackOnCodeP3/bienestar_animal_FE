@@ -111,6 +111,7 @@
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
     "alreadyHaveAnAccount": "¿Already have an account?",
+    "close": "Close",
     "createYourAccountHere": "Create your account here",
     "forgotPassword": "Forgot Password?",
     "login": "Login",
@@ -118,6 +119,15 @@
     "noAccount": "Don't have an account?",
     "register": "Register",
     "registerNow": "Register Now"
+  },
+  "matSnackBarMessages": {
+    "http": {
+      "operationCompletedSuccessfully": "Operation completed successfully",
+      "anErrorOccurredPleaseTryAgain": "An error occurred, please try again",
+      "hereIsSomeInformation": "Here is some information",
+      "warningPleaseCheckTheData": "Warning, please check the data",
+      "notification": "Notification"
+    }
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {

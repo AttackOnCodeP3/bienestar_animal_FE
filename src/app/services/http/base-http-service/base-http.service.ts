@@ -121,7 +121,7 @@ export class BaseHttpService<T> {
       console.error(`${context}:`, err);
       this.alertService.displayAlert({
         type: AlertTypeEnum.ERROR,
-        message
+        messageKey: message
       });
     };
   }

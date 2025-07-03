@@ -64,7 +64,7 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
-          message: response.message,
+          messageKey: response.message,
         });
         this.getAll();
       },
@@ -89,7 +89,7 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     if (!municipality.id) {
       this.alertService.displayAlert({
         type: AlertTypeEnum.ERROR,
-        message: 'Municipality ID is required for update',
+        messageKey: 'Municipality ID is required for update',
       });
       return;
     }
@@ -98,7 +98,7 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
-          message: response.message,
+          messageKey: response.message,
         });
         this.getAll();
       },
@@ -123,7 +123,7 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
-          message: response.message,
+          messageKey: response.message,
         });
         this.getAll();
       },

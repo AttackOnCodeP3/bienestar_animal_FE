@@ -6,6 +6,7 @@ export enum  I18nButtonsEnum {
   BUTTONS = "buttons.",
 
   BUTTON_ALREADY_HAVE_AN_ACCOUNT = I18nButtonsEnum.BUTTONS + "alreadyHaveAnAccount",
+  BUTTON_CLOSE = I18nButtonsEnum.BUTTONS + "close",
   BUTTON_CREATE_YOUR_ACCOUNT_HERE = I18nButtonsEnum.BUTTONS + "createYourAccountHere",
   BUTTON_FORGOT_PASSWORD = I18nButtonsEnum.BUTTONS + "forgotPassword",
   BUTTON_LOGIN = I18nButtonsEnum.BUTTONS + "login",

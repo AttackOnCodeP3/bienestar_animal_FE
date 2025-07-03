@@ -65,7 +65,9 @@ export class LoginPage {
         this.onNavigateToDashboard();
       },
       error: (error) => {
-        //this.alertService.displayAlert("",error.error.title);
+        this.alertService.displayAlert({
+          message: error.error.description,
+        });
         console.error(error.error.description)
       }
     })

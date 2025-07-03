@@ -4,7 +4,9 @@ import {
   MatSnackBarConfig
 } from '@angular/material/snack-bar';
 import {AlertOptions} from '@common/interfaces';
-import {AlertTypeEnum} from '@common/enums';
+import {AlertPanelClassEnum, AlertTypeEnum} from '@common/enums';
+import {I18nService} from '@services/general';
+import {I18nMessagesEnum} from '@common/enums/i18n';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +14,40 @@ import {AlertTypeEnum} from '@common/enums';
 export class AlertService {
 
   private readonly snackBar = inject(MatSnackBar);
+  private readonly i18nService = inject(I18nService);
 
   /**
    * Displays a snackbar alert using Angular Material.
-   * If no message is provided, a default message is chosen based on the type.
+   * Prioritizes i18n translation if messageKey is provided.
+   * Falls back to plain message or default translated message based on alert type.
    *
    * @param options Configuration options for the alert.
    * @author dgutierrez
    */
-  displayAlert(options: AlertOptions): void {
+  async displayAlert(options: AlertOptions): Promise<void> {
     const {
       type = AlertTypeEnum.ERROR,
+      messageKey,
       message,
-      duration = 3000,
-      horizontalPosition = 'center',
-      verticalPosition = 'top',
-      panelClass
+      parameter,
+      duration = 5000,
+      horizontalPosition = 'end',
+      verticalPosition = 'bottom',
+      panelClass,
     } = options;
 
-    const finalMessage = message ?? this.getDefaultMessage(type);
-    const finalPanelClass = panelClass ?? [this.getPanelClass(type)];
+    let finalMessage: string;
+
+    if (messageKey) {
+      finalMessage = await this.i18nService.get(messageKey, parameter);
+    } else if (message) {
+      finalMessage = message;
+    } else {
+      const defaultKey = this.getDefaultMessageKey(type);
+      finalMessage = await this.i18nService.get(defaultKey);
+    }
+
+    const finalPanelClass = panelClass ?? this.getPanelClassFromType(type);
 
     const config: MatSnackBarConfig = {
       duration,
@@ -40,39 +56,50 @@ export class AlertService {
       panelClass: finalPanelClass,
     };
 
-    this.snackBar.open(finalMessage, 'Cerrar', config);
+    const buttonLabelTranslated = await this.i18nService.get(this.i18nService.i18nButtonsEnum.BUTTON_CLOSE);
+
+    this.snackBar.open(finalMessage, buttonLabelTranslated, config);
   }
 
   /**
-   * Returns a default message based on the alert type.
+   * Returns the default i18n key for each alert type.
+   * This key will be translated before being displayed.
    *
-   * @param type The type of alert
-   * @returns The default message associated with the alert type
+   * @param type The type of alert.
+   * @returns The i18n key associated with the given alert type.
    * @author dgutierrez
    */
-  private getDefaultMessage(type: AlertTypeEnum): string {
+  private getDefaultMessageKey(type: AlertTypeEnum): string {
     switch (type) {
       case AlertTypeEnum.SUCCESS:
-        return 'Operation completed successfully';
+        return I18nMessagesEnum.MAT_SNACK_HTTP_OPERATION_COMPLETED_SUCCESSFULLY;
       case AlertTypeEnum.ERROR:
-        return 'An error occurred, please try again later';
+        return I18nMessagesEnum.MAT_SNACK_HTTP_AN_ERROR_OCCURRED_PLEASE_TRY_AGAIN;
       case AlertTypeEnum.INFO:
-        return 'Here is some information';
+        return I18nMessagesEnum.MAT_SNACK_HTTP_HERE_IS_SOME_INFORMATION;
       case AlertTypeEnum.WARNING:
-        return 'Warning: Please check the data';
+        return I18nMessagesEnum.MAT_SNACK_HTTP_WARNING_PLEASE_CHECK_THE_DATA;
       default:
-        return 'Notification';
+        return I18nMessagesEnum.MAT_SNACK_HTTP_NOTIFICATION;
     }
   }
 
   /**
-   * Returns a default CSS class based on alert type.
-   *
-   * @param type The type of alert
-   * @returns The corresponding CSS class for the alert style
+   * Returns the panel class based on the alert type.
+   * @param type The type of alert.
    * @author dgutierrez
    */
-  private getPanelClass(type: AlertTypeEnum): string {
-    return `${type}-snackbar`; // e.g., 'error-snackbar'
+  private getPanelClassFromType(type: AlertTypeEnum): string {
+    switch (type) {
+      case AlertTypeEnum.SUCCESS:
+        return AlertPanelClassEnum.SUCCESS;
+      case AlertTypeEnum.INFO:
+        return AlertPanelClassEnum.INFO;
+      case AlertTypeEnum.WARNING:
+        return AlertPanelClassEnum.WARNING;
+      case AlertTypeEnum.ERROR:
+      default:
+        return AlertPanelClassEnum.ERROR;
+    }
   }
 }

@@ -57,3 +57,20 @@
 .max-width-500px {
   max-width: 500px;
 }
+
+/**
+  * Generates box-shadow utility classes from 0 to 5
+  * Each class applies a box-shadow based on the Material Design system levels
+  * @example
+  * // CSS output:
+  * // .box-shadow-0 { box-shadow: var(--mat-sys-level0); }
+  * // .box-shadow-1 { box-shadow: var(--mat-sys-level1); }
+  * // ...
+  * // .box-shadow-5 { box-shadow: var(--mat-sys-level5); }
+  * // @author dgutierrez
+ */
+@for $i from 0 through 5 {
+  .box-shadow-#{$i} {
+    box-shadow: var(--mat-sys-level#{$i});
+  }
+}

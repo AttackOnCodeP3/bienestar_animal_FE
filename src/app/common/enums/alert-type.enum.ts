@@ -1,5 +1,3 @@
-
-
 /**
  * Enum representing the possible types of alerts.
  * @author dgutierrez

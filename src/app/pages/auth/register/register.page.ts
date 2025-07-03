@@ -6,13 +6,14 @@ import {MatButton} from '@angular/material/button';
 import {
   InterestsFormComponent,
   ItWorkedAsNurseryHomeFormComponent,
-  LocationFormComponent, PasswordFormComponent,
+  LocationFormComponent,
+  PasswordFormComponent,
   PersonalDataUserRegistrationFormComponent
 } from '@components/forms/user';
 import {LogoBienestarAnimalComponent} from '@components/icons';
 import {Constants} from '@common/constants/constants';
-import {FormsService, I18nService} from '@services/general';
-import {PagesUrlsEnum} from '@common/enums';
+import {AlertService, FormsService, I18nService} from '@services/general';
+import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
 import {MatDivider} from '@angular/material/divider';
 import {
   AuthHttpService,
@@ -49,6 +50,7 @@ import {matchFieldsValidations} from '@common/forms';
   changeDetection: Constants.changeDetectionStrategy
 })
 export class RegisterPage implements OnInit {
+  private readonly alertService = inject(AlertService);
   private readonly authService = inject(AuthHttpService);
   private readonly municipalityHttpService = inject(MunicipalityHttpService);
   readonly cantonHttpService = inject(CantonHttpService);
@@ -103,7 +105,6 @@ export class RegisterPage implements OnInit {
    * Registers a new user with the provided personal data.
    * It retrieves the form values, constructs a User object, and calls the authService to register the user.
    * If successful, it navigates to the login page; otherwise, it shows an error message.
-   * TODO: Uncomment i18nService messages when available.
    * @author dgutierrez
    */
   private registerUser() {
@@ -111,11 +112,14 @@ export class RegisterPage implements OnInit {
     const user = new User(rest);
     this.authService.registerUser(user).subscribe({
       next: () => {
-        /*this.i18nService.showSuccessMessage('auth.register.success');*/
+        this.alertService.displayAlert({
+          message: "Registration successful! You can now log in.",
+          type: AlertTypeEnum.SUCCESS
+        })
         this.navigateToLogin();
       },
       error: (error) => {
-        /*this.i18nService.showErrorMessage('auth.register.error', error);*/
+        this.alertService.displayAlert({message: error.error.description})
       }
     });
   }

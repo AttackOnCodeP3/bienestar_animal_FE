@@ -1,9 +1,10 @@
-import {inject, Injectable} from '@angular/core';
+import {effect, inject, Injectable} from '@angular/core';
 import {CustomErrorStateMatcher} from '@common/forms';
 import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {InputType} from '@common/types';
-import {I18nService} from '@services/general';
+import {I18nService, LogService} from '@services/general';
 import {I18nFormsEnum} from '@common/enums/i18n';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 /**
  * Service for managing forms, including validation and error handling.
@@ -16,7 +17,8 @@ import {I18nFormsEnum} from '@common/enums/i18n';
 })
 export class FormsService {
   readonly formsBuilder = inject(FormBuilder);
-  private readonly i18n = inject(I18nService)
+  private readonly logService = inject(LogService);
+  private readonly i18nService = inject(I18nService)
 
   matcher = new CustomErrorStateMatcher();
 
@@ -41,6 +43,16 @@ export class FormsService {
    */
   private readonly errorMessages: Map<string, (type: InputType) => string> = new Map();
 
+  private readonly reloadErrorMessagesEffect = effect(() => {
+    const currentLanguaje = this.i18nService.currentLanguage()
+    this.initializeErrorMessages();
+    this.logService.debug({
+      message: `FormsService initialized with language:`,
+      data: { currentLanguaje },
+      className: this.constructor.name,
+    });
+  });
+
   constructor() {
     this.initializeErrorMessages();
   }
@@ -59,12 +71,12 @@ export class FormsService {
       pattern,
       required,
     ] = await Promise.all([
-      this.i18n.get(I18nFormsEnum.FORM_VALIDATION_MUST_MATCH),
-      this.i18n.get(I18nFormsEnum.FORM_VALIDATION_EMAIL),
-      this.i18n.get(I18nFormsEnum.FORM_VALIDATION_MAXLENGTH),
-      this.i18n.get(I18nFormsEnum.FORM_VALIDATION_MINLENGTH),
-      this.i18n.get(I18nFormsEnum.FORM_VALIDATION_PATTERN),
-      this.i18n.get(I18nFormsEnum.FORM_VALIDATION_REQUIRED),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MUST_MATCH),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_EMAIL),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MAXLENGTH),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MINLENGTH),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_PATTERN),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_REQUIRED),
     ]);
 
     this.errorMessages.set('mustMatch', () => mustMatch);
