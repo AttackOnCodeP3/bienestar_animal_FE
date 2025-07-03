@@ -1,0 +1,28 @@
+
+<form [formGroup]="form()">
+  <div class="row">
+    <div class="col-1 mb-3">
+      <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">
+      </mat-checkbox>
+    </div>
+    @if (checked()) {
+      <div class="col-12" @fade>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{i18nService().i18nFormsEnum.PLEASE_SELECT_A_MUNICIPALITY_LABEL | translate}}</mat-label>
+          <mat-select
+            formControlName="volunteerMunicipality"
+            [errorStateMatcher]="formsService().matcher">
+            <mat-option>--</mat-option>
+            @for (municipality of municipalitiesList(); track municipality.id) {
+              <mat-option [value]="municipality">{{ municipality.name }}</mat-option>
+            }
+          </mat-select>
+          @let municipalityControl = form().get('volunteerMunicipality');
+          @if (formsService().isFieldInvalid(municipalityControl)) {
+            <mat-error>{{ formsService().getErrorMessage(municipalityControl) }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    }
+  </div>
+</form>

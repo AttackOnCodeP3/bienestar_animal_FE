@@ -43,6 +43,8 @@
       "@components/user": ["app/components/user/index.ts"], // Alias for user component index file
       "@models": ["app/models/index.ts"], // Alias for models index file
 
+      "@models/dto": ["app/models/dto/index.ts"], // Alias for DTO models index file
+
       "@core/interceptors": ["app/core/interceptors/index.ts"], // Alias for interceptors index file
 
       "@pages/*": ["app/pages/*"],

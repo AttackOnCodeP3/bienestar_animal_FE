@@ -7,6 +7,7 @@ import {ILoginResponse} from '@common/interfaces/http';
 import {RollsEnum} from '@common/enums';
 import {StorageService} from '@services/general';
 import {User} from '@models';
+import {RegisterUserRequestDTO} from '@models/dto';
 
 @Injectable({
   providedIn: 'root'
@@ -77,12 +78,12 @@ export class AuthHttpService {
 
   /**
    * Registers a new user.
-   * @param user User data
    * @returns Observable of registration result
+   * @param registerUserRequestDTO Data Transfer Object for user registration
    * @author dgutierrez
    */
-  registerUser(user: User): Observable<ILoginResponse> {
-    return this.httpClient.post<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_SIGN_UP_URL, user);
+  registerUser(registerUserRequestDTO: RegisterUserRequestDTO): Observable<ILoginResponse> {
+    return this.httpClient.post<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_SIGN_UP_URL, registerUserRequestDTO);
   }
 
   /**
