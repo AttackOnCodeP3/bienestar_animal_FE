@@ -1,0 +1,21 @@
+import {RoutesUrlsEnum} from '@common/enums';
+
+/**
+ * Enum for defining the URLs of different pages in the application.
+ * This enum is used to manage the routing paths for various pages,
+ * ensuring consistency and ease of maintenance.
+ * @author dgutierrez
+ */
+export enum PagesUrlsEnum {
+  // Utility routes
+  VOID_ROUTE = RoutesUrlsEnum.VOID_ROUTE,
+
+  // Routes of the Authentication module
+  AUTH = RoutesUrlsEnum.AUTH,
+  LOGIN = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.LOGIN,
+  REGISTER = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.REGISTER,
+  FORGOT_PASSWORD = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.FORGOT_PASSWORD,
+
+  // Routes of the Main Dashboard
+  DASHBOARD = RoutesUrlsEnum.DASHBOARD,
+}

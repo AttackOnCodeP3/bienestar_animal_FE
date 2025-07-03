@@ -4,6 +4,7 @@
 /// @author dgutierrez
 
 @use 'sass:map';
+@use "sass:math";
 
 /// Returns a rem value from a pixel input for scalable typography.
 ///
@@ -17,7 +18,7 @@
 ///   font-size: to-rem(24); // returns 1.5rem
 /// @author dgutierrez
 @function to-rem($px) {
-  @return ($px / 16) * 1rem;
+  @return math.div($px, 16) * 1rem;
 }
 
 /// Returns true if a key exists in a Sass map.

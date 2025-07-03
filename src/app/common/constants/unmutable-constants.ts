@@ -22,25 +22,49 @@ export abstract class UnmutableConstants {
   static readonly LS_APP_PREFERENCE_PREFIX: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'app-preference-'
   static readonly LS_APP_PREFERENCE_SCHEME: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + UnmutableConstants.LS_APP_PREFERENCE_PREFIX + 'scheme'
   static readonly LS_APP_PREFERENCE_LANGUAGE: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + UnmutableConstants.LS_APP_PREFERENCE_PREFIX + 'language'
+  static readonly LS_APP_AUTH_USER: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'authUser'
+  static readonly LS_ACCESS_TOKEN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'access_token'
+  static readonly LS_EXPIRES_IN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'expiresIn'
 
   static readonly IMAGE_QUALITY: number = 50
-
-
-  // ==================================================================
-  // PARTIAL ROUTES FOR SERVICES
-  // ==================================================================
 
   // ==================================================================
   // ROUTES FOR SECURITY/AUTH SERVICES
   // ==================================================================
-  private static readonly SECURITY: string = '/security'
-  static readonly AUTH_URL: string = UnmutableConstants.SECURITY + '/auth'
-  static readonly REQUEST_PASSWORD_CHANGE_URL: string =
-    UnmutableConstants.SECURITY + '/requestPasswordChange'
+  private static readonly AUTH_URL: string = '/auth'
+  static readonly AUTH_LOGIN_URL: string = UnmutableConstants.AUTH_URL + '/login'
+  static readonly AUTH_SIGN_UP_URL: string = UnmutableConstants.AUTH_URL + '/signup'
+  static readonly REQUEST_PASSWORD_CHANGE_URL: string ='/requestPasswordChange'
 
   // ==================================================================
-  // ROUTES FOR COMPANION ANIMAL SERVICES
+  // ROUTES FOR INTEREST SERVICES
   // =================================================================
-  private static readonly COMPANION_ANIMAL: string = '/CompanionAnimal'
-  static readonly REGISTER_COMPANION_ANIMAL_URL: string = UnmutableConstants.COMPANION_ANIMAL + '/registerCompanionAnimal'
+  private static readonly INTERESTS: string = '/interests'
+  static readonly GET_ALL_INTERESTS_URL: string = UnmutableConstants.INTERESTS;
+
+  // ==================================================================
+  // ROUTES FOR MUNICIPALITY SERVICES
+  // =================================================================
+  private static readonly MUNICIPALITIES: string = '/municipalities'
+  static readonly GET_ALL_MUNICIPALITIES_URL: string = UnmutableConstants.MUNICIPALITIES;
+
+  //Canton, District, Neighborhood
+
+  // ==================================================================
+  // ROUTES FOR CANTON SERVICES
+  // =================================================================
+  private static readonly CANTONS: string = '/cantons'
+  static readonly GET_ALL_CANTONS_URL: string = UnmutableConstants.CANTONS;
+
+  // ==================================================================
+  // ROUTES FOR DISTRICT SERVICES
+  // =================================================================
+  private static readonly DISTRICTS: string = '/districts'
+  static readonly GET_ALL_DISTRICTS_URL: string = UnmutableConstants.DISTRICTS;
+
+  // ==================================================================
+  // ROUTES FOR NEIGHBORHOOD SERVICES
+  // =================================================================
+  private static readonly NEIGHBORHOODS: string = '/neighborhoods'
+  static readonly GET_ALL_NEIGHBORHOODS_URL: string = UnmutableConstants.NEIGHBORHOODS;
 }

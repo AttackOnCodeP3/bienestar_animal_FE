@@ -28,6 +28,8 @@ export interface IMenuItem {
    * Optional property to indicate if the menu item is displayed in the topbar.
    */
   children?: IMenuItemChild[];
+
+  click: VoidFunction;
 }
 
 /**

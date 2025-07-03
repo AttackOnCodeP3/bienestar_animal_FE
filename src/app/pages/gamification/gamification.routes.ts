@@ -20,6 +20,6 @@ export const GEMIFICATION_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.REWARDS_SYSTEM,
-    loadComponent: () => import('@pages/gamification/rewards-system/rewards-system').then(m => m.RewardsSystem),
+    loadComponent: () => import('@pages/gamification/rewards-system/rewards-system.page').then(m => m.RewardsSystemPage),
   }
 ]

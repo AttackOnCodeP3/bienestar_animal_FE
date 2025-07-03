@@ -16,9 +16,127 @@
     "reports": "Reports",
     "logout": "Logout"
   },
+  "general": {
+    "provideTemporaryShelter": "Provide a temporary shelter",
+    "personalInformation": "Personal Information",
+    "location": "Location"
+  },
+  "it-worked-as-nursery-home-form-component": {
+    "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
+    "descriptionNurseryHome": "Temporary homes that provide adequate space, food, hygiene, and shelter for pets (dogs and cats) that need a family to offer them a temporary home while a permanent home is found."
+  },
+  "interests-form-component": {
+    "title": "Interests",
+    "description": "Select your associated interests to receive training and other personalized content."
+  },
+  "password-form-component": {
+    "title": "Password"
+  },
+  "================== INPUT LABELS =====================": "",
+  "inputs": {
+    "labels": {
+      "lastName": "Last Name",
+      "neighborhoodCommunityOrVillage": "Neighborhood/Community or Village",
+      "canton": "Canton",
+      "animalCondition": "Animal Condition",
+      "confirmPassword": "Confirm Password",
+      "currentPassword": "Current Password",
+      "password": "Password",
+      "email": "Email",
+      "emailAddress": "Email Address",
+      "district": "District",
+      "age": "Age",
+      "ageAccordingToObservation": "Age According to Observation",
+      "species": "Species",
+      "status": "Status",
+      "name": "Name",
+      "productName": "Product Name",
+      "newPassword": "New Password",
+      "approximateWeight": "Approximate Weight",
+      "breed": "Breed",
+      "pleaseSelectANeighborhood": "Please select a neighborhood",
+      "pleaseSelectACanton": "Please select a canton",
+      "pleaseSelectADistrict": "Please select a district",
+      "sex": "Sex",
+      "phone": "Phone",
+      "identificationCard": "Identification Card",
+      "phoneNumber": "Phone Number",
+      "birthDate": "Birth Date",
+      "isNurseryHome": "Is Nursery Home?"
+    },
+    "================== FORM VALIDATIONS ==================": "",
+    "formValidations": {
+      "mustMatch": "Passwords do not match",
+      "email": "Must be a valid email address",
+      "maxlength": "Must be at most",
+      "minlength": "Must be at least",
+      "pattern": "Invalid format",
+      "required": "Required field"
+    },
+    "================== FORM PLACEHOLDERS ==================": "",
+    "formPlaceholders": {
+      "age": "Enter age",
+      "ageAccordingToObservation": "Enter age according to observation",
+      "animalCondition": "Select animal condition",
+      "approximateWeight": "Enter approximate weight",
+      "birthDate": "Enter the birth date",
+      "breed": "Select breed",
+      "canton": "Enter canton",
+      "confirmPassword": "Confirm your password",
+      "currentPassword": "Enter current password",
+      "district": "Enter district",
+      "email": "Enter email",
+      "emailAddress": "Enter email address",
+      "identificationCard": "Enter the identification card",
+      "isNurseryHome": "Select if it is a nursery home",
+      "lastName": "Enter last name",
+      "name": "Enter name",
+      "neighborhoodCommunityOrVillage": "Enter neighborhood/community or village",
+      "newPassword": "Enter new password",
+      "password": "Enter password",
+      "phoneNumber": "Enter the phone number",
+      "productName": "Enter product name",
+      "species": "Select species",
+      "status": "Select status"
+    }
+  },
   "================== PAGES LABELS ==================": "",
   "login-page": {
-    "title": "Login"
+    "title": "Login",
+    "orRegisterWith": "Or register with"
+  },
+  "register-page": {
+    "title": "Register and be part of it"
+  },
+  "================== VALIDATIONS ==================": "",
+  "validations": {
+    "general": {
+      "invalidFields": "There are invalid fields. Please check the entered data."
+    },
+    "register-page": {
+      "registeredSuccessfully": "Successfully registered, please log in"
+    }
+  },
+  "================== BUTTON TEXT ===========================": "",
+  "buttons": {
+    "alreadyHaveAnAccount": "¿Already have an account?",
+    "close": "Close",
+    "createYourAccountHere": "Create your account here",
+    "forgotPassword": "Forgot Password?",
+    "login": "Login",
+    "logout": "Logout",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "registerNow": "Register Now"
+  },
+  "matSnackBarMessages": {
+    "http": {
+      "operationCompletedSuccessfully": "Operation completed successfully",
+      "anErrorOccurredPleaseTryAgain": "An error occurred, please try again",
+      "hereIsSomeInformation": "Here is some information",
+      "warningPleaseCheckTheData": "Warning, please check the data",
+      "notification": "Notification"
+    }
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {

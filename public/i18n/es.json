@@ -9,6 +9,11 @@
     "english": "Inglés",
     "spanish": "Español"
   },
+  "general": {
+    "provideTemporaryShelter": "Brinda un refugio temporal",
+    "personalInformation": "Información personal",
+    "location": "Ubicación"
+  },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
     "home": "Inicio",
@@ -16,9 +21,123 @@
     "reports": "Reportes",
     "logout": "Cerrar sesión"
   },
+  "it-worked-as-nursery-home-form-component": {
+    "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
+    "descriptionNurseryHome": "Hogares temporales que presentan las condiciones adecuadas de espacio, alimentación, higiene y refugio para mascotas (perros y gatos) que necesitan de una familia que les brinde un hogar temporal mientras se les encuentre una casa definitiva."
+  },
+  "interests-form-component": {
+    "title": "Intereses",
+    "description": "Seleccione sus intereses asociados para recibir capacitaciones entre otros contenidos personalizados."
+  },
+  "password-form-component": {
+    "title": "Contraseña"
+  },
+  "================== INPUT LABELS =====================": "",
+  "inputs": {
+    "labels": {
+      "age": "Edad",
+      "ageAccordingToObservation": "Edad según observación",
+      "animalCondition": "Condición del animal",
+      "approximateWeight": "Peso aproximado",
+      "birthDate": "Fecha de nacimiento",
+      "breed": "Raza",
+      "canton": "Cantón",
+      "confirmPassword": "Confirmar contraseña",
+      "currentPassword": "Contraseña actual",
+      "district": "Distrito",
+      "email": "Correo",
+      "emailAddress": "Correo electrónico",
+      "identificationCard": "Cédula de identidad",
+      "isNurseryHome": "¿Es casa cuna?",
+      "lastName": "Apellidos",
+      "name": "Nombre",
+      "neighborhoodCommunityOrVillage": "Barrio/comunidad o poblado",
+      "newPassword": "Nueva contraseña",
+      "password": "Contraseña",
+      "phone": "Teléfono",
+      "phoneNumber": "Número de teléfono",
+      "pleaseSelectACanton": "Seleccione un cantón por favor",
+      "pleaseSelectADistrict": "Seleccione un distrito por favor",
+      "pleaseSelectANeighborhood": "Seleccione un barrio por favor",
+      "productName": "Nombre del producto",
+      "sex": "Sexo",
+      "species": "Especie",
+      "status": "Estado"
+    },
+    "================== FORM VALIDATIONS ==================": "",
+    "formValidations": {
+      "mustMatch": "Las contraseñas no coincide",
+      "email": "Debe ser un correo electrónico válido",
+      "maxlength": "Debe tener máximo",
+      "minlength": "Debe tener al menos",
+      "pattern": "El formato no es correcto",
+      "required": "Campo requerido"
+    },
+    "================== FORM PLACEHOLDERS ==================": "",
+    "formPlaceholders": {
+      "age": "Ingrese la edad",
+      "ageAccordingToObservation": "Ingrese la edad según observación",
+      "animalCondition": "Seleccione la condición del animal",
+      "approximateWeight": "Ingrese el peso aproximado",
+      "birthDate": "Ingrese la fecha de nacimiento",
+      "breed": "Seleccione la raza",
+      "canton": "Ingrese el cantón",
+      "confirmPassword": "Confirme la contraseña",
+      "currentPassword": "Ingrese la contraseña actual",
+      "district": "Ingrese el distrito",
+      "email": "Ingrese el correo electrónico",
+      "emailAddress": "Ingrese el correo electrónico",
+      "identificationCard": "Ingrese la cédula de identidad",
+      "isNurseryHome": "Seleccione si es un hogar de crianza",
+      "lastName": "Ingrese los apellidos",
+      "name": "Ingrese el nombre",
+      "neighborhoodCommunityOrVillage": "Ingrese el barrio/comunidad o poblado",
+      "newPassword": "Ingrese la nueva contraseña",
+      "password": "Ingrese la contraseña",
+      "phoneNumber": "Ingrese el número de teléfono",
+      "productName": "Ingrese el nombre del producto",
+      "species": "Seleccione la especie",
+      "status": "Seleccione el estado"
+    }
+  },
   "================== PAGES LABELS ==================": "",
   "login-page": {
-    "title": "Iniciar sesión"
+    "title": "Iniciar sesión",
+    "orRegisterWith": "O regístrese con"
+  },
+  "register-page": {
+    "title": "Regístrate y forma parte"
+  },
+  "================== VALIDATIONS ==================": "",
+  "validations": {
+    "general": {
+      "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados."
+    },
+    "register-page": {
+      "registeredSuccessfully": "Registrado exitosamente, por favor inicie sesión"
+    }
+  },
+  "================== BUTTON TEXT ===========================": "",
+  "buttons": {
+    "alreadyHaveAnAccount": "¿Ya tiene una cuenta?",
+    "close": "Cerrar",
+    "createYourAccountHere": "Crea tu cuenta aquí",
+    "forgotPassword": "¿Olvidó su contraseña?",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "noAccount": "¿No tiene una cuenta?",
+    "register": "Registrar",
+    "registerNow": "Regístrate ahora"
+  },
+  "================== MAT SNACK BAR MESSAGES ==================": "",
+  "matSnackBarMessages": {
+    "http": {
+      "operationCompletedSuccessfully": "Operación realizada con éxito",
+      "anErrorOccurredPleaseTryAgain": "Ocurrió un error, por favor intente nuevamente",
+      "hereIsSomeInformation": "Aquí hay algo de información",
+      "warningPleaseCheckTheData": "Advertencia, por favor revise los datos",
+      "notification": "Notificación"
+    }
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {

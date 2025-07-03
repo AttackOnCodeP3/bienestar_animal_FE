@@ -1,4 +1,4 @@
-import {ThemeName} from '@common/types/theme-name.type';
+import {ThemeName} from '@common/types';
 
 /**
  * Interface representing an application theme.

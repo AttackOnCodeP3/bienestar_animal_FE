@@ -1,0 +1,102 @@
+<form [formGroup]="form()">
+  <div class="row">
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="identificationCard"
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"/>
+        @let idControl = form().get('identificationCard');
+        @if (formsService().isFieldInvalid(idControl)) {
+          <mat-error>{{ formsService().getErrorMessage(idControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ i18nService().i18nFormsEnum.NAME_LABEL | translate }}</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="name"
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.NAME_PLACEHOLDER | translate"/>
+        @let nameControl = form().get('name');
+        @if (formsService().isFieldInvalid(nameControl)) {
+          <mat-error>{{ formsService().getErrorMessage(nameControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ i18nService().i18nFormsEnum.LAST_NAME_LABEL | translate }}</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="lastname"
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.LAST_NAME_PLACEHOLDER | translate"/>
+        @let lastNameControl = form().get('lastname');
+        @if (formsService().isFieldInvalid(lastNameControl)) {
+          <mat-error>{{ formsService().getErrorMessage(lastNameControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ i18nService().i18nFormsEnum.BIRTH_DATE_LABEL | translate }}</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="birthDate"
+          [errorStateMatcher]="formsService().matcher"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        @let birthDateControl = form().get('birthDate');
+        @if (formsService().isFieldInvalid(birthDateControl)) {
+          <mat-error>{{ formsService().getErrorMessage(birthDateControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{i18nService().i18nFormsEnum.EMAIL_LABEL | translate}}</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.EMAIL_PLACEHOLDER | translate"/>
+        @let emailControl = form().get('email');
+        @if (formsService().isFieldInvalid(emailControl)) {
+          <mat-error>{{ formsService().getErrorMessage(emailControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ i18nService().i18nFormsEnum.PHONE_NUMBER_LABEL | translate }}</mat-label>
+        <input
+          type="tel"
+          matInput
+          formControlName="phoneNumber"
+          [errorStateMatcher]="formsService().matcher"
+          [placeholder]="i18nService().i18nFormsEnum.PHONE_NUMBER_PLACEHOLDER | translate"/>
+        @let phoneControl = form().get('phoneNumber');
+        @if (formsService().isFieldInvalid(phoneControl)) {
+          <mat-error>{{ formsService().getErrorMessage(phoneControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+</form>

@@ -1,4 +1,5 @@
 import {UnmutableConstants} from './unmutable-constants';
+import {ChangeDetectionStrategy} from '@angular/core';
 
 /**
  * Class that defines constant, read-only variables that change according to the environment!
@@ -8,20 +9,20 @@ import {UnmutableConstants} from './unmutable-constants';
  * @author dgutierrez
  */
 export class Constants extends UnmutableConstants {
-  static readonly appHost: string = 'https://development.atack_on_code.cr/'
+  static readonly appHost: string = 'http://localhost:8080'
 
   static readonly apiBaseUrl: string =
-    Constants.appHost + 'BienestarAnimalWS/api/launion'
+    Constants.appHost;
+
+  // ==================================================================
+  // Change detection strategy
+  // =================================================================
+  static readonly changeDetectionStrategy: ChangeDetectionStrategy.OnPush =
+    ChangeDetectionStrategy.OnPush
 
   /**
    * Enables console.log for API and services
    * Used for debugging purposes
    */
   static readonly debugMode: boolean = true
-
-  /**
-   * Enables debug mode for cache storage
-   * Helps in troubleshooting caching issues
-   */
-  static readonly cacheStorageDebugMode: boolean = false
 }

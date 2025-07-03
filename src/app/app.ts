@@ -1,26 +1,31 @@
 import {Component, effect, inject} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {RouterOutlet} from '@angular/router';
-import {Theme, Log, I18n} from '@services/general';
-import {LanguagesEnum} from '@common/enums';
+import {ThemeService, LogService, I18nService} from '@services/general';
 import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
+import {LanguagesEnum, SvgIconsEnum} from '@common/enums';
+import {Constants} from '@common/constants/constants';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection: Constants.changeDetectionStrategy
 })
 export class App {
-  private readonly log = inject(Log);
+  private readonly log = inject(LogService);
   private readonly translate = inject(TranslateService);
-  private readonly i18n = inject(I18n);
+  private readonly i18n = inject(I18nService);
   private readonly matIconReg = inject(MatIconRegistry);
-  readonly theme = inject(Theme);
+  private readonly sanitizer = inject(DomSanitizer);
+  readonly theme = inject(ThemeService);
 
   constructor() {
     this.setDefaultLanguage();
     this.setDefaultFontSetClass();
+    this.configureSvgsIconRegistry();
   }
 
   /**
@@ -72,5 +77,15 @@ export class App {
     this.log.debug({
       message: `Default language set to: ${languageCode.toUpperCase()}`,
     });
+  }
+
+  /**
+   * Configures the custom SVG icons for the application.
+   * This method registers the Google Sign-In icon using the MatIconRegistry.
+   * It uses the DomSanitizer to bypass security for the SVG content.
+   * @author dgutierrez
+   */
+  private configureSvgsIconRegistry(): void {
+      this.matIconReg.addSvgIconLiteral('google-sign-in', this.sanitizer.bypassSecurityTrustHtml(SvgIconsEnum.GOOGLE_SIGN_IN))
   }
 }
