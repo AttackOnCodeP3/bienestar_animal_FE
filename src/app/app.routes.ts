@@ -1,6 +1,8 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {DashboardLayoutComponent} from '@components/dashboard-layout/dashboard-layout.component';
 import {RoutesUrlsEnum} from '@common/enums/routes-urls.enum';
+import {authGuard, roleGuard} from '@core/guards';
+import {RolesEnum} from '@common/enums';
 
 export const routes: Routes = [
   {
@@ -10,11 +12,12 @@ export const routes: Routes = [
   },
   {
     path: RoutesUrlsEnum.AUTH,
-    loadChildren: () => import('@pages/auth/auth.routes').then(m => m.AUTH_ROUTES),
+    loadChildren: () => import('@pages/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
   {
     path: RoutesUrlsEnum.DASHBOARD,
     component: DashboardLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',

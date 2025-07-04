@@ -2,7 +2,7 @@ import {Municipality} from './municipality';
 import {Interest} from './interest';
 import {Neighborhood} from './neighborhood';
 import {IAuthority} from '@common/interfaces/http';
-import {RollsEnum} from '@common/enums';
+import {RolesEnum} from '@common/enums';
 
 /**
  * User model representing a user in the system.
@@ -26,7 +26,7 @@ export class User {
   municipality: Municipality | null;
   neighborhood: Neighborhood | null;
   authorities: IAuthority[] | null;
-  role: RollsEnum | null;
+  role: RolesEnum | null;
 
   constructor(values: Partial<User> = {}) {
     this.id = values.id || null;

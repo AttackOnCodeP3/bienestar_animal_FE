@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import {Constants} from '@common/constants/constants';
 import {ILoginResponse} from '@common/interfaces/http';
-import {RollsEnum} from '@common/enums';
-import {StorageService} from '@services/general';
+import {RolesEnum} from '@common/enums';
+import {LogService, StorageService} from '@services/general';
 import {User} from '@models';
 import {RegisterUserRequestDTO} from '@models/dto';
 
@@ -14,8 +14,9 @@ import {RegisterUserRequestDTO} from '@models/dto';
 })
 export class AuthHttpService {
 
-  private readonly storageService = inject(StorageService);
   private readonly httpClient = inject(HttpClient);
+  private readonly logService = inject(LogService)
+  private readonly storageService = inject(StorageService);
 
   private readonly userSignal = signal<User>(new User({ email: '', authorities: [] }));
   private readonly accessTokenSignal = signal<string | null>(null);
@@ -116,7 +117,14 @@ export class AuthHttpService {
    * @returns True if any match
    * @author dgutierrez
    */
-  hasAnyRole(roles: string[]): boolean {
+  hasAnyRole(roles: RolesEnum[] | undefined): boolean {
+    if (!roles || roles.length === 0) {
+      this.logService.debug({
+        message: 'No roles provided for hasAnyRole check',
+        data: { roles }
+      });
+      return false;
+    }
     return roles.some(role => this.hasRole(role));
   }
 
@@ -126,7 +134,7 @@ export class AuthHttpService {
    * @author dgutierrez
    */
   isSuperAdmin(): boolean {
-    return this.hasRole(RollsEnum.SUPER_ADMIN);
+    return this.hasRole(RolesEnum.SUPER_ADMIN);
   }
 
   /**
@@ -147,7 +155,7 @@ export class AuthHttpService {
    */
   areActionsAvailable(requiredAuthorities: string[]): boolean {
     const hasRequiredRole = requiredAuthorities.some(r => this.hasRole(r));
-    const isAdmin = this.hasRole(RollsEnum.ADMIN) || this.hasRole(RollsEnum.SUPER_ADMIN);
+    const isAdmin = this.hasRole(RolesEnum.MUNICIPAL_ADMIN) || this.hasRole(RolesEnum.SUPER_ADMIN);
     return hasRequiredRole && isAdmin;
   }
 }

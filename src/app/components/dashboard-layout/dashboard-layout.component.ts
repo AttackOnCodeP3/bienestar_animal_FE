@@ -9,7 +9,7 @@ import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/
 import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {BreakpointsEnum, RoutesUrlsEnum} from '@common/enums';
+import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem, IMenuItemChild} from '@common/interfaces';
 import {ThemeService, I18nService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
@@ -45,13 +45,15 @@ import {AuthHttpService} from '@services/http';
 })
 export class DashboardLayoutComponent {
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
+  readonly authHttpService = inject(AuthHttpService);
   readonly i18n = inject(I18nService);
   readonly theme = inject(ThemeService)
-  private readonly authService = inject(AuthHttpService);
 
   readonly isScreenSmall = signal<boolean>(false);
   readonly sideNavMode = signal<MatDrawerMode>('side');
   readonly matSidenav = viewChild(MatSidenav);
+
+  readonly allRoles = signal(Object.values(RolesEnum));
 
   readonly menuItems = signal<IMenuItem[]>([
     {
@@ -59,7 +61,8 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.HOME,
       route: 'home',
       click: () => {
-      }
+      },
+      authorities: [...this.allRoles()]
     },
     {
       icon: "pets",
@@ -67,19 +70,22 @@ export class DashboardLayoutComponent {
       route: 'gamification/rewards-system',
       click: () => {
       },
+      authorities: [...this.allRoles()]
     },
     {
       icon: 'analytics',
       label: I18nMenuEnum.REPORTS,
       route: 'reports/report-1',
       click: () => {
-      }
+      },
+      authorities: [...this.allRoles()]
     },
     {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: '',
-      click: () => this.authService.logout(),
+      click: () => this.authHttpService.logout(),
+      authorities: [...this.allRoles()]
     }
   ])
 
