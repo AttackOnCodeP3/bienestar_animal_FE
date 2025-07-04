@@ -28,5 +28,5 @@ jobs:
           npm install -g http-server
           npx http-server ./dist &
           sleep 10
-          curl -f http://localhost:4200 || (echo "Health check failed!" && exit 1)
+          curl -f http://localhost:8080 || (echo "Health check failed!" && exit 1)
         if: true # Esto se pone en falso si no se quiere ejecutar el servidor que checkea el app corriendo en vivo
