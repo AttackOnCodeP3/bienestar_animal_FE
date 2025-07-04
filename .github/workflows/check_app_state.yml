@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular project
-        run: npm run build --if-present
+        run: ng build
 
       - name: Run Angular app (optional)
         run: |
