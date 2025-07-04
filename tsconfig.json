@@ -45,6 +45,7 @@
 
       "@models/dto": ["app/models/dto/index.ts"], // Alias for DTO models index file
 
+      "@core/guards": ["app/core/guards/index.ts"], // Alias for guards index file
       "@core/interceptors": ["app/core/interceptors/index.ts"], // Alias for interceptors index file
 
       "@pages/*": ["app/pages/*"],

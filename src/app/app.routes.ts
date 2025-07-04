@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import {DashboardLayoutComponent} from '@components/dashboard-layout/dashboard-layout.component';
 import {RoutesUrlsEnum} from '@common/enums/routes-urls.enum';
+import {authGuard} from '@core/guards';
 
 export const routes: Routes = [
   {
@@ -10,11 +11,12 @@ export const routes: Routes = [
   },
   {
     path: RoutesUrlsEnum.AUTH,
-    loadChildren: () => import('@pages/auth/auth.routes').then(m => m.AUTH_ROUTES),
+    loadChildren: () => import('@pages/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
   {
     path: RoutesUrlsEnum.DASHBOARD,
     component: DashboardLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
