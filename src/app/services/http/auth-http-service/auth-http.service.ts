@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import {Constants} from '@common/constants/constants';
 import {ILoginResponse} from '@common/interfaces/http';
-import {RollsEnum} from '@common/enums';
+import {RolesEnum} from '@common/enums';
 import {StorageService} from '@services/general';
 import {User} from '@models';
 import {RegisterUserRequestDTO} from '@models/dto';
@@ -126,7 +126,7 @@ export class AuthHttpService {
    * @author dgutierrez
    */
   isSuperAdmin(): boolean {
-    return this.hasRole(RollsEnum.SUPER_ADMIN);
+    return this.hasRole(RolesEnum.SUPER_ADMIN);
   }
 
   /**
@@ -147,7 +147,7 @@ export class AuthHttpService {
    */
   areActionsAvailable(requiredAuthorities: string[]): boolean {
     const hasRequiredRole = requiredAuthorities.some(r => this.hasRole(r));
-    const isAdmin = this.hasRole(RollsEnum.ADMIN) || this.hasRole(RollsEnum.SUPER_ADMIN);
+    const isAdmin = this.hasRole(RolesEnum.MUNICIPAL_ADMIN) || this.hasRole(RolesEnum.SUPER_ADMIN);
     return hasRequiredRole && isAdmin;
   }
 }
