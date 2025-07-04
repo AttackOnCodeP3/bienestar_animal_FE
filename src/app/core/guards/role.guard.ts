@@ -1,6 +1,6 @@
 import {inject} from '@angular/core';
 import {CanActivateFn, Router, UrlTree} from '@angular/router';
-import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {PagesUrlsEnum, RolesEnum} from '@common/enums';
 import {AuthHttpService} from '@services/http';
 
 /**
@@ -14,7 +14,7 @@ import {AuthHttpService} from '@services/http';
  */
 export const roleGuard = (
   requiredRoles: RolesEnum[],
-  redirectTo: string = RoutesUrlsEnum.ACCESS_DENIED
+  redirectTo: string = PagesUrlsEnum.ACCESS_DENIED
 ): CanActivateFn => {
   return (): boolean | UrlTree => {
     const auth = inject(AuthHttpService);

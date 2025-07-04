@@ -47,7 +47,7 @@ export class DashboardLayoutComponent {
   private readonly breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
   readonly i18n = inject(I18nService);
   readonly theme = inject(ThemeService)
-  private readonly authService = inject(AuthHttpService);
+  private readonly authHttpService = inject(AuthHttpService);
 
   readonly isScreenSmall = signal<boolean>(false);
   readonly sideNavMode = signal<MatDrawerMode>('side');
@@ -79,7 +79,7 @@ export class DashboardLayoutComponent {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: '',
-      click: () => this.authService.logout(),
+      click: () => this.authHttpService.logout(),
     }
   ])
 
