@@ -7,7 +7,7 @@ export class Canton {
   name: string | null;
 
   constructor(values: Partial<Canton> = {}) {
-    this.id = values.id || null;
-    this.name = values.name || null;
+    this.id = values.id ??= null;
+    this.name = values.name ??= null;
   }
 }

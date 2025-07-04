@@ -25,16 +25,11 @@ export class StorageService {
    * @author dgutierrez
    */
   get<T>(key: string, reviver?: (data: any) => T): T | null {
-    const raw = localStorage.getItem(key);
+    const raw = this.getRaw(key);
     if (!raw) return null;
 
     try {
       let parsed: any = JSON.parse(raw);
-
-      // Handle legacy double-serialization (string inside a string)
-      if (typeof parsed === 'string') {
-        parsed = JSON.parse(parsed);
-      }
 
       return reviver ? reviver(parsed) : parsed;
     } catch (error) {

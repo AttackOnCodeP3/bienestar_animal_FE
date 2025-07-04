@@ -23,8 +23,8 @@ export class AuthHttpService {
   private readonly expiresInSignal = signal<number | null>(null);
 
   readonly isAuthenticated = computed(() => !!this.accessTokenSignal());
-  readonly user = computed(() => this.userSignal());
-  readonly userAuthorities = computed(() => this.user().authorities ?? []);
+  readonly currentUser = computed(() => this.userSignal());
+  readonly userAuthorities = computed(() => this.currentUser().authorities ?? []);
   readonly accessToken = computed(() => this.accessTokenSignal());
 
   constructor() {
@@ -36,7 +36,7 @@ export class AuthHttpService {
    * @author dgutierrez
    */
   private saveToStorage(): void {
-     this.storageService.set(Constants.LS_APP_AUTH_USER, this.user());
+     this.storageService.set(Constants.LS_APP_AUTH_USER, this.currentUser());
     if (this.accessTokenSignal()) {
        this.storageService.set(Constants.LS_ACCESS_TOKEN, this.accessTokenSignal()!);
     }
