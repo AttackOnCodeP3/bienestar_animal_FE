@@ -10,17 +10,48 @@ import { Injectable } from '@angular/core';
 export class StorageService {
 
   /**
-   * Retrieves a value from localStorage and parses it as JSON.
-   * Defaults to `string` if no generic type is provided.
+   * Retrieves and parses a value from localStorage.
    *
-   * @template T The expected type of the returned value. Defaults to `string`.
-   * @param key The localStorage key to retrieve.
-   * @returns The parsed value if it exists and is valid JSON, or `null` otherwise.
+   * Automatically parses JSON and optionally uses a reviver function
+   * to transform the parsed object into a specific class or structure.
+   *
+   * Also handles legacy cases of double-serialized values by attempting
+   * a second parse if the first result is still a string.
+   *
+   * @template T The expected type of the returned value.
+   * @param key The key in localStorage to retrieve.
+   * @param reviver Optional function to transform the parsed data into an instance of T.
+   * @returns The parsed and optionally transformed value, or `null` if the key does not exist or parsing fails.
    * @author dgutierrez
    */
-  get<T = string>(key: string): T | null {
+  get<T>(key: string, reviver?: (data: any) => T): T | null {
     const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) as T : null;
+    if (!raw) return null;
+
+    try {
+      let parsed: any = JSON.parse(raw);
+
+      // Handle legacy double-serialization (string inside a string)
+      if (typeof parsed === 'string') {
+        parsed = JSON.parse(parsed);
+      }
+
+      return reviver ? reviver(parsed) : parsed;
+    } catch (error) {
+      console.error(`Failed to parse localStorage item with key "${key}"`, error);
+      return null;
+    }
+  }
+
+  /**
+   * Retrieves a raw value from localStorage without parsing it.
+   *
+   * @param key The localStorage key to retrieve.
+   * @returns The raw string value if it exists, or `null` otherwise.
+   * @author dgutierrez
+   */
+  getRaw(key: string): string | null {
+    return localStorage.getItem(key);
   }
 
   /**

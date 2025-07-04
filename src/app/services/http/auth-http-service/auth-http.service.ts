@@ -36,7 +36,7 @@ export class AuthHttpService {
    * @author dgutierrez
    */
   private saveToStorage(): void {
-     this.storageService.set(Constants.LS_APP_AUTH_USER, JSON.stringify(this.user()));
+     this.storageService.set(Constants.LS_APP_AUTH_USER, this.user());
     if (this.accessTokenSignal()) {
        this.storageService.set(Constants.LS_ACCESS_TOKEN, this.accessTokenSignal()!);
     }
@@ -50,13 +50,12 @@ export class AuthHttpService {
    * @author dgutierrez
    */
   private loadFromStorage(): void {
-    const token = this.storageService.get(Constants.LS_ACCESS_TOKEN);
-    const expires = this.storageService.get(Constants.LS_EXPIRES_IN);
-    const user = this.storageService.get(Constants.LS_APP_AUTH_USER);
-
+    const token = this.storageService.getRaw(Constants.LS_ACCESS_TOKEN);
+    const expires = this.storageService.getRaw(Constants.LS_EXPIRES_IN);
+    const user = this.storageService.get(Constants.LS_APP_AUTH_USER, data => new User(data));
     if (token) this.accessTokenSignal.set(token);
     if (expires) this.expiresInSignal.set(Number(expires));
-    if (user) this.userSignal.set(new User(JSON.parse(user)));
+    if (user) this.userSignal.set(user);
   }
 
   /**
@@ -75,6 +74,18 @@ export class AuthHttpService {
         this.saveToStorage();
       })
     );
+  }
+
+  /**
+   * Saves the login response to signals and localStorage.
+   * @param response The login response containing token, user info, and expiration
+   * @author dgutierrez
+   */
+  saveLoginResponseToSignalsAndStorage(response: ILoginResponse): void {
+    this.accessTokenSignal.set(response.token);
+    this.expiresInSignal.set(response.expiresIn);
+    this.userSignal.set(response.authUser);
+    this.saveToStorage();
   }
 
   /**
@@ -144,7 +155,7 @@ export class AuthHttpService {
    * @author dgutierrez
    */
   getPermittedRoutes(routes: Route[]): Route[] {
-    return routes.filter(r => r.data!['authorities'] && this.hasAnyRole(r.data!['authorities']));
+    return routes.filter(r => r.data![Constants.AUTHORITIES] && this.hasAnyRole(r.data![Constants.AUTHORITIES]));
   }
 
   /**
@@ -157,5 +168,21 @@ export class AuthHttpService {
     const hasRequiredRole = requiredAuthorities.some(r => this.hasRole(r));
     const isAdmin = this.hasRole(RolesEnum.MUNICIPAL_ADMIN) || this.hasRole(RolesEnum.SUPER_ADMIN);
     return hasRequiredRole && isAdmin;
+  }
+
+  /**
+   * Sends a request to the backend endpoint responsible for finalizing the social login flow.
+   *
+   * This method uses `withCredentials: true` to ensure that cookies (such as `JSESSIONID`)
+   * are included in the request, allowing the backend to recognize the authenticated session
+   * established during the OAuth2 login (e.g., via Google).
+   *
+   * @returns An observable that emits the login response, including a JWT token and user information.
+   * @author dgutierrez
+   */
+  getTokenFromSocialLogin(): Observable<ILoginResponse> {
+    return this.httpClient.get<ILoginResponse>(`${Constants.apiBaseUrl}${Constants.AUTH_SOCIAL_SUCCESS_URL}`, {
+      withCredentials: true
+    });
   }
 }

@@ -26,6 +26,8 @@ export enum RoutesUrlsEnum {
   REGISTER = 'register',
   FORGOT_PASSWORD = 'forgot-password',
   ACCESS_DENIED = 'access-denied',
+  SOCIAL_CALLBACK = 'social-callback',
+  COMPLETE_PROFILE = 'complete-profile',
 
   // Gemification routes
   REWARDS_SYSTEM = 'rewards-system',

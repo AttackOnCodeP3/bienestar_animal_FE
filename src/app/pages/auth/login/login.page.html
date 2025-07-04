@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100 box-shadow-5">
   <div class="container">
-    <div class="row justify-content-center rounded py-5 bg-primary-contrast">
+    <div class="row justify-content-center rounded py-5 bg-primary-contrast box-shadow-5">
       <div class="col-md-6 col-lg-5">
         <div class="text-center">
           <app-logo-bienestar-animal listCssClasses="max-width-500px" />
@@ -64,7 +64,7 @@
           <p class="text-center text-secondary mb-3">{{i18nService.i18nPagesEnum.LOGIN_PAGE_OR_REGISTER_WITH | translate}}</p>
 
           <div class="text-center">
-            <button matIconButton type="button">
+            <button matIconButton type="button" (click)="onNavigateToAuthenticationWithGoogle()">
               <mat-icon svgIcon="google-sign-in"></mat-icon>
             </button>
           </div>

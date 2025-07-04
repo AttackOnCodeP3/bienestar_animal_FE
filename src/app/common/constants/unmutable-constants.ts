@@ -9,6 +9,7 @@
 export abstract class UnmutableConstants {
 
   static readonly HEADER_AUTH: string = 'Authorization'
+  static readonly AUTHORITIES: string = 'authorities'
 
 
   // ==================================================================
@@ -32,9 +33,12 @@ export abstract class UnmutableConstants {
   // ROUTES FOR SECURITY/AUTH SERVICES
   // ==================================================================
   private static readonly AUTH_URL: string = '/auth'
+  static readonly AUTH_SOCIAL_URL: string = UnmutableConstants.AUTH_URL + '/social';
   static readonly AUTH_LOGIN_URL: string = UnmutableConstants.AUTH_URL + '/login'
   static readonly AUTH_SIGN_UP_URL: string = UnmutableConstants.AUTH_URL + '/signup'
+  static readonly AUTH_SOCIAL_SUCCESS_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/success'
   static readonly REQUEST_PASSWORD_CHANGE_URL: string ='/requestPasswordChange'
+  static readonly URL_AUTH_WITH_GOOGLE: string = "http://localhost:8080/oauth2/authorization/google"
 
   // ==================================================================
   // ROUTES FOR INTEREST SERVICES

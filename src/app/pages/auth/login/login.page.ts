@@ -96,4 +96,12 @@ export class LoginPage {
   onNavigateToRegister() {
     this.router.navigate([PagesUrlsEnum.REGISTER]);
   }
+
+  /**
+   * Navigates to the authentication with Google page.
+   * @author dgutierrez
+   */
+  onNavigateToAuthenticationWithGoogle() {
+    window.location.href = Constants.URL_AUTH_WITH_GOOGLE;
+  }
 }

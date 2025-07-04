@@ -16,7 +16,7 @@ export class User {
   email: string | null;
   phoneNumber: string | null;
   birthDate: string | null;
-  isNurseryHome: boolean | null;
+  nurseryHome: boolean | null;
   temporaryPassword: string | null;
   requiresPasswordChange: boolean | null;
   isActive: boolean | null;
@@ -26,6 +26,8 @@ export class User {
   municipality: Municipality | null;
   neighborhood: Neighborhood | null;
   authorities: IAuthority[] | null;
+  socialLoginCompleted: boolean | null;
+  usedSocialLogin: boolean | null;
   role: RolesEnum | null;
 
   constructor(values: Partial<User> = {}) {
@@ -36,7 +38,7 @@ export class User {
     this.email = values.email || null;
     this.phoneNumber = values.phoneNumber || null;
     this.birthDate = values.birthDate || null;
-    this.isNurseryHome = values.isNurseryHome || null;
+    this.nurseryHome = values.nurseryHome || null;
     this.temporaryPassword = values.temporaryPassword || null;
     this.requiresPasswordChange = values.requiresPasswordChange || null;
     this.isActive = values.isActive || null;
@@ -46,6 +48,8 @@ export class User {
     this.municipality = values.municipality || null;
     this.neighborhood = values.neighborhood || null;
     this.authorities = values.authorities || null;
+    this.socialLoginCompleted = values.socialLoginCompleted || null;
+    this.usedSocialLogin = values.usedSocialLogin || null;
     this.role = values.role || null;
   }
 }
