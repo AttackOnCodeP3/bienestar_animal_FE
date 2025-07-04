@@ -1,3 +1,5 @@
+import {RolesEnum} from '@common/enums';
+
 /**
  * Interface representing a menu item in the application.
  * @author dgutierrez
@@ -30,6 +32,8 @@ export interface IMenuItem {
   children?: IMenuItemChild[];
 
   click: VoidFunction;
+
+  authorities: RolesEnum[]
 }
 
 /**

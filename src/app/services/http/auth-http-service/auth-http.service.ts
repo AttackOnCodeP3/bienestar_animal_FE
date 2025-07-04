@@ -116,7 +116,20 @@ export class AuthHttpService {
    * @returns True if any match
    * @author dgutierrez
    */
-  hasAnyRole(roles: string[]): boolean {
+  hasAnyRole(roles: RolesEnum[] | undefined): boolean {
+    if (!roles || roles.length === 0) {
+      console.warn('No roles provided for hasAnyRole check');
+      return false;
+    }
+
+    const hasRole = roles.some(role => this.hasRole(role));
+
+    if (!hasRole) {
+      console.log(`User does not have any of the specified roles: ${roles.join(', ')}`);
+    } else{
+      console.log(`User has at least one of the specified roles: ${roles.join(', ')}`);
+    }
+
     return roles.some(role => this.hasRole(role));
   }
 

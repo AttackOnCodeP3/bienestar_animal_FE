@@ -55,32 +55,36 @@
 
               <mat-action-list>
                 @for (child of item?.children; track child) {
-                  <mat-list-item
-                    class="mb-2"
-                    [disabled]="child.isDisabled"
-                    [routerLink]="child.isDisabled? null : child.route"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    [tabindex]="getTabIndex(child)"
-                    (click)="child?.click()"
-                    routerLinkActive="mdc-list-item--activated"
-                  >
-                    <span>{{ child.label! | translate }}</span>
-                  </mat-list-item>
+                  @if (authHttpService.hasAnyRole(child.authorities)) {
+                    <mat-list-item
+                      class="mb-2"
+                      [disabled]="child.isDisabled"
+                      [routerLink]="child.isDisabled? null : child.route"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      [tabindex]="getTabIndex(child)"
+                      (click)="child?.click()"
+                      routerLinkActive="mdc-list-item--activated"
+                    >
+                      <span>{{ child.label! | translate }}</span>
+                    </mat-list-item>
+                  }
                 }
               </mat-action-list>
             </mat-expansion-panel>
           } @else {
-            <mat-list-item
-              class="mb-2"
-              [disabled]="item?.isDisabled"
-              [routerLink]="item?.isDisabled? null : item?.route" [tabindex]="getTabIndex(item)"
-              (click)="item?.click()"
-              routerLinkActive="mdc-list-item--activated pointer"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <mat-icon matListItemIcon>{{ item?.icon }}</mat-icon>
-              <span>{{ item?.label! | translate }}</span>
-            </mat-list-item>
+            @if (authHttpService.hasAnyRole(item?.authorities)) {
+              <mat-list-item
+                class="mb-2"
+                [disabled]="item?.isDisabled"
+                [routerLink]="item?.isDisabled? null : item?.route" [tabindex]="getTabIndex(item)"
+                (click)="item?.click()"
+                routerLinkActive="mdc-list-item--activated pointer"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <mat-icon matListItemIcon>{{ item?.icon }}</mat-icon>
+                <span>{{ item?.label! | translate }}</span>
+              </mat-list-item>
+            }
           }
         }
       </mat-accordion>
