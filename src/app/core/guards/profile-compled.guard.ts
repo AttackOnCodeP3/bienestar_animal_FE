@@ -9,11 +9,15 @@ import {PagesUrlsEnum} from '@common/enums';
  */
 export const profileCompletedGuard: CanActivateFn = () => {
   const router = inject(Router);
-  const authHttpService = inject(AuthHttpService);
-  const user = authHttpService.currentUser();
-  const hasCompletedProfile = user?.socialLoginCompleted ?? true;
+  const authService = inject(AuthHttpService);
+  const user = authService.currentUser();
 
-  return hasCompletedProfile
-    ? true
-    : router.createUrlTree([PagesUrlsEnum.COMPLETE_PROFILE]);
-};
+  const isSocial = user?.usedSocialLogin === true;
+  const isCompleted = user?.socialLoginCompleted === true;
+
+  const mustCompleteProfile = isSocial && !isCompleted;
+
+  return mustCompleteProfile
+    ? router.createUrlTree([PagesUrlsEnum.COMPLETE_PROFILE])
+    : true;
+}
