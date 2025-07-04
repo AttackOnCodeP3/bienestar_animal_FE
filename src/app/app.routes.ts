@@ -34,7 +34,6 @@ export const routes: Routes = [
       },
       {
         path: RoutesUrlsEnum.REPORTS,
-        canActivate:[roleGuard([RolesEnum.SUPER_ADMIN])],
         loadChildren: () => import('@pages/reports/reports.routes').then(m => m.REPORTS_ROUTES),
       }
     ]
