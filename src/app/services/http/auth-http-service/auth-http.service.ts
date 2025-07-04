@@ -5,7 +5,7 @@ import {Observable, tap} from 'rxjs';
 import {Constants} from '@common/constants/constants';
 import {ILoginResponse} from '@common/interfaces/http';
 import {RolesEnum} from '@common/enums';
-import {StorageService} from '@services/general';
+import {LogService, StorageService} from '@services/general';
 import {User} from '@models';
 import {RegisterUserRequestDTO} from '@models/dto';
 
@@ -14,8 +14,9 @@ import {RegisterUserRequestDTO} from '@models/dto';
 })
 export class AuthHttpService {
 
-  private readonly storageService = inject(StorageService);
   private readonly httpClient = inject(HttpClient);
+  private readonly logService = inject(LogService)
+  private readonly storageService = inject(StorageService);
 
   private readonly userSignal = signal<User>(new User({ email: '', authorities: [] }));
   private readonly accessTokenSignal = signal<string | null>(null);
@@ -118,18 +119,12 @@ export class AuthHttpService {
    */
   hasAnyRole(roles: RolesEnum[] | undefined): boolean {
     if (!roles || roles.length === 0) {
-      console.warn('No roles provided for hasAnyRole check');
+      this.logService.debug({
+        message: 'No roles provided for hasAnyRole check',
+        data: { roles }
+      });
       return false;
     }
-
-    const hasRole = roles.some(role => this.hasRole(role));
-
-    if (!hasRole) {
-      console.log(`User does not have any of the specified roles: ${roles.join(', ')}`);
-    } else{
-      console.log(`User has at least one of the specified roles: ${roles.join(', ')}`);
-    }
-
     return roles.some(role => this.hasRole(role));
   }
 
