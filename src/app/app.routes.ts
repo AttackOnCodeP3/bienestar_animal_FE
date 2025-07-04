@@ -29,7 +29,7 @@ export const routes: Routes = [
       },
       {
         path: RoutesUrlsEnum.GAMIFICATION,
-        loadChildren: () => import('@pages/gamification/gamification.routes').then(m => m.GEMIFICATION_ROUTES),
+        loadChildren: () => import('@pages/gamification/gamification.routes').then(m => m.GAMIFICATION_ROUTES),
       },
       {
         path: RoutesUrlsEnum.REPORTS,
