@@ -2,7 +2,7 @@ name: Scheduled Merge Desarrollo to QA
 
 on:
   schedule:
-    # Esto es para que se ejecute todos los días a las 21:00 UTC (que es a las 7pm et o sea 5pm costa rica)
+    # Esto es para que se ejecute todos los días a las 23:00 UTC (que es a las 7pm et o sea 5pm costa rica)
     - cron: "0 23 * * *"
   workflow_dispatch:
 
