@@ -4,7 +4,6 @@ import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {InputType} from '@common/types';
 import {I18nService, LogService} from '@services/general';
 import {I18nFormsEnum} from '@common/enums/i18n';
-import {toObservable} from '@angular/core/rxjs-interop';
 
 /**
  * Service for managing forms, including validation and error handling.

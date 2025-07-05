@@ -66,6 +66,7 @@ export class LoginPage {
     if (!email || !password) {return}
     this.authService.login({email, password}).subscribe({
       next: () => {
+        this.loginForm.reset();
         this.onNavigateToDashboard();
       },
       error: (error) => {

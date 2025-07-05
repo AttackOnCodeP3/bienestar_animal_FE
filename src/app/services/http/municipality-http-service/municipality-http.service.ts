@@ -1,8 +1,7 @@
-import {inject, Injectable, signal} from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {BaseHttpService} from '@services/http';
 import {Municipality} from '@models';
 import {ISearch} from '@common/interfaces/http';
-import {AlertService} from '@services/general';
 import {Constants} from '@common/constants/constants';
 import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';
