@@ -103,6 +103,7 @@ export class CompleteProfilePage implements OnInit {
           messageKey: I18nPagesValidationsEnum.COMPLETE_PROFILE_PROFILE_COMPLETED_SUCCESSFULLY,
           type: AlertTypeEnum.SUCCESS
         });
+        this.userRegistrationFormService.formUserRegistration.reset()
         this.navigateToDashboard();
       },
       error: (error) => {

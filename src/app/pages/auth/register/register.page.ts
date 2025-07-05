@@ -1,6 +1,6 @@
-import {Component, computed, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 import {
@@ -11,11 +11,9 @@ import {
   PersonalDataUserRegistrationFormComponent,
   VolunteerOptionFormComponent
 } from '@components/forms/user';
-import {LogoBienestarAnimalComponent} from '@components/icons';
 import {Constants} from '@common/constants/constants';
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
-import {MatDivider} from '@angular/material/divider';
 import {
   AuthHttpService,
   CantonHttpService,
@@ -23,10 +21,8 @@ import {
   InterestHttpService,
   MunicipalityHttpService
 } from '@services/http';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {matchFieldsValidations} from '@common/forms';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
-import {Canton, District, Interest, Municipality, Neighborhood, User} from '@models';
+import {Municipality, User} from '@models';
 import {RegisterUserRequestDTO} from '@models/dto';
 import {UserRegistrationFormService} from '@services/forms';
 import {NavbarComponent} from '@components/general';
@@ -42,9 +38,7 @@ import {NavbarComponent} from '@components/general';
     InterestsFormComponent,
     ItWorkedAsNurseryHomeFormComponent,
     LocationFormComponent,
-    LogoBienestarAnimalComponent,
     MatButton,
-    MatDivider,
     PasswordFormComponent,
     PersonalDataUserRegistrationFormComponent,
     ReactiveFormsModule,
@@ -113,6 +107,7 @@ export class RegisterPage implements OnInit {
           messageKey: I18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
           type: AlertTypeEnum.SUCCESS
         });
+        this.userRegistrationFormService.formUserRegistration.reset()
         this.navigateToLogin();
       },
       error: (error) => {
