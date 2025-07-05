@@ -8,10 +8,14 @@ export enum I18nPagesValidationsEnum {
   VALIDATIONS = 'validations.',
   GENERAL = I18nPagesValidationsEnum.VALIDATIONS + 'general.',
   REGISTER_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'register-page.',
+  COMPLETE_PROFILE_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'complete-profile-page.',
 
   // General
   GENERAL_INVALID_FIELDS = I18nPagesValidationsEnum.GENERAL + "invalidFields",
 
   // Register Page
   REGISTER_PAGE_REGISTERED_SUCCESSFULLY = I18nPagesValidationsEnum.REGISTER_PAGE + "registeredSuccessfully",
+
+  //Complete Profile Page
+  COMPLETE_PROFILE_PROFILE_COMPLETED_SUCCESSFULLY = I18nPagesValidationsEnum.COMPLETE_PROFILE_PAGE + "profileCompletedSuccessfully",
 }

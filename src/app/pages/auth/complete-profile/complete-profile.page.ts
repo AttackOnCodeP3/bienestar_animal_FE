@@ -99,14 +99,24 @@ export class CompleteProfilePage implements OnInit {
     this.completeProfile();
   }
 
+  /**
+   * Completes the user's profile by sending a request to the server.
+   * @author dgutierrez
+   */
   private completeProfile() {
-    const formValue = this.formPersonalDataUser.value;
-    const completeProfileRequestDTO = CompleteProfileRequestDTO.fromUser(new User(formValue), this.volunteerIntent());
+    const {volunteerMunicipality, ...rest} = this.formPersonalDataUser.getRawValue();
+    const completeProfileRequestDTO = CompleteProfileRequestDTO.fromUser(
+      new User({
+        ...rest,
+        municipality: new Municipality({
+          id: volunteerMunicipality?.id,
+        })
+      }), this.volunteerIntent());
 
     this.authHttpService.completeProfile(completeProfileRequestDTO).subscribe({
       next: () => {
         this.alertService.displayAlert({
-          messageKey: I18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
+          messageKey: I18nPagesValidationsEnum.COMPLETE_PROFILE_PROFILE_COMPLETED_SUCCESSFULLY,
           type: AlertTypeEnum.SUCCESS
         })
         this.navigateToDashboard();
