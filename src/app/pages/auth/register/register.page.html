@@ -11,7 +11,7 @@
     <h2>{{ i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate }}</h2>
     <div class="col-12">
       <app-personal-data-user-registration-form
-        [form]="formPersonalDataUser"
+        [form]="userRegistrationFormService.formUserRegistration"
         [i18nService]="i18nService"
         [formsService]="formsService"
       />
@@ -26,7 +26,7 @@
         [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
         (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
         (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
-        [form]="formPersonalDataUser"
+        [form]="userRegistrationFormService.formUserRegistration"
         [i18nService]="i18nService"
         [formsService]="formsService"
       />
@@ -36,8 +36,8 @@
     <h2>{{ i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate }}</h2>
     <div class="col-12">
       <app-it-worked-as-nursery-home
-        [checked]="isNurseryHome()!"
-        (checkedChange)="checkedChangeIsNurseryHome($event)"
+        [checked]="userRegistrationFormService.isNurseryHome()!"
+        (checkedChange)="userRegistrationFormService.setNurseryHomeValue(userRegistrationFormService.formUserRegistration, $event)"
         [i18nService]="i18nService"
         [formsService]="formsService"
       />
@@ -48,22 +48,22 @@
     <p>{{ i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate }}</p>
     <app-interests
       [listInterests]="interestHttpService.interestList()"
-      (selectedInterestsChange)="interestsChange($event)"/>
+      (selectedInterestsChange)="userRegistrationFormService.setInterests(userRegistrationFormService.formUserRegistration, $event)"/>
     <mat-divider class="my-4"/>
 
     <h2>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_TITLE | translate }}</h2>
     <p>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_DESCRIPTION | translate }}</p>
     <app-volunteer-option-form
-      [(checked)]="volunteerIntent"
+      [(checked)]="userRegistrationFormService.volunteerIntent"
       [i18nService]="i18nService"
-      [form]="formPersonalDataUser"
+      [form]="userRegistrationFormService.formUserRegistration"
       [formsService]="formsService"
       [municipalitiesList]="municipalityHttpService.municipalityList()"/>
     <mat-divider class="my-4"/>
 
 
     <h2>{{ i18nService.i18nComponentsEnum.PASSWORD_FORM_TITLE | translate }}</h2>
-    <app-password-form [form]="formPersonalDataUser" [i18nService]="i18nService" [formsService]="formsService"/>
+    <app-password-form [form]="userRegistrationFormService.formUserRegistration" [i18nService]="i18nService" [formsService]="formsService"/>
     <mat-divider class="my-4"/>
 
 

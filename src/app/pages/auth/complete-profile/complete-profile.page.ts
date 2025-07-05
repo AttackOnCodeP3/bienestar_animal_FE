@@ -1,5 +1,4 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {Component, computed, inject, OnInit} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {NavbarComponent} from '@components/general';
 import {
@@ -18,14 +17,13 @@ import {
 } from '@services/http';
 import {TranslatePipe} from '@ngx-translate/core';
 import {AlertService, FormsService, I18nService} from '@services/general';
-import {Canton, District, Interest, Municipality, Neighborhood, User} from '@models';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {matchFieldsValidations} from '@common/forms';
+import {Municipality, User} from '@models';
 import {MatButton} from '@angular/material/button';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
 import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
 import {Router} from '@angular/router';
 import {CompleteProfileRequestDTO} from '@models/dto';
+import {UserRegistrationFormService} from '@services/forms';
 
 @Component({
   selector: 'app-complete-profile',
@@ -33,125 +31,93 @@ import {CompleteProfileRequestDTO} from '@models/dto';
     InterestsFormComponent,
     ItWorkedAsNurseryHomeFormComponent,
     LocationFormComponent,
+    MatButton,
     NavbarComponent,
     PersonalDataUserRegistrationFormComponent,
     TranslatePipe,
     VolunteerOptionFormComponent,
-    MatButton,
   ],
   templateUrl: './complete-profile.page.html',
   styleUrl: './complete-profile.page.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
 export class CompleteProfilePage implements OnInit {
+  private readonly alertService = inject(AlertService);
+  private readonly authHttpService = inject(AuthHttpService);
   private readonly router = inject(Router);
-  readonly alertService = inject(AlertService);
-  readonly authHttpService = inject(AuthHttpService);
   readonly cantonHttpService = inject(CantonHttpService);
   readonly districtHttpService = inject(DistrictHttpService);
-  readonly formsService = inject(FormsService)
-  readonly i18nService = inject(I18nService)
+  readonly formsService = inject(FormsService);
+  readonly i18nService = inject(I18nService);
   readonly interestHttpService = inject(InterestHttpService);
   readonly municipalityHttpService = inject(MunicipalityHttpService);
+  readonly userRegistrationFormService = inject(UserRegistrationFormService);
 
-  readonly volunteerIntent = signal(false);
-  readonly formPersonalDataUser = this.formsService.formsBuilder.group({
-    identificationCard: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]), //disabled
-    lastname: new FormControl('', [Validators.required]), //disabled
-    email: new FormControl('', [Validators.required, Validators.email]), //disabled
-    phoneNumber: new FormControl('', [Validators.required]),
-    birthDate: new FormControl('', [Validators.required]),
-    isNurseryHome: new FormControl(false, [Validators.required]),
-    interests: new FormControl<Interest[]>([]),
-    canton: new FormControl<Canton | null>(null, [Validators.required]),
-    district: new FormControl<District | null>(null, [Validators.required]),
-    neighborhood: new FormControl<Neighborhood | null>(null, [Validators.required]),
-    password: new FormControl('', [Validators.required]), //disabled
-    confirmPassword: new FormControl('', [Validators.required]), //disabled
-    volunteerMunicipality: new FormControl<Municipality | null>(null, [Validators.required]),
-  }, {
-    validators: matchFieldsValidations('password', 'confirmPassword'),
-  });
-
-  readonly isNurseryHome = toSignal(this.formPersonalDataUser.controls.isNurseryHome?.valueChanges, {initialValue: this.formPersonalDataUser.controls.isNurseryHome?.value});
-
-  private readonly enableDisableVolunteerMunicipalityEffect = effect(() => {
-    this.enableDisableVolunteerMunicipality(this.volunteerIntent());
-  });
+  constructor() {
+    this.userRegistrationFormService.setupVolunteerMunicipalityEffect(this.userRegistrationFormService.formUserRegistration);
+  }
 
   ngOnInit() {
     this.loadUserData();
     this.disableFormControls();
+
     this.cantonHttpService.getAll();
     this.interestHttpService.getAll();
     this.municipalityHttpService.getAll();
   }
 
+  /**
+   * Handles the form submission to complete the user profile.
+   * Validates the form before sending the request.
+   * @author dgutierrez
+   */
   onSubmit() {
-    if (this.formPersonalDataUser.invalid) {
-      this.formsService.markFormTouchedAndDirty(this.formPersonalDataUser);
+    if (this.userRegistrationFormService.formUserRegistration.invalid) {
+      this.formsService.markFormTouchedAndDirty(this.userRegistrationFormService.formUserRegistration);
       this.alertService.displayAlert({
         messageKey: I18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
-      })
+      });
       return;
     }
     this.completeProfile();
   }
 
   /**
-   * Completes the user's profile by sending a request to the server.
+   * Calls the API to complete the user profile based on form data.
+   * On success, navigates to the dashboard. On failure, displays an error alert.
    * @author dgutierrez
    */
   private completeProfile() {
-    const {volunteerMunicipality, ...rest} = this.formPersonalDataUser.getRawValue();
+    const { volunteerMunicipality, ...rest } = this.userRegistrationFormService.formUserRegistration.getRawValue();
     const completeProfileRequestDTO = CompleteProfileRequestDTO.fromUser(
       new User({
         ...rest,
-        municipality: new Municipality({
-          id: volunteerMunicipality?.id,
-        })
-      }), this.volunteerIntent());
+        municipality: new Municipality({ id: volunteerMunicipality?.id })
+      }),
+      this.userRegistrationFormService.volunteerIntent()
+    );
 
     this.authHttpService.completeProfile(completeProfileRequestDTO).subscribe({
       next: () => {
         this.alertService.displayAlert({
           messageKey: I18nPagesValidationsEnum.COMPLETE_PROFILE_PROFILE_COMPLETED_SUCCESSFULLY,
           type: AlertTypeEnum.SUCCESS
-        })
+        });
         this.navigateToDashboard();
       },
       error: (error) => {
-        this.alertService.displayAlert({message: error.error.description})
+        this.alertService.displayAlert({ message: error.error.description });
       }
     });
   }
 
   /**
-   * Enables or disables the volunteer municipality field based on the intent.
-   * @param intent - A boolean indicating whether the user intends to volunteer.
-   * @author dgutierrez
-   */
-  private enableDisableVolunteerMunicipality(intent: boolean) {
-    const control = this.formPersonalDataUser.get('volunteerMunicipality');
-
-    if (!control) return;
-
-    if (intent) {
-      control.enable();
-    } else {
-      control.disable();
-      control.setValue(null);
-    }
-  }
-
-  /**
-   * Loads the current user's data into the form for personal data.
+   * Loads user data from the current session and fills name, lastname, and email fields.
    * @author dgutierrez
    */
   private loadUserData() {
     const currentUser = this.authHttpService.currentUser();
-    this.formPersonalDataUser.patchValue({
+    this.userRegistrationFormService.formUserRegistration.patchValue({
       name: currentUser.name,
       lastname: currentUser.lastname,
       email: currentUser.email,
@@ -159,33 +125,15 @@ export class CompleteProfilePage implements OnInit {
   }
 
   /**
-   * Disables the form controls for personal data.
+   * Disables fields are not editable by the user or needed for the complete profile.
    * @author dgutierrez
    */
   private disableFormControls() {
-    this.formPersonalDataUser.get('name')?.disable();
-    this.formPersonalDataUser.get('lastname')?.disable();
-    this.formPersonalDataUser.get('email')?.disable();
-    this.formPersonalDataUser.get('password')?.disable();
-    this.formPersonalDataUser.get('confirmPassword')?.disable();
-  }
-
-  /**
-   * Handles the change event of the "It worked as a nursery home" checkbox.
-   * @param checked - The new checked state of the checkbox.
-   * @author dgutierrez
-   */
-  checkedChangeIsNurseryHome(checked: boolean) {
-    this.formPersonalDataUser.get('isNurseryHome')?.setValue(checked);
-  }
-
-  /**
-   * Handles the change event of the canton selection.
-   * @param interests - The selected interests.
-   * @author dgutierrez
-   */
-  interestsChange(interests: Interest[]) {
-    this.formPersonalDataUser.get('interests')?.setValue(interests);
+    this.userRegistrationFormService.formUserRegistration.get('name')?.disable();
+    this.userRegistrationFormService.formUserRegistration.get('lastname')?.disable();
+    this.userRegistrationFormService.formUserRegistration.get('email')?.disable();
+    this.userRegistrationFormService.formUserRegistration.get('password')?.disable();
+    this.userRegistrationFormService.formUserRegistration.get('confirmPassword')?.disable();
   }
 
   /**
@@ -193,6 +141,6 @@ export class CompleteProfilePage implements OnInit {
    * @author dgutierrez
    */
   navigateToDashboard() {
-    this.router.navigate([PagesUrlsEnum.DASHBOARD])
+    this.router.navigate([PagesUrlsEnum.DASHBOARD]);
   }
 }
