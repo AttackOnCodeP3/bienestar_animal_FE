@@ -17,7 +17,7 @@
 @include mixins.dark-mode {
   .mat-snack-error {
     @include material.snack-bar-overrides((
-      button-color: var(--mat-sys-error),
+      button-color: var(--mat-sys-on-error),
       supporting-text-color: var(--mat-sys-on-error),
       container-color: var(--mat-sys-error),
     ));
