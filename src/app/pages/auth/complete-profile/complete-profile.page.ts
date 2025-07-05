@@ -1,4 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 import {Constants} from '@common/constants/constants';
 import {NavbarComponent} from '@components/general';
@@ -16,12 +18,10 @@ import {
   InterestHttpService,
   MunicipalityHttpService
 } from '@services/http';
-import {TranslatePipe} from '@ngx-translate/core';
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {Municipality, User} from '@models';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
 import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
-import {Router} from '@angular/router';
 import {CompleteProfileRequestDTO} from '@models/dto';
 import {UserRegistrationFormService} from '@services/forms';
 
