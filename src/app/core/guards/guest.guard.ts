@@ -15,8 +15,8 @@ import {RoutesUrlsEnum} from '@common/enums';
  */
 export const guestGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree => {
   const router = inject(Router);
-  const authService = inject(AuthHttpService);
+  const authHttpService = inject(AuthHttpService);
 
-  const isGuest = !authService.isAuthenticated();
+  const isGuest = !authHttpService.isAuthenticated();
   return isGuest ? true : router.createUrlTree([RoutesUrlsEnum.DASHBOARD]);
 };

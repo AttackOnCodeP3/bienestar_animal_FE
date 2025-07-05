@@ -17,10 +17,10 @@ export const roleGuard = (
   redirectTo: string = PagesUrlsEnum.ACCESS_DENIED
 ): CanActivateFn => {
   return (): boolean | UrlTree => {
-    const auth = inject(AuthHttpService);
+    const authHttpService = inject(AuthHttpService);
     const router = inject(Router);
 
-    const hasRequiredRole = requiredRoles.some(role => auth.hasRole(role));
+    const hasRequiredRole = requiredRoles.some(role => authHttpService.hasRole(role));
     return hasRequiredRole ? true : router.createUrlTree([redirectTo]);
   };
 };

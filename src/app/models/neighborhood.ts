@@ -10,8 +10,8 @@ export class Neighborhood {
   district: District | null;
 
   constructor(values: Partial<Neighborhood> = {}) {
-    this.id = values.id || null;
-    this.name = values.name || null;
-    this.district = values.district || null;
+    this.id = values.id ??= null;
+    this.name = values.name ??= null;
+    this.district = values.district ??= null;
   }
 }

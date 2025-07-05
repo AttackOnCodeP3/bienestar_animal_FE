@@ -19,6 +19,14 @@ export const AUTH_ROUTES: Routes = [
     pathMatch: 'full',
   },
   {
+    path: RoutesUrlsEnum.ACCESS_DENIED,
+    loadComponent: () => import('@pages/auth/access-denied/access-denied.page').then(m => m.AccessDeniedPage),
+  },
+  {
+    path: RoutesUrlsEnum.COMPLETE_PROFILE,
+    loadComponent: () => import('@pages/auth/complete-profile/complete-profile.page').then(m => m.CompleteProfilePage),
+  },
+  {
     path: RoutesUrlsEnum.LOGIN,
     loadComponent: () => import('@pages/auth/login/login.page').then(m => m.LoginPage),
     canActivate: [guestGuard]
@@ -33,7 +41,7 @@ export const AUTH_ROUTES: Routes = [
     loadComponent: () => import('@pages/auth/forgot-password/forgot-password.page').then(m => m.ForgotPasswordPage),
   },
   {
-    path: RoutesUrlsEnum.ACCESS_DENIED,
-    loadComponent: () => import('@pages/auth/access-denied/access-denied.page').then(m => m.AccessDeniedPage),
+    path: RoutesUrlsEnum.SOCIAL_CALLBACK,
+    loadComponent: () => import('@pages/auth/social-callback/social-callback.page').then(m => m.SocialCallbackPage),
   }
 ] as const

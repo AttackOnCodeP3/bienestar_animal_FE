@@ -16,6 +16,7 @@ export enum PagesUrlsEnum {
   REGISTER = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.REGISTER,
   FORGOT_PASSWORD = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.FORGOT_PASSWORD,
   ACCESS_DENIED = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ACCESS_DENIED,
+  COMPLETE_PROFILE = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLETE_PROFILE,
 
   // Routes of the Main Dashboard
   DASHBOARD = RoutesUrlsEnum.DASHBOARD,

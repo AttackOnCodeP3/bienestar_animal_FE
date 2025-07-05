@@ -1,88 +1,86 @@
-<div class="d-flex justify-content-center align-items-center min-vh-100 ">
-  <div class="container">
-    <div class="row justify-content-center rounded py-5 bg-primary-contrast">
-      <div class="col-12">
-        <div class="text-center">
-          <app-logo-bienestar-animal listCssClasses="max-width-500px"/>
-        </div>
+<div class="container box-shadow-5 my-5">
+  <div class="row justify-content-center rounded bg-primary-contrast">
+    <div class="col-12">
+      <div class="text-center">
+        <app-logo-bienestar-animal listCssClasses="max-width-500px"/>
       </div>
+    </div>
 
-      <h1 class="text-center mb-4">{{ i18nService.i18nPagesEnum.REGISTER_PAGE_TITLE | translate }}</h1>
+    <h1 class="text-center mb-4">{{ i18nService.i18nPagesEnum.REGISTER_PAGE_TITLE | translate }}</h1>
 
-      <h2>{{ i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate }}</h2>
-      <div class="col-12">
-        <app-personal-data-user-registration-form
-          [form]="formPersonalDataUser"
-          [i18nService]="i18nService"
-          [formsService]="formsService"
-        />
-      </div>
-
-      <mat-divider class="my-4"/>
-      <h2>{{ i18nService.i18nGeneralEnum.LOCATION | translate }}</h2>
-      <div class="col-12">
-        <app-location
-          [cantonsList]="cantonHttpService.cantonList()"
-          [districtsList]="cantonHttpService.districtsByCanton()"
-          [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
-          (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
-          (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
-          [form]="formPersonalDataUser"
-          [i18nService]="i18nService"
-          [formsService]="formsService"
-        />
-      </div>
-      <mat-divider class="my-4"/>
-
-      <h2>{{ i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate }}</h2>
-      <div class="col-12">
-        <app-it-worked-as-nursery-home
-          [checked]="isNurseryHome()!"
-          (checkedChange)="checkedChangeIsNurseryHome($event)"
-          [i18nService]="i18nService"
-          [formsService]="formsService"
-        />
-      </div>
-      <mat-divider class="my-4"/>
-
-      <h2>{{ i18nService.i18nComponentsEnum.INTERESTS_TITLE | translate }}</h2>
-      <p>{{ i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate }}</p>
-      <app-interests
-        [listInterests]="interestHttpService.interestList()"
-        (selectedInterestsChange)="interestsChange($event)"/>
-      <mat-divider class="my-4"/>
-
-      <h2>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_TITLE | translate }}</h2>
-      <p>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_DESCRIPTION | translate }}</p>
-      <app-volunteer-option-form
-        [(checked)]="volunteerIntent"
-        [i18nService]="i18nService"
+    <h2>{{ i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate }}</h2>
+    <div class="col-12">
+      <app-personal-data-user-registration-form
         [form]="formPersonalDataUser"
+        [i18nService]="i18nService"
         [formsService]="formsService"
-        [municipalitiesList]="municipalityHttpService.municipalityList()"/>
-      <mat-divider class="my-4"/>
+      />
+    </div>
+
+    <mat-divider class="my-4"/>
+    <h2>{{ i18nService.i18nGeneralEnum.LOCATION | translate }}</h2>
+    <div class="col-12">
+      <app-location-form
+        [cantonsList]="cantonHttpService.cantonList()"
+        [districtsList]="cantonHttpService.districtsByCanton()"
+        [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
+        (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
+        (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
+        [form]="formPersonalDataUser"
+        [i18nService]="i18nService"
+        [formsService]="formsService"
+      />
+    </div>
+    <mat-divider class="my-4"/>
+
+    <h2>{{ i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate }}</h2>
+    <div class="col-12">
+      <app-it-worked-as-nursery-home
+        [checked]="isNurseryHome()!"
+        (checkedChange)="checkedChangeIsNurseryHome($event)"
+        [i18nService]="i18nService"
+        [formsService]="formsService"
+      />
+    </div>
+    <mat-divider class="my-4"/>
+
+    <h2>{{ i18nService.i18nComponentsEnum.INTERESTS_TITLE | translate }}</h2>
+    <p>{{ i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate }}</p>
+    <app-interests
+      [listInterests]="interestHttpService.interestList()"
+      (selectedInterestsChange)="interestsChange($event)"/>
+    <mat-divider class="my-4"/>
+
+    <h2>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_TITLE | translate }}</h2>
+    <p>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_DESCRIPTION | translate }}</p>
+    <app-volunteer-option-form
+      [(checked)]="volunteerIntent"
+      [i18nService]="i18nService"
+      [form]="formPersonalDataUser"
+      [formsService]="formsService"
+      [municipalitiesList]="municipalityHttpService.municipalityList()"/>
+    <mat-divider class="my-4"/>
 
 
-      <h2>{{ i18nService.i18nComponentsEnum.PASSWORD_FORM_TITLE | translate }}</h2>
-      <app-password-form [form]="formPersonalDataUser" [i18nService]="i18nService" [formsService]="formsService"/>
-      <mat-divider class="my-4"/>
+    <h2>{{ i18nService.i18nComponentsEnum.PASSWORD_FORM_TITLE | translate }}</h2>
+    <app-password-form [form]="formPersonalDataUser" [i18nService]="i18nService" [formsService]="formsService"/>
+    <mat-divider class="my-4"/>
 
 
-      <div class="mb-4 text-center">
-        <button type="submit" matButton="filled" class="w-100" (click)="onSubmit()">
-          {{ i18nService.i18nButtonsEnum.BUTTON_REGISTER_NOW | translate }}
-        </button>
-      </div>
+    <div class="mb-4 text-center">
+      <button type="submit" matButton="filled" class="w-100" (click)="onSubmit()">
+        {{ i18nService.i18nButtonsEnum.BUTTON_REGISTER_NOW | translate }}
+      </button>
+    </div>
 
-      <div class="mb-4 text-end">
-        <button
-          matButton="text"
-          (click)="navigateToLogin()"
-        >
-          {{ i18nService.i18nButtonsEnum.BUTTON_ALREADY_HAVE_AN_ACCOUNT | translate }}
-          {{ i18nService.i18nButtonsEnum.BUTTON_LOGIN | translate }}
-        </button>
-      </div>
+    <div class="mb-4 text-end">
+      <button
+        matButton="text"
+        (click)="navigateToLogin()"
+      >
+        {{ i18nService.i18nButtonsEnum.BUTTON_ALREADY_HAVE_AN_ACCOUNT | translate }}
+        {{ i18nService.i18nButtonsEnum.BUTTON_LOGIN | translate }}
+      </button>
     </div>
   </div>
 </div>

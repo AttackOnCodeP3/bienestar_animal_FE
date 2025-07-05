@@ -1,8 +1,7 @@
 import {Routes} from '@angular/router';
-import {DashboardLayoutComponent} from '@components/dashboard-layout/dashboard-layout.component';
-import {RoutesUrlsEnum} from '@common/enums/routes-urls.enum';
-import {authGuard, roleGuard} from '@core/guards';
-import {RolesEnum} from '@common/enums';
+import {RoutesUrlsEnum} from '@common/enums';
+import {authGuard, profileCompletedGuard} from '@core/guards';
+import {DashboardLayoutComponent} from '@components/general';
 
 export const routes: Routes = [
   {
@@ -17,7 +16,7 @@ export const routes: Routes = [
   {
     path: RoutesUrlsEnum.DASHBOARD,
     component: DashboardLayoutComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, profileCompletedGuard],
     children: [
       {
         path: '',
@@ -30,7 +29,7 @@ export const routes: Routes = [
       },
       {
         path: RoutesUrlsEnum.GAMIFICATION,
-        loadChildren: () => import('@pages/gamification/gamification.routes').then(m => m.GEMIFICATION_ROUTES),
+        loadChildren: () => import('@pages/gamification/gamification.routes').then(m => m.GAMIFICATION_ROUTES),
       },
       {
         path: RoutesUrlsEnum.REPORTS,

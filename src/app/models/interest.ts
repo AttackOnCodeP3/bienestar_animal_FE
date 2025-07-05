@@ -8,8 +8,8 @@ export class Interest {
   description: string | null;
 
   constructor(values : Partial<Interest> = {}) {
-    this.id = values.id || null;
-    this.name = values.name || null;
-    this.description = values.description || null;
+    this.id = values.id ??= null;
+    this.name = values.name ??= null;
+    this.description = values.description ??= null;
   }
 }

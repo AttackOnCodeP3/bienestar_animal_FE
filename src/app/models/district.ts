@@ -10,8 +10,8 @@ export class District {
   canton: Canton | null;
 
   constructor(values: Partial<District> = {}) {
-    this.id = values.id || null;
-    this.name = values.name || null;
-    this.canton = values.canton || null;
+    this.id = values.id ??= null;
+    this.name = values.name ??= null;
+    this.canton = values.canton ??= null;
   }
 }

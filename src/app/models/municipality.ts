@@ -12,10 +12,10 @@ export class Municipality {
   canton: Canton | null;
 
   constructor(values: Partial<Municipality> = {}) {
-    this.id = values.id || null;
-    this.name = values.name || null;
-    this.address = values.address || null;
-    this.email = values.email || null;
-    this.canton = values.canton || null;
+    this.id = values.id ??= null;
+    this.name = values.name ??= null;
+    this.address = values.address ??= null;
+    this.email = values.email ??= null;
+    this.canton = values.canton ??= null;
   }
 }

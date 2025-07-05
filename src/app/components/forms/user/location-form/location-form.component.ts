@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-location',
+  selector: 'app-location-form',
   imports: [MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './location-form.component.html',
   styleUrl: './location-form.component.scss',

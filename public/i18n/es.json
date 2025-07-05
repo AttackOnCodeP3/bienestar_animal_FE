@@ -121,6 +121,9 @@
     },
     "register-page": {
       "registeredSuccessfully": "Registrado exitosamente, por favor inicie sesión"
+    },
+    "complete-profile-page": {
+      "profileCompletedSuccessfully": "Perfil completado exitosamente"
     }
   },
   "================== BUTTON TEXT ===========================": "",

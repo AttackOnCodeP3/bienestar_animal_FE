@@ -20,6 +20,7 @@
 
       "@services/general": ["app/services/index.ts"],
       "@services/http": ["app/services/http/index.ts"], // Alias for http index file
+      "@services/forms": ["app/services/forms/index.ts"], // Alias for forms index file
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
       "@common/enums/*": ["app/common/enums/*"],
@@ -41,6 +42,7 @@
       "@animations/slide/*": ["app/animations/slide/*"],
 
       "@components/user": ["app/components/user/index.ts"], // Alias for user component index file
+      "@components/general": ["app/components/index.ts"], // Alias for general component index file
       "@models": ["app/models/index.ts"], // Alias for models index file
 
       "@models/dto": ["app/models/dto/index.ts"], // Alias for DTO models index file

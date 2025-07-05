@@ -163,4 +163,21 @@ export class FormsService {
   getError(control: AbstractControl | null, type: InputType = 'text'): string | null {
     return this.isFieldInvalid(control) ? this.getErrorMessage(control, type) : null;
   }
+
+  /**
+   * Returns an array of field names that are invalid in the given FormGroup.
+   * @param form The FormGroup to check for invalid fields.
+   * @return An array of invalid field names.
+   * @author dgutierrez
+   */
+  getInvalidFields(form: FormGroup): string[] {
+    if (!form || !form.controls) {
+      return [];
+    }
+
+    return Object.keys(form.controls).filter(key => {
+      const control = form.get(key);
+      return this.isFieldInvalid(control);
+    });
+  }
 }
