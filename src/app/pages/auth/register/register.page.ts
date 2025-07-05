@@ -39,12 +39,12 @@ import {NavbarComponent} from '@components/general';
     ItWorkedAsNurseryHomeFormComponent,
     LocationFormComponent,
     MatButton,
+    NavbarComponent,
     PasswordFormComponent,
     PersonalDataUserRegistrationFormComponent,
     ReactiveFormsModule,
     TranslatePipe,
     VolunteerOptionFormComponent,
-    NavbarComponent
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss',
