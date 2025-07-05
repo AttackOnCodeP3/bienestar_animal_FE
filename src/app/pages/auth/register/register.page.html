@@ -20,7 +20,7 @@
     <mat-divider class="my-4"/>
     <h2>{{ i18nService.i18nGeneralEnum.LOCATION | translate }}</h2>
     <div class="col-12">
-      <app-location
+      <app-location-form
         [cantonsList]="cantonHttpService.cantonList()"
         [districtsList]="cantonHttpService.districtsByCanton()"
         [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"

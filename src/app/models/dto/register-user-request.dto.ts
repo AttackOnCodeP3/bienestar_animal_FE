@@ -38,7 +38,7 @@ export class RegisterUserRequestDTO {
    * @returns A new instance of RegisterUserRequestDTO.
    * @author dgutierrez
    */
-  static fromUser(user: Partial<User>, wantsToBeVolunteer: boolean) {
+  static fromUser(user: Partial<User>, wantsToBeVolunteer: boolean): RegisterUserRequestDTO {
     return new RegisterUserRequestDTO({
       name: user.name,
       lastname: user.lastname,

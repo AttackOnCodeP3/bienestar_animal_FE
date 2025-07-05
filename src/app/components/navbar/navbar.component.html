@@ -1,0 +1,42 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    @if (showMenuToggle()){
+      <button mat-icon-button (click)="matSidenav()?.toggle()">
+        <mat-icon class="icon-color-scheme">menu</mat-icon>
+      </button>
+    }
+    <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
+    <div class="d-flex flex-grow-1 justify-content-end">
+      <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+        <mat-icon class="icon-color-scheme">{{ i18n.currentLanguage()?.icon }}</mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+        <mat-icon class="icon-color-scheme">{{ theme.selectedTheme()?.icon }}</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar-row>
+  <mat-menu #themeMenu>
+    @for (themeItem of theme.getThemes(); track themeItem.name) {
+      <button
+        [class.selected-theme]="theme.selectedTheme()?.name === themeItem.name"
+        mat-menu-item
+        (click)="theme.setTheme(themeItem.name)"
+      >
+        <mat-icon>{{ themeItem.icon }}</mat-icon>
+        <span>{{ themeItem.label | translate }}</span>
+      </button>
+    }
+  </mat-menu>
+  <mat-menu #languageMenu>
+    @for (languageItem of i18n.supportedLanguages(); track languageItem.label) {
+      <button
+        [class.selected-language]="i18n.currentLanguage()?.label === languageItem.label"
+        mat-menu-item
+        (click)="i18n.setPreferenceLanguage(languageItem)"
+      >
+        <mat-icon>{{ languageItem.icon }}</mat-icon>
+        <span>{{ languageItem.label | translate }}</span>
+      </button>
+    }
+  </mat-menu>
+</mat-toolbar>

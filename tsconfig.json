@@ -20,6 +20,7 @@
 
       "@services/general": ["app/services/index.ts"],
       "@services/http": ["app/services/http/index.ts"], // Alias for http index file
+      "@services/forms": ["app/services/forms/index.ts"], // Alias for forms index file
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
       "@common/enums/*": ["app/common/enums/*"],

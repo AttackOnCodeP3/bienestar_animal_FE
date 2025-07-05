@@ -1,20 +1,18 @@
 import {Component, computed, inject, signal, viewChild} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {TranslatePipe} from '@ngx-translate/core';
-import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatIcon} from '@angular/material/icon';
-import {MatIconButton} from "@angular/material/button";
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
 import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem, IMenuItemChild} from '@common/interfaces';
 import {ThemeService, I18nService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
 import {Constants} from '@common/constants/constants';
 import {AuthHttpService} from '@services/http';
+import {NavbarComponent} from '@components/general';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -22,18 +20,13 @@ import {AuthHttpService} from '@services/http';
     MatActionList,
     MatExpansionModule,
     MatIcon,
-    MatIconButton,
     MatListItem,
     MatListItemIcon,
-    MatMenu,
-    MatMenuItem,
-    MatMenuTrigger,
     MatNavList,
     MatSidenav,
     MatSidenavContainer,
     MatSidenavContent,
-    MatToolbar,
-    MatToolbarRow,
+    NavbarComponent,
     RouterLink,
     RouterLinkActive,
     RouterOutlet,

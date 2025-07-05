@@ -7,7 +7,7 @@ import {ILoginResponse} from '@common/interfaces/http';
 import {RolesEnum} from '@common/enums';
 import {LogService, StorageService} from '@services/general';
 import {User} from '@models';
-import {RegisterUserRequestDTO} from '@models/dto';
+import {RegisterUserRequestDTO, CompleteProfileRequestDTO} from '@models/dto';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +96,20 @@ export class AuthHttpService {
    */
   registerUser(registerUserRequestDTO: RegisterUserRequestDTO): Observable<ILoginResponse> {
     return this.httpClient.post<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_SIGN_UP_URL, registerUserRequestDTO);
+  }
+
+  /**
+   * Completes the user profile after registration with social login.
+   * @param completeUserRequestDTO Data Transfer Object for completing user profile
+   * @return Observable of login response
+   * @author dgutierrez
+   */
+  completeProfile(completeUserRequestDTO: CompleteProfileRequestDTO): Observable<ILoginResponse> {
+    return this.httpClient.put<ILoginResponse>(Constants.apiBaseUrl + Constants.COMPLETE_USER_PROFILE_URL, completeUserRequestDTO).pipe(
+      tap((response: ILoginResponse) => {
+        this.saveLoginResponseToSignalsAndStorage(response);
+      })
+    );
   }
 
   /**

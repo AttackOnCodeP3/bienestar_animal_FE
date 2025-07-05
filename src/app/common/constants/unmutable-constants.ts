@@ -41,6 +41,12 @@ export abstract class UnmutableConstants {
   static readonly URL_AUTH_WITH_GOOGLE: string = "http://localhost:8080/oauth2/authorization/google"
 
   // ==================================================================
+  // ROUTES FOR USERS SERVICES
+  // =================================================================
+  private static readonly USERS: string = '/users'
+  static readonly COMPLETE_USER_PROFILE_URL: string = UnmutableConstants.USERS + '/complete-profile'
+
+  // ==================================================================
   // ROUTES FOR INTEREST SERVICES
   // =================================================================
   private static readonly INTERESTS: string = '/interests'
