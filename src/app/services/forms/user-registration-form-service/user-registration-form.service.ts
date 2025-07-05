@@ -1,8 +1,8 @@
 import {inject, Injectable, signal, effect, computed} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {Canton, District, Interest, Municipality, Neighborhood} from '@models';
 import {matchFieldsValidations} from '@common/forms';
-import {FormGroup} from '@angular/forms';
 
 @Injectable({providedIn: 'root'})
 export class UserRegistrationFormService {
