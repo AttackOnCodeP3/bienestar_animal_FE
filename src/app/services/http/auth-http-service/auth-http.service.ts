@@ -105,8 +105,9 @@ export class AuthHttpService {
    * @author dgutierrez
    */
   completeProfile(completeUserRequestDTO: CompleteProfileRequestDTO): Observable<ILoginResponse> {
-    return this.httpClient.put<ILoginResponse>(Constants.apiBaseUrl + Constants.COMPLETE_USER_PROFILE_URL, completeUserRequestDTO).pipe(
+    return this.httpClient.put<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_SOCIAL_COMPLETE_USER_PROFILE_URL, completeUserRequestDTO).pipe(
       tap((response: ILoginResponse) => {
+        debugger
         this.saveLoginResponseToSignalsAndStorage(response);
       })
     );
