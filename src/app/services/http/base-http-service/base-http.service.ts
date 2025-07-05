@@ -101,27 +101,43 @@ export class BaseHttpService<T> {
   }
 
   /**
-   * Handles standard HTTP errors by showing an alert message and logging the error to the console.
-   *
-   * @param options Object containing:
-   *  - message: Message to be displayed to the user (required)
-   *  - context: Optional label to identify the error in the console (default: 'HTTP Error')
-   * @returns Error handling function to be passed directly to the `error` of the `subscribe`
-   * @author dgutierrez
+   * Handles errors from HTTP requests and displays an alert.
+   * @param message
+   * @param context
    */
   handleError(
     {
       message,
-      context = 'HTTP Error'
+      context = 'HTTP Error',
     }: {
       message: string;
       context?: string;
     }): (err: any) => void {
     return (err: any) => {
       console.error(`${context}:`, err);
+
+      let finalMessage = message;
+
+      // Error thrown from interceptor as `throw new Error(...)`
+      if (err instanceof Error && err.message) {
+        finalMessage = err.message;
+
+        // Structured backend error: { mensaje: '...' }
+      } else if (err?.mensaje) {
+        finalMessage = err.mensaje;
+
+        // Angular HTTP error with error.mensaje
+      } else if (err?.error?.mensaje) {
+        finalMessage = err.error.mensaje;
+
+        // Error como string simple
+      } else if (typeof err === 'string') {
+        finalMessage = err;
+      }
+
       this.alertService.displayAlert({
         type: AlertTypeEnum.ERROR,
-        messageKey: message
+        messageKey: finalMessage,
       });
     };
   }

@@ -154,7 +154,12 @@
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
-    "noInternetConnection": "No internet connection, check your connection first, and try again"
+    "noInternetConnection": "No internet connection, check your connection first, and try again",
+    "badRequest": "Incorrect request, please check the entered data",
+    "internalServerError": "Internal server error, please try again later",
+    "notFound": "Resource not found",
+    "serviceUnavailable": "Service unavailable, please try again later",
+    "unauthorized": "Unauthorized, please log in"
   },
   "================== BL ERROR LIST ==================": "",
   "generalServices": {

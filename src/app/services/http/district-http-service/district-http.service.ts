@@ -3,7 +3,6 @@ import {BaseHttpService} from '@services/http';
 import {Constants} from '@common/constants/constants';
 import {District, Neighborhood} from '@models';
 import {IResponse, ISearch} from '@common/interfaces/http';
-import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';
 
 @Injectable({

@@ -1,27 +1,21 @@
-// import {HttpInterceptorFn} from '@angular/common/http';
-// import {inject} from '@angular/core';
-// import {Router} from '@angular/router';
-// import {Observable, catchError, of} from 'rxjs';
-// import {AuthService} from '../services/auth.service';
-//
-// export const handleErrorsInterceptor: HttpInterceptorFn = (req, next) => {
-//   const router: Router = inject(Router);
-//   const authService: AuthService = inject(AuthService);
-//
-//   return next(req).pipe(
-//     catchError((error: any): Observable<any> => {
-//       if ((error.status === 401 || error.status === 403) && !req.url.includes('auth')) {
-//         authService.logout();
-//         router.navigateByUrl('/login');
-//         return of({status: false});
-//       }
-//       if (error.status === 422) {
-//         throw error.error;
-//       }
-//       if (error.status === 404) {
-//         throw {status: false};
-//       }
-//       return of({status: false});
-//     })
-//   );
-// };
+import {HttpInterceptorFn, HttpErrorResponse} from '@angular/common/http';
+import {inject} from '@angular/core';
+import {catchError} from 'rxjs';
+import {ErrorHandlingService} from '@services/general';
+
+/**
+ * Interceptor to handle HTTP errors globally.
+ * @param req - The HTTP request being made.
+ * @param next - The next interceptor in the chain.
+ * @return An observable that emits the HTTP response or handles the error.
+ * @author dgutierrez
+ */
+export const handleErrorsInterceptor: HttpInterceptorFn = (req, next) => {
+  const errorHandlingService = inject(ErrorHandlingService);
+
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      return errorHandlingService.handle(error, req);
+    })
+  );
+};
