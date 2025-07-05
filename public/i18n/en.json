@@ -114,6 +114,10 @@
   "register-page": {
     "title": "Register and be part of it"
   },
+  "complete-profile-page": {
+    "title": "Complete your profile",
+    "subtitle": "Please complete your profile to continue"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
@@ -130,6 +134,7 @@
   "buttons": {
     "alreadyHaveAnAccount": "¿Already have an account?",
     "close": "Close",
+    "completeProfile": "Completar perfil",
     "createYourAccountHere": "Create your account here",
     "forgotPassword": "Forgot Password?",
     "login": "Login",

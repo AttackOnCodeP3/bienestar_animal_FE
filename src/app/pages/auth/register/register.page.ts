@@ -29,6 +29,7 @@ import {I18nPagesValidationsEnum} from '@common/enums/i18n';
 import {Canton, District, Interest, Municipality, Neighborhood, User} from '@models';
 import {RegisterUserRequestDTO} from '@models/dto';
 import {UserRegistrationFormService} from '@services/forms';
+import {NavbarComponent} from '@components/general';
 
 /**
  * Component for the user registration page.
@@ -38,17 +39,18 @@ import {UserRegistrationFormService} from '@services/forms';
   selector: 'app-register',
   imports: [
     FormsModule,
+    InterestsFormComponent,
+    ItWorkedAsNurseryHomeFormComponent,
+    LocationFormComponent,
     LogoBienestarAnimalComponent,
+    MatButton,
+    MatDivider,
+    PasswordFormComponent,
+    PersonalDataUserRegistrationFormComponent,
     ReactiveFormsModule,
     TranslatePipe,
-    MatButton,
-    PersonalDataUserRegistrationFormComponent,
-    ItWorkedAsNurseryHomeFormComponent,
-    MatDivider,
-    InterestsFormComponent,
-    LocationFormComponent,
-    PasswordFormComponent,
-    VolunteerOptionFormComponent
+    VolunteerOptionFormComponent,
+    NavbarComponent
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss',
@@ -76,6 +78,10 @@ export class RegisterPage implements OnInit {
     this.cantonHttpService.getAll();
   }
 
+  /**
+   * Handles the form submission for user registration.
+   * @author dgutierrez
+   */
   onSubmit() {
     if (this.userRegistrationFormService.formUserRegistration.invalid) {
       this.formsService.markFormTouchedAndDirty(this.userRegistrationFormService.formUserRegistration);
@@ -87,6 +93,10 @@ export class RegisterPage implements OnInit {
     this.registerUser();
   }
 
+  /**
+   * Completes the user registration by sending the form data to the server.
+   * @author dgutierrez
+   */
   private registerUser() {
     const {confirmPassword, volunteerMunicipality, ...rest} = this.userRegistrationFormService.formUserRegistration.getRawValue();
     const registerUserRequestDTO = RegisterUserRequestDTO.fromUser(
@@ -111,6 +121,10 @@ export class RegisterPage implements OnInit {
     });
   }
 
+  /**
+   * Navigates to the login page.
+   * @author dgutierrez
+   */
   navigateToLogin() {
     this.router.navigate([PagesUrlsEnum.LOGIN]);
   }
