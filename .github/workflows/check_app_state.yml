@@ -1,0 +1,32 @@
+name: Build Angular on PR to desarrollo
+
+on:
+  pull_request:
+    branches:
+      - Desarrollo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular project
+        run: ng build
+
+      - name: Run Angular app
+        run: |
+          npm install -g http-server
+          npx http-server ./dist &
+          sleep 10
+          curl -f http://localhost:8080 || (echo "Health check failed!" && exit 1)
+        if: true # Esto se pone en falso si no se quiere ejecutar el servidor que checkea el app corriendo en vivo
