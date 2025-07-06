@@ -58,7 +58,6 @@ export class CompleteProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.i18nService.currentLanguage())
     this.loadUserData();
     this.disableFormControls();
 

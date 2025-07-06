@@ -41,7 +41,7 @@ export class AuthHttpService {
        this.storageService.set(Constants.LS_ACCESS_TOKEN, this.accessTokenSignal()!);
     }
     if (this.expiresInSignal()) {
-       this.storageService.set(Constants.LS_EXPIRES_IN, this.expiresInSignal()!.toString());
+       this.storageService.set(Constants.LS_EXPIRES_IN, this.expiresInSignal());
     }
   }
 

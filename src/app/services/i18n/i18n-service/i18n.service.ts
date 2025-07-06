@@ -6,11 +6,12 @@ import {LanguagesEnum} from '@common/enums';
 import {ISupportedLanguage} from '@common/interfaces';
 import {LogService} from '@services/general';
 import {
+  I18nButtonsEnum,
   I18nComponentsEnum,
   I18nFormsEnum,
   I18nGeneralKeysEnum,
+  I18nMessagesEnum,
   I18nPagesEnum,
-  I18nButtonsEnum
 } from '@common/enums/i18n';
 
 /**
@@ -67,6 +68,10 @@ export class I18nService {
     return I18nComponentsEnum;
   }
 
+  get i18nMessagesEnum() {
+    return I18nMessagesEnum;
+  }
+
   /**
    * Gets the translated value of a label from the internationalization file.
    * @param key Key of the label to search for.
@@ -93,7 +98,7 @@ export class I18nService {
   has(key: string): boolean {
     const currentLang = this.translateService.currentLang || this.getBrowserLanguage();
     const translations = this.translateService.translations[currentLang];
-    
+
     if (!translations) {
       return false;
     }

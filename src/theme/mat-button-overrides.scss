@@ -18,3 +18,10 @@
     ));
   }
 }
+
+.btn-secondary-1 {
+  @include material.button-overrides((
+    filled-container-color: var(--mat-sys-secondary-fixed),
+    filled-label-text-color: var(--mat-sys-on-secondary-fixed),
+  ));
+}

@@ -152,6 +152,9 @@
       "hereIsSomeInformation": "Here is some information",
       "warningPleaseCheckTheData": "Warning, please check the data",
       "notification": "Notification"
+    },
+    "auth": {
+      "completeProfileToContinue": "Complete your profile to continue"
     }
   },
   "================== HTTP ERROR LIST ==================": "",
