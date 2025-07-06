@@ -170,7 +170,7 @@
     "serviceError": "Ocurrió un error con el servicio, por favor contacte al administrador"
   },
   "INVALID_CREDENTIALS": "Usuario o contraseña incorrectos",
-  "ACCOUNT_LOCKED": "La cuenta está bloqueada",
+  "ACCOUNT_LOCKED": "La cuenta está bloqueada. Por favor, contacte al administrador.",
   "ACCESS_DENIED": "No tiene permisos para acceder",
   "JWT_INVALID_SIGNATURE": "Firma JWT inválida",
   "JWT_EXPIRED": "El token ha expirado",
