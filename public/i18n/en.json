@@ -14,6 +14,7 @@
     "home": "Home",
     "gamification": "Gamification",
     "reports": "Reports",
+    "user-management": "User Management",
     "logout": "Logout"
   },
   "general": {
@@ -114,6 +115,10 @@
   "register-page": {
     "title": "Register and be part of it"
   },
+  "complete-profile-page": {
+    "title": "Complete your profile",
+    "subtitle": "Please complete your profile to continue"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
@@ -130,6 +135,7 @@
   "buttons": {
     "alreadyHaveAnAccount": "¿Already have an account?",
     "close": "Close",
+    "completeProfile": "Complete Profile",
     "createYourAccountHere": "Create your account here",
     "forgotPassword": "Forgot Password?",
     "login": "Login",
@@ -149,7 +155,12 @@
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
-    "noInternetConnection": "No internet connection, check your connection first, and try again"
+    "noInternetConnection": "No internet connection, check your connection first, and try again",
+    "badRequest": "Incorrect request, please check the entered data",
+    "internalServerError": "Internal server error, please try again later",
+    "notFound": "Resource not found",
+    "serviceUnavailable": "Service unavailable, please try again later",
+    "unauthorized": "Unauthorized, please log in"
   },
   "================== BL ERROR LIST ==================": "",
   "generalServices": {

@@ -13,7 +13,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {MissingTranslationHandler, provideTranslateService, TranslateLoader} from '@ngx-translate/core';
 import {MissingI18nService} from '@services/general';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {accessTokenInterceptor, baseUrlInterceptor} from '@core/interceptors';
+import {accessTokenInterceptor, baseUrlInterceptor, handleErrorsInterceptor} from '@core/interceptors';
 
 registerLocaleData(localeEn)
 
@@ -29,7 +29,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi(),
       withInterceptors([
           baseUrlInterceptor,
-          accessTokenInterceptor
+          accessTokenInterceptor,
+          handleErrorsInterceptor
         ]
       )
     ),

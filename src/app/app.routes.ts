@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
-import {RoutesUrlsEnum} from '@common/enums';
-import {authGuard, profileCompletedGuard} from '@core/guards';
+import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {authGuard, profileCompletedGuard, roleGuard} from '@core/guards';
 import {DashboardLayoutComponent} from '@components/general';
 
 export const routes: Routes = [
@@ -34,6 +34,11 @@ export const routes: Routes = [
       {
         path: RoutesUrlsEnum.REPORTS,
         loadChildren: () => import('@pages/reports/reports.routes').then(m => m.REPORTS_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.SECURITY,
+        loadChildren: () => import('@pages/security/security.routes').then(m => m.SECURITY_ROUTES),
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN])]
       }
     ]
   }

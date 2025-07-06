@@ -1,6 +1,6 @@
-<div class="d-flex justify-content-center align-items-center min-vh-100 box-shadow-5">
+<div class="d-flex justify-content-center align-items-center min-vh-100">
   <div class="container">
-    <div class="row justify-content-center rounded py-5 bg-primary-contrast box-shadow-5">
+    <div class="row justify-content-center rounded py-5 bg-primary-contrast">
       <div class="col-md-6 col-lg-5">
         <div class="text-center">
           <app-logo-bienestar-animal listCssClasses="max-width-500px" />
@@ -12,7 +12,7 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Email</mat-label>
+              <mat-label>{{i18nService.i18nFormsEnum.EMAIL_LABEL | translate}}</mat-label>
               <input
                 type="email"
                 matInput

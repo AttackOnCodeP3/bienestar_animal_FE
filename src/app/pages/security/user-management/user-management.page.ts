@@ -2,12 +2,11 @@ import {Component} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 
 @Component({
-  selector: 'app-forgot-password',
+  selector: 'app-user-management',
   imports: [],
-  templateUrl: './forgot-password.page.html',
-  styleUrl: './forgot-password.page.scss',
+  templateUrl: './user-management.page.html',
+  styleUrl: './user-management.page.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
-export class ForgotPasswordPage {
-
+export class UserManagementPage {
 }

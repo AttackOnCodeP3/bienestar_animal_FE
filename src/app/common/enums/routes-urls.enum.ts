@@ -3,6 +3,7 @@ const PATH_GAMIFICATION_ROUTES = 'gamification';
 const PATH_REPORTS_ROUTES = 'reports';
 const PATH_HOME_ROUTES = 'home';
 const PATH_DASHBOARD_ROUTES = 'dashboard';
+const PATH_SECURITY_ROUTES = 'security';
 const VOID_PATH = '';
 
 /**
@@ -14,6 +15,7 @@ export enum RoutesUrlsEnum {
   VOID_ROUTE = VOID_PATH,
   SLASH = '/',
   DASHBOARD = PATH_DASHBOARD_ROUTES,
+  SECURITY = PATH_SECURITY_ROUTES,
 
   // Main routes
   HOME = PATH_HOME_ROUTES,
@@ -35,4 +37,7 @@ export enum RoutesUrlsEnum {
   // Reports routes
   //TODO: Later change the this for the correct report names
   REPORT_1 = 'report-1',
+
+  //Security routes
+  SECURITY_USER_MANAGEMENT = 'user-management',
 }

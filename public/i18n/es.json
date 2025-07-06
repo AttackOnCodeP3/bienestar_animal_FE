@@ -19,6 +19,7 @@
     "home": "Inicio",
     "gamification": "Gamificación",
     "reports": "Reportes",
+    "user-management": "Gestión de usuarios",
     "logout": "Cerrar sesión"
   },
   "it-worked-as-nursery-home-form-component": {
@@ -114,6 +115,10 @@
   "register-page": {
     "title": "Regístrate y forma parte"
   },
+  "complete-profile-page": {
+    "title": "Complete su perfil",
+    "subtitle": "Por favor complete su perfil para continuar"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
@@ -130,6 +135,7 @@
   "buttons": {
     "alreadyHaveAnAccount": "¿Ya tiene una cuenta?",
     "close": "Cerrar",
+    "completeProfile": "Completar perfil",
     "createYourAccountHere": "Crea tu cuenta aquí",
     "forgotPassword": "¿Olvidó su contraseña?",
     "login": "Iniciar sesión",
@@ -150,7 +156,12 @@
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
-    "noInternetConnection": "Sin conexión a internet, compruebe primero su conexión, e intente nuevamente"
+    "noInternetConnection": "Sin conexión a internet, compruebe primero su conexión, e intente nuevamente",
+    "badRequest": "Solicitud incorrecta, por favor revise los datos ingresados",
+    "internalServerError": "Error interno del servidor, por favor intente nuevamente más tarde",
+    "notFound": "Recurso no encontrado",
+    "serviceUnavailable": "Servicio no disponible, por favor intente nuevamente más tarde",
+    "unauthorized": "No autorizado, por favor inicie sesión"
   },
   "================== BL ERROR LIST ==================": "",
   "generalServices": {
@@ -160,7 +171,8 @@
   },
   "Gen_0": "Error desconocido",
   "Gen_1": "Ha ocurrido un error inesperado. Por favor, contacte con el administrador.",
-  "================== BL AdmFoto ERROR LIST ==================": "",
+  "================== BL REST-CONTROLLERS ERROR LIST ==================": "",
+  "RestControllerAuth_1": "El usuario no tiene permisos para acceder a este recurso",
   "AdmFoto_1": "Foto no encontrada",
   "badCredentialsException": "Usuario o contraseña incorrectos",
   "AdmUsuario_1_Usuario": "El usuario indicado ya existe",

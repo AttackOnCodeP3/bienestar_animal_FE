@@ -6,7 +6,7 @@ import {Constants} from '@common/constants/constants';
 import {Interest} from '@models';
 
 @Component({
-  selector: 'app-interests',
+  selector: 'app-interests-form',
   imports: [
     MatList,
     MatListItem,

@@ -1,79 +1,85 @@
 <app-navbar [showMenuToggle]="false" />
 
-<div class="container my-5">
-  <div class="row justify-content-center rounded bg-primary-contrast mb-3">
-    <div class="col-12">
-      <h1 class="text-center">Complete por favor el registro</h1>
-    </div>
+<div class="container my-5 pb-5">
 
-    <h2>{{ i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate }}</h2>
+  <section class="row justify-content-center rounded bg-primary-contrast p-4 mb-4">
+    <div class="col-12 text-center">
+      <h1>{{ i18nService.i18nPagesEnum.COMPLETE_PROFILE_PAGE_TITLE | translate }}</h1>
+      <p>{{ i18nService.i18nPagesEnum.COMPLETE_PROFILE_PAGE_SUBTITLE | translate }}</p>
+    </div>
+  </section>
+
+  <section class="row justify-content-center rounded bg-primary-contrast p-4 mb-4">
     <div class="col-12">
+      <h2>{{ i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate }}</h2>
       <app-personal-data-user-registration-form
-        [form]="formPersonalDataUser"
+        [form]="userRegistrationFormService.formUserRegistration"
         [i18nService]="i18nService"
         [formsService]="formsService"
       />
     </div>
-  </div>
+  </section>
 
-  <div class="row justify-content-center rounded bg-primary-contrast mb-3">
+  <section class="row justify-content-center rounded bg-primary-contrast p-4 mb-4">
     <div class="col-12">
       <h2>{{ i18nService.i18nGeneralEnum.LOCATION | translate }}</h2>
-    </div>
-
-    <div class="col-12">
       <app-location-form
         [cantonsList]="cantonHttpService.cantonList()"
         [districtsList]="cantonHttpService.districtsByCanton()"
         [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
         (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
         (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
-        [form]="formPersonalDataUser"
+        [form]="userRegistrationFormService.formUserRegistration"
         [i18nService]="i18nService"
         [formsService]="formsService"
       />
     </div>
-  </div>
+  </section>
 
-  <div class="row justify-content-center rounded bg-primary-contrast mb-3">
-
+  <section class="row justify-content-center rounded bg-primary-contrast p-4 mb-4">
     <div class="col-12">
       <h2>{{ i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate }}</h2>
-      <app-it-worked-as-nursery-home
-        [checked]="isNurseryHome()!"
-        (checkedChange)="checkedChangeIsNurseryHome($event)"
+      <app-it-worked-as-nursery-home-form
+        [checked]="userRegistrationFormService.isNurseryHome()!"
+        (checkedChange)="userRegistrationFormService.setNurseryHomeValue(userRegistrationFormService.formUserRegistration, $event)"
         [i18nService]="i18nService"
         [formsService]="formsService"
       />
     </div>
-  </div>
+  </section>
 
-  <div class="row justify-content-center rounded bg-primary-contrast mb-3">
+  <section class="row justify-content-center rounded bg-primary-contrast p-4 mb-4">
     <div class="col-12">
       <h2>{{ i18nService.i18nComponentsEnum.INTERESTS_TITLE | translate }}</h2>
       <p>{{ i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate }}</p>
-      <app-interests
+      <app-interests-form
         [listInterests]="interestHttpService.interestList()"
-        (selectedInterestsChange)="interestsChange($event)"/>
+        (selectedInterestsChange)="userRegistrationFormService.setInterests(userRegistrationFormService.formUserRegistration, $event)"/>
     </div>
-  </div>
+  </section>
 
-  <div class="row justify-content-center rounded bg-primary-contrast mb-3">
+  <section class="row justify-content-center rounded bg-primary-contrast p-4 mb-4">
     <div class="col-12">
       <h2>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_TITLE | translate }}</h2>
       <p>{{ i18nService.i18nComponentsEnum.VOLUNTEER_OPTION_FORM_DESCRIPTION | translate }}</p>
       <app-volunteer-option-form
-        [(checked)]="volunteerIntent"
+        [(checked)]="userRegistrationFormService.volunteerIntent"
         [i18nService]="i18nService"
-        [form]="formPersonalDataUser"
+        [form]="userRegistrationFormService.formUserRegistration"
         [formsService]="formsService"
-        [municipalitiesList]="municipalityHttpService.municipalityList()"/>
+        [municipalitiesList]="municipalityHttpService.municipalityList()"
+      />
     </div>
-  </div>
+  </section>
 
   <div class="text-center">
-    <button type="submit" matButton="filled" class="w-100" (click)="onSubmit()">
-      {{ i18nService.i18nButtonsEnum.BUTTON_REGISTER_NOW | translate }}
+    <button
+      type="submit"
+      matButton="filled"
+      class="w-100"
+      (click)="onSubmit()"
+    >
+      {{ i18nService.i18nButtonsEnum.BUTTON_COMPLETE_PROFILE | translate }}
     </button>
   </div>
 </div>
