@@ -39,7 +39,7 @@
   <div class="row justify-content-center rounded bg-primary-contrast mb-3 py-4 px-4">
     <div class="col-12">
       <h2>{{ i18nService.i18nGeneralEnum.PROVIDE_TEMPORARY_SHELTER | translate }}</h2>
-      <app-it-worked-as-nursery-home
+      <app-it-worked-as-nursery-home-form
         [checked]="userRegistrationFormService.isNurseryHome()!"
         (checkedChange)="userRegistrationFormService.setNurseryHomeValue(userRegistrationFormService.formUserRegistration, $event)"
         [i18nService]="i18nService"
@@ -52,7 +52,7 @@
     <div class="col-12">
       <h2>{{ i18nService.i18nComponentsEnum.INTERESTS_TITLE | translate }}</h2>
       <p>{{ i18nService.i18nComponentsEnum.INTERESTS_DESCRIPTION | translate }}</p>
-      <app-interests
+      <app-interests-form
         [listInterests]="interestHttpService.interestList()"
         (selectedInterestsChange)="userRegistrationFormService.setInterests(userRegistrationFormService.formUserRegistration, $event)"
       />

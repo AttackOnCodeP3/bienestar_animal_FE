@@ -74,6 +74,14 @@ export class DashboardLayoutComponent {
       authorities: [...this.allRoles()]
     },
     {
+      icon: 'settings',
+      label: I18nMenuEnum.USER_MANAGEMENT,
+      route: 'security/user-management',
+      click: () => {
+      },
+      authorities: [RolesEnum.SUPER_ADMIN],
+    },
+    {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: '',

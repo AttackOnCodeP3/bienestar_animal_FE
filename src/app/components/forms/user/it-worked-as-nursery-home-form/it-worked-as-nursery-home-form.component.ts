@@ -11,7 +11,7 @@ import {Constants} from '@common/constants/constants';
  * @author dgutierrez
  */
 @Component({
-  selector: 'app-it-worked-as-nursery-home',
+  selector: 'app-it-worked-as-nursery-home-form',
   imports: [
     MatCheckbox,
     FormsModule,

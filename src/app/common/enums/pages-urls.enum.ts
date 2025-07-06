@@ -20,4 +20,7 @@ export enum PagesUrlsEnum {
 
   // Routes of the Main Dashboard
   DASHBOARD = RoutesUrlsEnum.DASHBOARD,
+
+  // Routes of the Security module
+  SECURITY_USER_MANAGEMENT = RoutesUrlsEnum.SECURITY +  RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT
 }
