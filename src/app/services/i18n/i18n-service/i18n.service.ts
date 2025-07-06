@@ -5,8 +5,13 @@ import {Constants} from '@common/constants/constants';
 import {LanguagesEnum} from '@common/enums';
 import {ISupportedLanguage} from '@common/interfaces';
 import {LogService} from '@services/general';
-import {I18nComponentsEnum, I18nFormsEnum, I18nGeneralKeysEnum, I18nPagesEnum} from '@common/enums/i18n';
-import {I18nButtonsEnum} from '@common/enums/i18n/i18n-buttons.enum';
+import {
+  I18nComponentsEnum,
+  I18nFormsEnum,
+  I18nGeneralKeysEnum,
+  I18nPagesEnum,
+  I18nButtonsEnum
+} from '@common/enums/i18n';
 
 /**
  * Interface that defines the literal object for label parameters.
@@ -50,7 +55,7 @@ export class I18nService {
     return I18nGeneralKeysEnum;
   }
 
-  get i18nFormsEnum(){
+  get i18nFormsEnum() {
     return I18nFormsEnum
   }
 
@@ -79,6 +84,35 @@ export class I18nService {
   }
 
   /**
+   * Checks if a translation exists for a given key using dot notation.
+   *
+   * @param key The i18n key (e.g., 'httpErrors.unauthorized')
+   * @returns True if the translation exists, false otherwise
+   * @author dgutierrez
+   */
+  has(key: string): boolean {
+    const currentLang = this.translateService.currentLang || this.getBrowserLanguage();
+    const translations = this.translateService.translations[currentLang];
+    
+    if (!translations) {
+      return false;
+    }
+
+    const segments = key.split('.');
+    let current: any = translations;
+
+    for (const segment of segments) {
+      if (current && Object.prototype.hasOwnProperty.call(current, segment)) {
+        current = current[segment];
+      } else {
+        return false;
+      }
+    }
+
+    return typeof current === 'string';
+  }
+
+  /**
    * Returns a translation instantly from the internal state of the loaded translation. All rules related to the current language, preferred language, and even alternative languages will be used, except for promise management.
    * @param key {string} Key of the label to search for.
    * @param parameter {string} Parameter to pass to the label (optional).
@@ -90,7 +124,11 @@ export class I18nService {
     return this.translateService.instant(key, parameters);
   }
 
-  getPrefenceLenguageByCode(code: string): ISupportedLanguage | null {
+  /**
+   * Returns the list of supported languages.
+   * @param code
+   */
+  getPreferenceLanguageByCode(code: string): ISupportedLanguage | null {
     const languages: ISupportedLanguage[] = this.supportedLanguages();
     const language: ISupportedLanguage | undefined = languages.find(lang => lang.code === code.toLowerCase());
     if (language) {
@@ -110,6 +148,12 @@ export class I18nService {
     return this.translateService.getBrowserLang() || LanguagesEnum.SPANISH;
   }
 
+  /**
+   * Sets the preferred language for the application.
+   * If the language is null, it removes the preference from localStorage.
+   * @param {ISupportedLanguage | null} language The language to set as preference.
+   * @author dgutierrez
+   */
   setPreferenceLanguage(language: ISupportedLanguage | null): void {
     const currentLanguage = this.currentLanguage();
     this.log.debug({

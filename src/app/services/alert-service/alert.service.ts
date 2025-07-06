@@ -38,8 +38,10 @@ export class AlertService {
 
     let finalMessage: string;
 
-    if (messageKey) {
+    if (messageKey && this.i18nService.has(messageKey)) {
       finalMessage = await this.i18nService.get(messageKey, parameter);
+    } else if (messageKey) {
+      finalMessage = messageKey;
     } else if (message) {
       finalMessage = message;
     } else {
