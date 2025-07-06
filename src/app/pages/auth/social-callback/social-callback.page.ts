@@ -3,6 +3,7 @@ import {Constants} from '@common/constants/constants';
 import {ILoginResponse} from '@common/interfaces/http';
 import {AuthHttpService} from '@services/http';
 import {Router} from '@angular/router';
+import {PagesUrlsEnum} from '@common/enums';
 
 @Component({
   selector: 'app-social-callback',
@@ -21,13 +22,13 @@ export class SocialCallbackPage implements OnInit {
         this.authHttpService.saveLoginResponseToSignalsAndStorage(res);
         const user = res.authUser;
         if (!user.socialLoginCompleted) {
-          this.router.navigate(['/auth/complete-profile']);
+          this.router.navigate([PagesUrlsEnum.COMPLETE_PROFILE]);
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate([PagesUrlsEnum.DASHBOARD]);
         }
       },
       error: () => {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate([PagesUrlsEnum.LOGIN]);
       }
     });
   }

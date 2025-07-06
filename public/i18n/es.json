@@ -135,6 +135,7 @@
   "buttons": {
     "alreadyHaveAnAccount": "¿Ya tiene una cuenta?",
     "close": "Cerrar",
+    "closeSession": "Cerrar sesión",
     "completeProfile": "Completar perfil",
     "createYourAccountHere": "Crea tu cuenta aquí",
     "forgotPassword": "¿Olvidó su contraseña?",

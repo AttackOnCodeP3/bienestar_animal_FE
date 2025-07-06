@@ -68,6 +68,11 @@ export class AuthHttpService {
     const url = `${Constants.apiBaseUrl}${Constants.AUTH_LOGIN_URL}`;
     return this.httpClient.post<ILoginResponse>(url, credentials).pipe(
       tap((response:ILoginResponse) => {
+        this.logService.debug({
+          message: 'Login successful',
+          data: response,
+          lineBreak: true
+        })
         this.accessTokenSignal.set(response.token);
         this.expiresInSignal.set(response.expiresIn);
         this.userSignal.set(response.authUser);
@@ -197,6 +202,12 @@ export class AuthHttpService {
   getTokenFromSocialLogin(): Observable<ILoginResponse> {
     return this.httpClient.get<ILoginResponse>(`${Constants.apiBaseUrl}${Constants.AUTH_SOCIAL_SUCCESS_URL}`, {
       withCredentials: true
-    });
+    }).pipe(tap((response: ILoginResponse) => {
+      this.logService.debug({
+        message: 'Social login successful',
+        data: response,
+        lineBreak: true
+      });
+    }));
   }
 }

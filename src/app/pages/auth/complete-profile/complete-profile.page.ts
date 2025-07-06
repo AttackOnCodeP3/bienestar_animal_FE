@@ -84,6 +84,15 @@ export class CompleteProfilePage implements OnInit {
   }
 
   /**
+   * Logs out the user by calling the logout method from AuthHttpService.
+   * @author dgutierrez
+   */
+  logout() {
+    this.authHttpService.logout();
+    this.router.navigate([PagesUrlsEnum.LOGIN]);
+  }
+
+  /**
    * Calls the API to complete the user profile based on form data.
    * On success, navigates to the dashboard. On failure, displays an error alert.
    * @author dgutierrez
