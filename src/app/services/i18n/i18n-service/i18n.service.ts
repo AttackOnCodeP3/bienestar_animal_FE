@@ -90,7 +90,7 @@ export class I18nService {
     if (!translations) {
       return false;
     }
-    return key in translations;
+    return Object.prototype.hasOwnProperty.call(translations, key);
   }
 
   /**
