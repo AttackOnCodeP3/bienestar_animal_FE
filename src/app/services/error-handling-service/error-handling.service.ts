@@ -27,23 +27,28 @@ export class ErrorHandlingService {
   handle(error: HttpErrorResponse, req: HttpRequest<any>): Observable<never> {
     const isAuthRequest = req.url.includes(RoutesUrlsEnum.AUTH);
 
+    const backendCode = error?.error?.code;
+
     switch (error.status) {
       case HttpStatusCode.Unauthorized:
       case HttpStatusCode.Forbidden:
         if (!isAuthRequest) {
           this.authHttpService.logout();
           this.router.navigateByUrl(PagesUrlsEnum.LOGIN);
+          return throwError(() => new Error(I18nHttpEnum.UNAUTHORIZED));
         }
-        return throwError(() => new Error(I18nHttpEnum.UNAUTHORIZED));
+
+        // If a custom `description` comes from the backend, we return it as is.
+        return throwError(() => new Error(backendCode ?? I18nHttpEnum.UNAUTHORIZED));
 
       case HttpStatusCode.UnprocessableEntity:
-        return throwError(() => error.error);
+        return throwError(() => error.error); // Keep the original structure of the error
 
       case HttpStatusCode.NotFound:
         return throwError(() => new Error(I18nHttpEnum.NOT_FOUND));
 
       default:
-        return throwError(() => error);
+        return throwError(() => new Error(backendCode ?? error.message));
     }
   }
 }

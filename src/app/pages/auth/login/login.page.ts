@@ -71,9 +71,9 @@ export class LoginPage {
       },
       error: (error) => {
         this.alertService.displayAlert({
-          message: error.error.description,
+          messageKey: error.message,
         });
-        console.error(error.error.description)
+        console.error(error);
       }
     })
   }

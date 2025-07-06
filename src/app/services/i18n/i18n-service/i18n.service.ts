@@ -79,6 +79,21 @@ export class I18nService {
   }
 
   /**
+   * Checks if a translation exists for a given key in the current language.
+   * @param key {string} Key of the label to search for.
+   * @return {boolean} True if the translation exists, false otherwise.
+   * @author dgutierrez
+   */
+  has(key: string): boolean {
+    const currentLang = this.translateService.currentLang || this.getBrowserLanguage();
+    const translations = this.translateService.translations[currentLang];
+    if (!translations) {
+      return false;
+    }
+    return key in translations;
+  }
+
+  /**
    * Returns a translation instantly from the internal state of the loaded translation. All rules related to the current language, preferred language, and even alternative languages will be used, except for promise management.
    * @param key {string} Key of the label to search for.
    * @param parameter {string} Parameter to pass to the label (optional).
