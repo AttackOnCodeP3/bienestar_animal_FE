@@ -37,10 +37,20 @@ export class UserManagementPage implements OnInit, AfterViewInit {
     this.dataSource().paginator = this.paginator();
   }
 
-  isActive(user: User) {
+  /**
+   * Checks if the user is active.
+   * @param user The user to check.
+   */
+  isActiveUser(user: User) {
     return user.active;
   }
 
+  /**
+   * Handles the toggle event for user activation status.
+   * @param user The user whose activation status is being toggled.
+   * @param event The event triggered by the toggle change.
+   * @author dgutierrez
+   */
   onToggle(user: User, event: MatSlideToggleChange) {
     const updatedActiveStatusUser = UpdateUserRequestDto.fromUser(new User({
       ...user,

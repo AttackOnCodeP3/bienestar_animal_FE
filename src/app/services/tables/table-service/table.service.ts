@@ -11,6 +11,12 @@ import {UserManagementDisplayedColumnsTableEnum} from 'common/enums/tables';
 })
 export class TableService {
 
+  /**
+   * The default page size for tables.
+   * @author dgutierrez
+   */
+  readonly pageSizeOptions = [5, 10, 20];
+
   get userManagementDisplayedColumnsTableEnum() {
     return UserManagementDisplayedColumnsTableEnum;
   }
