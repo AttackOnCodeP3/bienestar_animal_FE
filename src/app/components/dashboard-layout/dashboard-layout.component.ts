@@ -76,7 +76,7 @@ export class DashboardLayoutComponent {
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
-      route: RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
+      route:  RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
       click: () => {
       },
       authorities: [RolesEnum.SUPER_ADMIN],

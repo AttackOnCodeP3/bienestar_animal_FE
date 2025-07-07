@@ -13,7 +13,7 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
 
   protected override source: string = Constants.GET_ALL_MUNICIPALITIES_URL;
 
-  municipalityList = signal<Municipality[]>([]);
+  readonly municipalityList = signal<Municipality[]>([]);
 
   search: ISearch = {
     page: 1,
