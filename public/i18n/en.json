@@ -135,6 +135,7 @@
   "buttons": {
     "alreadyHaveAnAccount": "¿Already have an account?",
     "close": "Close",
+    "closeSession": "Close Session",
     "completeProfile": "Complete Profile",
     "createYourAccountHere": "Create your account here",
     "forgotPassword": "Forgot Password?",
@@ -151,6 +152,9 @@
       "hereIsSomeInformation": "Here is some information",
       "warningPleaseCheckTheData": "Warning, please check the data",
       "notification": "Notification"
+    },
+    "auth": {
+      "completeProfileToContinue": "Complete your profile to continue"
     }
   },
   "================== HTTP ERROR LIST ==================": "",

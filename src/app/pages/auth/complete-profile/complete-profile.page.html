@@ -72,14 +72,27 @@
     </div>
   </section>
 
-  <div class="text-center">
-    <button
-      type="submit"
-      matButton="filled"
-      class="w-100"
-      (click)="onSubmit()"
-    >
-      {{ i18nService.i18nButtonsEnum.BUTTON_COMPLETE_PROFILE | translate }}
-    </button>
+  <div class="row">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <button
+        type="submit"
+        matButton="outlined"
+        class="w-100"
+        (click)="logout()"
+      >
+        {{ i18nService.i18nButtonsEnum.BUTTON_CLOSE_SESSION | translate }}
+      </button>
+    </div>
+
+    <div class="col-md-6">
+      <button
+        type="submit"
+        matButton="filled"
+        class="w-100"
+        (click)="onSubmit()"
+      >
+        {{ i18nService.i18nButtonsEnum.BUTTON_COMPLETE_PROFILE | translate }}
+      </button>
+    </div>
   </div>
 </div>

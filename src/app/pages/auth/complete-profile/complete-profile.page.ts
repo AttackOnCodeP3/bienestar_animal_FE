@@ -58,7 +58,6 @@ export class CompleteProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.i18nService.currentLanguage())
     this.loadUserData();
     this.disableFormControls();
 
@@ -81,6 +80,15 @@ export class CompleteProfilePage implements OnInit {
       return;
     }
     this.completeProfile();
+  }
+
+  /**
+   * Logs out the user by calling the logout method from AuthHttpService.
+   * @author dgutierrez
+   */
+  logout() {
+    this.authHttpService.logout();
+    this.router.navigate([PagesUrlsEnum.LOGIN]);
   }
 
   /**

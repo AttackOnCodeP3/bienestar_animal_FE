@@ -3,6 +3,8 @@ import {Constants} from '@common/constants/constants';
 import {ILoginResponse} from '@common/interfaces/http';
 import {AuthHttpService} from '@services/http';
 import {Router} from '@angular/router';
+import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
+import {AlertService, I18nService} from '@services/general';
 
 @Component({
   selector: 'app-social-callback',
@@ -12,7 +14,9 @@ import {Router} from '@angular/router';
   changeDetection: Constants.changeDetectionStrategy
 })
 export class SocialCallbackPage implements OnInit {
+  private readonly alertService = inject(AlertService);
   private readonly authHttpService = inject(AuthHttpService);
+  private readonly i18nService = inject(I18nService);
   private readonly router = inject(Router);
 
   ngOnInit() {
@@ -21,13 +25,17 @@ export class SocialCallbackPage implements OnInit {
         this.authHttpService.saveLoginResponseToSignalsAndStorage(res);
         const user = res.authUser;
         if (!user.socialLoginCompleted) {
-          this.router.navigate(['/auth/complete-profile']);
+          this.router.navigate([PagesUrlsEnum.COMPLETE_PROFILE]);
+          this.alertService.displayAlert({
+            type: AlertTypeEnum.INFO,
+            messageKey: this.i18nService.i18nMessagesEnum.MAT_SNACK_AUTH_COMPLETE_PROFILE_TO_CONTINUE
+          })
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate([PagesUrlsEnum.DASHBOARD]);
         }
       },
       error: () => {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate([PagesUrlsEnum.LOGIN]);
       }
     });
   }

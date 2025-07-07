@@ -6,9 +6,9 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
 import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {BreakpointsEnum, PagesUrlsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem, IMenuItemChild} from '@common/interfaces';
-import {ThemeService, I18nService} from '@services/general';
+import {I18nService, ThemeService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
 import {Constants} from '@common/constants/constants';
 import {AuthHttpService} from '@services/http';
@@ -52,31 +52,31 @@ export class DashboardLayoutComponent {
     {
       icon: 'home',
       label: I18nMenuEnum.HOME,
-      route: 'home',
+      route: RoutesUrlsEnum.HOME,
       click: () => {
       },
-      authorities: [...this.allRoles()]
+      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER]
     },
     {
       icon: "pets",
       label: I18nMenuEnum.GAMIFICATION,
-      route: 'gamification/rewards-system',
+      route: RoutesUrlsEnum.GAMIFICATION,
       click: () => {
       },
-      authorities: [...this.allRoles()]
+      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER]
     },
     {
       icon: 'analytics',
       label: I18nMenuEnum.REPORTS,
-      route: 'reports/report-1',
+      route: RoutesUrlsEnum.REPORTS,
       click: () => {
       },
-      authorities: [...this.allRoles()]
+      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN]
     },
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
-      route: 'security/user-management',
+      route:  RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
       click: () => {
       },
       authorities: [RolesEnum.SUPER_ADMIN],
@@ -84,7 +84,7 @@ export class DashboardLayoutComponent {
     {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
-      route: '',
+      route: RoutesUrlsEnum.VOID_ROUTE,
       click: () => this.authHttpService.logout(),
       authorities: [...this.allRoles()]
     }
