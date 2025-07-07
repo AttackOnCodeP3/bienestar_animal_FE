@@ -131,6 +131,22 @@
       "profileCompletedSuccessfully": "Profile completed successfully"
     }
   },
+  "================== TABLES ==================": "",
+  "tables": {
+    "columns": {
+      "name": "Name",
+      "lastname": "Last Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "status": "Status",
+      "actions": "Actions",
+      "active": "Active",
+      "activateDesactivate": "Activate/Deactivate"
+    },
+    "emptyMessage": {
+      "noDataAvailable": "No data available"
+    }
+  },
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
     "alreadyHaveAnAccount": "¿Already have an account?",

@@ -12,6 +12,7 @@ import {
   I18nGeneralKeysEnum,
   I18nMessagesEnum,
   I18nPagesEnum,
+  I18nTablesEnum,
 } from '@common/enums/i18n';
 
 /**
@@ -70,6 +71,10 @@ export class I18nService {
 
   get i18nMessagesEnum() {
     return I18nMessagesEnum;
+  }
+
+  get i18nTablesEnum() {
+    return I18nTablesEnum;
   }
 
   /**

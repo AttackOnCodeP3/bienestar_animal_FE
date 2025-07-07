@@ -6,18 +6,25 @@ import {UserHttpService} from '@services/http';
 import {User} from '@models';
 import {MatSlideToggle, MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {UpdateUserRequestDto} from '@models/dto';
+import {I18nService, TableService} from '@services/general';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-management',
-  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle],
+  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe],
   templateUrl: './user-management.page.html',
   styleUrl: './user-management.page.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
 export class UserManagementPage implements OnInit, AfterViewInit {
+  readonly i18nService = inject(I18nService);
+  readonly tableService = inject(TableService);
   readonly userHttpService = inject(UserHttpService);
   paginator = viewChild.required(MatPaginator);
-  displayedColumns: string[] = ['name', 'lastname', 'email', 'active', 'actions'];
+
+  displayedColumns: string[] = [
+    ...Object.values(this.tableService.userManagementDisplayedColumnsTableEnum),
+  ];
   dataSource = computed(() => {
     return new MatTableDataSource<User>(this.userHttpService.userList());
   })
@@ -30,7 +37,7 @@ export class UserManagementPage implements OnInit, AfterViewInit {
     this.dataSource().paginator = this.paginator();
   }
 
-  isActive(user:User) {
+  isActive(user: User) {
     return user.active;
   }
 
