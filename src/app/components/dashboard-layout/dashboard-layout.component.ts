@@ -54,6 +54,7 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.HOME,
       route: RoutesUrlsEnum.HOME,
       click: () => {
+        this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER]
     },
@@ -62,6 +63,7 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.GAMIFICATION,
       route: RoutesUrlsEnum.GAMIFICATION,
       click: () => {
+        this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER]
     },
@@ -70,6 +72,7 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.REPORTS,
       route: RoutesUrlsEnum.REPORTS,
       click: () => {
+        this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN]
     },
@@ -78,6 +81,7 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.USER_MANAGEMENT,
       route:  RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
       click: () => {
+        this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN],
     },
@@ -133,5 +137,16 @@ export class DashboardLayoutComponent {
    */
   getTabIndex(item: IMenuItem | IMenuItemChild | undefined): number {
     return item?.isDisabled ? -1 : 0
+  }
+
+  /**
+   * Checks if the current screen size is small.
+   * @returns {boolean} True if the screen is small, false otherwise.
+   * @author dgutierrez
+   */
+  private closeSidenav(): void {
+    if (this.isScreenSmall()) {
+      this.matSidenav()?.close();
+    }
   }
 }

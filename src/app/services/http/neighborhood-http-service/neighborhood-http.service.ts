@@ -10,7 +10,7 @@ import {createPageArray} from '@common/utils';
 })
 export class NeighborhoodHttpService extends BaseHttpService<Neighborhood>{
 
-  protected override source = Constants.GET_ALL_NEIGHBORHOODS_URL;
+  protected override source = Constants.NEIGHBORHOODS_URL;
 
   neighborhoodList = signal<Neighborhood[]>([]);
 

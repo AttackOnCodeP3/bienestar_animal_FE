@@ -131,6 +131,36 @@
       "profileCompletedSuccessfully": "Perfil completado exitosamente"
     }
   },
+  "================== MATERIAL ==================": "",
+  "matPaginator": {
+    "itemsPerPageLabel": "Elementos por página",
+    "nextPageLabel": "Página siguiente",
+    "previousPageLabel": "Página anterior",
+    "firstPageLabel": "Primera página",
+    "lastPageLabel": "Última página",
+    "of": "de"
+  },
+  "================== COMMON ==================": "",
+  "common": {
+    "active": "Activo",
+    "inactive": "Inactivo"
+  },
+  "================== TABLES ==================": "",
+  "tables": {
+    "columns": {
+      "name": "Nombre",
+      "lastname": "Apellido",
+      "email": "Correo electrónico",
+      "phoneNumber": "Número de teléfono",
+      "status": "Estado",
+      "actions": "Acciones",
+      "active": "Activo",
+      "activateDesactivate": "Activar/Desactivar"
+    },
+    "emptyMessage": {
+      "noDataAvailable": "No hay datos disponibles"
+    }
+  },
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
     "alreadyHaveAnAccount": "¿Ya tiene una cuenta?",
