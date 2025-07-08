@@ -13,7 +13,7 @@ import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-user-management',
-  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe, I18nBooleanPipe, I18nBooleanPipe, AsyncPipe],
+  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe, I18nBooleanPipe, AsyncPipe],
   templateUrl: './user-management.page.html',
   styleUrl: './user-management.page.scss',
   changeDetection: Constants.changeDetectionStrategy
