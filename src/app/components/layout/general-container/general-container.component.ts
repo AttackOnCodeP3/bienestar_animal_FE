@@ -12,5 +12,5 @@ import {NgClass} from '@angular/common';
   changeDetection: Constants.changeDetectionStrategy
 })
 export class GeneralContainerComponent {
-    readonly classList = input<string[]>([[]]);
+    readonly classList = input<string[]>([]);
 }
