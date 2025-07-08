@@ -1,7 +1,7 @@
 import {inject, Pipe, PipeTransform} from '@angular/core';
-import {I18nService} from '@services/general';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable, startWith, switchMap} from 'rxjs';
+import {I18nService} from '@services/general';
 
 @Pipe({
   name: 'i18nBoolean'
