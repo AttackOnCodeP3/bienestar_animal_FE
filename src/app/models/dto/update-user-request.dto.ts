@@ -24,21 +24,21 @@ export class UpdateUserRequestDto {
   roleIds: number[];
 
   constructor(values: Partial<UpdateUserRequestDto> = {}) {
-    this.id = values.id ?? null;
-    this.identificationCard = values.identificationCard ?? null;
-    this.name = values.name ?? null;
-    this.lastname = values.lastname ?? null;
-    this.email = values.email ?? null;
-    this.phoneNumber = values.phoneNumber ?? null;
-    this.birthDate = values.birthDate ?? null;
-    this.nurseryHome = values.nurseryHome ?? null;
-    this.requiresPasswordChange = values.requiresPasswordChange ?? null;
-    this.active = values.active ?? null;
-    this.registeredByCensusTaker = values.registeredByCensusTaker ?? null;
-    this.socialLoginCompleted = values.socialLoginCompleted ?? null;
-    this.usedSocialLogin = values.usedSocialLogin ?? null;
-    this.municipalityId = values.municipalityId ?? null;
-    this.neighborhoodId = values.neighborhoodId ?? null;
+    this.id = values.id ??= null;
+    this.identificationCard = values.identificationCard ??= null;
+    this.name = values.name ??= null;
+    this.lastname = values.lastname ??= null;
+    this.email = values.email ??= null;
+    this.phoneNumber = values.phoneNumber ??= null;
+    this.birthDate = values.birthDate ??= null;
+    this.nurseryHome = values.nurseryHome ??= null;
+    this.requiresPasswordChange = values.requiresPasswordChange ??= null;
+    this.active = values.active ??= null;
+    this.registeredByCensusTaker = values.registeredByCensusTaker ??= null;
+    this.socialLoginCompleted = values.socialLoginCompleted ??= null;
+    this.usedSocialLogin = values.usedSocialLogin ??= null;
+    this.municipalityId = values.municipalityId ??= null;
+    this.neighborhoodId = values.neighborhoodId ??= null;
     this.interestIds = values.interestIds ? Array.from(values.interestIds) : [];
     this.roleIds = values.roleIds ? Array.from(values.roleIds) : [];
   }

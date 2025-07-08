@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, computed, inject, OnInit, viewChild} from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {Constants} from '@common/constants/constants';
 import {UserHttpService} from '@services/http';
 import {User} from '@models';
@@ -57,5 +57,18 @@ export class UserManagementPage implements OnInit, AfterViewInit {
       active: event.checked
     }));
     this.userHttpService.update(updatedActiveStatusUser);
+  }
+
+  /**
+   * Handles pagination changes for the user list.
+   * @param event The pagination event containing the new page index and size.
+   * @author dgutierrez
+   */
+  onPageChange(event: PageEvent) {
+    this.tableService.onPageChangeGeneric(
+      event,
+      this.userHttpService.search,
+      () => this.userHttpService.getAll()
+    );
   }
 }

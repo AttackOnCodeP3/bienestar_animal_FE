@@ -131,6 +131,15 @@
       "profileCompletedSuccessfully": "Perfil completado exitosamente"
     }
   },
+  "================== MATERIAL ==================": "",
+  "matPaginator": {
+    "itemsPerPageLabel": "Elementos por página",
+    "nextPageLabel": "Página siguiente",
+    "previousPageLabel": "Página anterior",
+    "firstPageLabel": "Primera página",
+    "lastPageLabel": "Última página",
+    "of": "de"
+  },
   "================== TABLES ==================": "",
   "tables": {
     "columns": {

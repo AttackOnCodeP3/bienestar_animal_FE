@@ -10,6 +10,7 @@ import {
   I18nComponentsEnum,
   I18nFormsEnum,
   I18nGeneralKeysEnum,
+  I18nMatEnum,
   I18nMessagesEnum,
   I18nPagesEnum,
   I18nTablesEnum,
@@ -75,6 +76,10 @@ export class I18nService {
 
   get i18nTablesEnum() {
     return I18nTablesEnum;
+  }
+
+  get i18nMatEnum() {
+    return I18nMatEnum;
   }
 
   /**
