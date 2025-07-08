@@ -6,7 +6,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
 import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {BreakpointsEnum, PagesUrlsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem, IMenuItemChild} from '@common/interfaces';
 import {I18nService, ThemeService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
