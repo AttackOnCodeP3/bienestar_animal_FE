@@ -10,10 +10,11 @@ import {I18nService, TableService} from '@services/general';
 import {TranslatePipe} from '@ngx-translate/core';
 import {I18nBooleanPipe} from '@core/pipes';
 import {AsyncPipe} from '@angular/common';
+import {GeneralContainerComponent} from '@components/layout';
 
 @Component({
   selector: 'app-user-management',
-  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe, I18nBooleanPipe, AsyncPipe],
+  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe, I18nBooleanPipe, AsyncPipe, GeneralContainerComponent],
   templateUrl: './user-management.page.html',
   styleUrl: './user-management.page.scss',
   changeDetection: Constants.changeDetectionStrategy
