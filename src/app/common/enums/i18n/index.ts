@@ -1,4 +1,5 @@
 export * from "./i18n-buttons.enum";
+export * from "./i18n-common.enum";
 export * from "./i18n-components.enum";
 export * from "./i18n-forms.enum";
 export * from "./i18n-general-keys.enum";

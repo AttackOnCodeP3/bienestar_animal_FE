@@ -8,10 +8,12 @@ import {MatSlideToggle, MatSlideToggleChange} from '@angular/material/slide-togg
 import {UpdateUserRequestDto} from '@models/dto';
 import {I18nService, TableService} from '@services/general';
 import {TranslatePipe} from '@ngx-translate/core';
+import {I18nBooleanPipe} from '@core/pipes';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-user-management',
-  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe],
+  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe, I18nBooleanPipe, I18nBooleanPipe, AsyncPipe],
   templateUrl: './user-management.page.html',
   styleUrl: './user-management.page.scss',
   changeDetection: Constants.changeDetectionStrategy

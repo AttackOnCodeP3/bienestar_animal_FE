@@ -7,6 +7,7 @@ import {ISupportedLanguage} from '@common/interfaces';
 import {LogService} from '@services/general';
 import {
   I18nButtonsEnum,
+  I18nCommonEnum,
   I18nComponentsEnum,
   I18nFormsEnum,
   I18nGeneralKeysEnum,
@@ -32,8 +33,8 @@ interface ILabelParameters {
   providedIn: 'root',
 })
 export class I18nService {
-  private readonly translateService: TranslateService = inject(TranslateService);
   private readonly log = inject(LogService);
+  private readonly translateService = inject(TranslateService);
 
   readonly supportedLanguages = signal<ISupportedLanguage[]>([
     {
@@ -80,6 +81,10 @@ export class I18nService {
 
   get i18nMatEnum() {
     return I18nMatEnum;
+  }
+
+  get i18nCommonEnum() {
+    return I18nCommonEnum;
   }
 
   /**

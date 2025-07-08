@@ -50,6 +50,7 @@
 
       "@core/guards": ["app/core/guards/index.ts"], // Alias for guards index file
       "@core/interceptors": ["app/core/interceptors/index.ts"], // Alias for interceptors index file
+      "@core/pipes": ["app/core/pipes/index.ts"], // Alias for pipes index file
 
       "@pages/*": ["app/pages/*"],
     }

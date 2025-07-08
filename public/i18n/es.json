@@ -140,6 +140,11 @@
     "lastPageLabel": "Última página",
     "of": "de"
   },
+  "================== COMMON ==================": "",
+  "common": {
+    "active": "Activo",
+    "inactive": "Inactivo"
+  },
   "================== TABLES ==================": "",
   "tables": {
     "columns": {
