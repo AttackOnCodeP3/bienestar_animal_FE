@@ -1,4 +1,4 @@
-import {Component, computed, input, model} from '@angular/core';
+import {Component, computed, effect, input, model} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatListOption, MatSelectionList} from '@angular/material/list';
 import {Constants} from '@common/constants/constants';
@@ -25,7 +25,7 @@ export class RoleSelectorFormComponent {
   readonly formsService = input.required<FormsService>();
   readonly i18nService = input.required<I18nService>();
   readonly rolesList = input.required<Role[]>();
-  readonly rolesListSelected = model<Role[]>([]);
+  readonly rolesListSelected = input<Role[]>([]);
 
   /**
    * Computes a function to compare roles by their IDs.
@@ -34,4 +34,11 @@ export class RoleSelectorFormComponent {
    * @author dgutierrez
    */
   compareRolesFn = computed(() => this.formsService().getGenericCompareFn<Role>('id'));
+
+  constructor() {
+    effect(() => {
+      const selectedRoles = this.rolesListSelected();
+      console.error('Selected roles:', selectedRoles);
+    });
+  }
 }

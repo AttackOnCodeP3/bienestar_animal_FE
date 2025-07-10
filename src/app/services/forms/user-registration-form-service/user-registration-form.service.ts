@@ -128,7 +128,7 @@ export class UserRegistrationFormService {
    * @param roles The selected roles
    * @author dgutierrez
    */
-  setRoles(form: FormGroup, roles: Role[]): void {
+  private setRoles(form: FormGroup, roles: Role[]): void {
     form.get('roles')?.setValue(roles);
   }
 

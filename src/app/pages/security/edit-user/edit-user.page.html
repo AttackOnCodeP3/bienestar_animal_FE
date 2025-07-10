@@ -43,7 +43,6 @@
         [i18nService]="i18nService"
         [form]="userRegistrationFormService.formUserRoleSelector"
         [rolesListSelected]="userRegistrationFormService.rolesListSelected()"
-        (rolesListSelectedChange)="userRegistrationFormService.setRoles(userRegistrationFormService.formUserRoleSelector,$event)"
         [rolesList]="roleHttpService.roleList()"
       />
     </div>
