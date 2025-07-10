@@ -1,7 +1,7 @@
 import {inject, Injectable, signal, effect, computed} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {FormGroup} from '@angular/forms';
-import {Canton, District, Interest, Municipality, Neighborhood, Role} from '@models';
+import {Canton, District, Interest, Municipality, Neighborhood, Role, User} from '@models';
 import {matchFieldsValidations} from '@common/forms';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
@@ -255,5 +255,39 @@ export class UserRegistrationFormService {
     }
 
     return null;
+  }
+
+  /**
+   * Carga los datos personales y de ubicación del usuario en el formulario de registro.
+   * Este método se utiliza para prellenar campos cuando se está editando un usuario.
+   *
+   * @param user Objeto `User` con los datos a cargar en el formulario de registro.
+   * @author dgutierrez
+   */
+  populateUserRegistrationForm(user: User): void {
+    this.formUserRegistration.patchValue({
+      identificationCard: user.identificationCard,
+      name: user.name,
+      lastname: user.lastname,
+      birthDate: user.birthDate,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      canton: user.neighborhood?.district?.canton ?? null,
+      district: user.neighborhood?.district ?? null,
+      neighborhood: user.neighborhood ?? null,
+    });
+  }
+
+  /**
+   * Carga los roles del usuario en el formulario de selección de roles.
+   * Este método se utiliza para prellenar los roles cuando se está editando un usuario.
+   *
+   * @param user Objeto `User` con los roles a cargar en el formulario de roles.
+   * @author dgutierrez
+   */
+  populateUserRolesForm(user: User): void {
+    this.formUserRoleSelector.patchValue({
+      roles: user.roles?.map(role => new Role(role)) ?? [],
+    });
   }
 }
