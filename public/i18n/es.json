@@ -12,15 +12,17 @@
   "general": {
     "provideTemporaryShelter": "Brinda un refugio temporal",
     "personalInformation": "Información personal",
-    "location": "Ubicación"
+    "location": "Ubicación",
+    "roles": "Roles"
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
-    "home": "Inicio",
+    "create-user": "Crear usuario",
     "gamification": "Gamificación",
+    "home": "Inicio",
+    "logout": "Cerrar sesión",
     "reports": "Reportes",
-    "user-management": "Gestión de usuarios",
-    "logout": "Cerrar sesión"
+    "user-management": "Gestión de usuarios"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
@@ -129,6 +131,10 @@
     },
     "complete-profile-page": {
       "profileCompletedSuccessfully": "Perfil completado exitosamente"
+    },
+    "create-user-page": {
+      "userCreatedSuccessfully": "Usuario creado exitosamente",
+      "roleRequired": "El rol es requerido"
     }
   },
   "================== MATERIAL ==================": "",
@@ -155,7 +161,8 @@
       "status": "Estado",
       "actions": "Acciones",
       "active": "Activo",
-      "activateDesactivate": "Activar/Desactivar"
+      "activateDesactivate": "Activar/Desactivar",
+      "block": "Bloquear"
     },
     "emptyMessage": {
       "noDataAvailable": "No hay datos disponibles"

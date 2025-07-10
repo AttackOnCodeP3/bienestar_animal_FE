@@ -40,4 +40,5 @@ export enum RoutesUrlsEnum {
 
   //Security routes
   SECURITY_USER_MANAGEMENT = 'user-management',
+  SECURITY_CREATE_USER = 'create-user',
 }

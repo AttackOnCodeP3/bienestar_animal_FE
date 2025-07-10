@@ -1,0 +1,9 @@
+<form [formGroup]="form()">
+  <mat-selection-list [formControlName]="'roles'">
+    @for (role of rolesList(); track role.id) {
+      <mat-list-option [value]="role" >{{role.description}}</mat-list-option>
+    }
+  </mat-selection-list>
+
+</form>
+

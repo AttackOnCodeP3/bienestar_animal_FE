@@ -179,4 +179,30 @@ export class FormsService {
       return this.isFieldInvalid(control);
     });
   }
+
+  /**
+   * Logs the names of invalid fields in the form.
+   * @param form The FormGroup to check for invalid fields.
+   * @author dgutierrez
+   */
+  logFormErrors(form: FormGroup): void {
+    if (!form || !form.controls) {
+      this.logService.error({
+        message: 'FormsService: logFormErrors: Form is null or has no controls.',
+      });
+      return;
+    }
+
+    const invalidFields = this.getInvalidFields(form);
+    if (!invalidFields.length) {
+      this.logService.info({
+        message: 'FormsService: logFormErrors: All fields are valid.',
+      });
+      return;
+    }
+
+    this.logService.error({
+      message: `FormsService: logFormErrors: Invalid fields: ${invalidFields.join(', ')}`,
+    });
+  }
 }

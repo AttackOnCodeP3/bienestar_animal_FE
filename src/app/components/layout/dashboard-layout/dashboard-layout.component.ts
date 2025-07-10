@@ -79,10 +79,27 @@ export class DashboardLayoutComponent {
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
-      route:  RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
+      route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
       click: () => {
-        this.closeSidenav()
       },
+      children: [
+        {
+          label: I18nMenuEnum.USER_MANAGEMENT,
+          route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
+          click: () => {
+            this.closeSidenav()
+          },
+          authorities: [RolesEnum.SUPER_ADMIN],
+        },
+        {
+          label: I18nMenuEnum.CREATE_USER,
+          route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_CREATE_USER,
+          click: () => {
+            this.closeSidenav()
+          },
+          authorities: [RolesEnum.SUPER_ADMIN],
+        }
+      ],
       authorities: [RolesEnum.SUPER_ADMIN],
     },
     {

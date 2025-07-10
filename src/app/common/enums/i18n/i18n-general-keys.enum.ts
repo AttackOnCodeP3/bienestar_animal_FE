@@ -20,4 +20,5 @@ export enum I18nGeneralKeysEnum {
   PROVIDE_TEMPORARY_SHELTER = I18nGeneralKeysEnum.GENERAL + '.provideTemporaryShelter',
   PERSONAL_INFORMATION = I18nGeneralKeysEnum.GENERAL + '.personalInformation',
   LOCATION = I18nGeneralKeysEnum.GENERAL + '.location',
+  ROLES = I18nGeneralKeysEnum.GENERAL + '.roles',
 }

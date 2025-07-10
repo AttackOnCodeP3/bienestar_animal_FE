@@ -5,7 +5,7 @@ import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';
 import {Constants} from '@common/constants/constants';
 import {ISearch} from '@common/interfaces/http';
-import {UpdateUserRequestDto} from '@models/dto';
+import {RegisterUserRequestDTO, UpdateUserRequestDto} from '@models/dto';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,17 @@ export class UserHttpService extends BaseHttpService<User> {
       },
       context: `${this.constructor.name}#getAll`,
     });
+  }
+
+  /**
+   * Saves a new user to the server.
+   * @param registerUserRequestDto The user registration request DTO containing user details.
+   * @return Observable<User> The observable for the HTTP request.
+   * @author dgutierrez
+   */
+  adminRegisterUser(registerUserRequestDto:RegisterUserRequestDTO){
+    const url = Constants.apiBaseUrl + Constants.ADMIN_REGISTER_USER_URL
+    return this.http.post<RegisterUserRequestDTO>(url, registerUserRequestDto);
   }
 
   /**

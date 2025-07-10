@@ -1,16 +1,39 @@
 import {inject, Injectable, signal, effect, computed} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {FormGroup} from '@angular/forms';
-import {Canton, District, Interest, Municipality, Neighborhood} from '@models';
+import {Canton, District, Interest, Municipality, Neighborhood, Role} from '@models';
 import {matchFieldsValidations} from '@common/forms';
+import {toSignal} from '@angular/core/rxjs-interop';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class UserRegistrationFormService {
   private readonly fb = inject(FormBuilder);
+  readonly formUserRegistration = this.buildUserForm();
+  readonly formUserRoleSelector = this.buildUserFormRoleSelector();
+
+  private readonly rolesListSelectedToSignal = toSignal(
+    this.formUserRoleSelector.controls.roles.valueChanges,
+    { initialValue: this.formUserRoleSelector.controls.roles.value || [] }
+  );
 
   readonly volunteerIntent = signal(false);
-  readonly isNurseryHome = computed(() => this.formUserRegistration.controls.isNurseryHome.value);
-  readonly formUserRegistration = this.buildUserForm();
+  readonly rolesListSelected = computed(() => this.rolesListSelectedToSignal() ?? []);
+  readonly isNurseryHome = computed(() => this.formUserRegistration.controls.isNurseryHome.value || false);
+
+  /**
+   * List of optional fields in the user registration form.
+   * These fields are not required in the User entity in the backend.
+   * @author dgutierrez
+   */
+  readonly optionalFields = [
+    'identificationCard',
+    'phoneNumber',
+    'birthDate',
+    'temporaryPassword',
+    'municipality',
+    'interests',
+    'lastLoginDate'
+  ];
 
   /**
    * Applies a reactive effect to enable/disable the volunteer municipality field.
@@ -29,6 +52,15 @@ export class UserRegistrationFormService {
         control.setValue(null);
       }
     });
+  }
+
+  /**
+   * Sets up the form for admin user creation by disabling certain fields.
+   * This method is called when the form is used to create a user by an admin.
+   * @author dgutierrez
+   */
+  setupFormForAdminUserCreation(): void {
+    this.disableFormFieldsCreateUserByAdmin();
   }
 
   /**
@@ -58,6 +90,16 @@ export class UserRegistrationFormService {
   }
 
   /**
+   * Builds the form group for user roles selection.
+   * @author dgutierrez
+   */
+  private buildUserFormRoleSelector() {
+    return this.fb.group({
+      roles: new FormControl<Role[]>([], [Validators.required]),
+    });
+  }
+
+  /**
    * Updates the "isNurseryHome" form control value.
    * @param form The form where the value should be set
    * @param checked The new value for the checkbox
@@ -75,5 +117,100 @@ export class UserRegistrationFormService {
    */
   setInterests(form: FormGroup, interests: Interest[]): void {
     form.get('interests')?.setValue(interests);
+  }
+
+  /**
+   * Sets the roles in the user role selector form.
+   * @param form The form where the roles should be set
+   * @param roles The selected roles
+   * @author dgutierrez
+   */
+  setRoles(form: FormGroup, roles: Role[]): void {
+    form.get('roles')?.setValue(roles);
+  }
+
+  /**
+   * Disables all form fields for user registration when created by an admin.
+   * @author dgutierrez
+   */
+  private disableFormFieldsCreateUserByAdmin() {
+    this.disablePasswordFields();
+    this.disableVolunteerMunicipalityField();
+    this.disableIsNurseryHomeField();
+    this.disableInterestsField();
+    this.clearOptionalFieldValidators();
+  }
+
+  /**
+   * Disables the password and confirm password fields in the form.
+   * @author dgutierrez
+   */
+  disablePasswordFields(): void {
+    this.formUserRegistration.get('password')?.disable();
+    this.formUserRegistration.get('confirmPassword')?.disable();
+  }
+
+  /**
+   * Disables the volunteer municipality field in the form.
+   * @author dgutierrez
+   */
+  disableVolunteerMunicipalityField(): void {
+    this.formUserRegistration.get('volunteerMunicipality')?.disable();
+  }
+
+  /**
+   * Disables the "isNurseryHome" field in the form.
+   * @author dgutierrez
+   */
+  disableIsNurseryHomeField(): void {
+    this.formUserRegistration.get('isNurseryHome')?.disable();
+  }
+
+  /**
+   * Disables the interests field in the form.
+   * @author dgutierrez
+   */
+  disableInterestsField(): void {
+    this.formUserRegistration.get('interests')?.disable();
+  }
+
+  /**
+   * Clears validators for optional fields in the form.
+   * This is fields are not required in the User entity in the backend.
+   * @author dgutierrez
+   */
+  clearOptionalFieldValidators() {
+    this.optionalFields.forEach(field => {
+      const control = this.formUserRegistration.get(field);
+      if (control) {
+        control.clearValidators();
+        control.updateValueAndValidity();
+      }
+    });
+  }
+
+  /**
+   * Resets both user registration and user role selector forms to their initial state.
+   * @author dgutierrez
+   */
+  resetForms(){
+    this.resetFormUserRegistration();
+    this.resetUserRoleSelector();
+  }
+
+  /**
+   * Resets the user registration form to its initial state.
+   * @author dgutierrez
+   */
+  resetFormUserRegistration() {
+    this.formUserRegistration.reset();
+  }
+
+  /**
+   * Resets the user role selector form to its initial state.
+   * @author dgutierrez
+   */
+  resetUserRoleSelector() {
+    this.formUserRoleSelector.reset();
   }
 }

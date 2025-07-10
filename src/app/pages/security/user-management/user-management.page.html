@@ -1,6 +1,9 @@
 
-<app-general-container-component [classList]="['bg-primary']">
-  <h1>Hola mundo</h1>
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Gestionar usuarios</h1>
+    <button matButton="elevated" (click)="onNavigateToCreateUser()"> <mat-icon>add</mat-icon> Crear usuario</button>
+  </div>
 </app-general-container-component>
 
 <div class="mat-elevation-z8">
@@ -13,7 +16,7 @@
 
     <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.LASTNAME">
       <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_LASTNAME | translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{ element.name }}</td>
+      <td mat-cell *matCellDef="let element"> {{ element.lastname }}</td>
     </ng-container>
 
     <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.EMAIL">
@@ -27,7 +30,7 @@
     </ng-container>
 
     <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.ACTIONS">
-      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_ACTIVATE_DESACTIVATE | translate}}</th>
+      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_BLOCK | translate}}</th>
       <td mat-cell *matCellDef="let element">
         <mat-slide-toggle
           [checked]="isActiveUser(element)"
