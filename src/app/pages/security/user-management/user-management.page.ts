@@ -3,6 +3,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
+import {Router} from '@angular/router';
 import {MatSlideToggle, MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Constants} from '@common/constants/constants';
@@ -13,7 +14,6 @@ import {I18nService, TableService} from '@services/general';
 import {I18nBooleanPipe} from '@core/pipes';
 import {AsyncPipe} from '@angular/common';
 import {GeneralContainerComponent} from '@components/layout';
-import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
 
 @Component({
@@ -39,12 +39,13 @@ export class UserManagementPage implements OnInit, AfterViewInit {
   readonly i18nService = inject(I18nService);
   readonly tableService = inject(TableService);
   readonly userHttpService = inject(UserHttpService);
-  paginator = viewChild.required(MatPaginator);
+  readonly paginator = viewChild.required(MatPaginator);
 
   displayedColumns: string[] = [
     ...Object.values(this.tableService.userManagementDisplayedColumnsTableEnum),
   ];
-  dataSource = computed(() => {
+
+  readonly dataSource = computed(() => {
     return new MatTableDataSource<User>(this.userHttpService.userList());
   })
 
