@@ -10,7 +10,7 @@ import {createPageArray} from '@common/utils';
 })
 export class CantonHttpService extends BaseHttpService<Canton> {
 
-  protected override source = Constants.GET_ALL_CANTONS_URL;
+  protected override source = Constants.CANTONS_URL;
 
   readonly cantonList = signal<Canton[]>([]);
   readonly districtsByCanton = signal<District[]>([]);

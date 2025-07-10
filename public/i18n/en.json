@@ -11,22 +11,18 @@
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
-    "home": "Home",
+    "create-user": "Create User",
     "gamification": "Gamification",
+    "home": "Home",
+    "logout": "Logout",
     "reports": "Reports",
-    "user-management": "User Management",
-    "municipalities": "Municipality Management",
-    "viewMunicipalities": "View Municipalities",
-    "createMunicipality": "Create Municipality",
-    "logout": "Logout"
+    "user-management": "User Management"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
     "personalInformation": "Personal Information",
     "location": "Location",
-    "actions": "Actions",
-    "edit": "Edit",
-    "delete": "Delete"
+    "roles": "Roles"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
@@ -135,6 +131,41 @@
     },
     "complete-profile-page": {
       "profileCompletedSuccessfully": "Profile completed successfully"
+    },
+    "create-user-page": {
+      "userCreatedSuccessfully": "User created successfully",
+      "roleRequired": "Role is required"
+    }
+  },
+  "================== MATERIAL ==================": "",
+  "matPaginator": {
+    "itemsPerPageLabel": "Items per page",
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page",
+    "firstPageLabel": "First page",
+    "lastPageLabel": "Last page",
+    "of": "of"
+  },
+  "================== COMMON ==================": "",
+  "common": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "================== TABLES ==================": "",
+  "tables": {
+    "columns": {
+      "name": "Name",
+      "lastname": "Last Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "status": "Status",
+      "actions": "Actions",
+      "active": "Active",
+      "activateDesactivate": "Activate/Deactivate",
+      "block": "Block"
+    },
+    "emptyMessage": {
+      "noDataAvailable": "No data available"
     }
   },
   "================== BUTTON TEXT ===========================": "",
@@ -149,7 +180,8 @@
     "logout": "Logout",
     "noAccount": "Don't have an account?",
     "register": "Register",
-    "registerNow": "Register Now"
+    "registerNow": "Register Now",
+    "updateUser": "Update User"
   },
   "matSnackBarMessages": {
     "http": {

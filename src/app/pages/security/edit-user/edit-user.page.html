@@ -1,0 +1,58 @@
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Editando usuario</h1>
+    <button matButton="elevated" (click)="navigateToUserManagement()"><mat-icon>
+      arrow_back
+    </mat-icon>Gestión usuarios</button>
+  </div>
+</app-general-container-component>
+
+<div class="mb-5">
+  <div class="justify-content-center rounded bg-primary-contrast mb-3 py-4 px-4">
+    <div class="col-12">
+      <h2>{{ i18nService.i18nGeneralEnum.PERSONAL_INFORMATION | translate }}</h2>
+      <app-personal-data-user-registration-form
+        [form]="userRegistrationFormService.formUserRegistration"
+        [i18nService]="i18nService"
+        [formsService]="formsService"
+      />
+    </div>
+  </div>
+
+  <div class="justify-content-center rounded bg-primary-contrast mb-3 py-4 px-4">
+    <div class="col-12">
+      <h2>{{ i18nService.i18nGeneralEnum.LOCATION | translate }}</h2>
+      <app-location-form
+        [cantonsList]="cantonHttpService.cantonList()"
+        [districtsList]="cantonHttpService.districtsByCanton()"
+        [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
+        (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
+        (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
+        [form]="userRegistrationFormService.formUserRegistration"
+        [i18nService]="i18nService"
+        [formsService]="formsService"
+      />
+    </div>
+  </div>
+
+  <div class="justify-content-center rounded bg-primary-contrast mb-3 py-4 px-4">
+    <div class="col-12">
+      <h2>{{ i18nService.i18nGeneralEnum.ROLES | translate }}</h2>
+      <app-role-selector-form
+        [formsService]="formsService"
+        [i18nService]="i18nService"
+        [form]="userRegistrationFormService.formUserRoleSelector"
+        [rolesListSelected]="userRegistrationFormService.rolesListSelected()"
+        [rolesList]="roleHttpService.roleList()"
+      />
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button matButton="tonal" (click)="onSubmit()">
+      {{ i18nService.i18nButtonsEnum.BUTTON_UPDATE_USER | translate }}
+    </button>
+  </div>
+</div>
+
+
