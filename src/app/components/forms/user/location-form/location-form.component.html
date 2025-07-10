@@ -5,9 +5,7 @@
         <mat-label>{{i18nService().i18nFormsEnum.PLEASE_SELECT_A_CANTON_LABEL | translate}}</mat-label>
         <mat-select
           formControlName="canton"
-          [errorStateMatcher]="formsService().matcher"
-          [compareWith]="formsService().genericCompare"
-        >
+          [errorStateMatcher]="formsService().matcher">
           <mat-option>--</mat-option>
           @for (canton of cantonsList(); track canton.id) {
             <mat-option [value]="canton">{{ canton.name }}</mat-option>
@@ -26,9 +24,7 @@
         @let districtControl = form().get('district');
         <mat-select
           formControlName="district"
-          [errorStateMatcher]="formsService().matcher"
-          [compareWith]="formsService().genericCompare"
-        >
+          [errorStateMatcher]="formsService().matcher">
           <mat-option>--</mat-option>
           @for (district of districtsList(); track district.id) {
             <mat-option [value]="district">{{ district.name }}</mat-option>
@@ -47,7 +43,6 @@
         <mat-select
           formControlName="neighborhood"
           [errorStateMatcher]="formsService().matcher"
-          [compareWith]="formsService().genericCompare"
         >
           <mat-option>--</mat-option>
           @for (neighborhood of neighbourhoodsList(); track neighborhood.id) {

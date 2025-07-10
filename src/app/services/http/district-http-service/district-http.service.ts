@@ -10,7 +10,7 @@ import {createPageArray} from '@common/utils';
 })
 export class DistrictHttpService extends BaseHttpService<District>{
 
-  protected override source = Constants.DISTRICTS_URL;
+  protected override source = Constants.GET_ALL_DISTRICTS_URL;
 
   readonly districtList = signal<District[]>([]);
   readonly neighborhoodsByDistrict = signal<Neighborhood[]>([]);

@@ -45,33 +45,18 @@ export abstract class UnmutableConstants {
   // ROUTES FOR USERS SERVICES
   // =================================================================
   private static readonly USERS: string = '/users'
-  static readonly USERS_URL: string = UnmutableConstants.USERS;
-
-  // ==================================================================
-  // ROUTES FOR ADMIN SERVICES
-  // =================================================================
-  private static readonly ADMIN: string = '/admin'
-  static readonly ADMIN_REGISTER_USER_URL: string = UnmutableConstants.ADMIN;
 
   // ==================================================================
   // ROUTES FOR INTEREST SERVICES
   // =================================================================
   private static readonly INTERESTS: string = '/interests'
-  static readonly INTERESTS_URL: string = UnmutableConstants.INTERESTS;
-
-  // ==================================================================
-  // ROUTES FOR ROLE SERVICES
-  // =================================================================
-  private static readonly ROLES: string = '/roles'
-  static readonly ROLES_URL: string = UnmutableConstants.ROLES;
+  static readonly GET_ALL_INTERESTS_URL: string = UnmutableConstants.INTERESTS;
 
   // ==================================================================
   // ROUTES FOR MUNICIPALITY SERVICES
   // =================================================================
   private static readonly MUNICIPALITIES: string = '/municipalities'
-  static readonly MUNICIPALITIES_URL: string = UnmutableConstants.MUNICIPALITIES;
-
-  // USER
+  static readonly GET_ALL_MUNICIPALITIES_URL: string = UnmutableConstants.MUNICIPALITIES;
 
   //Canton, District, Neighborhood
 
@@ -79,17 +64,17 @@ export abstract class UnmutableConstants {
   // ROUTES FOR CANTON SERVICES
   // =================================================================
   private static readonly CANTONS: string = '/cantons'
-  static readonly CANTONS_URL: string = UnmutableConstants.CANTONS;
+  static readonly GET_ALL_CANTONS_URL: string = UnmutableConstants.CANTONS;
 
   // ==================================================================
   // ROUTES FOR DISTRICT SERVICES
   // =================================================================
   private static readonly DISTRICTS: string = '/districts'
-  static readonly DISTRICTS_URL: string = UnmutableConstants.DISTRICTS;
+  static readonly GET_ALL_DISTRICTS_URL: string = UnmutableConstants.DISTRICTS;
 
   // ==================================================================
   // ROUTES FOR NEIGHBORHOOD SERVICES
   // =================================================================
   private static readonly NEIGHBORHOODS: string = '/neighborhoods'
-  static readonly NEIGHBORHOODS_URL: string = UnmutableConstants.NEIGHBORHOODS;
+  static readonly GET_ALL_NEIGHBORHOODS_URL: string = UnmutableConstants.NEIGHBORHOODS;
 }

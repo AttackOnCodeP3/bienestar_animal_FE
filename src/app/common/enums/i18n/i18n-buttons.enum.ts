@@ -16,5 +16,4 @@ export enum  I18nButtonsEnum {
   BUTTON_NO_ACCOUNT = I18nButtonsEnum.BUTTONS + "noAccount",
   BUTTON_REGISTER = I18nButtonsEnum.BUTTONS + "register",
   BUTTON_REGISTER_NOW = I18nButtonsEnum.BUTTONS + "registerNow",
-  BUTTON_UPDATE_USER = I18nButtonsEnum.BUTTONS + "updateUser",
 }

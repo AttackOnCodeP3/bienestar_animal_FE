@@ -9,7 +9,6 @@ export enum I18nPagesValidationsEnum {
   GENERAL = I18nPagesValidationsEnum.VALIDATIONS + 'general.',
   REGISTER_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'register-page.',
   COMPLETE_PROFILE_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'complete-profile-page.',
-  CREATE_USER_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'create-user-page.',
 
   // General
   GENERAL_INVALID_FIELDS = I18nPagesValidationsEnum.GENERAL + "invalidFields",
@@ -19,8 +18,4 @@ export enum I18nPagesValidationsEnum {
 
   //Complete Profile Page
   COMPLETE_PROFILE_PROFILE_COMPLETED_SUCCESSFULLY = I18nPagesValidationsEnum.COMPLETE_PROFILE_PAGE + "profileCompletedSuccessfully",
-
-  //Create User Page
-  CREATE_USER_PAGE_USER_CREATED_SUCCESSFULLY = I18nPagesValidationsEnum.CREATE_USER_PAGE + "userCreatedSuccessfully",
-  CREATE_USER_PAGE_ROLE_REQUIRED = I18nPagesValidationsEnum.CREATE_USER_PAGE + "roleRequired",
 }

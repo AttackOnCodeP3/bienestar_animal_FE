@@ -6,7 +6,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
 import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {BreakpointsEnum, PagesUrlsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem, IMenuItemChild} from '@common/interfaces';
 import {I18nService, ThemeService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
@@ -54,7 +54,6 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.HOME,
       route: RoutesUrlsEnum.HOME,
       click: () => {
-        this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER]
     },
@@ -63,7 +62,6 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.GAMIFICATION,
       route: RoutesUrlsEnum.GAMIFICATION,
       click: () => {
-        this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER]
     },
@@ -72,34 +70,15 @@ export class DashboardLayoutComponent {
       label: I18nMenuEnum.REPORTS,
       route: RoutesUrlsEnum.REPORTS,
       click: () => {
-        this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN]
     },
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
-      route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
+      route:  RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
       click: () => {
       },
-      children: [
-        {
-          label: I18nMenuEnum.USER_MANAGEMENT,
-          route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
-          click: () => {
-            this.closeSidenav()
-          },
-          authorities: [RolesEnum.SUPER_ADMIN],
-        },
-        {
-          label: I18nMenuEnum.CREATE_USER,
-          route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_CREATE_USER,
-          click: () => {
-            this.closeSidenav()
-          },
-          authorities: [RolesEnum.SUPER_ADMIN],
-        }
-      ],
       authorities: [RolesEnum.SUPER_ADMIN],
     },
     {
@@ -179,16 +158,5 @@ export class DashboardLayoutComponent {
    */
   getTabIndex(item: IMenuItem | IMenuItemChild | undefined): number {
     return item?.isDisabled ? -1 : 0
-  }
-
-  /**
-   * Checks if the current screen size is small.
-   * @returns {boolean} True if the screen is small, false otherwise.
-   * @author dgutierrez
-   */
-  private closeSidenav(): void {
-    if (this.isScreenSmall()) {
-      this.matSidenav()?.close();
-    }
   }
 }

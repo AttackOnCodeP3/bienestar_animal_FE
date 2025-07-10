@@ -12,7 +12,7 @@ import {createPageArray} from '@common/utils';
 })
 export class InterestHttpService extends BaseHttpService<Interest> {
 
-  protected override source = Constants.INTERESTS_URL;
+  protected override source = Constants.GET_ALL_INTERESTS_URL;
 
   readonly interestList = signal<Interest[]>([]);
 

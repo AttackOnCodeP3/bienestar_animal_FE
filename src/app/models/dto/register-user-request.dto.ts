@@ -16,7 +16,6 @@ export class RegisterUserRequestDTO {
   neighborhoodId: number | null;
   wantsToBeVolunteer: boolean;
   interestIds: number[];
-  roleIds: number[];
 
   constructor(values: Partial<RegisterUserRequestDTO> = {}) {
     this.name = values.name || null;
@@ -30,7 +29,6 @@ export class RegisterUserRequestDTO {
     this.neighborhoodId = values.neighborhoodId || null;
     this.wantsToBeVolunteer = values.wantsToBeVolunteer ?? false;
     this.interestIds = values.interestIds ? Array.from(values.interestIds) : [];
-    this.roleIds = values.roleIds ? Array.from(values.roleIds) : [];
   }
 
   /**
@@ -40,7 +38,7 @@ export class RegisterUserRequestDTO {
    * @returns A new instance of RegisterUserRequestDTO.
    * @author dgutierrez
    */
-  static fromUser(user: Partial<User>, wantsToBeVolunteer: boolean = false): RegisterUserRequestDTO {
+  static fromUser(user: Partial<User>, wantsToBeVolunteer: boolean): RegisterUserRequestDTO {
     return new RegisterUserRequestDTO({
       name: user.name,
       lastname: user.lastname,
@@ -52,11 +50,6 @@ export class RegisterUserRequestDTO {
       municipalityId: user.municipality?.id,
       neighborhoodId: user.neighborhood?.id,
       wantsToBeVolunteer: wantsToBeVolunteer,
-      roleIds: user.roles
-        ? user.roles
-          .map(role => role?.id)
-          .filter((id): id is number => id !== null && id !== undefined)
-        : [],
       interestIds: user.interests
         ? user.interests
           .map(interest => interest?.id)

@@ -11,10 +11,9 @@ import {routes} from './app.routes';
 import {HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MissingTranslationHandler, provideTranslateService, TranslateLoader} from '@ngx-translate/core';
-import {MatPaginatorCustomService, MissingI18nService} from '@services/general';
+import {MissingI18nService} from '@services/general';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {accessTokenInterceptor, baseUrlInterceptor, handleErrorsInterceptor} from '@core/interceptors';
-import {MatPaginatorIntl} from '@angular/material/paginator';
 
 registerLocaleData(localeEn)
 
@@ -49,6 +48,5 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     {provide: LOCALE_ID, useValue: 'en'},
-    {provide: MatPaginatorIntl, useClass: MatPaginatorCustomService}
   ]
 };

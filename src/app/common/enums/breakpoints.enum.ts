@@ -9,6 +9,4 @@ export enum BreakpointsEnum {
   LG = 992,
   XL = 1200,
   XXL = 1400,
-  XXXL = 1600,
-  XXXXL_MOST = 1670,
 }

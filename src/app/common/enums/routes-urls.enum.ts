@@ -4,12 +4,9 @@ const PATH_REPORTS_ROUTES = 'reports';
 const PATH_HOME_ROUTES = 'home';
 const PATH_DASHBOARD_ROUTES = 'dashboard';
 const PATH_SECURITY_ROUTES = 'security';
+const PATH_MUNICIPALITIES = 'municipalities';
 const VOID_PATH = '';
 
-/**
- * Enum for application routes URLs.
- * @author dgutierrez
- */
 export enum RoutesUrlsEnum {
   // Utility routes
   VOID_ROUTE = VOID_PATH,
@@ -22,8 +19,9 @@ export enum RoutesUrlsEnum {
   AUTH = PATH_AUTH_ROUTES,
   GAMIFICATION = PATH_GAMIFICATION_ROUTES,
   REPORTS = PATH_REPORTS_ROUTES,
+  MUNICIPALITIES = PATH_MUNICIPALITIES,
 
-  // Auth routes
+  // Auth
   LOGIN = 'login',
   REGISTER = 'register',
   FORGOT_PASSWORD = 'forgot-password',
@@ -31,15 +29,17 @@ export enum RoutesUrlsEnum {
   SOCIAL_CALLBACK = 'social-callback',
   COMPLETE_PROFILE = 'complete-profile',
 
-  // Gemification routes
+  // Gamification
   REWARDS_SYSTEM = 'rewards-system',
 
-  // Reports routes
-  //TODO: Later change the this for the correct report names
+  // Reports
   REPORT_1 = 'report-1',
 
-  //Security routes
+  // Security
   SECURITY_USER_MANAGEMENT = 'user-management',
-  SECURITY_CREATE_USER = 'create-user',
-  SECURITY_EDIT_USER = 'edit-user',
+
+  // Municipality
+  MUNICIPALITY_LIST = 'municipality-list',
+  MUNICIPALITY_CREATE = 'municipality-create',
+  MUNICIPALITY_EDIT = 'municipality-edit',
 }

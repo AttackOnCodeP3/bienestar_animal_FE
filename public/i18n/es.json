@@ -13,16 +13,20 @@
     "provideTemporaryShelter": "Brinda un refugio temporal",
     "personalInformation": "Información personal",
     "location": "Ubicación",
-    "roles": "Roles"
+    "actions": "Acciones",
+    "edit": "Editar",
+    "delete": "Eliminar"
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
-    "create-user": "Crear usuario",
-    "gamification": "Gamificación",
     "home": "Inicio",
-    "logout": "Cerrar sesión",
+    "gamification": "Gamificación",
     "reports": "Reportes",
-    "user-management": "Gestión de usuarios"
+    "user-management": "Gestión de usuarios",
+    "municipalities": "Gestión de municipalidades",
+    "viewMunicipalities": "Ver municipalidades",
+    "createMunicipality": "Crear municipalidad",
+    "logout": "Cerrar sesión"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
@@ -131,41 +135,6 @@
     },
     "complete-profile-page": {
       "profileCompletedSuccessfully": "Perfil completado exitosamente"
-    },
-    "create-user-page": {
-      "userCreatedSuccessfully": "Usuario creado exitosamente",
-      "roleRequired": "El rol es requerido"
-    }
-  },
-  "================== MATERIAL ==================": "",
-  "matPaginator": {
-    "itemsPerPageLabel": "Elementos por página",
-    "nextPageLabel": "Página siguiente",
-    "previousPageLabel": "Página anterior",
-    "firstPageLabel": "Primera página",
-    "lastPageLabel": "Última página",
-    "of": "de"
-  },
-  "================== COMMON ==================": "",
-  "common": {
-    "active": "Activo",
-    "inactive": "Inactivo"
-  },
-  "================== TABLES ==================": "",
-  "tables": {
-    "columns": {
-      "name": "Nombre",
-      "lastname": "Apellido",
-      "email": "Correo electrónico",
-      "phoneNumber": "Número de teléfono",
-      "status": "Estado",
-      "actions": "Acciones",
-      "active": "Activo",
-      "activateDesactivate": "Activar/Desactivar",
-      "block": "Bloquear"
-    },
-    "emptyMessage": {
-      "noDataAvailable": "No hay datos disponibles"
     }
   },
   "================== BUTTON TEXT ===========================": "",
@@ -180,8 +149,7 @@
     "logout": "Cerrar sesión",
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
-    "registerNow": "Regístrate ahora",
-    "updateUser": "Actualizar usuario"
+    "registerNow": "Regístrate ahora"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {
