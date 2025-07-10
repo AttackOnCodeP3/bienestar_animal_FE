@@ -89,7 +89,7 @@ export class MunicipalityEditPage implements OnInit {
       status: this.form.value.status || ''
     };
 
-    console.log('Sending DTO:', dto);
+    // Removed console.log statement to avoid exposing sensitive data in production.
 
     this.municipalityHttpService.update(dto);
   }
