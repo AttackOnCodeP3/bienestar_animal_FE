@@ -48,6 +48,7 @@ import {NavbarComponent} from '@components/general';
   ],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss',
+  providers: [UserRegistrationFormService],
   changeDetection: Constants.changeDetectionStrategy
 })
 export class RegisterPage implements OnInit {

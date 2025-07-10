@@ -15,12 +15,15 @@
     "location": "Ubicación",
     "actions": "Acciones",
     "edit": "Editar",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "roles": "Roles"
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
-    "home": "Inicio",
+    "create-user": "Crear usuario",
     "gamification": "Gamificación",
+    "home": "Inicio",
+    "logout": "Cerrar sesión",
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
     "municipalities": "Gestión de municipalidades",
@@ -135,6 +138,41 @@
     },
     "complete-profile-page": {
       "profileCompletedSuccessfully": "Perfil completado exitosamente"
+    },
+    "create-user-page": {
+      "userCreatedSuccessfully": "Usuario creado exitosamente",
+      "roleRequired": "El rol es requerido"
+    }
+  },
+  "================== MATERIAL ==================": "",
+  "matPaginator": {
+    "itemsPerPageLabel": "Elementos por página",
+    "nextPageLabel": "Página siguiente",
+    "previousPageLabel": "Página anterior",
+    "firstPageLabel": "Primera página",
+    "lastPageLabel": "Última página",
+    "of": "de"
+  },
+  "================== COMMON ==================": "",
+  "common": {
+    "active": "Activo",
+    "inactive": "Inactivo"
+  },
+  "================== TABLES ==================": "",
+  "tables": {
+    "columns": {
+      "name": "Nombre",
+      "lastname": "Apellido",
+      "email": "Correo electrónico",
+      "phoneNumber": "Número de teléfono",
+      "status": "Estado",
+      "actions": "Acciones",
+      "active": "Activo",
+      "activateDesactivate": "Activar/Desactivar",
+      "block": "Bloquear"
+    },
+    "emptyMessage": {
+      "noDataAvailable": "No hay datos disponibles"
     }
   },
   "================== BUTTON TEXT ===========================": "",
@@ -149,7 +187,8 @@
     "logout": "Cerrar sesión",
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
-    "registerNow": "Regístrate ahora"
+    "registerNow": "Regístrate ahora",
+    "updateUser": "Actualizar usuario"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

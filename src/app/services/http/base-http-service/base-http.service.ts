@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {IResponse, ISearch} from '@common/interfaces/http';
 import {Constants} from '@common/constants/constants';
-import {AlertService} from '@services/general';
+import {AlertService, LogService} from '@services/general';
 import {AlertTypeEnum} from '@common/enums';
 
 @Injectable({
@@ -13,7 +13,8 @@ export class BaseHttpService<T> {
 
   protected source!: string;
   protected http = inject(HttpClient);
-  protected readonly alertService = inject(AlertService);
+  protected readonly alertService = inject(AlertService)
+  private readonly logService = inject(LogService);
 
   get sourceUrl(): string {
     return Constants.apiBaseUrl + this.source;
@@ -50,6 +51,14 @@ export class BaseHttpService<T> {
   }): void {
     this.findAllWithParams({page, size}).subscribe({
       next: (res) => {
+        this.logService.debug({
+          message: `Fetched data from ${context}`,
+          data: res.data,
+        });
+        this.logService.debug({
+          message: `Search metadata from ${context}`,
+          data: res.meta,
+        });
         setSearchMeta(res.meta);
         setTotalItems(res.meta?.totalPages ?? 0);
         updateSignal.set(res.data);

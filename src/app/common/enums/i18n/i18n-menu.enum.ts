@@ -12,5 +12,6 @@ export enum I18nMenuEnum {
   MUNICIPALITIES = I18nMenuEnum.MENU + '.municipalities',
   VIEW_MUNICIPALITIES = I18nMenuEnum.MENU + '.viewMunicipalities',
   CREATE_MUNICIPALITY = I18nMenuEnum.MENU + '.createMunicipality',
+  CREATE_USER = I18nMenuEnum.MENU + '.create-user',
   LOGOUT = I18nMenuEnum.MENU + '.logout',
 }
