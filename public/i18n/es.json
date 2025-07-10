@@ -12,7 +12,10 @@
   "general": {
     "provideTemporaryShelter": "Brinda un refugio temporal",
     "personalInformation": "Información personal",
-    "location": "Ubicación"
+    "location": "Ubicación",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "delete": "Eliminar"
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
@@ -20,6 +23,9 @@
     "gamification": "Gamificación",
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
+    "municipalities": "Gestión de municipalidades",
+    "viewMunicipalities": "Ver municipalidades",
+    "createMunicipality": "Crear municipalidad",
     "logout": "Cerrar sesión"
   },
   "it-worked-as-nursery-home-form-component": {

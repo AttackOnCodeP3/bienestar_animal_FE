@@ -15,12 +15,18 @@
     "gamification": "Gamification",
     "reports": "Reports",
     "user-management": "User Management",
+    "municipalities": "Municipality Management",
+    "viewMunicipalities": "View Municipalities",
+    "createMunicipality": "Create Municipality",
     "logout": "Logout"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
     "personalInformation": "Personal Information",
-    "location": "Location"
+    "location": "Location",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",

@@ -5,7 +5,7 @@
     <mat-nav-list class="mx-1 ms-lg-1 me-lg-0">
       <mat-accordion>
         @for (item of menuItemsSorted(); track item) {
-          @if (item?.children?.length) {
+          @if (item?.children?.length && authHttpService.hasAnyRole(item?.authorities)) {
             <mat-expansion-panel class="mb-2" [disabled]="item?.isDisabled">
               <mat-expansion-panel-header class="px-3">
                 <mat-panel-title>
@@ -20,7 +20,7 @@
                     <mat-list-item
                       class="mb-2"
                       [disabled]="child.isDisabled"
-                      [routerLink]="child.isDisabled? null : child.route"
+                      [routerLink]="child.isDisabled ? null : child.route"
                       [routerLinkActiveOptions]="{ exact: true }"
                       [tabindex]="getTabIndex(child)"
                       (click)="child?.click()"
@@ -37,7 +37,8 @@
               <mat-list-item
                 class="mb-2"
                 [disabled]="item?.isDisabled"
-                [routerLink]="item?.isDisabled? null : item?.route" [tabindex]="getTabIndex(item)"
+                [routerLink]="item?.isDisabled ? null : item?.route"
+                [tabindex]="getTabIndex(item)"
                 (click)="item?.click()"
                 routerLinkActive="mdc-list-item--activated pointer"
                 [routerLinkActiveOptions]="{ exact: true }"

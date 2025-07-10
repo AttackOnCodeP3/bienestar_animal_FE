@@ -87,6 +87,31 @@ export class DashboardLayoutComponent {
       route: RoutesUrlsEnum.VOID_ROUTE,
       click: () => this.authHttpService.logout(),
       authorities: [...this.allRoles()]
+    },
+    {
+      icon: 'apartment',
+      label: I18nMenuEnum.MUNICIPALITIES,
+      route: '',
+      authorities: [RolesEnum.SUPER_ADMIN],
+      children: [
+        {
+          label: 'menu.viewMunicipalities',
+          route: `/${RoutesUrlsEnum.DASHBOARD}/${RoutesUrlsEnum.MUNICIPALITIES}/${RoutesUrlsEnum.MUNICIPALITY_LIST}`,
+          authorities: [RolesEnum.SUPER_ADMIN],
+        },
+        {
+          label: 'menu.createMunicipality',
+          route: `/${RoutesUrlsEnum.DASHBOARD}/${RoutesUrlsEnum.MUNICIPALITIES}/${RoutesUrlsEnum.MUNICIPALITY_CREATE}`,
+          authorities: [RolesEnum.SUPER_ADMIN],
+        },
+      ],
+    },
+    {
+      icon: 'pets',
+      label: 'menu.gamification',
+      route: `/${RoutesUrlsEnum.DASHBOARD}/${RoutesUrlsEnum.GAMIFICATION}`,
+      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER],
+      click: () => {},
     }
   ])
 

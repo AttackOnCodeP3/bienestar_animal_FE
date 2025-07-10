@@ -21,7 +21,7 @@ import {
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {Municipality, User} from '@models';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
-import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
+import {AlertTypeEnum, MunicipalityStatusEnum, PagesUrlsEnum} from '@common/enums';
 import {CompleteProfileRequestDTO} from '@models/dto';
 import {UserRegistrationFormService} from '@services/forms';
 
@@ -101,7 +101,14 @@ export class CompleteProfilePage implements OnInit {
     const completeProfileRequestDTO = CompleteProfileRequestDTO.fromUser(
       new User({
         ...rest,
-        municipality: new Municipality({ id: volunteerMunicipality?.id })
+        municipality: {
+          id: volunteerMunicipality?.id ?? 0,
+          name: volunteerMunicipality?.name ?? '',
+          email: volunteerMunicipality?.email ?? '',
+          status: volunteerMunicipality?.status ?? MunicipalityStatusEnum.ACTIVE,
+          canton: volunteerMunicipality?.canton ?? { id: 0, name: '' }
+        }
+
       }),
       this.userRegistrationFormService.volunteerIntent()
     );

@@ -1,44 +1,75 @@
 import {RolesEnum} from '@common/enums';
 
 /**
- * Interface representing a menu item in the application.
- * @author dgutierrez
+ * Interface representing a child menu item.
+ * A child always has a label, route, optional click, and authorities.
  */
-export interface IMenuItem {
+export interface IMenuItemChild {
   /**
-   * The name of the icon to be displayed for the menu item.
-   */
-  icon: string;
-
-  /**
-   * The label for the menu item, typically displayed in the UI.
+   * The label for the child item.
    */
   label: string;
 
   /**
-   * The route path associated with the menu item.
-   * This is used for navigation within the application.
+   * The route path associated with the child item.
    */
   route: string;
 
   /**
-   * Optional property to indicate if the menu item is displayed in the sidebar.
+   * Optional click handler.
    */
-  isDisabled?: boolean;
+  click?: VoidFunction;
 
   /**
-   * Optional property to indicate if the menu item is displayed in the topbar.
+   * Roles that can see this item.
    */
-  children?: IMenuItemChild[];
+  authorities: RolesEnum[];
 
-  click: VoidFunction;
-
-  authorities: RolesEnum[]
+  /**
+   * Optional disabled flag.
+   */
+  isDisabled?: boolean;
 }
 
 /**
- * Interface representing a child menu item.
- * @author dgutierrez
+ * Interface representing a menu item in the application.
+ * Can have either:
+ *   - A route and optional click handler.
+ *   - Or a list of children.
  */
-export interface IMenuItemChild extends Omit<IMenuItem, 'icon' | 'children'> {
+export interface IMenuItem {
+  /**
+   * The icon to display.
+   */
+  icon: string;
+
+  /**
+   * The label.
+   */
+  label: string;
+
+  /**
+   * Optional route (only if no children).
+   */
+  route?: string;
+
+  /**
+   * Optional click handler.
+   */
+  click?: VoidFunction;
+
+  /**
+   * Optional children (if this is a parent).
+   */
+  children?: IMenuItemChild[];
+
+  /**
+   * Roles that can see this item.
+   */
+  authorities: RolesEnum[];
+
+  /**
+   * Optional disabled flag.
+   */
+  isDisabled?: boolean;
 }
