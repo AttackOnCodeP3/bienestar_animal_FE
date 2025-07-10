@@ -81,7 +81,7 @@ export class CreateUserPage implements OnInit {
       roles: userData?.roles?.map(role => new Role({id: role.id})) ?? []
     }));
     this.userHttpService.adminRegisterUser(registerUserRequest).subscribe({
-      next: (user) => {
+      next: (_) => {
         this.alertService.displayAlert({
           messageKey: I18nPagesValidationsEnum.CREATE_USER_PAGE_USER_CREATED_SUCCESSFULLY,
           type: AlertTypeEnum.SUCCESS

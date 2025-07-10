@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RoleHttpService } from './role-http.service';
+import { RoleHttpService } from '@services/http';
 
 describe('RoleHttp', () => {
   let service: RoleHttpService;

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoleSelectorFormComponent } from './role-selector-form.component';
+import { RoleSelectorFormComponent } from '@components/forms/user';
 
 describe('RoleSelector', () => {
   let component: RoleSelectorFormComponent;
