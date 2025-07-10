@@ -24,6 +24,12 @@ export enum PagesUrlsEnum {
   GAMIFICATION = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.GAMIFICATION,
   REPORTS = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.REPORTS,
 
+  // Routes of the Municipalities module
+  MUNICIPALITIES = RoutesUrlsEnum.MUNICIPALITIES,
+  MUNICIPALITY_LIST = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_LIST,
+  MUNICIPALITY_CREATE = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_CREATE,
+  MUNICIPALITY_EDIT = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_EDIT,
+
   // Routes of the Security module
   SECURITY_USER_MANAGEMENT = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
   SECURITY_CREATE_USER = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_CREATE_USER,

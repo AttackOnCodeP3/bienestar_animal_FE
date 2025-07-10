@@ -13,6 +13,9 @@
     "provideTemporaryShelter": "Brinda un refugio temporal",
     "personalInformation": "Información personal",
     "location": "Ubicación",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "delete": "Eliminar",
     "roles": "Roles"
   },
   "================== COMPONENT LABELS ==================": "",
@@ -22,7 +25,11 @@
     "home": "Inicio",
     "logout": "Cerrar sesión",
     "reports": "Reportes",
-    "user-management": "Gestión de usuarios"
+    "user-management": "Gestión de usuarios",
+    "municipalities": "Gestión de municipalidades",
+    "viewMunicipalities": "Ver municipalidades",
+    "createMunicipality": "Crear municipalidad",
+    "logout": "Cerrar sesión"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",

@@ -1,21 +1,19 @@
+
 import {Canton} from './canton';
+import {MunicipalityStatusEnum} from '@common/enums';
 
-/**
- * Municipality model representing a local government area.
- * @author dgutierrez
- */
-export class Municipality {
-  id: number | null;
-  name: string | null;
-  address: string | null;
-  email: string | null;
-  canton: Canton | null;
-
-  constructor(values: Partial<Municipality> = {}) {
-    this.id = values.id ??= null;
-    this.name = values.name ??= null;
-    this.address = values.address ??= null;
-    this.email = values.email ??= null;
-    this.canton = values.canton ??= null;
-  }
+export interface Municipality {
+  id: number;
+  name: string;
+  address?: string;
+  phone?: string;
+  email: string;
+  responsibleName?: string;
+  responsibleRole?: string;
+  responsibleEmail?: string;
+  status: MunicipalityStatusEnum;
+  canton: Canton;
+  logo?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import {AlertService} from '@services/general';
 
-import { AlertService } from './alert-service';
 
 describe('Alert', () => {
   let service: AlertService;

@@ -16,12 +16,19 @@
     "home": "Home",
     "logout": "Logout",
     "reports": "Reports",
-    "user-management": "User Management"
+    "user-management": "User Management",
+    "municipalities": "Municipality Management",
+    "viewMunicipalities": "View Municipalities",
+    "createMunicipality": "Create Municipality",
+    "logout": "Logout"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
     "personalInformation": "Personal Information",
     "location": "Location",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
     "roles": "Roles"
   },
   "it-worked-as-nursery-home-form-component": {

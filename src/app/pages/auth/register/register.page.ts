@@ -13,7 +13,7 @@ import {
 } from '@components/forms/user';
 import {Constants} from '@common/constants/constants';
 import {AlertService, FormsService, I18nService} from '@services/general';
-import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
+import {AlertTypeEnum, MunicipalityStatusEnum, PagesUrlsEnum} from '@common/enums';
 import {
   AuthHttpService,
   CantonHttpService,
@@ -97,7 +97,14 @@ export class RegisterPage implements OnInit {
     const registerUserRequestDTO = RegisterUserRequestDTO.fromUser(
       new User({
         ...rest,
-        municipality: new Municipality({id: volunteerMunicipality?.id})
+        municipality: {
+          id: volunteerMunicipality?.id ?? 0,
+          name: volunteerMunicipality?.name ?? '',
+          email: volunteerMunicipality?.email ?? '',
+          status: volunteerMunicipality?.status ?? MunicipalityStatusEnum.ACTIVE,
+          canton: volunteerMunicipality?.canton ?? { id: 0, name: '' }
+        }
+
       }),
       this.userRegistrationFormService.volunteerIntent()
     );

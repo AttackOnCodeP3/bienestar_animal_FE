@@ -7,3 +7,5 @@ export * from "./rolesEnum";
 export * from "./route-params.enum";
 export * from "./routes-urls.enum";
 export * from "./svg-icons.enum";
+export * from './municipality-status.enum';
+

@@ -20,31 +20,36 @@ export class BaseHttpService<T> {
     return Constants.apiBaseUrl + this.source;
   }
 
+  /** Returns IResponse with metadata */
   find(id: string | number): Observable<IResponse<T>> {
     return this.http.get<IResponse<T>>(this.sourceUrl + '/' + id);
+  }
+
+  /** Returns only the T data */
+  getOne(id: number): Observable<T> {
+    return this.http.get<T>(this.sourceUrl + '/' + id);
   }
 
   findAll(): Observable<IResponse<T[]>> {
     return this.http.get<IResponse<T[]>>(this.sourceUrl);
   }
 
-  fetchAllPaginated(
-    {
-      updateSignal,
-      page,
-      size,
-      setSearchMeta,
-      setTotalItems,
-      context
-    }: {
-      updateSignal: WritableSignal<T[]>;
-      page: number;
-      size: number;
-      setSearchMeta: (meta: Partial<ISearch>) => void;
-      setTotalItems: (totalPages: number) => void;
-      context: string;
-    }) {
-    return this.findAllWithParams({page, size}).subscribe({
+  fetchAllPaginated({
+                      updateSignal,
+                      page,
+                      size,
+                      setSearchMeta,
+                      setTotalItems,
+                      context
+                    }: {
+    updateSignal: WritableSignal<T[]>;
+    page: number;
+    size: number;
+    setSearchMeta: (meta: Partial<ISearch>) => void;
+    setTotalItems: (totalPages: number) => void;
+    context: string;
+  }): void {
+    this.findAllWithParams({page, size}).subscribe({
       next: (res) => {
         this.logService.debug({
           message: `Fetched data from ${context}`,
@@ -105,41 +110,31 @@ export class BaseHttpService<T> {
     let queryParams = new HttpParams();
     Object.keys(params).forEach(key => {
       queryParams = queryParams.append(key, params[key]);
-    })
+    });
     return queryParams;
   }
 
   /**
    * Handles errors from HTTP requests and displays an alert.
-   * @param message
-   * @param context
    */
-  handleError(
-    {
-      message,
-      context = 'HTTP Error',
-    }: {
-      message: string;
-      context?: string;
-    }): (err: any) => void {
+  handleError({
+                message,
+                context = 'HTTP Error',
+              }: {
+    message: string;
+    context?: string;
+  }): (err: any) => void {
     return (err: any) => {
       console.error(`${context}:`, err);
 
       let finalMessage = message;
 
-      // Error thrown from interceptor as `throw new Error(...)`
       if (err instanceof Error && err.message) {
         finalMessage = err.message;
-
-        // Structured backend error: { mensaje: '...' }
       } else if (err?.mensaje) {
         finalMessage = err.mensaje;
-
-        // Angular HTTP error with error.mensaje
       } else if (err?.error?.mensaje) {
         finalMessage = err.error.mensaje;
-
-        // Error como string simple
       } else if (typeof err === 'string') {
         finalMessage = err;
       }
