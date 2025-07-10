@@ -180,7 +180,8 @@
     "logout": "Logout",
     "noAccount": "Don't have an account?",
     "register": "Register",
-    "registerNow": "Register Now"
+    "registerNow": "Register Now",
+    "updateUser": "Update User"
   },
   "matSnackBarMessages": {
     "http": {

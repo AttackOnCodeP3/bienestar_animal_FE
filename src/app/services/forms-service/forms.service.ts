@@ -4,6 +4,7 @@ import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {InputType} from '@common/types';
 import {I18nService, LogService} from '@services/general';
 import {I18nFormsEnum} from '@common/enums/i18n';
+import {IIdentifiable} from '@common/interfaces';
 
 /**
  * Service for managing forms, including validation and error handling.
@@ -204,5 +205,28 @@ export class FormsService {
     this.logService.error({
       message: `FormsService: logFormErrors: Invalid fields: ${invalidFields.join(', ')}`,
     });
+  }
+
+  /**
+   * Generic function to compare objects by a key.
+   * Useful for use in compareWith of mat-select.
+   * @returns A function that compares two objects by that key.
+   * @author dgutierrez
+   */
+  getGenericCompareFn<T>(key: keyof T): (o1: T | null, o2: T | null) => boolean {
+    return (o1: T | null, o2: T | null): boolean => {
+      return !!o1 && !!o2 && o1[key] === o2[key];
+    };
+  }
+
+  /**
+   * Generic comparison function for objects implementing IIdentifiable.
+   * @param o1 Object 1 to compare, must implement IIdentifiable interface.
+   * @param o2 Object 2 to compare, must implement IIdentifiable interface.
+   * @return True if both objects have the same id, false otherwise.
+   * @author dgutierrez
+   */
+  genericCompare<T extends IIdentifiable>(o1: T, o2: T): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
 }

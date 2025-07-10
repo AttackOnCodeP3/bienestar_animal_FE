@@ -14,7 +14,6 @@ import {UserRegistrationFormService} from '@services/forms';
 import {
   CantonHttpService,
   DistrictHttpService,
-  InterestHttpService,
   MunicipalityHttpService,
   RoleHttpService,
   UserHttpService
@@ -48,23 +47,26 @@ export class CreateUserPage implements OnInit {
   readonly districtHttpService = inject(DistrictHttpService);
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
-  readonly interestHttpService = inject(InterestHttpService);
   readonly municipalityHttpService = inject(MunicipalityHttpService);
   readonly roleHttpService = inject(RoleHttpService);
   readonly userHttpService = inject(UserHttpService);
   readonly userRegistrationFormService = inject(UserRegistrationFormService);
 
   ngOnInit() {
-    this.interestHttpService.getAll();
     this.municipalityHttpService.getAll();
     this.cantonHttpService.getAll();
     this.roleHttpService.getAll();
 
-    this.userRegistrationFormService.setupFormForAdminUserCreation();
+    this.userRegistrationFormService.setupFormForAdminUserCreationOrUpdate();
   }
 
   onSubmit() {
-    if (!this.validForms()) {
+    const validationResult = this.userRegistrationFormService.validateUserRegistrationForms();
+
+    if (validationResult) {
+      const { form, errorMessageKey } = validationResult;
+      this.formsService.markFormTouchedAndDirty(form);
+      this.alertService.displayAlert({ messageKey: errorMessageKey });
       return;
     }
    this.registerUser();
@@ -75,7 +77,7 @@ export class CreateUserPage implements OnInit {
    * @author dgutierrez
    */
   private registerUser() {
-    const userData = this.getFormsUserData();
+    const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
     const registerUserRequest = RegisterUserRequestDTO.fromUser(new User({
       ...userData,
       roles: userData?.roles?.map(role => new Role({id: role.id})) ?? []
@@ -94,48 +96,6 @@ export class CreateUserPage implements OnInit {
         });
       }
     })
-  }
-
-  /**
-   * Validates the forms used in the user registration process.
-   * @author
-   */
-  private validForms(): boolean {
-    const {formUserRegistration, formUserRoleSelector} = this.userRegistrationFormService;
-
-    const invalidForms = [
-      {
-        form: formUserRegistration,
-        errorMessageKey: I18nPagesValidationsEnum.GENERAL_INVALID_FIELDS,
-      },
-      {
-        form: formUserRoleSelector,
-        errorMessageKey: I18nPagesValidationsEnum.CREATE_USER_PAGE_ROLE_REQUIRED,
-      }
-    ];
-
-    for (const {form, errorMessageKey} of invalidForms) {
-      if (form.invalid) {
-        this.formsService.markFormTouchedAndDirty(form);
-        this.alertService.displayAlert({messageKey: errorMessageKey});
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  /**
-   * Retrieves the user data from the forms.
-   * @author dgutierrez
-   */
-  private getFormsUserData() {
-    const {formUserRegistration, formUserRoleSelector} = this.userRegistrationFormService;
-
-    return {
-      ...formUserRegistration.getRawValue(),
-      roles: formUserRoleSelector.getRawValue().roles
-    };
   }
 
   /**

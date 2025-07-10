@@ -1,13 +1,16 @@
 import {inject, Injectable, signal, effect, computed} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {FormGroup} from '@angular/forms';
 import {Canton, District, Interest, Municipality, Neighborhood, Role} from '@models';
 import {matchFieldsValidations} from '@common/forms';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {I18nPagesValidationsEnum} from '@common/enums/i18n';
+import {FormsService} from '@services/general';
+import {IFormValidationError} from '@common/interfaces';
 
 @Injectable()
 export class UserRegistrationFormService {
-  private readonly fb = inject(FormBuilder);
+  private readonly formsService = inject(FormsService)
   readonly formUserRegistration = this.buildUserForm();
   readonly formUserRoleSelector = this.buildUserFormRoleSelector();
 
@@ -55,11 +58,11 @@ export class UserRegistrationFormService {
   }
 
   /**
-   * Sets up the form for admin user creation by disabling certain fields.
+   * Sets up the form for admin user creation or update by disabling certain fields.
    * This method is called when the form is used to create a user by an admin.
    * @author dgutierrez
    */
-  setupFormForAdminUserCreation(): void {
+  setupFormForAdminUserCreationOrUpdate(): void {
     this.disableFormFieldsCreateUserByAdmin();
   }
 
@@ -69,7 +72,7 @@ export class UserRegistrationFormService {
    * @author gutierrez
    */
   private buildUserForm() {
-    return this.fb.group({
+    return this.formsService.formsBuilder.group({
       identificationCard: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
@@ -94,7 +97,7 @@ export class UserRegistrationFormService {
    * @author dgutierrez
    */
   private buildUserFormRoleSelector() {
-    return this.fb.group({
+    return this.formsService.formsBuilder.group({
       roles: new FormControl<Role[]>([], [Validators.required]),
     });
   }
@@ -212,5 +215,45 @@ export class UserRegistrationFormService {
    */
   resetUserRoleSelector() {
     this.formUserRoleSelector.reset();
+  }
+
+  /**
+   * Retrieves the user data from the forms.
+   * @author dgutierrez
+   */
+  buildUserPayloadFromForms() {
+    return {
+      ...this.formUserRegistration.getRawValue(),
+      roles: this.formUserRoleSelector.getRawValue().roles
+    };
+  }
+
+  /**
+   * Validates both forms and returns the first invalid form and its error key.
+   * @returns IFormValidationError | null
+   * If all forms are valid, returns null.
+   * @author dgutierrez
+   */
+  validateUserRegistrationForms(): IFormValidationError | null {
+    const { formUserRegistration, formUserRoleSelector } = this;
+
+    const invalidForms = [
+      {
+        form: formUserRegistration,
+        errorMessageKey: I18nPagesValidationsEnum.GENERAL_INVALID_FIELDS,
+      },
+      {
+        form: formUserRoleSelector,
+        errorMessageKey: I18nPagesValidationsEnum.CREATE_USER_PAGE_ROLE_REQUIRED,
+      },
+    ];
+
+    for (const { form, errorMessageKey } of invalidForms) {
+      if (form.invalid) {
+        return { form, errorMessageKey };
+      }
+    }
+
+    return null;
   }
 }

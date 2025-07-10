@@ -180,7 +180,8 @@
     "logout": "Cerrar sesión",
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
-    "registerNow": "Regístrate ahora"
+    "registerNow": "Regístrate ahora",
+    "updateUser": "Actualizar usuario"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

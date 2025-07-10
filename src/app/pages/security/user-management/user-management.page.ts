@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, computed, inject, OnInit, viewChild} from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
-import {MatButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatSlideToggle, MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -28,6 +28,7 @@ import {PagesUrlsEnum} from '@common/enums';
     MatSlideToggle,
     MatTableModule,
     TranslatePipe,
+    MatIconButton,
   ],
   templateUrl: './user-management.page.html',
   styleUrl: './user-management.page.scss',
@@ -96,5 +97,14 @@ export class UserManagementPage implements OnInit, AfterViewInit {
    */
   onNavigateToCreateUser() {
     this.router.navigate([PagesUrlsEnum.SECURITY_CREATE_USER])
+  }
+
+  /**
+   * Navigates to the edit user page with the specified user ID.
+   * @param userId The ID of the user to edit.
+   * @author dgutierrez
+   */
+  onNavigateToEditUser(userId:number) {
+    this.router.navigate([PagesUrlsEnum.SECURITY_EDIT_USER, userId]);
   }
 }

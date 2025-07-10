@@ -16,6 +16,12 @@ export class UserHttpService extends BaseHttpService<User> {
 
   readonly userList = signal<User[]>([]);
 
+  /**
+   * Signal to hold a user searched by ID.
+   * @author dgutierrez
+   */
+  readonly selectedUserById = signal<User | null>(null);
+
   search: ISearch = {
     page: 1,
     size: 10,
@@ -47,6 +53,25 @@ export class UserHttpService extends BaseHttpService<User> {
         this.totalItems = createPageArray(totalPages);
       },
       context: `${this.constructor.name}#getAll`,
+    });
+  }
+
+  /**
+   * Fetches a user by ID and updates the `userList` signal with the result as a single-element array.
+   * On error, shows an alert.
+   *
+   * @param id User ID to fetch.
+   * @author dgutierrez
+   */
+  getById(id: number): void {
+    this.find(id).subscribe({
+      next: (res) => {
+        this.selectedUserById.set(res.data);
+      },
+      error: this.handleError({
+        message: 'An error occurred fetching the user by ID',
+        context: `${this.constructor.name}#getById`,
+      }),
     });
   }
 

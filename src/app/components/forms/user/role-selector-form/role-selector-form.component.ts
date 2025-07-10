@@ -1,4 +1,4 @@
-import {Component, input, model} from '@angular/core';
+import {Component, computed, input, model} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatListOption, MatSelectionList} from '@angular/material/list';
 import {Constants} from '@common/constants/constants';
@@ -26,4 +26,12 @@ export class RoleSelectorFormComponent {
   readonly i18nService = input.required<I18nService>();
   readonly rolesList = input.required<Role[]>();
   readonly rolesListSelected = model<Role[]>([]);
+
+  /**
+   * Computes a function to compare roles by their IDs.
+   * This function is used to determine if two roles are equal based on their IDs.
+   * @return A function that takes two roles and returns true if their IDs match.
+   * @author dgutierrez
+   */
+  compareRolesFn = computed(() => this.formsService().getGenericCompareFn<Role>('id'));
 }

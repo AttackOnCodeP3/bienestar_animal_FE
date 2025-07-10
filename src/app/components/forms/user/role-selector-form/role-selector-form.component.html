@@ -1,9 +1,8 @@
 <form [formGroup]="form()">
-  <mat-selection-list [formControlName]="'roles'">
+  <mat-selection-list [formControlName]="'roles'" [compareWith]="compareRolesFn()">
     @for (role of rolesList(); track role.id) {
       <mat-list-option [value]="role" >{{role.description}}</mat-list-option>
     }
   </mat-selection-list>
-
 </form>
 
