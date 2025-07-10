@@ -20,7 +20,7 @@ export class BaseHttpService<T> {
     return Constants.apiBaseUrl + this.source;
   }
 
-  /** Devuelve IResponse con metadata */
+  /** Returns IResponse with metadata */
   find(id: string | number): Observable<IResponse<T>> {
     return this.http.get<IResponse<T>>(this.sourceUrl + '/' + id);
   }
