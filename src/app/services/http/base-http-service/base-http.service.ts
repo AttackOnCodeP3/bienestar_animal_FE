@@ -25,7 +25,7 @@ export class BaseHttpService<T> {
     return this.http.get<IResponse<T>>(this.sourceUrl + '/' + id);
   }
 
-  /** Devuelve solo el dato T */
+  /** Returns only the T data */
   getOne(id: number): Observable<T> {
     return this.http.get<T>(this.sourceUrl + '/' + id);
   }
