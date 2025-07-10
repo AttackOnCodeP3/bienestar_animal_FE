@@ -52,7 +52,7 @@ export class MunicipalityEditPage implements OnInit {
     this.municipalityHttpService.find(id).subscribe((response) => {
       const municipality = response.data;
 
-      console.log('Municipality loaded:', municipality);
+// Removed the console.log statement as it is not suitable for production.
 
       this.form.patchValue({
         id: municipality.id,
