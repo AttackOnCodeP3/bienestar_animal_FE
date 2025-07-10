@@ -53,7 +53,7 @@ export class EditUserPage implements OnInit {
   readonly userHttpService = inject(UserHttpService);
   readonly userRegistrationFormService = inject(UserRegistrationFormService);
 
-  userToEdit = computed(() => this.userHttpService.selectedUserById());
+  readonly userToEdit = computed(() => this.userHttpService.selectedUserById());
 
   /**
    * @author dgutierrez
@@ -61,16 +61,17 @@ export class EditUserPage implements OnInit {
   private readonly initializeFormWithUserToEditEffect = effect(() => {
     const user = this.userToEdit();
     if (user) {
-      this.pathFormToUserEdit(user);
+      this.userRegistrationFormService.populateUserRegistrationForm(user);
+      this.userRegistrationFormService.populateUserRolesForm(user);
     }
   });
 
   async ngOnInit() {
+    this.userRegistrationFormService.setupFormForAdminUserCreationOrUpdate();
     this.municipalityHttpService.getAll();
     this.cantonHttpService.getAll();
     this.roleHttpService.getAll();
     await this.inicializeUserToEdit();
-    this.userRegistrationFormService.setupFormForAdminUserCreationOrUpdate();
   }
 
   onSubmit() {
@@ -110,28 +111,6 @@ export class EditUserPage implements OnInit {
     if (userId) {
       this.userHttpService.getById(userId)
     }
-  }
-
-  /**
-   * Populates the user registration form with the data from the user object.
-   * @param user The user object containing the data to populate the form.
-   * @author dgutierrez
-   */
-  private pathFormToUserEdit(user: User) {
-    this.userRegistrationFormService.formUserRegistration.patchValue({
-      identificationCard: user.identificationCard,
-      name: user.name,
-      lastname: user.lastname,
-      birthDate: user.birthDate,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      canton: user.neighborhood?.district?.canton,
-      district: user.neighborhood?.district,
-      neighborhood: user.neighborhood,
-    });
-    this.userRegistrationFormService.formUserRoleSelector.patchValue({
-      roles: user.roles?.map(role => new Role(role)),
-    });
   }
 
   /**
