@@ -7,7 +7,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {Constants} from '@common/constants/constants';
 import {FormsService, I18nService} from '@services/general';
 import {Municipality} from '@models';
-import {fade} from '../../../../common/animations/fade/fade';
+import {fade} from '@animations/fade';
 
 @Component({
   selector: 'app-volunteer-option-form',

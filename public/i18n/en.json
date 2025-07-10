@@ -11,16 +11,18 @@
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
-    "home": "Home",
+    "create-user": "Create User",
     "gamification": "Gamification",
+    "home": "Home",
+    "logout": "Logout",
     "reports": "Reports",
-    "user-management": "User Management",
-    "logout": "Logout"
+    "user-management": "User Management"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
     "personalInformation": "Personal Information",
-    "location": "Location"
+    "location": "Location",
+    "roles": "Roles"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
@@ -129,6 +131,10 @@
     },
     "complete-profile-page": {
       "profileCompletedSuccessfully": "Profile completed successfully"
+    },
+    "create-user-page": {
+      "userCreatedSuccessfully": "User created successfully",
+      "roleRequired": "Role is required"
     }
   },
   "================== MATERIAL ==================": "",
@@ -155,7 +161,8 @@
       "status": "Status",
       "actions": "Actions",
       "active": "Active",
-      "activateDesactivate": "Activate/Deactivate"
+      "activateDesactivate": "Activate/Deactivate",
+      "block": "Block"
     },
     "emptyMessage": {
       "noDataAvailable": "No data available"
@@ -173,7 +180,8 @@
     "logout": "Logout",
     "noAccount": "Don't have an account?",
     "register": "Register",
-    "registerNow": "Register Now"
+    "registerNow": "Register Now",
+    "updateUser": "Update User"
   },
   "matSnackBarMessages": {
     "http": {

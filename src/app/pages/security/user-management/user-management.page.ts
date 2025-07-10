@@ -1,33 +1,51 @@
 import {AfterViewInit, Component, computed, inject, OnInit, viewChild} from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {Router} from '@angular/router';
+import {MatSlideToggle, MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {TranslatePipe} from '@ngx-translate/core';
 import {Constants} from '@common/constants/constants';
 import {UserHttpService} from '@services/http';
 import {User} from '@models';
-import {MatSlideToggle, MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {UpdateUserRequestDto} from '@models/dto';
 import {I18nService, TableService} from '@services/general';
-import {TranslatePipe} from '@ngx-translate/core';
 import {I18nBooleanPipe} from '@core/pipes';
 import {AsyncPipe} from '@angular/common';
+import {GeneralContainerComponent} from '@components/layout';
+import {PagesUrlsEnum} from '@common/enums';
 
 @Component({
   selector: 'app-user-management',
-  imports: [MatTableModule, MatPaginatorModule, MatSlideToggle, TranslatePipe, I18nBooleanPipe, AsyncPipe],
+  imports: [
+    AsyncPipe,
+    GeneralContainerComponent,
+    I18nBooleanPipe,
+    MatButton,
+    MatIcon,
+    MatPaginatorModule,
+    MatSlideToggle,
+    MatTableModule,
+    TranslatePipe,
+    MatIconButton,
+  ],
   templateUrl: './user-management.page.html',
   styleUrl: './user-management.page.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
 export class UserManagementPage implements OnInit, AfterViewInit {
+  private readonly router = inject(Router);
   readonly i18nService = inject(I18nService);
   readonly tableService = inject(TableService);
   readonly userHttpService = inject(UserHttpService);
-  paginator = viewChild.required(MatPaginator);
+  readonly paginator = viewChild.required(MatPaginator);
 
   displayedColumns: string[] = [
     ...Object.values(this.tableService.userManagementDisplayedColumnsTableEnum),
   ];
-  dataSource = computed(() => {
+
+  readonly dataSource = computed(() => {
     return new MatTableDataSource<User>(this.userHttpService.userList());
   })
 
@@ -72,5 +90,22 @@ export class UserManagementPage implements OnInit, AfterViewInit {
       this.userHttpService.search,
       () => this.userHttpService.getAll()
     );
+  }
+
+  /**
+   * Navigates to the create user page.
+   * @author dgutierrez
+   */
+  onNavigateToCreateUser() {
+    this.router.navigate([PagesUrlsEnum.SECURITY_CREATE_USER])
+  }
+
+  /**
+   * Navigates to the edit user page with the specified user ID.
+   * @param userId The ID of the user to edit.
+   * @author dgutierrez
+   */
+  onNavigateToEditUser(userId:number) {
+    this.router.navigate([PagesUrlsEnum.SECURITY_EDIT_USER, userId]);
   }
 }

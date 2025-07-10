@@ -14,4 +14,5 @@ export enum I18nTablesEnum {
   COLUMN_ACTIONS = I18nTablesEnum.COLUMNS + 'actions',
   COLUMN_PHONE_NUMBER = I18nTablesEnum.COLUMNS + 'phoneNumber',
   COLUMN_ACTIVATE_DESACTIVATE = I18nTablesEnum.COLUMNS + 'activateDesactivate',
+  COLUMN_BLOCK = I18nTablesEnum.COLUMNS + 'block',
 }

@@ -48,10 +48,22 @@ export abstract class UnmutableConstants {
   static readonly USERS_URL: string = UnmutableConstants.USERS;
 
   // ==================================================================
+  // ROUTES FOR ADMIN SERVICES
+  // =================================================================
+  private static readonly ADMIN: string = '/admin'
+  static readonly ADMIN_REGISTER_USER_URL: string = UnmutableConstants.ADMIN;
+
+  // ==================================================================
   // ROUTES FOR INTEREST SERVICES
   // =================================================================
   private static readonly INTERESTS: string = '/interests'
-  static readonly GET_ALL_INTERESTS_URL: string = UnmutableConstants.INTERESTS;
+  static readonly INTERESTS_URL: string = UnmutableConstants.INTERESTS;
+
+  // ==================================================================
+  // ROUTES FOR ROLE SERVICES
+  // =================================================================
+  private static readonly ROLES: string = '/roles'
+  static readonly ROLES_URL: string = UnmutableConstants.ROLES;
 
   // ==================================================================
   // ROUTES FOR MUNICIPALITY SERVICES

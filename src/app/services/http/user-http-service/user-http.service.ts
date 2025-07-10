@@ -5,7 +5,7 @@ import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';
 import {Constants} from '@common/constants/constants';
 import {ISearch} from '@common/interfaces/http';
-import {UpdateUserRequestDto} from '@models/dto';
+import {RegisterUserRequestDTO, UpdateUserRequestDto} from '@models/dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,12 @@ export class UserHttpService extends BaseHttpService<User> {
   protected override source: string = Constants.USERS_URL;
 
   readonly userList = signal<User[]>([]);
+
+  /**
+   * Signal to hold a user searched by ID.
+   * @author dgutierrez
+   */
+  readonly selectedUserById = signal<User | null>(null);
 
   search: ISearch = {
     page: 1,
@@ -48,6 +54,36 @@ export class UserHttpService extends BaseHttpService<User> {
       },
       context: `${this.constructor.name}#getAll`,
     });
+  }
+
+  /**
+   * Fetches a user by ID and updates the `userList` signal with the result as a single-element array.
+   * On error, shows an alert.
+   *
+   * @param id User ID to fetch.
+   * @author dgutierrez
+   */
+  getById(id: number): void {
+    this.find(id).subscribe({
+      next: (res) => {
+        this.selectedUserById.set(res.data);
+      },
+      error: this.handleError({
+        message: 'An error occurred fetching the user by ID',
+        context: `${this.constructor.name}#getById`,
+      }),
+    });
+  }
+
+  /**
+   * Saves a new user to the server.
+   * @param registerUserRequestDto The user registration request DTO containing user details.
+   * @return Observable<User> The observable for the HTTP request.
+   * @author dgutierrez
+   */
+  adminRegisterUser(registerUserRequestDto:RegisterUserRequestDTO){
+    const url = Constants.apiBaseUrl + Constants.ADMIN_REGISTER_USER_URL
+    return this.http.post<RegisterUserRequestDTO>(url, registerUserRequestDto);
   }
 
   /**

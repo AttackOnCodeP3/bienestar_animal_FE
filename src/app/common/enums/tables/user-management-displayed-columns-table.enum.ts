@@ -9,5 +9,6 @@ export enum UserManagementDisplayedColumnsTableEnum {
   LASTNAME = 'lastname',
   EMAIL = 'email',
   ACTIVE = 'active',
-  ACTIONS = 'actions'
+  BLOCK = 'block',
+  ACTIONS = 'actions',
 }
