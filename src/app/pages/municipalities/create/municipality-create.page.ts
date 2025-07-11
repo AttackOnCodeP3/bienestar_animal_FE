@@ -43,12 +43,19 @@ export class MunicipalityCreatePage implements OnInit {
   submit(): void {
     if (this.form.invalid){
       this.formsService.markFormTouchedAndDirty(this.form);
-      this.alertService.displayAlert({});
+      this.alertService.displayAlert({
+        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
+      });
       return;
     }
     this.registerMunicipality();
   }
 
+  /**
+   * Registers a new municipality using the form data.
+   * @author gjimenez
+   * @modifiedBy dgutierrez 10/07/2025 refactor for more clean code
+   */
   private registerMunicipality() {
     const dto = {
       name: this.form.value.name!,
@@ -62,6 +69,11 @@ export class MunicipalityCreatePage implements OnInit {
     this.municipalityHttpService.save(dto);
   }
 
+  /**
+   *
+   * @author gjimenez
+   * @modifiedBy dgutierrez 10/07/2025 refactor for more clean code
+   */
   private buildForm() {
     return this.formsService.formsBuilder.group({
       name: new FormControl<string>('', [Validators.required]),
