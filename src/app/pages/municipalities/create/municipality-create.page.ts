@@ -1,32 +1,39 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import {MunicipalityHttpService} from '@services/http';
-import {CreateMunicipalityRequestDTO} from '@models/dto';
+import {CantonHttpService, MunicipalityHttpService} from '@services/http';
+import {FormsService, I18nService} from '@services/general';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-municipality-create',
-  standalone: true,
   templateUrl: './municipality-create.page.html',
   styleUrls: ['./municipality-create.page.scss'],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    ReactiveFormsModule,
+    TranslatePipe
   ]
 })
-export class MunicipalityCreatePage {
-  private readonly fb = inject(FormBuilder);
+export class MunicipalityCreatePage implements OnInit {
   private readonly municipalityHttpService = inject(MunicipalityHttpService);
+  readonly cantonHttpService = inject(CantonHttpService);
+  readonly formsService = inject(FormsService);
+  readonly i18nService = inject(I18nService);
 
-  form = this.fb.group({
+  /**
+   * @author gjimenez
+   * @modifiedby dgutierrez 10/07/2025 change the implementation to use FormsService
+   */
+  form = this.formsService.formsBuilder.group({
     name: ['', Validators.required],
     address: [''],
     phone: [''],
@@ -35,6 +42,10 @@ export class MunicipalityCreatePage {
     responsibleName: [''],
     responsiblePosition: ['']
   });
+
+  ngOnInit() {
+    this.cantonHttpService.getAll();
+  }
 
   submit(): void {
     if (this.form.valid) {
@@ -50,5 +61,4 @@ export class MunicipalityCreatePage {
       this.municipalityHttpService.save(dto);
     }
   }
-
 }

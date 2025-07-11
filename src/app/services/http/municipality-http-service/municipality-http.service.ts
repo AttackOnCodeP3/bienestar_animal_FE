@@ -7,6 +7,10 @@ import {createPageArray} from '@common/utils';
 import {Municipality} from '@models';
 import {CreateMunicipalityRequestDTO, UpdateMunicipalityRequestDTO} from '@models/dto';
 
+/**
+ * Service for managing municipalities via HTTP requests.
+ * @author dgutierrez
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +27,11 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
 
   totalItems: number[] = [];
 
+  /**
+   * Fetches all municipalities with pagination.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   */
   getAll(): void {
     this.fetchAllPaginated({
       updateSignal: this.municipalityList,
@@ -38,10 +47,20 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     });
   }
 
+  /**
+   * Fetches a single municipality by ID.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   */
   getById(id: number) {
     return this.getOne(id);
   }
 
+  /**
+   * Adds a new municipality.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   */
   save(dto: CreateMunicipalityRequestDTO): void {
     this.add(dto).subscribe({
       next: (response) => {
@@ -58,6 +77,11 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     });
   }
 
+  /**
+   * Updates an existing municipality.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   */
   update(municipality: UpdateMunicipalityRequestDTO): void {
     if (!municipality.id) {
       this.alertService.displayAlert({
@@ -82,6 +106,11 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     });
   }
 
+  /**
+   * Deletes a municipality by ID.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   */
   delete(municipality: Municipality): void {
     this.del(municipality.id).subscribe({
       next: (response) => {

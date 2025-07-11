@@ -79,13 +79,13 @@ export class DashboardLayoutComponent {
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
-      route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
+      route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_USER_MANAGEMENT}`,
       click: () => {
       },
       children: [
         {
           label: I18nMenuEnum.USER_MANAGEMENT,
-          route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
+          route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_USER_MANAGEMENT}`,
           click: () => {
             this.closeSidenav()
           },
@@ -93,7 +93,7 @@ export class DashboardLayoutComponent {
         },
         {
           label: I18nMenuEnum.CREATE_USER,
-          route: RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_CREATE_USER,
+          route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_CREATE_USER}`,
           click: () => {
             this.closeSidenav()
           },
@@ -103,26 +103,18 @@ export class DashboardLayoutComponent {
       authorities: [RolesEnum.SUPER_ADMIN],
     },
     {
-      icon: 'logout',
-      label: I18nMenuEnum.LOGOUT,
-      route: RoutesUrlsEnum.VOID_ROUTE,
-      click: () => this.authHttpService.logout(),
-      authorities: [...this.allRoles()]
-    },
-    {
       icon: 'apartment',
       label: I18nMenuEnum.MUNICIPALITIES,
-      route: '',
       authorities: [RolesEnum.SUPER_ADMIN],
       children: [
         {
-          label: 'menu.viewMunicipalities',
-          route: `/${RoutesUrlsEnum.DASHBOARD}/${RoutesUrlsEnum.MUNICIPALITIES}/${RoutesUrlsEnum.MUNICIPALITY_LIST}`,
+          label: I18nMenuEnum.VIEW_MUNICIPALITIES,
+          route: `${RoutesUrlsEnum.MUNICIPALITIES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MUNICIPALITY_LIST}`,
           authorities: [RolesEnum.SUPER_ADMIN],
         },
         {
-          label: 'menu.createMunicipality',
-          route: `/${RoutesUrlsEnum.DASHBOARD}/${RoutesUrlsEnum.MUNICIPALITIES}/${RoutesUrlsEnum.MUNICIPALITY_CREATE}`,
+          label: I18nMenuEnum.CREATE_MUNICIPALITY,
+          route: `${RoutesUrlsEnum.MUNICIPALITIES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MUNICIPALITY_CREATE}`,
           authorities: [RolesEnum.SUPER_ADMIN],
         },
       ],
@@ -130,10 +122,17 @@ export class DashboardLayoutComponent {
     {
       icon: 'pets',
       label: 'menu.gamification',
-      route: `/${RoutesUrlsEnum.DASHBOARD}/${RoutesUrlsEnum.GAMIFICATION}`,
+      route: `${RoutesUrlsEnum.GAMIFICATION}`,
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER],
-      click: () => {},
-    }
+      click: () => this.closeSidenav(),
+    },
+    {
+      icon: 'logout',
+      label: I18nMenuEnum.LOGOUT,
+      route: RoutesUrlsEnum.VOID_ROUTE,
+      click: () => this.authHttpService.logout(),
+      authorities: [...this.allRoles()]
+    },
   ])
 
   /**

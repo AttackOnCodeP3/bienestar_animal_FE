@@ -12,15 +12,14 @@
   "================== COMPONENT LABELS ==================": "",
   "menu": {
     "create-user": "Create User",
+    "createMunicipality": "Create Municipality",
     "gamification": "Gamification",
     "home": "Home",
     "logout": "Logout",
+    "municipalities": "Municipality Management",
     "reports": "Reports",
     "user-management": "User Management",
-    "municipalities": "Municipality Management",
-    "viewMunicipalities": "View Municipalities",
-    "createMunicipality": "Create Municipality",
-    "logout": "Logout"
+    "viewMunicipalities": "View Municipalities"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
@@ -49,6 +48,7 @@
   "================== INPUT LABELS =====================": "",
   "inputs": {
     "labels": {
+      "address": "Address",
       "age": "Age",
       "ageAccordingToObservation": "Age According to Observation",
       "animalCondition": "Animal Condition",
@@ -72,9 +72,11 @@
       "phoneNumber": "Phone Number",
       "pleaseSelectACanton": "Please select a canton",
       "pleaseSelectADistrict": "Please select a district",
-      "pleaseSelectANeighborhood": "Please select a neighborhood",
       "pleaseSelectAMunicipality": "Please select a municipality",
+      "pleaseSelectANeighborhood": "Please select a neighborhood",
       "productName": "Product Name",
+      "responsibleName": "Responsible Name",
+      "responsiblePosition": "Responsible Position",
       "sex": "Sex",
       "species": "Species",
       "status": "Status"
@@ -90,6 +92,7 @@
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
+      "address": "Enter address",
       "age": "Enter age",
       "ageAccordingToObservation": "Enter age according to observation",
       "animalCondition": "Select animal condition",
@@ -105,13 +108,15 @@
       "identificationCard": "Enter the identification card",
       "isNurseryHome": "Select if it is a nursery home",
       "lastName": "Enter last name",
+      "municipality": "Select municipality",
       "name": "Enter name",
       "neighborhoodCommunityOrVillage": "Enter neighborhood/community or village",
       "newPassword": "Enter new password",
       "password": "Enter password",
       "phoneNumber": "Enter the phone number",
       "productName": "Enter product name",
-      "municipality": "Select municipality",
+      "responsibleName": "Enter the name of the responsible",
+      "responsiblePosition": "Enter the position of the responsible",
       "species": "Select species",
       "status": "Select status"
     }
@@ -181,6 +186,7 @@
     "close": "Close",
     "closeSession": "Close Session",
     "completeProfile": "Complete Profile",
+    "createMunicipality": "Create Municipality",
     "createYourAccountHere": "Create your account here",
     "forgotPassword": "Forgot Password?",
     "login": "Login",

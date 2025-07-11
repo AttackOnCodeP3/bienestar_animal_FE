@@ -9,6 +9,7 @@ export enum  I18nButtonsEnum {
   BUTTON_CLOSE = I18nButtonsEnum.BUTTONS + "close",
   BUTTON_CLOSE_SESSION = I18nButtonsEnum.BUTTONS + "closeSession",
   BUTTON_COMPLETE_PROFILE = I18nButtonsEnum.BUTTONS + "completeProfile",
+  BUTTON_CREATE_MUNICIPALITY = I18nButtonsEnum.BUTTONS + "createMunicipality",
   BUTTON_CREATE_YOUR_ACCOUNT_HERE = I18nButtonsEnum.BUTTONS + "createYourAccountHere",
   BUTTON_FORGOT_PASSWORD = I18nButtonsEnum.BUTTONS + "forgotPassword",
   BUTTON_LOGIN = I18nButtonsEnum.BUTTONS + "login",
