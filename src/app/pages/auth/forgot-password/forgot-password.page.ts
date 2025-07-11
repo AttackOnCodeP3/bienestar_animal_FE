@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TranslatePipe } from '@ngx-translate/core';
-
+import { ForgotPwHttpService } from '@services/http';
+import { AlertService } from '@services/general';
 
 @Component({
   selector: 'app-forgot-password',
@@ -24,37 +25,25 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class ForgotPasswordPage {
 
-  // Signals for state
-  loading = signal(false);
-  success = signal(false);
-  error = signal<string | null>(null);
+  private readonly ForgotPwHttpService = inject(ForgotPwHttpService);
 
+  loading = signal(false);
 
   email = new FormControl('', [Validators.required, Validators.email]);
+
+  forgotPasswordForm = new FormGroup({
+    email: this.email
+  });
 
   constructor(private http: HttpClient) {}
 
   send() {
+    console.log('send');
     if (this.email.invalid) return;
     this.loading.set(true);
-    this.error.set(null);
-    this.success.set(false);
 
-   
-    this.http.post('/api/auth/forgot-password', { email: this.email.value }).subscribe({
-      next: () => {
-        this.success.set(true);
-        this.loading.set(false);
-      },
-      error: (err) => {
-        // Optionally extract error message
-        this.error.set('Something went wrong. Please try again.');
-        this.loading.set(false);
-      }
-    });
+    console.log(this.email)
+
+    this.ForgotPwHttpService.save(this.email.value ?? '')
   }
-}
-
-function inject(I18nService: any) {
-  throw new Error('Function not implemented.');
 }

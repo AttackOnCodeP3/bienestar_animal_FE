@@ -7,3 +7,4 @@ export * from "./municipality-http-service/municipality-http.service";
 export * from "./neighborhood-http-service/neighborhood-http.service";
 export * from "./role-http-service/role-http.service";
 export * from "./user-http-service/user-http.service";
+export * from "./forgot-pw-http-service/forgot-pw-http.service";

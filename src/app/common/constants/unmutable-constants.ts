@@ -40,12 +40,14 @@ export abstract class UnmutableConstants {
   static readonly AUTH_SOCIAL_COMPLETE_USER_PROFILE_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/complete-profile'
   static readonly REQUEST_PASSWORD_CHANGE_URL: string ='/requestPasswordChange'
   static readonly URL_AUTH_WITH_GOOGLE: string = "http://localhost:8080/oauth2/authorization/google"
-
+ 
   // ==================================================================
   // ROUTES FOR USERS SERVICES
   // =================================================================
   private static readonly USERS: string = '/users'
   static readonly USERS_URL: string = UnmutableConstants.USERS;
+   static readonly FORGOT_PASSWORD_URL: string = UnmutableConstants.USERS + '/forgot-password';
+ 
 
   // ==================================================================
   // ROUTES FOR ADMIN SERVICES
