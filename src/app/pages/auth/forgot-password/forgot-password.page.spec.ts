@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForgotPasswordPage } from './forgot-password.page';
 
-describe('ForgotPassword', () => {
+describe('ForgotPasswordPage', () => {
   let component: ForgotPasswordPage;
   let fixture: ComponentFixture<ForgotPasswordPage>;
 
