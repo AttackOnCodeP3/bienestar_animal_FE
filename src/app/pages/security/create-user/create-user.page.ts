@@ -64,12 +64,12 @@ export class CreateUserPage implements OnInit {
     const validationResult = this.userRegistrationFormService.validateUserRegistrationForms();
 
     if (validationResult) {
-      const { form, errorMessageKey } = validationResult;
+      const {form, errorMessageKey} = validationResult;
       this.formsService.markFormTouchedAndDirty(form);
-      this.alertService.displayAlert({ messageKey: errorMessageKey });
+      this.alertService.displayAlert({messageKey: errorMessageKey});
       return;
     }
-   this.registerUser();
+    this.registerUser();
   }
 
   /**
@@ -77,12 +77,9 @@ export class CreateUserPage implements OnInit {
    * @author dgutierrez
    */
   private registerUser() {
-    const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
-    const registerUserRequest = RegisterUserRequestDTO.fromUser(new User({
-      ...userData,
-      roles: userData?.roles?.map(role => new Role({id: role.id})) ?? []
-    }));
-    this.userHttpService.adminRegisterUser(registerUserRequest).subscribe({
+    this.userHttpService.adminRegisterUser(
+      this.buildCreateUserRequestDTO()
+    ).subscribe({
       next: (_) => {
         this.alertService.displayAlert({
           messageKey: I18nPagesValidationsEnum.CREATE_USER_PAGE_USER_CREATED_SUCCESSFULLY,
@@ -96,6 +93,18 @@ export class CreateUserPage implements OnInit {
         });
       }
     })
+  }
+
+  /**
+   * Builds the request DTO for creating a user.
+   * @author dgutierrez
+   */
+  private buildCreateUserRequestDTO() {
+    const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
+    return RegisterUserRequestDTO.fromUser(new User({
+      ...userData,
+      roles: userData?.roles?.map(role => new Role({id: role.id})) ?? []
+    }));
   }
 
   /**

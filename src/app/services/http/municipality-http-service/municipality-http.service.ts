@@ -6,15 +6,25 @@ import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';
 import {Municipality} from '@models';
 import {CreateMunicipalityRequestDTO, UpdateMunicipalityRequestDTO} from '@models/dto';
+import {FormGroup} from '@angular/forms';
 
+/**
+ * Service for managing municipalities via HTTP requests.
+ * @author dgutierrez
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class MunicipalityHttpService extends BaseHttpService<Municipality> {
 
-  protected override source = '/municipalities';
+  protected override source = Constants.MUNICIPALITIES_URL;
 
   readonly municipalityList = signal<Municipality[]>([]);
+  /**
+   * Signal to hold a municipality searched by ID.
+   * @author dgutierrez
+   */
+  readonly selectedMunicipalityId = signal<Municipality | null>(null);
 
   search: ISearch = {
     page: 1,
@@ -23,6 +33,11 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
 
   totalItems: number[] = [];
 
+  /**
+   * Fetches all municipalities with pagination.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 Updated pagination logic to include meta and total items handling.
+   */
   getAll(): void {
     this.fetchAllPaginated({
       updateSignal: this.municipalityList,
@@ -38,17 +53,35 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     });
   }
 
+  /**
+   * Fetches a single municipality by ID.
+   * @author dgutierrez
+   */
   getById(id: number) {
-    return this.getOne(id);
+    this.find(id).subscribe({
+      next: (response) => {
+        this.selectedMunicipalityId.set(response.data);
+      },
+      error: this.handleError({
+        message: 'An error occurred fetching the municipality by ID',
+        context: `${this.constructor.name}#getById`
+      })
+    });
   }
 
-  save(dto: CreateMunicipalityRequestDTO): void {
+  /**
+   * Adds a new municipality.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   */
+  save(dto: CreateMunicipalityRequestDTO, form?: FormGroup): void {
     this.add(dto).subscribe({
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
           messageKey: response.message
         });
+        form?.reset();
         this.getAll();
       },
       error: this.handleError({
@@ -58,22 +91,26 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     });
   }
 
-  update(municipality: UpdateMunicipalityRequestDTO): void {
-    if (!municipality.id) {
-      this.alertService.displayAlert({
-        type: AlertTypeEnum.ERROR,
-        messageKey: 'Municipality ID required'
-      });
-      return;
-    }
-
-    this.edit(municipality.id, municipality).subscribe({
+  /**
+   * Updates an existing municipality.
+   *
+   * @param municipality the municipality to update
+   * @param callBack optional callback function to execute after the update
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   * @modifiedby dgutierrez 12/7/2025 add the callBack parameter to allow additional actions after the update
+   */
+  update(municipality: UpdateMunicipalityRequestDTO, callBack?: VoidFunction): void {
+    this.edit(municipality.id!, municipality).subscribe({
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
           messageKey: response.message
         });
         this.getAll();
+        if (callBack) {
+          callBack();
+        }
       },
       error: this.handleError({
         message: 'Error updating municipality',
@@ -82,6 +119,11 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     });
   }
 
+  /**
+   * Deletes a municipality by ID.
+   * @author dgutierrez
+   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   */
   delete(municipality: Municipality): void {
     this.del(municipality.id).subscribe({
       next: (response) => {

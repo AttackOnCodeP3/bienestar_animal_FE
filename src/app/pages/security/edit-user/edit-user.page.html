@@ -1,9 +1,12 @@
 <app-general-container-component>
-  <div class="d-flex justify-content-between align-items-center">
-    <h1>Editando usuario</h1>
-    <button matButton="elevated" (click)="navigateToUserManagement()"><mat-icon>
-      arrow_back
-    </mat-icon>Gestión usuarios</button>
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+    <h1>{{ i18nService.i18nPagesEnum.EDIT_USER_PAGE_TITLE | translate }}</h1>
+    <button matButton="elevated" (click)="navigateToUserManagement()">
+      <mat-icon>
+        arrow_back
+      </mat-icon>
+      {{ i18nService.i18nButtonsEnum.BUTTON_USER_MANAGEMENT | translate }}
+    </button>
   </div>
 </app-general-container-component>
 

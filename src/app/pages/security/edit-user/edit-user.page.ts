@@ -19,7 +19,7 @@ import {
   PersonalDataUserRegistrationFormComponent,
   RoleSelectorFormComponent
 } from '@components/forms/user';
-import {PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
+import {AlertTypeEnum, PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {Role, User} from '@models';
 import {UpdateUserRequestDto} from '@models/dto';
@@ -53,13 +53,13 @@ export class EditUserPage implements OnInit {
   readonly userHttpService = inject(UserHttpService);
   readonly userRegistrationFormService = inject(UserRegistrationFormService);
 
-  readonly userToEdit = computed(() => this.userHttpService.selectedUserById());
+  readonly userToUpdate = computed(() => this.userHttpService.selectedUserById());
 
   /**
    * @author dgutierrez
    */
-  private readonly initializeFormWithUserToEditEffect = effect(() => {
-    const user = this.userToEdit();
+  private readonly initializeFormWithUserToUpdateEffect = effect(() => {
+    const user = this.userToUpdate();
     if (user) {
       this.userRegistrationFormService.populateUserRegistrationForm(user);
       this.userRegistrationFormService.populateUserRolesForm(user);
@@ -71,9 +71,13 @@ export class EditUserPage implements OnInit {
     this.municipalityHttpService.getAll();
     this.cantonHttpService.getAll();
     this.roleHttpService.getAll();
-    await this.inicializeUserToEdit();
+    await this.initializeUserToEdit();
   }
 
+  /**
+   * Handles the form submission for updating a user.
+   * @author dgutierrez
+   */
   onSubmit() {
     const validationResult = this.userRegistrationFormService.validateUserRegistrationForms();
     if (validationResult) {
@@ -88,29 +92,49 @@ export class EditUserPage implements OnInit {
   /**
    * Updates the user using the data from the forms.
    * @author dgutierrez
+   * @modifiedBy dgutierrez 12/07/2025 add the validation for the user ID
    */
   private updateUser() {
-    const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
-    const roles = (userData?.roles ?? []).map(role => new Role({id: role.id}));
-    const updateUserRequest = UpdateUserRequestDto.fromUser(new User({
-      ...this.userToEdit(),
-      ...userData,
-      roles
-    }));
+    const updateUserRequest = this.buildUpdateUserRequestDto();
+    if (!this.validateUserId(updateUserRequest.id)) {
+      return;
+    }
 
     this.userHttpService.update(updateUserRequest);
     this.router.navigate([PagesUrlsEnum.SECURITY_USER_MANAGEMENT])
+    this.alertService.displayAlert({
+      messageKey: this.i18nService.i18nPagesValidationsEnum.EDIT_USER_PAGE_USER_UPDATED_SUCCESSFULLY,
+      type: AlertTypeEnum.SUCCESS
+    })
+  }
+
+  /**
+   * Builds the UpdateUserRequestDto from the user registration forms.
+   * @author dgutierrez
+   */
+  private buildUpdateUserRequestDto(): UpdateUserRequestDto {
+    const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
+    const roles = (userData?.roles ?? []).map(role => new Role({id: role.id}));
+
+    return UpdateUserRequestDto.fromUser(new User({
+      ...this.userToUpdate(),
+      ...userData,
+      roles
+    }));
   }
 
   /**
    * Initializes the user to edit by retrieving the user ID from the route parameters
    * @author dgutierrez
    */
-  private async inicializeUserToEdit() {
+  private async initializeUserToEdit() {
     const userId = await this.getUserIdFromRoute();
-    if (userId) {
-      this.userHttpService.getById(userId)
+
+    if (!this.validateUserId(userId)) {
+      return;
     }
+
+    this.userHttpService.getById(userId!)
   }
 
   /**
@@ -139,5 +163,23 @@ export class EditUserPage implements OnInit {
    */
   navigateToUserManagement() {
     this.router.navigate([PagesUrlsEnum.SECURITY_USER_MANAGEMENT]);
+  }
+
+  /**
+   * Validates the user ID to ensure it is a valid number greater than zero.
+   * If the validation fails, it displays an alert and navigates to the user management page.
+   * @param userId The user ID to validate.
+   * @author dgutierrez
+   */
+  private validateUserId(userId: number | null): boolean {
+    if (userId === null || isNaN(userId) || userId <= 0) {
+      this.alertService.displayAlert({
+        type: AlertTypeEnum.ERROR,
+        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_ID_TO_UPDATE
+      });
+      this.navigateToUserManagement();
+      return false;
+    }
+    return true;
   }
 }
