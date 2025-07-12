@@ -73,10 +73,10 @@ export class MunicipalityCreatePage implements OnInit {
   /**
    * Registers a new municipality using the form data.
    * @author gjimenez
-   * @modifiedBy dgutierrez 10/07/2025 refactor for more clean code
+   * @modifiedBy dgutierrez 10/07/2025 refactor for more clean code, and pass the form for reset
    */
   private registerMunicipality() {
-    this.municipalityHttpService.save(this.buildCreateMunicipalityRequestDTO());
+    this.municipalityHttpService.save(this.buildCreateMunicipalityRequestDTO(), this.form);
   }
 
   /**
@@ -86,13 +86,13 @@ export class MunicipalityCreatePage implements OnInit {
    */
   private buildForm() {
     return this.formsService.formsBuilder.group({
-      name: new FormControl<string>('NOMBRE', [Validators.required]),
-      address: new FormControl<string>('DIRECCION'),
-      phone: new FormControl<string>('87652345'),
-      email: new FormControl<string>('a@gmail.com', [Validators.required, Validators.email]),
+      name: new FormControl<string>('', [Validators.required]),
+      address: new FormControl<string>(''),
+      phone: new FormControl<string>(''),
+      email: new FormControl<string>('', [Validators.required, Validators.email]),
       cantonId: new FormControl<number | null>(null, [Validators.required]),
-      responsibleName: new FormControl<string>('RESPONSABLE NOMBRE'),
-      responsibleRole: new FormControl<string>('Responsable CARGO')
+      responsibleName: new FormControl<string>(''),
+      responsibleRole: new FormControl<string>('')
     });
   }
 

@@ -114,9 +114,7 @@ export class MunicipalityEditPage implements OnInit {
       return;
     }
 
-    this.municipalityHttpService.update(updateDto);
-
-    this.router.navigate([PagesUrlsEnum.MUNICIPALITY_LIST]);
+    this.municipalityHttpService.update(updateDto, this.navigateToMunicipalitiesList.bind(this));
   }
 
   /**

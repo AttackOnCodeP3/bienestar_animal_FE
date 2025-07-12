@@ -77,16 +77,4 @@ export class MunicipalityListPage implements OnInit {
   navigateToEditMunicipality(id: number): void {
     this.router.navigate([PagesUrlsEnum.MUNICIPALITY_EDIT, id]);
   }
-
-  /**
-   * Deletes a municipality by its ID.
-   * @param municipalityId The ID of the municipality to delete.
-   * @author gjimenez
-   */
-  delete(municipalityId: number): void {
-    const municipality = this.municipalityHttpService.municipalityList().find(m => m.id === municipalityId);
-    if (municipality) {
-      this.municipalityHttpService.delete(municipality);
-    }
-  }
 }

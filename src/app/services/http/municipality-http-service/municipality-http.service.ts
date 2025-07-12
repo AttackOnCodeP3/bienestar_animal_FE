@@ -6,6 +6,7 @@ import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';
 import {Municipality} from '@models';
 import {CreateMunicipalityRequestDTO, UpdateMunicipalityRequestDTO} from '@models/dto';
+import {FormGroup} from '@angular/forms';
 
 /**
  * Service for managing municipalities via HTTP requests.
@@ -73,13 +74,14 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
    * @author dgutierrez
    * @modifiedby gjimenez 10/7/2025 unknown what changes he made
    */
-  save(dto: CreateMunicipalityRequestDTO): void {
+  save(dto: CreateMunicipalityRequestDTO, form?: FormGroup): void {
     this.add(dto).subscribe({
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
           messageKey: response.message
         });
+        form?.reset();
         this.getAll();
       },
       error: this.handleError({
@@ -91,10 +93,14 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
 
   /**
    * Updates an existing municipality.
+   *
+   * @param municipality the municipality to update
+   * @param callBack optional callback function to execute after the update
    * @author dgutierrez
    * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   * @modifiedby dgutierrez 12/7/2025 add the callBack parameter to allow additional actions after the update
    */
-  update(municipality: UpdateMunicipalityRequestDTO): void {
+  update(municipality: UpdateMunicipalityRequestDTO, callBack?: VoidFunction): void {
     this.edit(municipality.id!, municipality).subscribe({
       next: (response) => {
         this.alertService.displayAlert({
@@ -102,6 +108,9 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
           messageKey: response.message
         });
         this.getAll();
+        if (callBack) {
+          callBack();
+        }
       },
       error: this.handleError({
         message: 'Error updating municipality',

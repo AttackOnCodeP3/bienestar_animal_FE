@@ -3,7 +3,7 @@
 
 <app-general-container-component>
   <div class="d-flex justify-content-between align-items-center flex-wrap">
-    <h1>{{ i18nService.i18nPagesEnum.EDIT_MUNICIPALITY_PAGE_TITLE | translate }}</h1>
+    <h1>{{ i18nService.i18nPagesEnum.EDIT_MUNICIPALITY_PAGE_TITLE | translate }} <span class="color-primary">{{municipalityToUpdate()?.name}}</span> </h1>
     <button matButton="elevated" (click)="navigateToMunicipalitiesList()">
       <mat-icon>
         arrow_back
