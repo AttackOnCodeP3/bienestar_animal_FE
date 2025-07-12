@@ -21,7 +21,7 @@ export class MunicipalityStatusHttpService extends BaseHttpService<MunicipalityS
   readonly municipalityStatusList = signal<MunicipalityStatus[]>([]);
 
   /**
-   * Signal to hold a municipality serached by ID.
+   * Signal to hold a municipality searched by ID.
    * @author dgutierrez
    */
   readonly selectedMunicipalityId = signal<MunicipalityStatus | null>(null);
