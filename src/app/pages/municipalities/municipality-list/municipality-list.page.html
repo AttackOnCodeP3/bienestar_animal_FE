@@ -39,4 +39,13 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
+
+  <mat-paginator
+    [pageSizeOptions]="tableService.pageSizeOptions"
+    [length]="municipalityHttpService.search.totalElements || 0"
+    [pageSize]="municipalityHttpService.search.pageSize || municipalityHttpService.search.size"
+    [pageIndex]="(municipalityHttpService.search.pageNumber || municipalityHttpService.search.page || 1) - 1"
+    (page)="onPageChange($event)"
+    showFirstLastButtons="true">
+  </mat-paginator>
 </div>

@@ -1,21 +1,27 @@
 import {Component, computed, inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {
-  MatCell, MatCellDef,
+  MatCell,
+  MatCellDef,
   MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable, MatTableDataSource
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
+  MatTableDataSource
 } from '@angular/material/table';
+import {MatIcon} from '@angular/material/icon';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
+import {TranslatePipe} from '@ngx-translate/core';
 import {MunicipalityHttpService} from '@services/http';
 import {PagesUrlsEnum} from '@common/enums';
 import {MunicipalityManagementDisplayedColumnsTableEnum} from 'common/enums/tables';
 import {GeneralContainerComponent} from '@components/layout';
-import {MatIcon} from '@angular/material/icon';
 import {I18nService, TableService} from '@services/general';
-import {TranslatePipe} from '@ngx-translate/core';
 
 /**
  * Component for displaying a list of municipalities.
@@ -37,6 +43,7 @@ import {TranslatePipe} from '@ngx-translate/core';
     MatHeaderRow,
     MatHeaderRowDef,
     MatIcon,
+    MatPaginator,
     MatRow,
     MatRowDef,
     MatTable,
@@ -44,10 +51,10 @@ import {TranslatePipe} from '@ngx-translate/core';
   ]
 })
 export class MunicipalityListPage implements OnInit {
-  private readonly municipalityHttpService = inject(MunicipalityHttpService);
   private readonly router = inject(Router);
-  readonly tableService = inject(TableService);
   readonly i18nService = inject(I18nService);
+  readonly municipalityHttpService = inject(MunicipalityHttpService);
+  readonly tableService = inject(TableService);
 
   dataSource = computed(() => {
     return new MatTableDataSource(this.municipalityHttpService.municipalityList());
@@ -76,5 +83,18 @@ export class MunicipalityListPage implements OnInit {
    */
   navigateToEditMunicipality(id: number): void {
     this.router.navigate([PagesUrlsEnum.MUNICIPALITY_EDIT, id]);
+  }
+
+  /**
+   * Handles pagination changes for the municipality list.
+   * @param event The pagination event containing the new page index and size.
+   * @author dgutierrez
+   */
+  onPageChange(event: PageEvent) {
+    this.tableService.onPageChangeGeneric(
+      event,
+      this.municipalityHttpService.search,
+      () => this.municipalityHttpService.getAll()
+    );
   }
 }
