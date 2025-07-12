@@ -28,6 +28,7 @@ export enum RoutesUrlsEnum {
   ACCESS_DENIED = 'access-denied',
   SOCIAL_CALLBACK = 'social-callback',
   COMPLETE_PROFILE = 'complete-profile',
+  CHANGE_PASSWORD = 'change-password',
 
   // Gamification
   REWARDS_SYSTEM = 'rewards-system',
