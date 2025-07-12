@@ -13,7 +13,7 @@ export class UpdateMunicipalityRequestDTO {
   email: string | null;
   cantonId: number | null;
   responsibleName?: string | null;
-  responsiblePosition?: string | null;
+  responsibleRole?: string | null;
   municipalityStatusId?: number | null;
 
   constructor(values: Partial<UpdateMunicipalityRequestDTO> = {}) {
@@ -24,7 +24,7 @@ export class UpdateMunicipalityRequestDTO {
     this.email = values.email ??= null;
     this.cantonId = values.cantonId ??= null;
     this.responsibleName = values.responsibleName ??= null;
-    this.responsiblePosition = values.responsiblePosition ??= null;
+    this.responsibleRole = values.responsibleRole ??= null;
     this.municipalityStatusId = values.municipalityStatusId ??= null;
   }
 
@@ -44,7 +44,7 @@ export class UpdateMunicipalityRequestDTO {
       name: municipality.name,
       phone: municipality.phone,
       responsibleName: municipality.responsibleName,
-      responsiblePosition: municipality.responsibleRole,
+      responsibleRole: municipality.responsibleRole,
     });
   }
 }

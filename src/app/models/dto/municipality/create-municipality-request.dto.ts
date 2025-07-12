@@ -12,7 +12,7 @@ export class CreateMunicipalityRequestDTO {
   email: string | null;
   cantonId: number | null;
   responsibleName?: string | null;
-  responsiblePosition?: string | null;
+  responsibleRole?: string | null;
 
   constructor(values: Partial<CreateMunicipalityRequestDTO> = {}) {
     this.name = values.name ??= null;
@@ -21,7 +21,7 @@ export class CreateMunicipalityRequestDTO {
     this.email = values.email ??= null;
     this.cantonId = values.cantonId ??= null;
     this.responsibleName = values.responsibleName ??= null;
-    this.responsiblePosition = values.responsiblePosition ??= null;
+    this.responsibleRole = values.responsibleRole ??= null;
   }
 
   /**
@@ -38,7 +38,7 @@ export class CreateMunicipalityRequestDTO {
       name: municipality.name,
       phone: municipality.phone,
       responsibleName: municipality.responsibleName,
-      responsiblePosition: municipality.responsibleRole
+      responsibleRole: municipality.responsibleRole
     });
   }
 }

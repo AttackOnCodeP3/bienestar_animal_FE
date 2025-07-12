@@ -14,9 +14,31 @@
   <div class="row">
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Email</mat-label>
+        <mat-label>Responsible Name</mat-label>
+        <input matInput formControlName="responsibleName" [errorStateMatcher]="formsService.matcher" type="text" />
+        @let responsibleNameControl = form.get('responsibleName');
+        @if (formsService.isFieldInvalid(responsibleNameControl)) {
+          <mat-error>{{ formsService.getErrorMessage(responsibleNameControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Responsible Role</mat-label>
+        <input matInput formControlName="responsibleRole" [errorStateMatcher]="formsService.matcher" type="text" />
+        @let responsiblePositionControl = form.get('responsiblePosition');
+        @if (formsService.isFieldInvalid(responsiblePositionControl)) {
+          <mat-error>{{ formsService.getErrorMessage(responsiblePositionControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{i18nService.i18nFormsEnum.EMAIL_LABEL | translate }}</mat-label>
         <input
-          matInput formControlName="email" [errorStateMatcher]="formsService.matcher"
+          matInput formControlName="email" [errorStateMatcher]="formsService.matcher" [placeholder]="i18nService.i18nFormsEnum.EMAIL_PLACEHOLDER | translate" type="email"
         />
         @let emailControl = form.get('email');
         @if (formsService.isFieldInvalid(emailControl)) {
@@ -27,8 +49,8 @@
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="address" [errorStateMatcher]="formsService.matcher"/>
+        <mat-label>{{i18nService.i18nFormsEnum.ADDRESS_LABEL | translate}}</mat-label>
+        <input matInput formControlName="address" [errorStateMatcher]="formsService.matcher" [placeholder]="i18nService.i18nFormsEnum.ADDRESS_PLACEHOLDER | translate"/>
         @let addressControl = form.get('address');
         @if (formsService.isFieldInvalid(addressControl)) {
           <mat-error>{{ formsService.getErrorMessage(addressControl) }}</mat-error>
@@ -38,8 +60,8 @@
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Phone</mat-label>
-        <input matInput formControlName="phone" [errorStateMatcher]="formsService.matcher"/>
+        <mat-label>{{i18nService.i18nFormsEnum.PHONE_NUMBER_LABEL | translate}}</mat-label>
+        <input matInput formControlName="phone" [errorStateMatcher]="formsService.matcher" type="tel" [placeholder]="i18nService.i18nFormsEnum.PHONE_NUMBER_PLACEHOLDER | translate"/>
         @let phoneControl = form.get('phone');
         @if (formsService.isFieldInvalid(phoneControl)) {
           <mat-error>{{ formsService.getErrorMessage(phoneControl) }}</mat-error>
@@ -62,30 +84,8 @@
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Responsible Name</mat-label>
-        <input matInput formControlName="responsibleName" [errorStateMatcher]="formsService.matcher" />
-        @let responsibleNameControl = form.get('responsibleName');
-        @if (formsService.isFieldInvalid(responsibleNameControl)) {
-          <mat-error>{{ formsService.getErrorMessage(responsibleNameControl) }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4 mb-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Responsible Role</mat-label>
-        <input matInput formControlName="responsiblePosition" [errorStateMatcher]="formsService.matcher" />
-        @let responsiblePositionControl = form.get('responsiblePosition');
-        @if (formsService.isFieldInvalid(responsiblePositionControl)) {
-          <mat-error>{{ formsService.getErrorMessage(responsiblePositionControl) }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-4 mb-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="status" [errorStateMatcher]="formsService.matcher" [compareWith]="formsService.genericCompare">
+        <mat-label>{{i18nService.i18nFormsEnum.STATUS_LABEL | translate}}</mat-label>
+        <mat-select formControlName="status" [errorStateMatcher]="formsService.matcher" [compareWith]="formsService.genericCompare" [placeholder]="i18nService.i18nFormsEnum.STATUS_PLACEHOLDER | translate">
           <mat-option>--</mat-option>
           @for (status of municipalityStatusHttpService.municipalityStatusList(); track status.id) {
             <mat-option [value]="status">{{ status.name }}</mat-option>
@@ -97,8 +97,11 @@
         }
       </mat-form-field>
     </div>
-
   </div>
 
-  <button mat-raised-button color="primary" type="submit">Save</button>
+  <div class="text-end">
+    <button matButton="tonal" type="submit">
+      {{ i18nService.i18nButtonsEnum.BUTTON_UPDATE_MUNICIPALITY | translate }}
+    </button>
+  </div>
 </form>

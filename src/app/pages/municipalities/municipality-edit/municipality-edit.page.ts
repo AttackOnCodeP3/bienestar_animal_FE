@@ -50,7 +50,7 @@ export class MunicipalityEditPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     cantonId: [null as number | null, Validators.required],
     responsibleName: [''],
-    responsiblePosition: [''],
+    responsibleRole: [''],
     status: new FormControl<MunicipalityStatus | null>(null, [Validators.required])
   });
 
@@ -66,7 +66,7 @@ export class MunicipalityEditPage implements OnInit {
       email: municipality?.email,
       cantonId: municipality?.canton?.id ?? null,
       responsibleName: municipality?.responsibleName,
-      responsiblePosition: municipality?.responsibleRole,
+      responsibleRole: municipality?.responsibleRole,
       status: municipality?.status
     });
   })
@@ -101,10 +101,6 @@ export class MunicipalityEditPage implements OnInit {
   private updateMunicipality(): void {
     const updateDto = this.createUpdateMunicipalityRequestDTO();
     this.municipalityHttpService.update(updateDto);
-    this.alertService.displayAlert({
-      type: AlertTypeEnum.SUCCESS,
-      messageKey: this.i18nService.i18nPagesValidationsEnum.MUNICIPALITY_PAGE_MUNICIPALITY_UPDATED_SUCCESSFULLY
-    });
     this.router.navigate([PagesUrlsEnum.MUNICIPALITY_LIST]);
   }
 
