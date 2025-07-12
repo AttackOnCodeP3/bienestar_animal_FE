@@ -36,7 +36,7 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
   /**
    * Fetches all municipalities with pagination.
    * @author dgutierrez
-   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
+   * @modifiedby gjimenez 10/7/2025 Updated pagination logic to include meta and total items handling.
    */
   getAll(): void {
     this.fetchAllPaginated({
