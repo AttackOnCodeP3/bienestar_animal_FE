@@ -1,0 +1,45 @@
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      {{i18nService.i18nPagesEnum.MUNICIPALITY_PAGE_TITLE | translate}}
+    </h1>
+    <button matButton="elevated">
+      <mat-icon>add</mat-icon>
+      {{i18nService.i18nButtonsEnum.BUTTON_CREATE_MUNICIPALITY | translate}}
+    </button>
+  </div>
+</app-general-container-component>
+
+<div class="box-shadow-1">
+  <mat-table [dataSource]="dataSource()">
+    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.NAME">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_NAME | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.EMAIL">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_EMAIL | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.email }}</mat-cell>
+    </ng-container>
+
+    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.STATUS">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_STATUS | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.status.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.ACTIONS">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button matIconButton (click)="navigateToEdit(element.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button matIconButton (click)="delete(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>

@@ -10,6 +10,7 @@ export enum  I18nButtonsEnum {
   BUTTON_CLOSE_SESSION = I18nButtonsEnum.BUTTONS + "closeSession",
   BUTTON_COMPLETE_PROFILE = I18nButtonsEnum.BUTTONS + "completeProfile",
   BUTTON_CREATE_MUNICIPALITY = I18nButtonsEnum.BUTTONS + "createMunicipality",
+  BUTTON_CREATE_USER = I18nButtonsEnum.BUTTONS + "createUser",
   BUTTON_CREATE_YOUR_ACCOUNT_HERE = I18nButtonsEnum.BUTTONS + "createYourAccountHere",
   BUTTON_FORGOT_PASSWORD = I18nButtonsEnum.BUTTONS + "forgotPassword",
   BUTTON_LOGIN = I18nButtonsEnum.BUTTONS + "login",
@@ -17,5 +18,7 @@ export enum  I18nButtonsEnum {
   BUTTON_NO_ACCOUNT = I18nButtonsEnum.BUTTONS + "noAccount",
   BUTTON_REGISTER = I18nButtonsEnum.BUTTONS + "register",
   BUTTON_REGISTER_NOW = I18nButtonsEnum.BUTTONS + "registerNow",
+  BUTTON_SAVE = I18nButtonsEnum.BUTTONS + "save",
   BUTTON_UPDATE_USER = I18nButtonsEnum.BUTTONS + "updateUser",
+  BUTTON_USER_MANAGEMENT = I18nButtonsEnum.BUTTONS + "userManagement",
 }

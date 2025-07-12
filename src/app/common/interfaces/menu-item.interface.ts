@@ -26,7 +26,7 @@ export interface IMenuItem {
   /**
    * Optional click handler.
    */
-  click?: VoidFunction;
+  click: VoidFunction;
 
   /**
    * Optional children (if this is a parent).
@@ -59,11 +59,6 @@ export interface IMenuItemChild extends Omit<IMenuItem, 'icon' | 'children'> {
    * The route path associated with the child item.
    */
   route: string;
-
-  /**
-   * Optional click handler.
-   */
-  click?: VoidFunction;
 
   /**
    * Roles that can see this item.

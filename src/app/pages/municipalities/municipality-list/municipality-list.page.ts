@@ -1,5 +1,5 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, computed, inject, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -8,44 +8,47 @@ import {
   MatRow, MatRowDef,
   MatTable, MatTableDataSource
 } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button';
 import {MunicipalityHttpService} from '@services/http';
 import {PagesUrlsEnum} from '@common/enums';
-import { I18nFormsEnum } from '@common/enums/i18n/i18n-forms.enum';
-import { I18nButtonsEnum } from '@common/enums/i18n/i18n-buttons.enum';
-
-
+import {MunicipalityManagementDisplayedColumnsTableEnum} from 'common/enums/tables';
+import {GeneralContainerComponent} from '@components/layout';
+import {MatIcon} from '@angular/material/icon';
+import {I18nService, TableService} from '@services/general';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-municipality-list',
-  standalone: true,
   templateUrl: './municipality-list.page.html',
   styleUrls: ['./municipality-list.page.scss'],
   imports: [
-    MatTable,
-    MatHeaderCell,
+    GeneralContainerComponent,
+    MatButtonModule,
     MatCell,
-    MatHeaderRow,
-    MatRow,
-    MatColumnDef,
-    MatHeaderRowDef,
-    MatRowDef,
     MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
     MatHeaderCellDef,
-    MatButtonModule
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatIcon,
+    MatRow,
+    MatRowDef,
+    MatTable,
+    TranslatePipe,
   ]
 })
 export class MunicipalityListPage implements OnInit {
   private readonly municipalityHttpService = inject(MunicipalityHttpService);
   private readonly router = inject(Router);
-  readonly I18nFormsEnum = I18nFormsEnum;
-  readonly I18nGeneralEnum = I18nButtonsEnum;
+  readonly tableService = inject(TableService);
+  readonly i18nService = inject(I18nService);
 
   dataSource = computed(() => {
     return new MatTableDataSource(this.municipalityHttpService.municipalityList());
   });
 
-  displayedColumns = ['name', 'email', 'actions'];
+  readonly displayedColumns = [...Object.values(MunicipalityManagementDisplayedColumnsTableEnum)];
 
   ngOnInit(): void {
     this.municipalityHttpService.getAll();

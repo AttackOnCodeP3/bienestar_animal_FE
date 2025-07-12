@@ -47,25 +47,25 @@ export class MunicipalityEditPage implements OnInit {
   });
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.municipalityHttpService.find(id).subscribe((response) => {
-      const municipality = response.data;
-
-// Removed the console.log statement as it is not suitable for production.
-
-      this.form.patchValue({
-        id: municipality.id,
-        name: municipality.name,
-        address: municipality.address ?? '',
-        phone: municipality.phone ?? '',
-        email: municipality.email,
-        cantonId: municipality.canton?.id ?? null,
-        responsibleName: municipality.responsibleName ?? '',
-        responsiblePosition: municipality.responsibleRole ?? '',
-        status: municipality.status
-      });
-    });
+//     const id = Number(this.route.snapshot.paramMap.get('id'));
+//
+//     this.municipalityHttpService.find(id).subscribe((response) => {
+//       const municipality = response.data;
+//
+// // Removed the console.log statement as it is not suitable for production.
+//
+//       this.form.patchValue({
+//         id: municipality.id,
+//         name: municipality.name,
+//         address: municipality.address ?? '',
+//         phone: municipality.phone ?? '',
+//         email: municipality.email,
+//         cantonId: municipality.canton?.id ?? null,
+//         responsibleName: municipality.responsibleName ?? '',
+//         responsiblePosition: municipality.responsibleRole ?? '',
+//         status: municipality.status
+//       });
+//     });
   }
 
   submit(): void {

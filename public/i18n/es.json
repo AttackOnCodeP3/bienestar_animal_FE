@@ -133,6 +133,18 @@
     "title": "Complete su perfil",
     "subtitle": "Por favor complete su perfil para continuar"
   },
+  "user-management-page": {
+    "title": "Gestión de usuarios"
+  },
+  "municipalities-management-page": {
+    "title": "Gestión de municipalidades"
+  },
+  "create-user-page": {
+    "title": "Crear usuario"
+  },
+  "edit-user-page": {
+    "title": "Editando usuario"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
@@ -187,6 +199,7 @@
     "closeSession": "Cerrar sesión",
     "completeProfile": "Completar perfil",
     "createMunicipality": "Crear municipalidad",
+    "createUser": "Crear usuario",
     "createYourAccountHere": "Crea tu cuenta aquí",
     "forgotPassword": "¿Olvidó su contraseña?",
     "login": "Iniciar sesión",
@@ -194,7 +207,9 @@
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
     "registerNow": "Regístrate ahora",
-    "updateUser": "Actualizar usuario"
+    "save": "Guardar",
+    "updateUser": "Actualizar usuario",
+    "userManagement": "Gestión de usuarios"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

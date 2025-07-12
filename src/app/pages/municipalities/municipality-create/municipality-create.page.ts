@@ -5,9 +5,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import {TranslatePipe} from '@ngx-translate/core';
 import {CantonHttpService, MunicipalityHttpService} from '@services/http';
 import {AlertService, FormsService, I18nService} from '@services/general';
-import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-municipality-create',

@@ -133,6 +133,18 @@
     "title": "Complete your profile",
     "subtitle": "Please complete your profile to continue"
   },
+  "user-management-page": {
+    "title": "User Management"
+  },
+  "municipalities-management-page": {
+    "title": "Municipality Management"
+  },
+  "create-user-page": {
+    "title": "Create User"
+  },
+  "edit-user-page": {
+    "title": "Editing User"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
@@ -187,6 +199,7 @@
     "closeSession": "Close Session",
     "completeProfile": "Complete Profile",
     "createMunicipality": "Create Municipality",
+    "createUser": "Create User",
     "createYourAccountHere": "Create your account here",
     "forgotPassword": "Forgot Password?",
     "login": "Login",
@@ -194,6 +207,8 @@
     "noAccount": "Don't have an account?",
     "register": "Register",
     "registerNow": "Register Now",
+    "userManagement": "User Management",
+    "save": "Save",
     "updateUser": "Update User"
   },
   "matSnackBarMessages": {

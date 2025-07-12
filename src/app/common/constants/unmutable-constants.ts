@@ -71,6 +71,12 @@ export abstract class UnmutableConstants {
   private static readonly MUNICIPALITIES: string = '/municipalities'
   static readonly MUNICIPALITIES_URL: string = UnmutableConstants.MUNICIPALITIES;
 
+  // ==================================================================
+  // ROUTES FOR MUNICIPALITY SERVICES
+  // =================================================================
+  private static readonly MUNICIPALITIES_STATUS: string = "/municipality-statuses";
+  static readonly MUNICIPALITIES_STATUS_URL: string = UnmutableConstants.MUNICIPALITIES_STATUS;
+
   // USER
 
   //Canton, District, Neighborhood

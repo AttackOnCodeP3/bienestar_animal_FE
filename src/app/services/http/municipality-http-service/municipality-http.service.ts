@@ -16,7 +16,7 @@ import {CreateMunicipalityRequestDTO, UpdateMunicipalityRequestDTO} from '@model
 })
 export class MunicipalityHttpService extends BaseHttpService<Municipality> {
 
-  protected override source = '/municipalities';
+  protected override source = Constants.MUNICIPALITIES_URL;
 
   readonly municipalityList = signal<Municipality[]>([]);
 

@@ -106,16 +106,19 @@ export class DashboardLayoutComponent {
       icon: 'apartment',
       label: I18nMenuEnum.MUNICIPALITIES,
       authorities: [RolesEnum.SUPER_ADMIN],
+      click: () => {},
       children: [
         {
           label: I18nMenuEnum.VIEW_MUNICIPALITIES,
           route: `${RoutesUrlsEnum.MUNICIPALITIES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MUNICIPALITY_LIST}`,
           authorities: [RolesEnum.SUPER_ADMIN],
+          click: () => this.closeSidenav(),
         },
         {
           label: I18nMenuEnum.CREATE_MUNICIPALITY,
           route: `${RoutesUrlsEnum.MUNICIPALITIES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MUNICIPALITY_CREATE}`,
           authorities: [RolesEnum.SUPER_ADMIN],
+          click: () => this.closeSidenav(),
         },
       ],
     },
