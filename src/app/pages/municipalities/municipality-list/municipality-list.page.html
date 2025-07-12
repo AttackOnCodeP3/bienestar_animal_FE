@@ -3,7 +3,7 @@
     <h1>
       {{i18nService.i18nPagesEnum.MUNICIPALITY_PAGE_TITLE | translate}}
     </h1>
-    <button matButton="elevated">
+    <button matButton="elevated" (click)="navigateToCreateMunicipality()">
       <mat-icon>add</mat-icon>
       {{i18nService.i18nButtonsEnum.BUTTON_CREATE_MUNICIPALITY | translate}}
     </button>
@@ -30,7 +30,7 @@
     <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.ACTIONS">
       <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button matIconButton (click)="navigateToEdit(element.id)">
+        <button matIconButton (click)="navigateToEditMunicipality(element.id)">
           <mat-icon>edit</mat-icon>
         </button>
         <button matIconButton (click)="delete(element.id)">

@@ -1,5 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
+import {Router} from '@angular/router';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -8,8 +10,16 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {CantonHttpService, MunicipalityHttpService} from '@services/http';
 import {AlertService, FormsService, I18nService} from '@services/general';
-import {AlertTypeEnum} from '@common/enums';
+import {PagesUrlsEnum} from '@common/enums';
+import {GeneralContainerComponent} from '@components/layout';
+import {CreateMunicipalityRequestDTO} from '@models/dto';
+import {Canton, Municipality} from '@models';
 
+/**
+ * Component for creating a new municipality.
+ * @author gjimenez
+ * @modifiedby dgutierrez 12/07/2025 refactor for more clean code and adjustments in the form
+ */
 @Component({
   selector: 'app-municipality-create',
   templateUrl: './municipality-create.page.html',
@@ -21,15 +31,18 @@ import {AlertTypeEnum} from '@common/enums';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    TranslatePipe
+    TranslatePipe,
+    GeneralContainerComponent,
+    MatIcon
   ]
 })
 export class MunicipalityCreatePage implements OnInit {
+  private readonly alertService = inject(AlertService);
   private readonly municipalityHttpService = inject(MunicipalityHttpService);
+  private readonly router = inject(Router);
   readonly cantonHttpService = inject(CantonHttpService);
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
-  private readonly alertService = inject(AlertService);
 
   /**
    * @author gjimenez
@@ -41,8 +54,13 @@ export class MunicipalityCreatePage implements OnInit {
     this.cantonHttpService.getAll();
   }
 
+  /**
+   * Submits the form to create a new municipality.
+   * @author gjimenez
+   * @modifiedBy dgutierrez 12/07/2025 refactor for more clean code
+   */
   submit(): void {
-    if (this.form.invalid){
+    if (this.form.invalid) {
       this.formsService.markFormTouchedAndDirty(this.form);
       this.alertService.displayAlert({
         messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
@@ -58,36 +76,46 @@ export class MunicipalityCreatePage implements OnInit {
    * @modifiedBy dgutierrez 10/07/2025 refactor for more clean code
    */
   private registerMunicipality() {
-    const dto = {
-      name: this.form.value.name!,
-      address: this.form.value.address || '',
-      phone: this.form.value.phone || '',
-      email: this.form.value.email!,
-      cantonId: Number(this.form.value.cantonId),
-      responsibleName: this.form.value.responsibleName || '',
-      responsiblePosition: this.form.value.responsiblePosition || ''
-    };
-    this.municipalityHttpService.save(dto);
-    this.alertService.displayAlert({
-      messageKey: this.i18nService.i18nPagesValidationsEnum.CREATE_MUNICIPALITY_PAGE_MUNICIPALITY_CREATED_SUCCESSFULLY,
-      type: AlertTypeEnum.SUCCESS
-    })
+    this.municipalityHttpService.save(this.buildCreateMunicipalityRequestDTO());
   }
 
   /**
-   *
+   * Builds the form for creating a municipality.
    * @author gjimenez
    * @modifiedBy dgutierrez 10/07/2025 refactor for more clean code
    */
   private buildForm() {
     return this.formsService.formsBuilder.group({
-      name: new FormControl<string>('', [Validators.required]),
-      address: new FormControl<string>(''),
-      phone: new FormControl<string>(''),
-      email: new FormControl<string>('', [Validators.required, Validators.email]),
-      cantonId: [-1, Validators.required],
-      responsibleName: new FormControl<string>(''),
-      responsiblePosition: new FormControl<string>('')
+      name: new FormControl<string>('NOMBRE', [Validators.required]),
+      address: new FormControl<string>('DIRECCION'),
+      phone: new FormControl<string>('87652345'),
+      email: new FormControl<string>('a@gmail.com', [Validators.required, Validators.email]),
+      cantonId: new FormControl<number | null>(null, [Validators.required]),
+      responsibleName: new FormControl<string>('RESPONSABLE NOMBRE'),
+      responsibleRole: new FormControl<string>('Responsable CARGO')
     });
+  }
+
+  /**
+   * Builds the request DTO for creating a municipality.
+   * @author dgutierrez
+   */
+  private buildCreateMunicipalityRequestDTO(): CreateMunicipalityRequestDTO {
+    const {cantonId, ...rest} = this.form.getRawValue();
+
+    return CreateMunicipalityRequestDTO.fromMunicipality(new Municipality({
+      ...rest,
+      canton: new Canton({
+        id: cantonId
+      })
+    }));
+  }
+
+  /**
+   * Navigates to the municipalities list page.
+   * @author dgutierrez
+   */
+  navigateToMunicipalitiesList() {
+    this.router.navigate([PagesUrlsEnum.MUNICIPALITY_LIST]);
   }
 }

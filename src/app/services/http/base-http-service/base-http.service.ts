@@ -145,7 +145,7 @@ export class BaseHttpService<T> {
 
       let finalMessage = message;
 
-        // Error thrown from interceptor as `throw new Error(...)`
+      // Error thrown from interceptor as `throw new Error(...)`
       if (err instanceof Error && err.message) {
         finalMessage = err.message;
         // Structured backend error: { mensaje: '...' }

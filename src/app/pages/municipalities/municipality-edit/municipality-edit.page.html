@@ -1,7 +1,10 @@
+<!--@author gjimenez-->
+<!--@modifiedBy dgutierrez 11/7/2025 change the appearance of the mat form fields for the standard and add the correct implementation for the show erros-->
+
 <app-general-container-component>
   <div class="d-flex justify-content-between align-items-center flex-wrap">
     <h1>{{ i18nService.i18nPagesEnum.EDIT_MUNICIPALITY_PAGE_TITLE | translate }}</h1>
-    <button matButton="elevated">
+    <button matButton="elevated" (click)="navigateToMunicipalitiesList()">
       <mat-icon>
         arrow_back
       </mat-icon>

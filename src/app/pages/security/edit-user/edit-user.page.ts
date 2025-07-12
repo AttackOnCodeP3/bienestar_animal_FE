@@ -71,7 +71,7 @@ export class EditUserPage implements OnInit {
     this.municipalityHttpService.getAll();
     this.cantonHttpService.getAll();
     this.roleHttpService.getAll();
-    await this.inicializeUserToEdit();
+    await this.initializeUserToEdit();
   }
 
   /**
@@ -92,15 +92,13 @@ export class EditUserPage implements OnInit {
   /**
    * Updates the user using the data from the forms.
    * @author dgutierrez
+   * @modifiedBy dgutierrez 12/07/2025 add the validation for the user ID
    */
   private updateUser() {
-    const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
-    const roles = (userData?.roles ?? []).map(role => new Role({id: role.id}));
-    const updateUserRequest = UpdateUserRequestDto.fromUser(new User({
-      ...this.userToUpdate(),
-      ...userData,
-      roles
-    }));
+    const updateUserRequest = this.buildUpdateUserRequestDto();
+    if (!this.validateUserId(updateUserRequest.id)) {
+      return;
+    }
 
     this.userHttpService.update(updateUserRequest);
     this.router.navigate([PagesUrlsEnum.SECURITY_USER_MANAGEMENT])
@@ -111,14 +109,32 @@ export class EditUserPage implements OnInit {
   }
 
   /**
+   * Builds the UpdateUserRequestDto from the user registration forms.
+   * @author dgutierrez
+   */
+  private buildUpdateUserRequestDto(): UpdateUserRequestDto {
+    const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
+    const roles = (userData?.roles ?? []).map(role => new Role({id: role.id}));
+
+    return UpdateUserRequestDto.fromUser(new User({
+      ...this.userToUpdate(),
+      ...userData,
+      roles
+    }));
+  }
+
+  /**
    * Initializes the user to edit by retrieving the user ID from the route parameters
    * @author dgutierrez
    */
-  private async inicializeUserToEdit() {
+  private async initializeUserToEdit() {
     const userId = await this.getUserIdFromRoute();
-    if (userId) {
-      this.userHttpService.getById(userId)
+
+    if (!this.validateUserId(userId)) {
+      return;
     }
+
+    this.userHttpService.getById(userId!)
   }
 
   /**
@@ -147,5 +163,23 @@ export class EditUserPage implements OnInit {
    */
   navigateToUserManagement() {
     this.router.navigate([PagesUrlsEnum.SECURITY_USER_MANAGEMENT]);
+  }
+
+  /**
+   * Validates the user ID to ensure it is a valid number greater than zero.
+   * If the validation fails, it displays an alert and navigates to the user management page.
+   * @param userId The user ID to validate.
+   * @author dgutierrez
+   */
+  private validateUserId(userId: number | null): boolean {
+    if (userId === null || isNaN(userId) || userId <= 0) {
+      this.alertService.displayAlert({
+        type: AlertTypeEnum.ERROR,
+        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_ID_TO_UPDATE
+      });
+      this.navigateToUserManagement();
+      return false;
+    }
+    return true;
   }
 }

@@ -7,6 +7,7 @@ export enum I18nPagesEnum {
   REGISTER_PAGE = 'register-page',
   COMPLETE_PROFILE_PAGE = 'complete-profile-page',
   MUNICIPALITY_PAGE = 'municipalities-management-page',
+  CREATE_MUNICIPALITY_PAGE = 'create-municipality-page',
   EDIT_MUNICIPALITY_PAGE = 'edit-municipality-page',
   USER_MANAGEMENT_PAGE = 'user-management-page',
   CREATE_USER_PAGE = 'create-user-page',
@@ -24,7 +25,9 @@ export enum I18nPagesEnum {
 
   // Municipality page
   MUNICIPALITY_PAGE_TITLE = I18nPagesEnum.MUNICIPALITY_PAGE + '.title',
+  CREATE_MUNICIPALITY_PAGE_TITLE = I18nPagesEnum.CREATE_MUNICIPALITY_PAGE + '.title',
   EDIT_MUNICIPALITY_PAGE_TITLE = I18nPagesEnum.EDIT_MUNICIPALITY_PAGE + '.title',
+
 
   // User Management page
   USER_MANAGEMENT_PAGE_TITLE = I18nPagesEnum.USER_MANAGEMENT_PAGE + '.title',

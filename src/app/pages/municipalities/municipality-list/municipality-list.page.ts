@@ -17,6 +17,11 @@ import {MatIcon} from '@angular/material/icon';
 import {I18nService, TableService} from '@services/general';
 import {TranslatePipe} from '@ngx-translate/core';
 
+/**
+ * Component for displaying a list of municipalities.
+ * @author gjimenez
+ * @modifiedby dgutierrez 12/07/2025 refactor for more clean code and adjustments in the form
+ */
 @Component({
   selector: 'app-municipality-list',
   templateUrl: './municipality-list.page.html',
@@ -54,14 +59,30 @@ export class MunicipalityListPage implements OnInit {
     this.municipalityHttpService.getAll();
   }
 
-  navigateToCreate(): void {
+  /**
+   * Navigates to the create municipality page.
+   * @author gjimenez
+   * @modifiedby dgutierrez 12/07/2025 refactor to use the PagesUrlsEnum for navigation
+   */
+  navigateToCreateMunicipality(): void {
     this.router.navigate([PagesUrlsEnum.MUNICIPALITY_CREATE]);
   }
 
-  navigateToEdit(id: number): void {
+  /**
+   * Navigates to the edit municipality page.
+   * @param id The ID of the municipality to edit.
+   * @author gjimenez
+   * @modifiedby dgutierrez 12/07/2025 refactor to use the PagesUrlsEnum for navigation
+   */
+  navigateToEditMunicipality(id: number): void {
     this.router.navigate([PagesUrlsEnum.MUNICIPALITY_EDIT, id]);
   }
 
+  /**
+   * Deletes a municipality by its ID.
+   * @param municipalityId The ID of the municipality to delete.
+   * @author gjimenez
+   */
   delete(municipalityId: number): void {
     const municipality = this.municipalityHttpService.municipalityList().find(m => m.id === municipalityId);
     if (municipality) {

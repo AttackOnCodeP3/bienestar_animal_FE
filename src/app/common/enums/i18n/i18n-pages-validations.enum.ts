@@ -16,6 +16,7 @@ export enum I18nPagesValidationsEnum {
 
   // General
   GENERAL_INVALID_FIELDS = I18nPagesValidationsEnum.GENERAL + "invalidFields",
+  GENERAL_INVALID_ID_TO_UPDATE = I18nPagesValidationsEnum.GENERAL + "invalidIdToUpdate",
 
   // Register Page
   REGISTER_PAGE_REGISTERED_SUCCESSFULLY = I18nPagesValidationsEnum.REGISTER_PAGE + "registeredSuccessfully",

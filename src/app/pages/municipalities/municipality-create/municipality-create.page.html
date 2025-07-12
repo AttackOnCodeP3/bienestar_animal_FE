@@ -1,98 +1,139 @@
 <!--@author gjimenez-->
-<!--@modifiedBy dgutierrez 10/7/2025 change the appearance of the mat form fields for the standard and add the correct implementation for the show erros-->
-<form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>
-      {{ i18nService.i18nFormsEnum.NAME_LABEL | translate }}
-    </mat-label>
-    <input
-      matInput
-      formControlName="name"
-      [placeholder]="i18nService.i18nFormsEnum.NAME_PLACEHOLDER | translate"/>
-    @let idControl = form.get('name');
-    @if (formsService.isFieldInvalid(idControl)) {
-      <mat-error>{{ formsService.getErrorMessage(idControl) }}</mat-error>
-    }
-  </mat-form-field>
+<!--@modifiedBy dgutierrez 12/7/2025 change the appearance of the mat form fields for the standard and add the correct implementation for the show erros-->
 
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>
-      {{ i18nService.i18nFormsEnum.ADDRESS_LABEL | translate }}
-    </mat-label>
-    <input
-      matInput
-      formControlName="address"
-      type="text"
-      [placeholder]="i18nService.i18nFormsEnum.ADDRESS_PLACEHOLDER | translate"/>
-    @let addressControl = form.get('address');
-    @if (formsService.isFieldInvalid(addressControl)) {
-      <mat-error>{{ formsService.getErrorMessage(addressControl) }}</mat-error>
-    }
-  </mat-form-field>
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+    <h1>{{ i18nService.i18nPagesEnum.CREATE_MUNICIPALITY_PAGE_TITLE | translate }}</h1>
+    <button matButton="elevated" (click)="navigateToMunicipalitiesList()">
+      <mat-icon>
+        arrow_back
+      </mat-icon>
+      {{ i18nService.i18nButtonsEnum.BUTTON_MUNICIPALITY_MANAGEMENT | translate }}
+    </button>
+  </div>
+</app-general-container-component>
 
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>
-      {{ i18nService.i18nFormsEnum.PHONE_LABEL | translate }}
-    </mat-label>
-    <input
-      matInput
-      formControlName="phone"
-      type="tel"
-      [placeholder]="i18nService.i18nFormsEnum.PHONE_NUMBER_PLACEHOLDER | translate"/>
-    @let phoneControl = form.get('phone');
-    @if (formsService.isFieldInvalid(phoneControl)) {
-      <mat-error>{{ formsService.getErrorMessage(phoneControl) }}</mat-error>
-    }
-  </mat-form-field>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>
+          {{ i18nService.i18nFormsEnum.NAME_LABEL | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="name"
+          [placeholder]="i18nService.i18nFormsEnum.NAME_PLACEHOLDER | translate"/>
+        @let nameControl = form.get('name');
+        @if (formsService.isFieldInvalid(nameControl)) {
+          <mat-error>{{ formsService.getErrorMessage(nameControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
 
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>
-      {{ i18nService.i18nFormsEnum.EMAIL_LABEL | translate }}
-    </mat-label>
-    <input
-      matInput
-      formControlName="email"
-      [placeholder]="i18nService.i18nFormsEnum.EMAIL_PLACEHOLDER | translate"
-      type="email"
-    />
-    @let emailControl = form.get('email');
-    @if (formsService.isFieldInvalid(emailControl)) {
-      <mat-error>{{ formsService.getErrorMessage(emailControl) }}</mat-error>
-    }
-  </mat-form-field>
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>
+          {{ i18nService.i18nFormsEnum.ADDRESS_LABEL | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="address"
+          type="text"
+          [placeholder]="i18nService.i18nFormsEnum.ADDRESS_PLACEHOLDER | translate"/>
+        @let addressControl = form.get('address');
+        @if (formsService.isFieldInvalid(addressControl)) {
+          <mat-error>{{ formsService.getErrorMessage(addressControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
 
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>
-      {{ i18nService.i18nFormsEnum.CANTON_LABEL | translate }}
-    </mat-label>
-    <mat-select formControlName="cantonId">
-      @for ( canton of cantonHttpService.cantonList(); track canton.id) {
-        <mat-option [value]="canton.id">{{ canton.name }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>
+          {{ i18nService.i18nFormsEnum.PHONE_LABEL | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="phone"
+          type="tel"
+          [placeholder]="i18nService.i18nFormsEnum.PHONE_NUMBER_PLACEHOLDER | translate"/>
+        @let phoneControl = form.get('phone');
+        @if (formsService.isFieldInvalid(phoneControl)) {
+          <mat-error>{{ formsService.getErrorMessage(phoneControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
 
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>
-      {{ i18nService.i18nFormsEnum.RESPONSIBLE_NAME_LABEL | translate }}
-    </mat-label>
-    <input
-      matInput
-      formControlName="responsibleName"
-      [placeholder]="i18nService.i18nFormsEnum.RESPONSIBLE_NAME_PLACEHOLDER | translate"
-    />
-  </mat-form-field>
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>
+          {{ i18nService.i18nFormsEnum.EMAIL_LABEL | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="email"
+          [placeholder]="i18nService.i18nFormsEnum.EMAIL_PLACEHOLDER | translate"
+          type="email"
+        />
+        @let emailControl = form.get('email');
+        @if (formsService.isFieldInvalid(emailControl)) {
+          <mat-error>{{ formsService.getErrorMessage(emailControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
 
-  <mat-form-field appearance="outline" class="w-100">
-    <mat-label>
-      {{ i18nService.i18nFormsEnum.RESPONSIBLE_POSITION_LABEL | translate }}
-    </mat-label>
-    <input
-      matInput
-      formControlName="responsiblePosition"
-      [placeholder]="i18nService.i18nFormsEnum.RESPONSIBLE_POSITION_PLACEHOLDER | translate"
-    />
-  </mat-form-field>
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>
+          {{ i18nService.i18nFormsEnum.CANTON_LABEL | translate }}
+        </mat-label>
+        <mat-select formControlName="cantonId">
+          @for (canton of cantonHttpService.cantonList(); track canton.id) {
+            <mat-option [value]="canton.id">{{ canton.name }}</mat-option>
+          }
+        </mat-select>
+        @let cantonIdControl = form.get('cantonId');
+        @if (formsService.isFieldInvalid(cantonIdControl)) {
+          <mat-error>{{ formsService.getErrorMessage(cantonIdControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>
+          {{ i18nService.i18nFormsEnum.RESPONSIBLE_NAME_LABEL | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="responsibleName"
+          [placeholder]="i18nService.i18nFormsEnum.RESPONSIBLE_NAME_PLACEHOLDER | translate"
+        />
+        @let responsibleNameControl = form.get('responsibleName');
+        @if (formsService.isFieldInvalid(responsibleNameControl)) {
+          <mat-error>{{ formsService.getErrorMessage(responsibleNameControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>
+          {{ i18nService.i18nFormsEnum.RESPONSIBLE_ROLE_LABEL | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="responsibleRole"
+          [placeholder]="i18nService.i18nFormsEnum.RESPONSIBLE_ROLE_PLACEHOLDER | translate"
+        />
+        @let responsibleRoleControl = form.get('responsibleRole');
+        @if (formsService.isFieldInvalid(responsibleRoleControl)) {
+          <mat-error>{{ formsService.getErrorMessage(responsibleRoleControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
 
   <div class="text-end">
     <button matButton="tonal" type="submit">

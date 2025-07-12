@@ -76,7 +76,7 @@
       "pleaseSelectANeighborhood": "Please select a neighborhood",
       "productName": "Product Name",
       "responsibleName": "Responsible Name",
-      "responsiblePosition": "Responsible Position",
+      "responsibleRole": "Responsible Role",
       "sex": "Sex",
       "species": "Species",
       "status": "Status"
@@ -116,7 +116,7 @@
       "phoneNumber": "Enter the phone number",
       "productName": "Enter product name",
       "responsibleName": "Enter the name of the responsible",
-      "responsiblePosition": "Enter the position of the responsible",
+      "responsibleRole": "Enter the position of the responsible",
       "species": "Select species",
       "status": "Select status"
     }
@@ -151,12 +151,14 @@
     "userUpdatedSuccessfully": "User updated successfully"
   },
   "create-municipality-page": {
+    "title": "Creating Municipality",
     "municipalityCreatedSuccessfully": "Municipality created successfully"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
-      "invalidFields": "There are invalid fields. Please check the entered data."
+      "invalidFields": "There are invalid fields. Please check the entered data.",
+      "invalidIdToUpdate": "Unable to find the data. You will be redirected to try again."
     },
     "register-page": {
       "registeredSuccessfully": "Successfully registered, please log in"

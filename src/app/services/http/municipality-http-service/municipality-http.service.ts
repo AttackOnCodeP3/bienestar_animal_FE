@@ -68,7 +68,6 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
     });
   }
 
-
   /**
    * Adds a new municipality.
    * @author dgutierrez
@@ -96,15 +95,7 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
    * @modifiedby gjimenez 10/7/2025 unknown what changes he made
    */
   update(municipality: UpdateMunicipalityRequestDTO): void {
-    if (!municipality.id) {
-      this.alertService.displayAlert({
-        type: AlertTypeEnum.ERROR,
-        messageKey: 'Municipality ID required'
-      });
-      return;
-    }
-
-    this.edit(municipality.id, municipality).subscribe({
+    this.edit(municipality.id!, municipality).subscribe({
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,

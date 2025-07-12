@@ -76,7 +76,7 @@
       "pleaseSelectANeighborhood": "Seleccione un barrio por favor",
       "productName": "Nombre del producto",
       "responsibleName": "Nombre del responsable",
-      "responsiblePosition": "Cargo del responsable",
+      "responsibleRole": "Cargo del responsable",
       "sex": "Sexo",
       "species": "Especie",
       "status": "Estado"
@@ -116,7 +116,7 @@
       "phoneNumber": "Ingrese el número de teléfono",
       "productName": "Ingrese el nombre del producto",
       "responsibleName": "Ingrese el nombre del responsable",
-      "responsiblePosition": "Ingrese el cargo del responsable",
+      "responsibleRole": "Ingrese el cargo del responsable",
       "species": "Seleccione la especie",
       "status": "Seleccione el estado"
     }
@@ -139,11 +139,14 @@
   "municipalities-management-page": {
     "title": "Gestión de municipalidades"
   },
+  "create-municipality-page": {
+    "title": "Creando municipalidad"
+  },
   "edit-municipality-page": {
     "title": "Editando municipalidad"
   },
   "create-user-page": {
-    "title": "Crear usuario"
+    "title": "Creando usuario"
   },
   "edit-user-page": {
     "title": "Editando usuario"
@@ -151,7 +154,8 @@
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
-      "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados."
+      "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados.",
+      "invalidIdToUpdate": "No fue posible encontrar los datos. Serás redirigido para intentarlo nuevamente."
     },
     "register-page": {
       "registeredSuccessfully": "Registrado exitosamente, por favor inicie sesión"
