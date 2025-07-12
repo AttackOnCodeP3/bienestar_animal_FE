@@ -140,13 +140,18 @@
     "title": "Municipality Management"
   },
   "edit-municipality-page": {
-    "title": "Editing Municipality"
+    "title": "Editing Municipality",
+    "municipalityUpdatedSuccessfully": "Municipality updated successfully"
   },
   "create-user-page": {
     "title": "Create User"
   },
   "edit-user-page": {
-    "title": "Editing User"
+    "title": "Editing User",
+    "userUpdatedSuccessfully": "User updated successfully"
+  },
+  "create-municipality-page": {
+    "municipalityCreatedSuccessfully": "Municipality created successfully"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {

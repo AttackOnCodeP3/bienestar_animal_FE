@@ -103,7 +103,7 @@ export class MunicipalityEditPage implements OnInit {
     this.municipalityHttpService.update(updateDto);
     this.alertService.displayAlert({
       type: AlertTypeEnum.SUCCESS,
-      messageKey: 'Municipality updated successfully'
+      messageKey: this.i18nService.i18nPagesValidationsEnum.MUNICIPALITY_PAGE_MUNICIPALITY_UPDATED_SUCCESSFULLY
     });
     this.router.navigate([PagesUrlsEnum.MUNICIPALITY_LIST]);
   }

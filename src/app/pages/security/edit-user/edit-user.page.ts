@@ -19,7 +19,7 @@ import {
   PersonalDataUserRegistrationFormComponent,
   RoleSelectorFormComponent
 } from '@components/forms/user';
-import {PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
+import {AlertTypeEnum, PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {Role, User} from '@models';
 import {UpdateUserRequestDto} from '@models/dto';
@@ -104,6 +104,10 @@ export class EditUserPage implements OnInit {
 
     this.userHttpService.update(updateUserRequest);
     this.router.navigate([PagesUrlsEnum.SECURITY_USER_MANAGEMENT])
+    this.alertService.displayAlert({
+      messageKey: this.i18nService.i18nPagesValidationsEnum.EDIT_USER_PAGE_USER_UPDATED_SUCCESSFULLY,
+      type: AlertTypeEnum.SUCCESS
+    })
   }
 
   /**

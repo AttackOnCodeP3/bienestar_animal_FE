@@ -162,6 +162,15 @@
     "create-user-page": {
       "userCreatedSuccessfully": "Usuario creado exitosamente",
       "roleRequired": "El rol es requerido"
+    },
+    "edit-user-page": {
+      "userUpdatedSuccessfully": "Usuario actualizado exitosamente"
+    },
+    "create-municipality-page": {
+      "municipalityCreatedSuccessfully": "Municipalidad creada exitosamente"
+    },
+    "edit-municipality-page": {
+      "municipalityUpdatedSuccessfully": "Municipalidad actualizada exitosamente"
     }
   },
   "================== MATERIAL ==================": "",

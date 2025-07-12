@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Validators, ReactiveFormsModule, FormControl} from '@angular/forms';
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {CantonHttpService, MunicipalityHttpService} from '@services/http';
 import {AlertService, FormsService, I18nService} from '@services/general';
+import {AlertTypeEnum} from '@common/enums';
 
 @Component({
   selector: 'app-municipality-create',
@@ -67,6 +68,10 @@ export class MunicipalityCreatePage implements OnInit {
       responsiblePosition: this.form.value.responsiblePosition || ''
     };
     this.municipalityHttpService.save(dto);
+    this.alertService.displayAlert({
+      messageKey: this.i18nService.i18nPagesValidationsEnum.CREATE_MUNICIPALITY_PAGE_MUNICIPALITY_CREATED_SUCCESSFULLY,
+      type: AlertTypeEnum.SUCCESS
+    })
   }
 
   /**
