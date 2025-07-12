@@ -139,6 +139,9 @@
   "municipalities-management-page": {
     "title": "Gestión de municipalidades"
   },
+  "edit-municipality-page": {
+    "title": "Editando municipalidad"
+  },
   "create-user-page": {
     "title": "Crear usuario"
   },
@@ -204,6 +207,7 @@
     "forgotPassword": "¿Olvidó su contraseña?",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
+    "municipalitiesManagement": "Gestión de municipalidades",
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
     "registerNow": "Regístrate ahora",

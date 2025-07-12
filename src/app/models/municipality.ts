@@ -1,5 +1,5 @@
 import {Canton} from './canton';
-import {MunicipalityStatusEnum} from '@common/enums';
+import {MunicipalityStatus} from './municipality-status';
 
 /**
  * Municipality model representing a local government area.
@@ -9,7 +9,7 @@ import {MunicipalityStatusEnum} from '@common/enums';
 export class Municipality {
   address?: string | null;
   canton: Canton | null;
-  email: string;
+  email: string | null;
   id: number | null;
   logo?: string | null;
   name: string | null;
@@ -17,7 +17,7 @@ export class Municipality {
   responsibleEmail?: string | null;
   responsibleName?: string | null;
   responsibleRole?: string | null;
-  status: MunicipalityStatusEnum | null;
+  status: MunicipalityStatus | null;
 
   constructor(values: Partial<Municipality> = {}) {
     this.id = values.id ??= null;

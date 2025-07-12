@@ -19,6 +19,11 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
   protected override source = Constants.MUNICIPALITIES_URL;
 
   readonly municipalityList = signal<Municipality[]>([]);
+  /**
+   * Signal to hold a municipality searched by ID.
+   * @author dgutierrez
+   */
+  readonly selectedMunicipalityId = signal<Municipality | null>(null);
 
   search: ISearch = {
     page: 1,
@@ -50,11 +55,19 @@ export class MunicipalityHttpService extends BaseHttpService<Municipality> {
   /**
    * Fetches a single municipality by ID.
    * @author dgutierrez
-   * @modifiedby gjimenez 10/7/2025 unknown what changes he made
    */
   getById(id: number) {
-    return this.getOne(id);
+    this.find(id).subscribe({
+      next: (response) => {
+        this.selectedMunicipalityId.set(response.data);
+      },
+      error: this.handleError({
+        message: 'An error occurred fetching the municipality by ID',
+        context: `${this.constructor.name}#getById`
+      })
+    });
   }
+
 
   /**
    * Adds a new municipality.

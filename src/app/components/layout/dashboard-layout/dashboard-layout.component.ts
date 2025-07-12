@@ -123,13 +123,6 @@ export class DashboardLayoutComponent {
       ],
     },
     {
-      icon: 'pets',
-      label: 'menu.gamification',
-      route: `${RoutesUrlsEnum.GAMIFICATION}`,
-      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER],
-      click: () => this.closeSidenav(),
-    },
-    {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: RoutesUrlsEnum.VOID_ROUTE,

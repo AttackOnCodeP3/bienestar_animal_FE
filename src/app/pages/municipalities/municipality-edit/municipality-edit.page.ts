@@ -1,16 +1,19 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MunicipalityHttpService } from '@services/http';
-import { Municipality } from '@models';
-import { UpdateMunicipalityRequestDTO } from '@models/dto';
-import { AlertService } from '@services/general';
-import { AlertTypeEnum } from '@common/enums';
+import {Component, OnInit, inject, computed, effect} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {CantonHttpService, MunicipalityHttpService, MunicipalityStatusHttpService} from '@services/http';
+import {UpdateMunicipalityRequestDTO} from '@models/dto';
+import {AlertService, FormsService, I18nService} from '@services/general';
+import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
+import {GeneralContainerComponent} from '@components/layout';
+import {TranslatePipe} from '@ngx-translate/core';
+import {MatIcon} from '@angular/material/icon';
+import {Canton, Municipality, MunicipalityStatus} from '@models';
 
 @Component({
   selector: 'app-municipality-edit',
@@ -19,22 +22,27 @@ import { AlertTypeEnum } from '@common/enums';
   styleUrls: ['./municipality-edit.page.scss'],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
+    GeneralContainerComponent,
     MatButtonModule,
-    MatSelectModule
+    MatFormFieldModule,
+    MatIcon,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    TranslatePipe
   ]
 })
 export class MunicipalityEditPage implements OnInit {
-  private readonly fb = inject(FormBuilder);
-  private readonly route = inject(ActivatedRoute);
-  private readonly municipalityHttpService = inject(MunicipalityHttpService);
   private readonly alertService = inject(AlertService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  readonly cantonHttpService = inject(CantonHttpService);
+  readonly formsService = inject(FormsService);
+  readonly i18nService = inject(I18nService);
+  readonly municipalityHttpService = inject(MunicipalityHttpService);
+  readonly municipalityStatusHttpService = inject(MunicipalityStatusHttpService)
 
-  statusOptions: string[] = ['ACTIVE', 'DEACTIVATED', 'ARCHIVED'];
-
-  form = this.fb.group({
+  readonly form = this.formsService.formsBuilder.group({
     id: [null as number | null],
     name: ['', Validators.required],
     address: [''],
@@ -43,32 +51,39 @@ export class MunicipalityEditPage implements OnInit {
     cantonId: [null as number | null, Validators.required],
     responsibleName: [''],
     responsiblePosition: [''],
-    status: ['', Validators.required]
+    status: new FormControl<MunicipalityStatus | null>(null, [Validators.required])
   });
 
+  readonly municipalityToUpdate = computed(() => this.municipalityHttpService.selectedMunicipalityId())
+
+  private readonly initializeFormWithMunicipalityToUpdateEffect = effect(() => {
+    const municipality = this.municipalityToUpdate();
+    this.form.patchValue({
+      id: municipality?.id,
+      name: municipality?.name,
+      address: municipality?.address,
+      phone: municipality?.phone,
+      email: municipality?.email,
+      cantonId: municipality?.canton?.id ?? null,
+      responsibleName: municipality?.responsibleName,
+      responsiblePosition: municipality?.responsibleRole,
+      status: municipality?.status
+    });
+  })
+
   ngOnInit(): void {
-//     const id = Number(this.route.snapshot.paramMap.get('id'));
-//
-//     this.municipalityHttpService.find(id).subscribe((response) => {
-//       const municipality = response.data;
-//
-// // Removed the console.log statement as it is not suitable for production.
-//
-//       this.form.patchValue({
-//         id: municipality.id,
-//         name: municipality.name,
-//         address: municipality.address ?? '',
-//         phone: municipality.phone ?? '',
-//         email: municipality.email,
-//         cantonId: municipality.canton?.id ?? null,
-//         responsibleName: municipality.responsibleName ?? '',
-//         responsiblePosition: municipality.responsibleRole ?? '',
-//         status: municipality.status
-//       });
-//     });
+    this.municipalityStatusHttpService.getAll();
+    this.cantonHttpService.getAll();
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.municipalityHttpService.getById(id);
+    this.disableUnmodifiableFormControls();
   }
 
-  submit(): void {
+  /**
+   * Handles the form submission to update the municipality.
+   * @author dgutierrez
+   */
+  onSubmit(): void {
     if (this.form.invalid) {
       this.alertService.displayAlert({
         type: AlertTypeEnum.ERROR,
@@ -76,21 +91,43 @@ export class MunicipalityEditPage implements OnInit {
       });
       return;
     }
+    this.updateMunicipality();
+  }
 
-    const dto: UpdateMunicipalityRequestDTO = {
-      id: this.form.value.id!,
-      name: this.form.value.name!,
-      email: this.form.value.email!,
-      address: this.form.value.address || '',
-      phone: this.form.value.phone || '',
-      cantonId: this.form.value.cantonId!,
-      responsibleName: this.form.value.responsibleName || '',
-      responsiblePosition: this.form.value.responsiblePosition || '',
-      status: this.form.value.status || ''
+  /**
+   * Updates the municipality using the form data.
+   * @author dgutierrez
+   */
+  private updateMunicipality(): void {
+    const updateDto = this.createUpdateMunicipalityRequestDTO();
+    this.municipalityHttpService.update(updateDto);
+    this.alertService.displayAlert({
+      type: AlertTypeEnum.SUCCESS,
+      messageKey: 'Municipality updated successfully'
+    });
+    this.router.navigate([PagesUrlsEnum.MUNICIPALITY_LIST]);
+  }
+
+  /**
+   * Creates a DTO for updating the municipality based on the form values.
+   * @author dgutierrez
+   */
+  private createUpdateMunicipalityRequestDTO(): UpdateMunicipalityRequestDTO {
+    const {cantonId, status, ...rest} = this.form.getRawValue();
+    const municipalityData = {
+      ...this.municipalityToUpdate(),
+      ...rest,
+      canton: new Canton({id: cantonId}),
+      status: status
     };
+    return UpdateMunicipalityRequestDTO.fromMunicipality(new Municipality(municipalityData));
+  }
 
-    // Removed console.log statement to avoid exposing sensitive data in production.
-
-    this.municipalityHttpService.update(dto);
+  /**
+   * Disables form controls that should not be modified by the user.
+   * @author dgutierrez
+   */
+  private disableUnmodifiableFormControls() {
+    this.form.get('cantonId')?.disable();
   }
 }

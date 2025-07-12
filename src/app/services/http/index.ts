@@ -4,6 +4,7 @@ export * from "./canton-http-service/canton-http.service";
 export * from "./district-http-service/district-http.service";
 export * from "./interest-http-service/interest-http.service";
 export * from "./municipality-http-service/municipality-http.service";
+export * from "./municipality-status-http-service/municipality-status-http.service";
 export * from "./neighborhood-http-service/neighborhood-http.service";
 export * from "./role-http-service/role-http.service";
 export * from "./user-http-service/user-http.service";

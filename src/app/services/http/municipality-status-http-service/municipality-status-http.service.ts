@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { BaseHttpService } from '@services/http';
 import { ISearch } from '@common/interfaces/http';
 import { Constants } from '@common/constants/constants';
-import { Municipality } from '@models';
+import {Municipality, MunicipalityStatus} from '@models';
 import { AlertTypeEnum } from '@common/enums';
 import { createPageArray } from '@common/utils';
 
@@ -14,11 +14,17 @@ import { createPageArray } from '@common/utils';
 @Injectable({
   providedIn: 'root'
 })
-export class MunicipalityStatusHttpService extends BaseHttpService<Municipality> {
+export class MunicipalityStatusHttpService extends BaseHttpService<MunicipalityStatus> {
 
   protected override source = Constants.MUNICIPALITIES_STATUS_URL;
 
-  readonly municipalityStatusList = signal<Municipality[]>([]);
+  readonly municipalityStatusList = signal<MunicipalityStatus[]>([]);
+
+  /**
+   * Signal to hold a municipality serached by ID.
+   * @author dgutierrez
+   */
+  readonly selectedMunicipalityId = signal<MunicipalityStatus | null>(null);
 
   search: ISearch = {
     page: 1,
@@ -26,6 +32,23 @@ export class MunicipalityStatusHttpService extends BaseHttpService<Municipality>
   };
 
   totalItems: number[] = [];
+
+  /**
+   * Fetches a municipality status by ID and updates the selectedMunicipalityId signal.
+   * @param id The ID of the municipality status to fetch.
+   * @author dgutierrez
+   */
+  getById(id: number) {
+    this.find(id).subscribe({
+      next: (response) => {
+        this.selectedMunicipalityId.set(response.data);
+      },
+      error: this.handleError({
+        message: 'An error occurred fetching the municipality status by ID',
+        context: `${this.constructor.name}#getById`
+      })
+    });
+  }
 
   /**
    * Fetches all municipality statuses from the server using pagination and updates internal state.

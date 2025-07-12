@@ -53,13 +53,13 @@ export class EditUserPage implements OnInit {
   readonly userHttpService = inject(UserHttpService);
   readonly userRegistrationFormService = inject(UserRegistrationFormService);
 
-  readonly userToEdit = computed(() => this.userHttpService.selectedUserById());
+  readonly userToUpdate = computed(() => this.userHttpService.selectedUserById());
 
   /**
    * @author dgutierrez
    */
-  private readonly initializeFormWithUserToEditEffect = effect(() => {
-    const user = this.userToEdit();
+  private readonly initializeFormWithUserToUpdateEffect = effect(() => {
+    const user = this.userToUpdate();
     if (user) {
       this.userRegistrationFormService.populateUserRegistrationForm(user);
       this.userRegistrationFormService.populateUserRolesForm(user);
@@ -74,6 +74,10 @@ export class EditUserPage implements OnInit {
     await this.inicializeUserToEdit();
   }
 
+  /**
+   * Handles the form submission for updating a user.
+   * @author dgutierrez
+   */
   onSubmit() {
     const validationResult = this.userRegistrationFormService.validateUserRegistrationForms();
     if (validationResult) {
@@ -93,7 +97,7 @@ export class EditUserPage implements OnInit {
     const userData = this.userRegistrationFormService.buildUserPayloadFromForms();
     const roles = (userData?.roles ?? []).map(role => new Role({id: role.id}));
     const updateUserRequest = UpdateUserRequestDto.fromUser(new User({
-      ...this.userToEdit(),
+      ...this.userToUpdate(),
       ...userData,
       roles
     }));

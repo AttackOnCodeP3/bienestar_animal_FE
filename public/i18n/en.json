@@ -139,6 +139,9 @@
   "municipalities-management-page": {
     "title": "Municipality Management"
   },
+  "edit-municipality-page": {
+    "title": "Editing Municipality"
+  },
   "create-user-page": {
     "title": "Create User"
   },
@@ -204,12 +207,13 @@
     "forgotPassword": "Forgot Password?",
     "login": "Login",
     "logout": "Logout",
+    "municipalitiesManagement": "Municipality Management",
     "noAccount": "Don't have an account?",
     "register": "Register",
     "registerNow": "Register Now",
-    "userManagement": "User Management",
     "save": "Save",
-    "updateUser": "Update User"
+    "updateUser": "Update User",
+    "userManagement": "User Management"
   },
   "matSnackBarMessages": {
     "http": {
