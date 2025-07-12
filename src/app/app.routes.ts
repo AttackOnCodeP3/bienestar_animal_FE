@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: RoutesUrlsEnum.AUTH,
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: RoutesUrlsEnum.AUTH,

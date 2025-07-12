@@ -1,7 +1,12 @@
 <app-general-container-component>
   <div class="d-flex justify-content-between align-items-center">
-    <h1>Gestionar usuarios</h1>
-    <button matButton="elevated" (click)="onNavigateToCreateUser()"> <mat-icon>add</mat-icon> Crear usuario</button>
+    <h1>
+      {{i18nService.i18nPagesEnum.USER_MANAGEMENT_PAGE_TITLE | translate}}
+    </h1>
+    <button matButton="elevated" (click)="onNavigateToCreateUser()">
+      <mat-icon>add</mat-icon>
+      {{i18nService.i18nButtonsEnum.BUTTON_CREATE_USER | translate}}
+    </button>
   </div>
 </app-general-container-component>
 

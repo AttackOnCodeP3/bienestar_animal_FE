@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {RoutesUrlsEnum} from '@common/enums';
+import {RouteParamPathsEnum, RoutesUrlsEnum} from '@common/enums';
 
 export const MUNICIPALITY_ROUTES: Routes = [
   {
@@ -9,14 +9,14 @@ export const MUNICIPALITY_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.MUNICIPALITY_LIST,
-    loadComponent: () => import('./list/municipality-list.page').then(m => m.MunicipalityListPage)
+    loadComponent: () => import('@pages/municipalities/municipality-list/municipality-list.page').then(m => m.MunicipalityListPage)
   },
   {
     path: RoutesUrlsEnum.MUNICIPALITY_CREATE,
-    loadComponent: () => import('./create/municipality-create.page').then(m => m.MunicipalityCreatePage)
+    loadComponent: () => import('@pages/municipalities/municipality-create/municipality-create.page').then(m => m.MunicipalityCreatePage)
   },
   {
-    path: `${RoutesUrlsEnum.MUNICIPALITY_EDIT}/:id`,
-    loadComponent: () => import('./edit/municipality-edit.page').then(m => m.MunicipalityEditPage)
+    path: RoutesUrlsEnum.MUNICIPALITY_EDIT + RouteParamPathsEnum.MUNICIPALITY_ID,
+    loadComponent: () => import('@pages/municipalities/municipality-edit/municipality-edit.page').then(m => m.MunicipalityEditPage)
   }
 ];

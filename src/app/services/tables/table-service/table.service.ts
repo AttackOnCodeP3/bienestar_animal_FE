@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import {UserManagementDisplayedColumnsTableEnum} from 'common/enums/tables';
+import {
+  MunicipalityManagementDisplayedColumnsTableEnum,
+  UserManagementDisplayedColumnsTableEnum
+} from 'common/enums/tables';
 import {PageEvent} from '@angular/material/paginator';
 import {ISearch} from '@common/interfaces/http';
 
@@ -21,6 +24,10 @@ export class TableService {
 
   get userManagementDisplayedColumnsTableEnum() {
     return UserManagementDisplayedColumnsTableEnum;
+  }
+
+  get municipalityManagementDisplayedColumnsTableEnum() {
+    return MunicipalityManagementDisplayedColumnsTableEnum
   }
 
   /**

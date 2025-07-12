@@ -21,15 +21,14 @@
   "================== COMPONENT LABELS ==================": "",
   "menu": {
     "create-user": "Crear usuario",
+    "createMunicipality": "Crear municipalidad",
     "gamification": "Gamificación",
     "home": "Inicio",
     "logout": "Cerrar sesión",
+    "municipalities": "Gestión de municipalidades",
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
-    "municipalities": "Gestión de municipalidades",
-    "viewMunicipalities": "Ver municipalidades",
-    "createMunicipality": "Crear municipalidad",
-    "logout": "Cerrar sesión"
+    "viewMunicipalities": "Ver municipalidades"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
@@ -49,6 +48,7 @@
   "================== INPUT LABELS =====================": "",
   "inputs": {
     "labels": {
+      "address": "Dirección",
       "age": "Edad",
       "ageAccordingToObservation": "Edad según observación",
       "animalCondition": "Condición del animal",
@@ -72,9 +72,11 @@
       "phoneNumber": "Número de teléfono",
       "pleaseSelectACanton": "Seleccione un cantón por favor",
       "pleaseSelectADistrict": "Seleccione un distrito por favor",
-      "pleaseSelectANeighborhood": "Seleccione un barrio por favor",
       "pleaseSelectAMunicipality": "Seleccione una municipalidad por favor",
+      "pleaseSelectANeighborhood": "Seleccione un barrio por favor",
       "productName": "Nombre del producto",
+      "responsibleName": "Nombre del responsable",
+      "responsibleRole": "Cargo del responsable",
       "sex": "Sexo",
       "species": "Especie",
       "status": "Estado"
@@ -90,6 +92,7 @@
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
+      "address": "Ingrese la dirección",
       "age": "Ingrese la edad",
       "ageAccordingToObservation": "Ingrese la edad según observación",
       "animalCondition": "Seleccione la condición del animal",
@@ -105,13 +108,15 @@
       "identificationCard": "Ingrese la cédula de identidad",
       "isNurseryHome": "Seleccione si es un hogar de crianza",
       "lastName": "Ingrese los apellidos",
+      "municipality": "Seleccione la municipalidad",
       "name": "Ingrese el nombre",
       "neighborhoodCommunityOrVillage": "Ingrese el barrio/comunidad o poblado",
       "newPassword": "Ingrese la nueva contraseña",
       "password": "Ingrese la contraseña",
       "phoneNumber": "Ingrese el número de teléfono",
       "productName": "Ingrese el nombre del producto",
-      "municipality": "Seleccione la municipalidad",
+      "responsibleName": "Ingrese el nombre del responsable",
+      "responsibleRole": "Ingrese el cargo del responsable",
       "species": "Seleccione la especie",
       "status": "Seleccione el estado"
     }
@@ -128,10 +133,29 @@
     "title": "Complete su perfil",
     "subtitle": "Por favor complete su perfil para continuar"
   },
+  "user-management-page": {
+    "title": "Gestión de usuarios"
+  },
+  "municipalities-management-page": {
+    "title": "Gestión de municipalidades"
+  },
+  "create-municipality-page": {
+    "title": "Creando municipalidad"
+  },
+  "edit-municipality-page": {
+    "title": "Editando municipalidad"
+  },
+  "create-user-page": {
+    "title": "Creando usuario"
+  },
+  "edit-user-page": {
+    "title": "Editando usuario"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
-      "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados."
+      "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados.",
+      "invalidIdToUpdate": "No fue posible encontrar los datos. Serás redirigido para intentarlo nuevamente."
     },
     "register-page": {
       "registeredSuccessfully": "Registrado exitosamente, por favor inicie sesión"
@@ -142,6 +166,15 @@
     "create-user-page": {
       "userCreatedSuccessfully": "Usuario creado exitosamente",
       "roleRequired": "El rol es requerido"
+    },
+    "edit-user-page": {
+      "userUpdatedSuccessfully": "Usuario actualizado exitosamente"
+    },
+    "create-municipality-page": {
+      "municipalityCreatedSuccessfully": "Municipalidad creada exitosamente"
+    },
+    "edit-municipality-page": {
+      "municipalityUpdatedSuccessfully": "Municipalidad actualizada exitosamente"
     }
   },
   "================== MATERIAL ==================": "",
@@ -181,14 +214,20 @@
     "close": "Cerrar",
     "closeSession": "Cerrar sesión",
     "completeProfile": "Completar perfil",
+    "createMunicipality": "Crear municipalidad",
+    "createUser": "Crear usuario",
     "createYourAccountHere": "Crea tu cuenta aquí",
     "forgotPassword": "¿Olvidó su contraseña?",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
+    "municipalitiesManagement": "Gestión de municipalidades",
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
     "registerNow": "Regístrate ahora",
-    "updateUser": "Actualizar usuario"
+    "save": "Guardar",
+    "updateMunicipality": "Actualizar municipalidad",
+    "updateUser": "Actualizar usuario",
+    "userManagement": "Gestión de usuarios"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {
