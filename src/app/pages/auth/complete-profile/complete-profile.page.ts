@@ -39,6 +39,7 @@ import {UserRegistrationFormService} from '@services/forms';
   ],
   templateUrl: './complete-profile.page.html',
   styleUrl: './complete-profile.page.scss',
+  providers: [UserRegistrationFormService],
   changeDetection: Constants.changeDetectionStrategy
 })
 export class CompleteProfilePage implements OnInit {
