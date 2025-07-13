@@ -13,5 +13,7 @@ export enum I18nMenuEnum {
   VIEW_MUNICIPALITIES = I18nMenuEnum.MENU + '.viewMunicipalities',
   CREATE_MUNICIPALITY = I18nMenuEnum.MENU + '.createMunicipality',
   CREATE_USER = I18nMenuEnum.MENU + '.create-user',
+  ANIMAL = I18nMenuEnum.MENU + '.animal',
+  CREATE_ANIMAL_PROFILE = I18nMenuEnum.MENU + '.create-animal-profile',
   LOGOUT = I18nMenuEnum.MENU + '.logout',
 }

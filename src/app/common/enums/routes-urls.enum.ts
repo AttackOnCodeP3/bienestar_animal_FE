@@ -5,6 +5,7 @@ const PATH_HOME_ROUTES = 'home';
 const PATH_DASHBOARD_ROUTES = 'dashboard';
 const PATH_SECURITY_ROUTES = 'security';
 const PATH_MUNICIPALITIES = 'municipalities';
+const PATH_ANIMAL_ROUTES = 'animal';
 const VOID_PATH = '';
 
 export enum RoutesUrlsEnum {
@@ -13,6 +14,7 @@ export enum RoutesUrlsEnum {
   SLASH = '/',
   DASHBOARD = PATH_DASHBOARD_ROUTES,
   SECURITY = PATH_SECURITY_ROUTES,
+  ANIMAL = PATH_ANIMAL_ROUTES,
 
   // Main routes
   HOME = PATH_HOME_ROUTES,
@@ -44,5 +46,8 @@ export enum RoutesUrlsEnum {
   // Municipality
   MUNICIPALITY_LIST = 'municipality-list',
   MUNICIPALITY_CREATE = 'municipality-create',
-  MUNICIPALITY_EDIT = 'municipality-edit'
+  MUNICIPALITY_EDIT = 'municipality-edit',
+
+  //Animal
+  CREATE_ANIMAL_PROFILE = 'create-animal-profile',
 }

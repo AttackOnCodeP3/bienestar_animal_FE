@@ -20,6 +20,8 @@
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
+    "animal": "Animal",
+    "create-animal-profile": "Crear perfil de animal",
     "create-user": "Crear usuario",
     "createMunicipality": "Crear municipalidad",
     "gamification": "Gamificación",

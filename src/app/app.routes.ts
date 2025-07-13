@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
-import { RolesEnum, RoutesUrlsEnum } from '@common/enums';
-import { authGuard, profileCompletedGuard, roleGuard } from '@core/guards';
+import {Routes} from '@angular/router';
+import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {authGuard, profileCompletedGuard, roleGuard} from '@core/guards';
 import {DashboardLayoutComponent} from '@components/layout';
 
 export const routes: Routes = [
@@ -58,6 +58,11 @@ export const routes: Routes = [
         path: RoutesUrlsEnum.MUNICIPALITIES,
         canActivate: [roleGuard([RolesEnum.SUPER_ADMIN])],
         loadChildren: () => import('@pages/municipalities/municipality.routes').then(m => m.MUNICIPALITY_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.ANIMAL,
+        canActivate: [roleGuard([RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
       }
     ]
   }
