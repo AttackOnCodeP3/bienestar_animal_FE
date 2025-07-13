@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { I18nService } from '@services/general';
 
 @Component({
   selector: 'app-password-reset',
@@ -21,6 +22,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './password-reset.component.scss'
 })
 export class PasswordResetComponent {
+  readonly i18nService = inject(I18nService);
   loading = signal(false);
   submitted = signal(false);
 

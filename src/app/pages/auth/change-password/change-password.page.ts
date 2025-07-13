@@ -1,12 +1,18 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PasswordResetComponent } from '@components/forms/user/password-reset/password-reset.component';
+import { TranslatePipe } from '@ngx-translate/core';
+import { AlertService, I18nService } from '@services/general';
+
 @Component({
   selector: 'app-change-password',
-  imports: [PasswordResetComponent],
   templateUrl: './change-password.page.html',
-  styleUrl: './change-password.page.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./change-password.page.scss'],
+  imports: [TranslatePipe, PasswordResetComponent]
 })
 export class ChangePassword {
+ readonly i18nService = inject(I18nService);
+
+  constructor(private alertService: AlertService) {}
+
 
 }

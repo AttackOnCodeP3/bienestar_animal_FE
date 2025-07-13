@@ -46,6 +46,11 @@
     "title": "Voluntario",
     "description": "Si desea ser voluntario, por favor indique si lo desea y si es así, seleccione la municipalidad donde quisiera prestar sus servicios."
   },
+  "reset-password-component": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password"
+  },
+
   "================== INPUT LABELS =====================": "",
   "inputs": {
     "labels": {
@@ -128,6 +133,11 @@
     "title": "Complete su perfil",
     "subtitle": "Por favor complete su perfil para continuar"
   },
+  "forgot-password-page": {
+    "title": "Recuperar contraseña",
+    "subtitle": "Ingrese su correo electrónico para recuperar su contraseña"
+  },
+
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
@@ -188,7 +198,8 @@
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
     "registerNow": "Regístrate ahora",
-    "updateUser": "Actualizar usuario"
+    "updateUser": "Actualizar usuario",
+    "send": "Enviar"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

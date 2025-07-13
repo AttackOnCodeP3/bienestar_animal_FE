@@ -8,6 +8,7 @@ export enum I18nComponentsEnum {
   PASSWORD_FORM_COMPONENT = 'password-form-component',
   VOLUNTEER_OPTION_FORM_COMPONENT = 'volunteer-option-form-component',
 
+
   IT_WORKED_AS_NURSERY_HOME_LABEL = I18nComponentsEnum.IT_WORKED_AS_NURSERY_HOME_COMPONENT + '.currentlyWorksAsNurseryHome',
   IT_WORKED_AS_NURSERY_HOME_DESCRIPTION = I18nComponentsEnum.IT_WORKED_AS_NURSERY_HOME_COMPONENT + '.descriptionNurseryHome',
 
@@ -18,4 +19,11 @@ export enum I18nComponentsEnum {
 
   VOLUNTEER_OPTION_FORM_TITLE = I18nComponentsEnum.VOLUNTEER_OPTION_FORM_COMPONENT + '.title',
   VOLUNTEER_OPTION_FORM_DESCRIPTION = I18nComponentsEnum.VOLUNTEER_OPTION_FORM_COMPONENT + '.description',
+
+// Reset Password Component
+  RESET_PASSWORD_COMPONENT = 'reset-password-component',
+  RESET_PASSWORD_COMPONENT_TITLE = I18nComponentsEnum.RESET_PASSWORD_COMPONENT + '.title',
+  RESET_PASSWORD_COMPONENT_SUBTITLE = I18nComponentsEnum.RESET_PASSWORD_COMPONENT + '.subtitle',
+
+
 }

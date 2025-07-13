@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ForgotPwHttpService } from '@services/http';
-import { AlertService } from '@services/general';
+import { AlertService, I18nService } from '@services/general';
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -26,6 +27,7 @@ import { AlertService } from '@services/general';
 export class ForgotPasswordPage {
 
   private readonly ForgotPwHttpService = inject(ForgotPwHttpService);
+  readonly i18nService = inject(I18nService);
 
   loading = signal(false);
 
