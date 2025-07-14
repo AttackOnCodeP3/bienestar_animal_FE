@@ -47,7 +47,7 @@ export abstract class UnmutableConstants {
   private static readonly USERS: string = '/users'
   static readonly USERS_URL: string = UnmutableConstants.USERS;
    static readonly FORGOT_PASSWORD_URL: string = UnmutableConstants.USERS + '/forgot-password';
- 
+  static readonly CHANGE_PASSWORD_URL: string = UnmutableConstants.USERS + '/password-reset';
 
   // ==================================================================
   // ROUTES FOR ADMIN SERVICES
