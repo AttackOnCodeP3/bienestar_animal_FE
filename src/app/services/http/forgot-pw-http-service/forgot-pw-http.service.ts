@@ -17,19 +17,17 @@ export class ForgotPwHttpService extends BaseHttpService<String> {
     save(email: string): void {
         this.add({ email: email }).subscribe({
             next: (response) => {
-            this.alertService.displayAlert({
-                type: AlertTypeEnum.SUCCESS,
-                messageKey: response.message
-            });
-            setTimeout(() => {
-                window.location.href = this.forwardUrl;
-            }, 2000);
-            return;
-
+                this.alertService.displayAlert({
+                    type: AlertTypeEnum.SUCCESS,
+                    messageKey: response.message
+                });
+                setTimeout(() => {
+                    window.location.href = this.forwardUrl;
+                }, 1000);
             },
             error: this.handleError({
-            message: 'An error occurred while sending the password reset email',
-            context: `${this.constructor.name}#save`
+                message: 'An error occurred while sending the password reset email',
+                context: `${this.constructor.name}#save`
             })
         });
     }
