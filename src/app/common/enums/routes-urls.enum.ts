@@ -34,6 +34,7 @@ export enum RoutesUrlsEnum {
   REWARDS_SYSTEM = 'rewards-system',
 
   // Reports
+  //TODO: Later change the this for the correct report name
   REPORT_1 = 'report-1',
 
   // Security

@@ -81,7 +81,7 @@ export class RegisterPage implements OnInit {
     if (this.userRegistrationFormService.formUserRegistration.invalid) {
       this.formsService.markFormTouchedAndDirty(this.userRegistrationFormService.formUserRegistration);
       this.alertService.displayAlert({
-        messageKey: I18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
+        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
       });
       return;
     }
@@ -97,14 +97,7 @@ export class RegisterPage implements OnInit {
     const registerUserRequestDTO = RegisterUserRequestDTO.fromUser(
       new User({
         ...rest,
-        municipality: {
-          id: volunteerMunicipality?.id ?? 0,
-          name: volunteerMunicipality?.name ?? '',
-          email: volunteerMunicipality?.email ?? '',
-          status: volunteerMunicipality?.status ?? MunicipalityStatusEnum.ACTIVE,
-          canton: volunteerMunicipality?.canton ?? { id: 0, name: '' }
-        }
-
+        municipality: new Municipality({id: volunteerMunicipality?.id})
       }),
       this.userRegistrationFormService.volunteerIntent()
     );
@@ -112,7 +105,7 @@ export class RegisterPage implements OnInit {
     this.authHttpService.registerUser(registerUserRequestDTO).subscribe({
       next: () => {
         this.alertService.displayAlert({
-          messageKey: I18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
+          messageKey: this.i18nService.i18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
           type: AlertTypeEnum.SUCCESS
         });
         this.userRegistrationFormService.formUserRegistration.reset()

@@ -6,5 +6,6 @@
  * @author dgutierrez
  */
 export enum RouteParamsEnum {
-  USER_ID = 'userId'
+  USER_ID = 'userId',
+  MUNICIPALITY_ID = 'id',
 }

@@ -39,6 +39,7 @@ import {UserRegistrationFormService} from '@services/forms';
   ],
   templateUrl: './complete-profile.page.html',
   styleUrl: './complete-profile.page.scss',
+  providers: [UserRegistrationFormService],
   changeDetection: Constants.changeDetectionStrategy
 })
 export class CompleteProfilePage implements OnInit {
@@ -101,14 +102,7 @@ export class CompleteProfilePage implements OnInit {
     const completeProfileRequestDTO = CompleteProfileRequestDTO.fromUser(
       new User({
         ...rest,
-        municipality: {
-          id: volunteerMunicipality?.id ?? 0,
-          name: volunteerMunicipality?.name ?? '',
-          email: volunteerMunicipality?.email ?? '',
-          status: volunteerMunicipality?.status ?? MunicipalityStatusEnum.ACTIVE,
-          canton: volunteerMunicipality?.canton ?? { id: 0, name: '' }
-        }
-
+        municipality: new Municipality({id: volunteerMunicipality?.id})
       }),
       this.userRegistrationFormService.volunteerIntent()
     );
