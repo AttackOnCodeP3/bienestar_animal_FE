@@ -1,7 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { Constants } from "@common/constants/constants";
 import { BaseHttpService } from "../base-http-service/base-http.service";
-import { AlertTypeEnum } from "@common/enums";
+import { AlertTypeEnum, PagesUrlsEnum } from "@common/enums";
+import { AuthHttpService } from "../auth-http-service/auth-http.service";
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +12,15 @@ import { AlertTypeEnum } from "@common/enums";
 export class ChangePwHttpService extends BaseHttpService<String> {
 
     protected override source: string = Constants.CHANGE_PASSWORD_URL;
-
+        readonly forwardUrl: string = PagesUrlsEnum.LOGIN;
+        
+constructor(
+    @Inject(AuthHttpService) private authHttpService: AuthHttpService
+) {
+    super();
+}
     changePassword(userId: number, oldPassword: string, newPassword: string, confirmPassword: string): void {
+        
         const payload = {
             userId: userId,
             currentPassword: oldPassword,
@@ -26,6 +34,11 @@ export class ChangePwHttpService extends BaseHttpService<String> {
                     type: AlertTypeEnum.SUCCESS,
                     messageKey: response.message
                 });
+                setTimeout(() => {
+                    this.authHttpService.logout();
+                window.location.href = this.forwardUrl;
+            }, 2000);
+            return;
             },
             error: this.handleError({
                 message: 'An error occurred while updating the password',
@@ -34,3 +47,4 @@ export class ChangePwHttpService extends BaseHttpService<String> {
         });
     }
 }
+

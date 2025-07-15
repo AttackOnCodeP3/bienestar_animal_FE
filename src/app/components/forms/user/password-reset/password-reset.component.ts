@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { I18nService } from '@services/general';
+import { ChangePwHttpService } from 'app/services/http/change-pw-http-service/change-pw-http.service';
+import { AuthHttpService } from '@services/http';
 
 @Component({
   selector: 'app-password-reset',
@@ -23,6 +25,9 @@ import { I18nService } from '@services/general';
 })
 export class PasswordResetComponent {
   readonly i18nService = inject(I18nService);
+  private readonly ChangePasswordService = inject(ChangePwHttpService);
+  //const user = authHttpService.currentUser();
+  private readonly AuthHttpService = inject(AuthHttpService);
   loading = signal(false);
   submitted = signal(false);
 
@@ -40,20 +45,24 @@ export class PasswordResetComponent {
     return this.newPassword.value === this.confirmPassword.value;
   }
 
+  
   onSubmit() {
+    const userId = this.AuthHttpService.currentUser()?.id;
+
     this.submitted.set(true);
-    if (this.passwordResetForm.invalid || !this.passwordsMatch) return;
+    if (this.passwordResetForm.invalid || !this.passwordsMatch || userId == null) return;
     this.loading.set(true);
 
-    // Your API call here. Example:
-    // this.YourService.changePassword({ 
-    //   oldPassword: this.oldPassword.value, 
-    //   newPassword: this.newPassword.value 
-    // }).subscribe(...);
+    this.ChangePasswordService.changePassword(
+      userId,
+      this.oldPassword.value ?? '',
+      this.newPassword.value ?? '',
+      this.confirmPassword.value ?? ''
+    );
 
     setTimeout(() => {
       this.loading.set(false);
-      // Optionally reset the form and signals
+
     }, 1200);
   }
 }

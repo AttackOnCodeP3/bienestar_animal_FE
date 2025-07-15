@@ -40,11 +40,9 @@ export class ForgotPasswordPage {
   constructor(private http: HttpClient) {}
 
   send() {
-    console.log('send');
+
     if (this.email.invalid) return;
     this.loading.set(true);
-
-    console.log(this.email)
 
     this.ForgotPwHttpService.save(this.email.value ?? '')
   }
