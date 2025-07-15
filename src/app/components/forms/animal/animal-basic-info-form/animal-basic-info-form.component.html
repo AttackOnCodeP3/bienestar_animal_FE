@@ -1,1 +1,37 @@
-<p>animal-basic-info-form works!</p>
+<form [formGroup]="form()">
+  <div class="row">
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <!--{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}-->
+        <mat-label>Nombre</mat-label>
+        <!--formControlName="identificationCard"-->
+        <!--[placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"-->
+        <input
+          type="text"
+          matInput
+          [errorStateMatcher]="formsService().matcher"
+          />
+        @let idControl = form().get('identificationCard');
+        @if (formsService().isFieldInvalid(idControl)) {
+          <mat-error>{{ formsService().getErrorMessage(idControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <!--{{ i18nService().i18nFormsEnum.CANTON_LABEL | translate }}-->
+        <mat-label>
+          Especie
+        </mat-label>
+        <!-- formControlName="cantonId"-->
+        <mat-select [compareWith]="formsService().genericCompare">
+          @for ( specie of speciesHttpService().speciesList(); track specie.id) {
+            <mat-option [value]="specie">{{ specie.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+</form>

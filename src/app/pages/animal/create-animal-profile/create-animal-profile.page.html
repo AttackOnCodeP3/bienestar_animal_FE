@@ -1,1 +1,13 @@
-<p>create-animal-profile works!</p>
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Informacion basica general </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-animal-basic-info-form
+
+    [formsService]="formsService"
+    [i18nService]="i18nService"
+    [raceHttpService]="raceHttpService"
+    [speciesHttpService]="speciesHttpService"
+  />
+</mat-expansion-panel>
+
