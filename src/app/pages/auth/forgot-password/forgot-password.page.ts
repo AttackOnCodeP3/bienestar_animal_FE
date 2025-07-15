@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ForgotPwHttpService } from '@services/http';
 import { AlertService, I18nService } from '@services/general';
+import { LogoBienestarAnimalComponent } from "@components/icons";
 
 
 @Component({
@@ -19,8 +20,9 @@ import { AlertService, I18nService } from '@services/general';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    TranslatePipe
-  ],
+    TranslatePipe,
+    LogoBienestarAnimalComponent
+],
   templateUrl: './forgot-password.page.html',
   styleUrl: './forgot-password.page.scss'
 })
