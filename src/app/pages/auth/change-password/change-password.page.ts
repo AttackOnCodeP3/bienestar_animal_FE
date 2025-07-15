@@ -4,6 +4,15 @@ import { PasswordResetComponent } from '@components/forms/user/password-reset/pa
 import { AlertService, I18nService } from '@services/general';
 import { LogoBienestarAnimalComponent } from "@components/icons";
 
+/**
+ * Component responsible for handling the change password functionality.
+ * 
+ * This component displays the UI for users to change their password.
+ * It utilizes the `PasswordResetComponent` for the password reset form
+ * and the `LogoBienestarAnimalComponent` for branding.
+ * 
+ * @author @aBlancoC
+ */
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.page.html',

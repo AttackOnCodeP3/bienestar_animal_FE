@@ -1,10 +1,18 @@
 import { Injectable } from "@angular/core";
 import { Constants } from "@common/constants/constants";
-import { User } from "@models";
+
 import { BaseHttpService } from "../base-http-service/base-http.service";
 import { AlertTypeEnum } from "@common/enums/alert-type.enum";
 import { PagesUrlsEnum } from "@common/enums";
 
+/**
+ * Service for handling forgot password HTTP requests.
+ * Extends the BaseHttpService to provide functionality for sending password reset emails.
+ *
+ * @author @aBlancoC
+ * @extends BaseHttpService<String>
+ * @@Injectable
+ */
 @Injectable({
     providedIn: 'root'
 })

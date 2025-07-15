@@ -11,6 +11,15 @@ import { AlertService, I18nService } from '@services/general';
 import { LogoBienestarAnimalComponent } from "@components/icons";
 
 
+/**
+ * Component for handling the "Forgot Password" functionality.
+ * 
+ * This page allows users to request a password reset by entering their email address.
+ * It uses Angular's reactive forms for validation and interacts with a backend service
+ * to initiate the password reset process.
+ *
+ * @author @aBlancoC
+ */
 @Component({
   selector: 'app-forgot-password',
   standalone: true,

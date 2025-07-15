@@ -9,6 +9,26 @@ import { I18nService } from '@services/general';
 import { ChangePwHttpService } from 'app/services/http/change-pw-http-service/change-pw-http.service';
 import { AuthHttpService } from '@services/http';
 
+/**
+ * @author @aBlancoC
+ * 
+ * Component for handling user password reset functionality.
+ * 
+ * This Angular standalone component provides a form for users to change their password.
+ * It includes validation for required fields and minimum password length, and ensures
+ * that the new password and confirmation match before submitting the change request.
+ * 
+ * Dependencies:
+ * - I18nService: For internationalization support.
+ * - ChangePwHttpService: Service to handle password change HTTP requests.
+ * - AuthHttpService: Service to access current user authentication information.
+ * 
+ * Features:
+ * - Reactive form with validation for old password, new password, and confirmation.
+ * - Loading and submission state management.
+ * - Password match validation.
+ * - Handles form submission and invokes password change service.
+ */
 @Component({
   selector: 'app-password-reset',
   standalone: true,

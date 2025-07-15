@@ -4,6 +4,14 @@ import { BaseHttpService } from "../base-http-service/base-http.service";
 import { AlertTypeEnum, PagesUrlsEnum } from "@common/enums";
 import { AuthHttpService } from "../auth-http-service/auth-http.service";
 
+/**
+ * Service for handling password change HTTP requests.
+ * 
+ * Extends the {@link BaseHttpService} to provide functionality for changing a user's password.
+ * Utilizes the authentication service to log out the user after a successful password change.
+ * 
+ * @author @aBlancoC
+ */
 @Injectable({
     providedIn: 'root'
 })
