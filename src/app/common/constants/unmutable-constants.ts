@@ -129,4 +129,11 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly SEX: string = '/sex';
   static readonly SEX_URL: string = UnmutableConstants.SEX;
+
+  // ==================================================================
+  // ROUTES FOR VACCINE SERVICES
+  // =================================================================
+  private static readonly VACCINES: string = '/vaccines';
+  static readonly VACCINE_URL: string = UnmutableConstants.VACCINES;
+  static readonly VACCINE_BY_SPECIES_URL: string = 'by-species';
 }

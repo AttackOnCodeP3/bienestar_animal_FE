@@ -13,7 +13,7 @@ import {
 } from '@components/forms/user';
 import {Constants} from '@common/constants/constants';
 import {AlertService, FormsService, I18nService} from '@services/general';
-import {AlertTypeEnum, MunicipalityStatusEnum, PagesUrlsEnum} from '@common/enums';
+import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
 import {
   AuthHttpService,
   CantonHttpService,
@@ -21,7 +21,6 @@ import {
   InterestHttpService,
   MunicipalityHttpService
 } from '@services/http';
-import {I18nPagesValidationsEnum} from '@common/enums/i18n';
 import {Municipality, User} from '@models';
 import {RegisterUserRequestDTO} from '@models/dto';
 import {UserRegistrationFormService} from '@services/forms';

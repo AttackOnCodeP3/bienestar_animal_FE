@@ -49,10 +49,10 @@ export class RaceHttpService extends BaseHttpService<Race> {
    * Fetches races by species ID (paginated)
    * @param speciesId ID of the species
    * @param page optional page number (default 1)
-   * @param size optional page size (default 10)
+   * @param size optional page size (default 500)
    * @author dgutierrez
    */
-  getBySpeciesId(speciesId: number, page: number = 1, size: number = 10): void {
+  getBySpeciesId(speciesId: number, page: number = 1, size: number = 500): void {
     const customSource = `by-species/${speciesId}`;
     this.findAllWithParamsAndCustomSource(customSource, { page, size }).subscribe({
       next: (response) => {

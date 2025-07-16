@@ -10,3 +10,4 @@ export * from "./role";
 export * from "./sex";
 export * from "./species";
 export * from "./user";
+export * from "./vaccine";

@@ -12,3 +12,4 @@ export * from "./role-http-service/role-http.service";
 export * from "./sex-http-service/sex-http.service";
 export * from "./species-http-service/species-http.service";
 export * from "./user-http-service/user-http.service";
+export * from "./vaccine-http-service/vaccine-http.service";

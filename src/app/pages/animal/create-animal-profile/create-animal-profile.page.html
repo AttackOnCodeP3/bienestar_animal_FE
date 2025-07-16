@@ -1,13 +1,31 @@
-<mat-expansion-panel expanded="true">
+<mat-expansion-panel class="mb-4" expanded="true">
   <mat-expansion-panel-header>
-    <mat-panel-title> Informacion basica general </mat-panel-title>
+    <mat-panel-title>
+      <h1>Informacion basica general</h1>
+    </mat-panel-title>
   </mat-expansion-panel-header>
-  <app-animal-basic-info-form
 
+  <app-animal-basic-info-form
+    [form]="form"
     [formsService]="formsService"
     [i18nService]="i18nService"
-    [raceHttpService]="raceHttpService"
-    [speciesHttpService]="speciesHttpService"
+    [sexList]="sexHttpService.sexList()"
+    [speciesList]="speciesHttpService.speciesList()"
+    [raceListBySpecies]="raceHttpService.raceListBySpecies()"
+    (speciesSelectionChange)="onSpeciesSelectionChange($event)"
   />
 </mat-expansion-panel>
 
+@if (formsService.isControlHasValue('species', form)) {
+  <mat-expansion-panel expanded="true" @fade>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Vacunación</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-vaccination-form
+
+      [vaccineList]="vaccineHttpService.vaccineListBySpecies()" />
+  </mat-expansion-panel>
+}

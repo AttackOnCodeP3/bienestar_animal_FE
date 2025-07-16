@@ -3,7 +3,7 @@ import {createPageArray} from '@common/utils';
 import {ISearch} from '@common/interfaces/http';
 import {Constants} from '@common/constants/constants';
 import {AnimalType} from '@models';
-import {BaseHttpService} from '@services/http';
+import {BaseHttpService} from '@services/http/base-http-service/base-http.service';
 
 /**
  * Service for managing animal types via HTTP requests.
@@ -13,7 +13,6 @@ import {BaseHttpService} from '@services/http';
   providedIn: 'root'
 })
 export class AnimalTypesHttpService extends BaseHttpService<AnimalType> {
-
 
   protected override source = Constants.ANIMAL_TYPES_URL;
 
