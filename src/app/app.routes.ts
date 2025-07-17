@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { RolesEnum, RoutesUrlsEnum } from '@common/enums';
-import { authGuard, profileCompletedGuard, roleGuard,forgotPasswordGuard  } from '@core/guards';
+import { authGuard, profileCompletedGuard, roleGuard, forgotPasswordGuard  } from '@core/guards';
 import {DashboardLayoutComponent} from '@components/layout';
 
 export const routes: Routes = [
