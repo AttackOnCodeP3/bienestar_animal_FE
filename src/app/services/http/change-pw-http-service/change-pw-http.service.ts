@@ -20,7 +20,7 @@ import { AuthHttpService } from "../auth-http-service/auth-http.service";
 export class ChangePwHttpService extends BaseHttpService<String> {
 
     protected override source: string = Constants.CHANGE_PASSWORD_URL;
-        readonly forwardUrl: string = PagesUrlsEnum.LOGIN;
+    readonly forwardUrl: string = PagesUrlsEnum.LOGIN;
         
 constructor(
     @Inject(AuthHttpService) private authHttpService: AuthHttpService
