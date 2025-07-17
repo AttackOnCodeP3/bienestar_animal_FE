@@ -177,6 +177,10 @@
     },
     "edit-municipality-page": {
       "municipalityUpdatedSuccessfully": "Municipalidad actualizada exitosamente"
+    },
+    "create-animal-profile-page": {
+      "animalProfileCreatedSuccessfully": "Perfil de animal creado exitosamente",
+      "animalProfileVaccinationRequired": "El perfil del animal requiere al menos indicar una vacunación"
     }
   },
   "================== MATERIAL ==================": "",

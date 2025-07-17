@@ -66,6 +66,7 @@
           formControlName="birthDate"
           [max]="formsService().maxTodayDate"
           [errorStateMatcher]="formsService().matcher"
+          readonly
         />
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

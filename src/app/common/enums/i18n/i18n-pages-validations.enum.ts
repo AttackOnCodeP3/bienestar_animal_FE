@@ -13,6 +13,7 @@ export enum I18nPagesValidationsEnum {
   MUNICIPALITY_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'municipality-page.',
   EDIT_USER_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'edit-user-page.',
   CREATE_MUNICIPALITY_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'create-municipality-page.',
+  CREATE_ANIMAL_PROFILE_PAGE = I18nPagesValidationsEnum.VALIDATIONS + 'create-animal-profile-page.',
 
   // General
   GENERAL_INVALID_FIELDS = I18nPagesValidationsEnum.GENERAL + "invalidFields",
@@ -33,4 +34,7 @@ export enum I18nPagesValidationsEnum {
   EDIT_USER_PAGE_USER_UPDATED_SUCCESSFULLY = I18nPagesValidationsEnum.EDIT_USER_PAGE + "userUpdatedSuccessfully",
 
   CREATE_MUNICIPALITY_PAGE_MUNICIPALITY_CREATED_SUCCESSFULLY = I18nPagesValidationsEnum.CREATE_MUNICIPALITY_PAGE + "municipalityCreatedSuccessfully",
+
+  CREATE_ANIMAL_PROFILE_PAGE_ANIMAL_PROFILE_CREATED_SUCCESSFULLY = I18nPagesValidationsEnum.CREATE_ANIMAL_PROFILE_PAGE + "animalProfileCreatedSuccessfully",
+  CREATE_ANIMAL_PROFILE_PAGE_ANIMAL_PROFILE_VACCINATION_REQUIRED = I18nPagesValidationsEnum.CREATE_ANIMAL_PROFILE_PAGE + "animalProfileVaccinationRequired",
 }

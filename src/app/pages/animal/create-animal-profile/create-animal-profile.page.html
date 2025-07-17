@@ -6,7 +6,7 @@
   </mat-expansion-panel-header>
 
   <app-animal-basic-info-form
-    [form]="form"
+    [form]="formAnimalBasicInfo"
     [formsService]="formsService"
     [i18nService]="i18nService"
     [sexList]="sexHttpService.sexList()"
@@ -16,8 +16,8 @@
   />
 </mat-expansion-panel>
 
-@if (formsService.isControlHasValue('species', form)) {
-  <mat-expansion-panel expanded="true" @fade>
+@if (formsService.isControlHasValue('species', formAnimalBasicInfo)) {
+  <mat-expansion-panel class="mb-4" expanded="true" @fade>
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h2>Vacunación</h2>
@@ -25,7 +25,14 @@
     </mat-expansion-panel-header>
 
     <app-animal-vaccination-form
-
-      [vaccineList]="vaccineHttpService.vaccineListBySpecies()" />
+      (syncVaccinesDatesChange)="onSyncVaccinesDatesChange($event)"
+      [formsService]="formsService"
+      [form]="formAnimalVaccination"
+      [vaccineList]="vaccineHttpService.vaccineListBySpecies()"
+    />
   </mat-expansion-panel>
 }
+
+<div class="text-end" (click)="onSubmit()">
+  <button matButton="tonal">Registrar animal</button>
+</div>
