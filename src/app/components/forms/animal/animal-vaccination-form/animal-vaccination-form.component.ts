@@ -1,8 +1,7 @@
 import {Component, input, OnDestroy, OnInit, output} from '@angular/core';
 import {MatListModule} from '@angular/material/list';
-import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {MatInputModule} from '@angular/material/input';
 import {MatDatepicker, MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker';
-import {MatButton} from '@angular/material/button';
 import {Subscription} from 'rxjs';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {provideNativeDateAdapter} from '@angular/material/core';
@@ -20,15 +19,11 @@ import {IVaccineApplied} from '@common/interfaces';
   selector: 'app-animal-vaccination-form',
   imports: [
     MatListModule,
-    MatFormField,
-    MatLabel,
     MatDatepickerToggle,
     MatDatepicker,
     ReactiveFormsModule,
-    MatError,
-    MatInput,
     MatDatepickerModule,
-    MatButton,
+    MatInputModule
   ],
   templateUrl: './animal-vaccination-form.component.html',
   styleUrl: './animal-vaccination-form.component.scss',

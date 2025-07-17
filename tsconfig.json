@@ -30,6 +30,7 @@
       "@common/interfaces": ["app/common/interfaces/index.ts"], // Alias for interfaces index file
       "@common/interfaces/*": ["app/common/interfaces/*"],
       "@common/interfaces/http": ["app/common/interfaces/http/index.ts"], // Alias for http interfaces index file
+      "@common/interfaces/forms": ["app/common/interfaces/forms/index.ts"], // Alias for forms interfaces index file
       "@common/types": ["app/common/types/index.ts"], // Alias for types index file
       "@common/types/*": ["app/common/types/*"],
       "@common/constants/*": ["app/common/constants/*"],

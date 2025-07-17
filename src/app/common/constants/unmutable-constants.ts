@@ -136,4 +136,16 @@ export abstract class UnmutableConstants {
   private static readonly VACCINES: string = '/vaccines';
   static readonly VACCINE_URL: string = UnmutableConstants.VACCINES;
   static readonly VACCINE_BY_SPECIES_URL: string = 'by-species';
+
+  // ==================================================================
+  // ROUTES FOR SANITARY CONTROL RESPONSES SERVICES
+  // =================================================================
+  private static readonly SANITARY_CONTROL_RESPONSES: string = '/sanitary-control-responses';
+  static readonly SANITARY_CONTROL_RESPONSES_URL: string = UnmutableConstants.SANITARY_CONTROL_RESPONSES;
+
+  // ==================================================================
+  // ROUTES FOR SANITARY CONTROL TYPE SERVICES
+  // =================================================================
+  private static readonly SANITARY_CONTROL_TYPES: string = '/sanitary-control-types';
+  static readonly SANITARY_CONTROL_TYPES_URL: string = UnmutableConstants.SANITARY_CONTROL_TYPES;
 }
