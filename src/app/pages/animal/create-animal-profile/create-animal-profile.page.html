@@ -33,6 +33,19 @@
   </mat-expansion-panel>
 }
 
+<mat-expansion-panel class="mb-4" expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Desparasitación</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-animal-deworming-form
+    [form]="formDeworming"
+    [formsService]="formsService"
+    [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()" />
+</mat-expansion-panel>
+
 <div class="text-end" (click)="onSubmit()">
   <button matButton="tonal">Registrar animal</button>
 </div>

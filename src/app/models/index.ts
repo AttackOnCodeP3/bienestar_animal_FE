@@ -7,6 +7,8 @@ export * from "./municipality-status";
 export * from "./neighborhood";
 export * from "./race";
 export * from "./role";
+export * from "./sanitary-control-response";
+export * from "./sanitary-control-type";
 export * from "./sex";
 export * from "./species";
 export * from "./user";

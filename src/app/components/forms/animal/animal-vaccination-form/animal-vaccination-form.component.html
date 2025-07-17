@@ -1,5 +1,5 @@
 <form [formGroup]="form()">
-  <!-- Lista de vacunas seleccionables -->
+  <h4>¿Se ha aplicado este control?</h4>
   <mat-selection-list formControlName="selectedVaccines" multiple>
     @for (vac of vaccineList(); track vac.id) {
       <mat-list-option [value]="vac.id">{{ vac.name }}</mat-list-option>
@@ -29,9 +29,6 @@
             <mat-error>{{ formsService().getErrorMessage(fechaControl) }}</mat-error>
           }
         </mat-form-field>
-      </div>
-      <div class="col text-center">
-        <button matButton="tonal" (click)="matDatepicker.open()">Abrir</button>
       </div>
     </div>
   }
