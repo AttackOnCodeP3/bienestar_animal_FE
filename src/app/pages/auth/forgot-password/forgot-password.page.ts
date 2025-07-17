@@ -48,7 +48,7 @@ export class ForgotPasswordPage {
     email: this.email
   });
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   send() {
 
