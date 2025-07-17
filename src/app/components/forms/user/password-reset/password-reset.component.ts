@@ -46,7 +46,6 @@ import { AuthHttpService } from '@services/http';
 export class PasswordResetComponent {
   readonly i18nService = inject(I18nService);
   private readonly ChangePasswordService = inject(ChangePwHttpService);
-  //const user = authHttpService.currentUser();
   private readonly AuthHttpService = inject(AuthHttpService);
   loading = signal(false);
   submitted = signal(false);
