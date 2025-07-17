@@ -98,4 +98,42 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly NEIGHBORHOODS: string = '/neighborhoods'
   static readonly NEIGHBORHOODS_URL: string = UnmutableConstants.NEIGHBORHOODS;
+
+
+  // ==================================================================
+  // ROUTES FOR RACES SERVICES
+  // =================================================================
+  private static readonly RACES: string = '/races';
+  static readonly RACES_URL: string = UnmutableConstants.RACES;
+
+  // ==================================================================
+  // ROUTES FOR COMMUNITY ANIMALS SERVICES
+  // =================================================================
+  private static readonly COMMUNITY_ANIMALS: string = '/community-animals';
+  static readonly COMMUNITY_ANIMALS_URL: string = UnmutableConstants.COMMUNITY_ANIMALS;
+
+  // ==================================================================
+  // ROUTES FOR SPECIES SERVICES
+  // =================================================================
+  private static readonly SPECIES: string = '/species';
+  static readonly SPECIES_URL: string = UnmutableConstants.SPECIES;
+
+  // ==================================================================
+  // ROUTES FOR ANIMAL TYPES SERVICES
+  // =================================================================
+  private static readonly ANIMAL_TYPES: string = '/animal-types';
+  static readonly ANIMAL_TYPES_URL: string = UnmutableConstants.ANIMAL_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR SEX SERVICES
+  // =================================================================
+  private static readonly SEX: string = '/sex';
+  static readonly SEX_URL: string = UnmutableConstants.SEX;
+
+  // ==================================================================
+  // ROUTES FOR VACCINE SERVICES
+  // =================================================================
+  private static readonly VACCINES: string = '/vaccines';
+  static readonly VACCINE_URL: string = UnmutableConstants.VACCINES;
+  static readonly VACCINE_BY_SPECIES_URL: string = 'by-species';
 }

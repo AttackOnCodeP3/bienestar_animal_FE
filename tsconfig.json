@@ -18,8 +18,9 @@
     "paths": {
       "@components/*": ["app/components/*"],
 
-      "@services/general": ["app/services/index.ts"],
+      "@services/general": ["app/services/index.ts"], // Alias for general services index file
       "@services/http": ["app/services/http/index.ts"], // Alias for http index file
+      "@services/http/*": ["app/services/http/*"], // Alias for http directory
       "@services/forms": ["app/services/forms/index.ts"], // Alias for forms index file
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
@@ -43,10 +44,11 @@
       "@animations/slide/*": ["app/common/animations/slide/*"],
 
       "@components/user": ["app/components/user/index.ts"], // Alias for user component index file
+      "@components/animal": ["app/components/animal/index.ts"], // Alias for animal component index file
       "@components/general": ["app/components/index.ts"], // Alias for general component index file
       "@components/layout": ["app/components/layout/index.ts"], // Alias for layout component index file
-      "@models": ["app/models/index.ts"], // Alias for models index file
 
+      "@models": ["app/models/index.ts"], // Alias for models index file
       "@models/dto": ["app/models/dto/index.ts"], // Alias for DTO models index file
 
       "@core/guards": ["app/core/guards/index.ts"], // Alias for guards index file

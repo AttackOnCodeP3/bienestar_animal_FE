@@ -1,0 +1,38 @@
+<mat-expansion-panel class="mb-4" expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h1>Informacion basica general</h1>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-animal-basic-info-form
+    [form]="formAnimalBasicInfo"
+    [formsService]="formsService"
+    [i18nService]="i18nService"
+    [sexList]="sexHttpService.sexList()"
+    [speciesList]="speciesHttpService.speciesList()"
+    [raceListBySpecies]="raceHttpService.raceListBySpecies()"
+    (speciesSelectionChange)="onSpeciesSelectionChange($event)"
+  />
+</mat-expansion-panel>
+
+@if (formsService.isControlHasValue('species', formAnimalBasicInfo)) {
+  <mat-expansion-panel class="mb-4" expanded="true" @fade>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Vacunación</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-vaccination-form
+      (syncVaccinesDatesChange)="onSyncVaccinesDatesChange($event)"
+      [formsService]="formsService"
+      [form]="formAnimalVaccination"
+      [vaccineList]="vaccineHttpService.vaccineListBySpecies()"
+    />
+  </mat-expansion-panel>
+}
+
+<div class="text-end" (click)="onSubmit()">
+  <button matButton="tonal">Registrar animal</button>
+</div>
