@@ -23,7 +23,7 @@ export class ChangePwHttpService extends BaseHttpService<String> {
     readonly forwardUrl: string = PagesUrlsEnum.LOGIN;
         
 constructor(
-    @Inject(AuthHttpService) private authHttpService: AuthHttpService
+   private readonly authHttpService = inject(AuthHttpService);
 ) {
     super();
 }
