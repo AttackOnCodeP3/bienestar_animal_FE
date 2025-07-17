@@ -69,6 +69,10 @@ export class CreateAnimalProfilePage implements OnInit {
     this.raceHttpService.getBySpeciesId(species.id!)
   }
 
+  /**
+   * Builds the form for creating an animal profile.
+   * @author dgutierrez
+   */
   private buildCreateAnimalProfileForm() {
     return this.formsService.formsBuilder.group({
       name: this.formsService.formsBuilder.control('', {
