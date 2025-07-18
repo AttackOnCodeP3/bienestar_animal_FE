@@ -10,8 +10,8 @@
     </mat-radio-group>
   </div>
 
-  @if (sanitaryControlResponseValueId === sanitaryControlResponseEnum.YES) {
-    <div class="row">
+  @if (sanitaryControlResponseValueId === communityAnimalRegistrationFormService().sanitaryControlResponseEnum.YES) {
+    <div class="row" @fade>
 
       <div class="col-lg-4 mb-3">
         <mat-form-field appearance="outline" class="w-100">
