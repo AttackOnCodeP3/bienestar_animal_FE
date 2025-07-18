@@ -1,27 +1,30 @@
 import {Component, computed, effect, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {FormGroup, Validators} from '@angular/forms';
+import {MatButton} from '@angular/material/button';
+import {Subscription} from 'rxjs';
 import {
   AnimalBasicInfoFormComponent,
   AnimalVaccinationFormComponent,
-  AnimalDewormingFormComponent
+  AnimalDewormingFormComponent,
+  AnimalNeuteringFormComponent,
+  AnimalFleaControlFormComponent
 } from '@components/forms/animal';
 import {
   RaceHttpService,
-  SpeciesHttpService,
+  SanitaryControlResponseHttpService,
+  SanitaryControlTypeHttpService,
   SexHttpService,
+  SpeciesHttpService,
   VaccineHttpService,
-  SanitaryControlResponseHttpService, SanitaryControlTypeHttpService
 } from '@services/http';
 import {Race, SanitaryControlResponse, SanitaryControlType, Sex, Species} from '@models';
-import {FormGroup, Validators} from '@angular/forms';
 import {fade} from '@animations/fade';
 import {IVaccineApplied} from '@common/interfaces';
 import {AlertService, FormsService, I18nService} from '@services/general';
-import {MatButton} from '@angular/material/button';
-import {SanitaryControlResponseEnum, SanitaryControlTypeEnum} from '@common/enums';
-import {Subscription} from 'rxjs';
-import {ISanitaryControlForm} from '@common/interfaces/forms';
+import {SanitaryControlTypeEnum} from '@common/enums';
+import {CommunityAnimalRegistrationFormService} from '@services/forms';
 
 /**
  * Page for creating an animal profile.
@@ -32,9 +35,11 @@ import {ISanitaryControlForm} from '@common/interfaces/forms';
   imports: [
     AnimalBasicInfoFormComponent,
     AnimalDewormingFormComponent,
+    AnimalNeuteringFormComponent,
     AnimalVaccinationFormComponent,
     MatButton,
     MatExpansionModule,
+    AnimalFleaControlFormComponent,
   ],
   templateUrl: './create-animal-profile.page.html',
   styleUrl: './create-animal-profile.page.scss',
@@ -52,6 +57,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   readonly sexHttpService = inject(SexHttpService);
   readonly speciesHttpService = inject(SpeciesHttpService);
   readonly vaccineHttpService = inject(VaccineHttpService);
+  readonly communityAnimalRegistrationFormService = inject(CommunityAnimalRegistrationFormService);
 
   readonly sanitaryControlTypeList = this.sanitaryControlTypeHttpService.sanitaryControlTypeList;
   private readonly dewormingControlType = computed(() =>
@@ -66,9 +72,9 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
 
   readonly formAnimalBasicInfo = this.buildCreateAnimalProfileForm();
   readonly formAnimalVaccination = this.buildVaccinationForm();
-  readonly formDeworming: FormGroup<ISanitaryControlForm>;
-  readonly formFleaAndTickControl = this.buildSanitaryControlForm();
-  readonly formNeutering = this.buildSanitaryControlForm();
+  readonly formDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
+  readonly formFleaAndTickControl = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
+  readonly formNeutering = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
 
   /**
    * Effect to assign sanitary control types to the respective forms.
@@ -81,13 +87,13 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
     const neuteringType = this.neuteringControlType();
 
     if (dewormingType) {
-      this.updateSanitaryControlType(this.formDeworming, dewormingType);
+      this.communityAnimalRegistrationFormService.assignSanitaryControlType(this.formDeworming, dewormingType);
     }
     if (fleaAndTickType) {
-      this.updateSanitaryControlType(this.formFleaAndTickControl, fleaAndTickType);
+      this.communityAnimalRegistrationFormService.assignSanitaryControlType(this.formFleaAndTickControl, fleaAndTickType);
     }
     if (neuteringType) {
-      this.updateSanitaryControlType(this.formNeutering, neuteringType);
+      this.communityAnimalRegistrationFormService.assignSanitaryControlType(this.formNeutering, neuteringType);
     }
   });
 
@@ -105,9 +111,9 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
     this.sexHttpService.getAll();
     this.speciesHttpService.getAll();
 
-    this.subscriptions.push(this.applySanitaryControlValidations(this.formDeworming));
-    this.subscriptions.push(this.applySanitaryControlValidations(this.formFleaAndTickControl));
-    this.subscriptions.push(this.applySanitaryControlValidations(this.formNeutering));
+    this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formDeworming));
+    this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formFleaAndTickControl));
+    this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formNeutering));
   }
 
   ngOnDestroy() {
@@ -115,10 +121,18 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.formAnimalBasicInfo.invalid || this.formAnimalVaccination.invalid || this.formDeworming.invalid){
+    if (
+      this.formAnimalBasicInfo.invalid ||
+      this.formAnimalVaccination.invalid ||
+      this.formDeworming.invalid ||
+      this.formFleaAndTickControl.invalid ||
+      this.formNeutering.invalid
+    ) {
       this.formsService.markFormTouchedAndDirty(this.formAnimalBasicInfo);
       this.formsService.markFormTouchedAndDirty(this.formAnimalVaccination);
       this.formsService.markFormTouchedAndDirty(this.formDeworming);
+      this.formsService.markFormTouchedAndDirty(this.formFleaAndTickControl);
+      this.formsService.markFormTouchedAndDirty(this.formNeutering);
       this.alertService.displayAlert({
         messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
       })
@@ -181,8 +195,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   /**
    * @author dgutierrez
    */
-  private buildSanitaryControlForm(
-  ) {
+  private buildSanitaryControlForm() {
     return this.formsService.formsBuilder.group({
       productUsed: this.formsService.formsBuilder.control<string>('', {
         nonNullable: true,
@@ -215,51 +228,5 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
    */
   onSyncVaccinesDatesChange(vaccinesApplied: IVaccineApplied[]) {
     this.vaccinesAppliedDates.set(vaccinesApplied);
-    console.warn(vaccinesApplied);
-  }
-
-  /**
-   * Applies validations to the sanitary control form based on the selected response.
-   * @param form The form group containing the sanitary control response.
-   * @author dgutierrez
-   */
-  private applySanitaryControlValidations(form: FormGroup): Subscription {
-    const control = form.get('sanitaryControlResponse');
-    if (!control) return new Subscription();
-
-    return control.valueChanges.subscribe((value: SanitaryControlResponse) => {
-      const isDisabled = value?.id === SanitaryControlResponseEnum.NO || value?.id === SanitaryControlResponseEnum.UNKNOWN;
-      const productUsed = form.get('productUsed');
-      const lastApplicationDate = form.get('lastApplicationDate');
-
-      if (productUsed) {
-        productUsed.setValidators(isDisabled ? [] : [Validators.required]);
-        productUsed.updateValueAndValidity();
-      }
-
-      if (lastApplicationDate) {
-        lastApplicationDate.setValidators(isDisabled ? [] : [Validators.required]);
-        lastApplicationDate.updateValueAndValidity();
-      }
-    });
-  }
-
-  /**
-   * Updates the sanitary control type in the form.
-   * @param form The form group to update.
-   * @param type The sanitary control type to set.
-   * @author dgutierrez
-   */
-  updateSanitaryControlType(form: FormGroup, type: SanitaryControlType) {
-    if (!form.contains('sanitaryControlType')) {
-      form.addControl(
-        'sanitaryControlType',
-        this.formsService.formsBuilder.control(type, {
-          validators: [Validators.required]
-        })
-      );
-    } else {
-      form.get('sanitaryControlType')?.setValue(type);
-    }
   }
 }

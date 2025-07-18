@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnimalSterilizationFormComponent } from './animal-sterilization-form.component';
+import { AnimalNeuteringFormComponent } from './animal-neutering-form.component';
 
 describe('AnimalSterilizationForm', () => {
-  let component: AnimalSterilizationFormComponent;
-  let fixture: ComponentFixture<AnimalSterilizationFormComponent>;
+  let component: AnimalNeuteringFormComponent;
+  let fixture: ComponentFixture<AnimalNeuteringFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AnimalSterilizationFormComponent]
+      imports: [AnimalNeuteringFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AnimalSterilizationFormComponent);
+    fixture = TestBed.createComponent(AnimalNeuteringFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
