@@ -50,15 +50,13 @@ export class PasswordResetComponent {
   loading = signal(false);
   submitted = signal(false);
 
-  oldPassword = new FormControl('', [Validators.required]);
-  newPassword = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  confirmPassword = new FormControl('', [Validators.required]);
-
-  passwordResetForm = new FormGroup({
-    oldPassword: this.oldPassword,
-    newPassword: this.newPassword,
-    confirmPassword: this.confirmPassword
+  createPasswordResetForm(): FormGroup {
+  return new FormGroup({
+    oldPassword: new FormControl('', [Validators.required]),
+    newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    confirmPassword: new FormControl('', [Validators.required])
   });
+}
 
   get passwordsMatch(): boolean {
     return this.newPassword.value === this.confirmPassword.value;
