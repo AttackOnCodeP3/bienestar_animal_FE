@@ -49,6 +49,7 @@ export class PasswordResetComponent {
   private readonly authHttpService = inject(AuthHttpService);
   loading = signal(false);
   submitted = signal(false);
+  passwordResetForm = this.createPasswordResetForm();
 
   createPasswordResetForm(): FormGroup {
   return new FormGroup({
@@ -59,9 +60,19 @@ export class PasswordResetComponent {
 }
 
   get passwordsMatch(): boolean {
-    return this.newPassword.value === this.confirmPassword.value;
+    return (this.newPassword?.value ?? '') === (this.confirmPassword?.value ?? '');
+  }
+  get oldPassword() {
+    return this.passwordResetForm.get('oldPassword');
+  }
+  get newPassword() {
+    return this.passwordResetForm.get('newPassword');
+  }
+  get confirmPassword() {
+    return this.passwordResetForm.get('confirmPassword');
   }
 
+  
   
   onSubmit() {
     const userId = this.authHttpService.currentUser()?.id;
@@ -72,11 +83,10 @@ export class PasswordResetComponent {
 
     this.changePasswordService.changePassword(
       userId,
-      this.oldPassword.value ?? '',
-      this.newPassword.value ?? '',
-      this.confirmPassword.value ?? ''
+      this.oldPassword?.value ?? '',
+      this.newPassword?.value ?? '',
+      this.confirmPassword?.value ?? ''
     );
-
 
       this.loading.set(false);
 
