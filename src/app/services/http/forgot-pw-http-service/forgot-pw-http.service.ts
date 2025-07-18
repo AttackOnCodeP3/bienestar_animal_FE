@@ -17,7 +17,7 @@ import { PagesUrlsEnum } from "@common/enums";
     providedIn: 'root'
 })
 
-export class ForgotPwHttpService extends BaseHttpService<String> {
+export class ForgotPasswordHttpService extends BaseHttpService<String> {
 
     protected override source: string = Constants.FORGOT_PASSWORD_URL;
     readonly forwardUrl: string = PagesUrlsEnum.LOGIN;

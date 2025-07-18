@@ -17,13 +17,13 @@ import { AuthHttpService } from "../auth-http-service/auth-http.service";
 })
 
 
-export class ChangePwHttpService extends BaseHttpService<String> {
+export class ChangePasswordHttpService extends BaseHttpService<String> {
 
     protected override source: string = Constants.CHANGE_PASSWORD_URL;
     readonly forwardUrl: string = PagesUrlsEnum.LOGIN;
         
 constructor(
-   private readonly authHttpService = inject(AuthHttpService);
+    private readonly authHttpService: AuthHttpService
 ) {
     super();
 }

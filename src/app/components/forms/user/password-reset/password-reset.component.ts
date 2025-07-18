@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { I18nService } from '@services/general';
-import { ChangePwHttpService } from 'app/services/http/change-pw-http-service/change-pw-http.service';
+import { ChangePasswordHttpService } from 'app/services/http/change-pw-http-service/change-pw-http.service';
 import { AuthHttpService } from '@services/http';
 
 /**
@@ -20,7 +20,7 @@ import { AuthHttpService } from '@services/http';
  * 
  * Dependencies:
  * - I18nService: For internationalization support.
- * - ChangePwHttpService: Service to handle password change HTTP requests.
+ * - ChangePasswordHttpService: Service to handle password change HTTP requests.
  * - AuthHttpService: Service to access current user authentication information.
  * 
  * Features:
@@ -45,8 +45,8 @@ import { AuthHttpService } from '@services/http';
 })
 export class PasswordResetComponent {
   readonly i18nService = inject(I18nService);
-  private readonly ChangePasswordService = inject(ChangePwHttpService);
-  private readonly AuthHttpService = inject(AuthHttpService);
+  private readonly changePasswordService = inject(ChangePasswordHttpService);
+  private readonly authHttpService = inject(AuthHttpService);
   loading = signal(false);
   submitted = signal(false);
 
@@ -66,22 +66,21 @@ export class PasswordResetComponent {
 
   
   onSubmit() {
-    const userId = this.AuthHttpService.currentUser()?.id;
+    const userId = this.authHttpService.currentUser()?.id;
 
     this.submitted.set(true);
     if (this.passwordResetForm.invalid || !this.passwordsMatch || userId == null) return;
     this.loading.set(true);
 
-    this.ChangePasswordService.changePassword(
+    this.changePasswordService.changePassword(
       userId,
       this.oldPassword.value ?? '',
       this.newPassword.value ?? '',
       this.confirmPassword.value ?? ''
     );
 
-    setTimeout(() => {
+
       this.loading.set(false);
 
-    }, 1200);
   }
 }

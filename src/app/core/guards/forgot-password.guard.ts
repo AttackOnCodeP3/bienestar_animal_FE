@@ -16,9 +16,4 @@ export const forgotPasswordGuard: CanActivateFn = () => {
     return passwordResetRequired && isLoggedIn
         ? router.createUrlTree([PagesUrlsEnum.CHANGE_PASSWORD])
         : true;
-
-
-
 }
-
-

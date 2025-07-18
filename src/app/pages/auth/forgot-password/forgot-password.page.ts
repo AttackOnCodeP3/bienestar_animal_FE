@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ForgotPwHttpService } from '@services/http';
+import { ForgotPasswordHttpService } from '@services/http';
 import { AlertService, I18nService } from '@services/general';
 import { LogoBienestarAnimalComponent } from "@components/icons";
 
@@ -37,7 +37,7 @@ import { LogoBienestarAnimalComponent } from "@components/icons";
 })
 export class ForgotPasswordPage {
 
-  private readonly ForgotPwHttpService = inject(ForgotPwHttpService);
+  private readonly ForgotPasswordHttpService  = inject(ForgotPasswordHttpService );
   readonly i18nService = inject(I18nService);
 
   loading = signal(false);
@@ -55,6 +55,6 @@ export class ForgotPasswordPage {
     if (this.email.invalid) return;
     this.loading.set(true);
 
-    this.ForgotPwHttpService.save(this.email.value ?? '')
+    this.ForgotPasswordHttpService .save(this.email.value ?? '')
   }
 }
