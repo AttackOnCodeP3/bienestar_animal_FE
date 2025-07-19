@@ -76,6 +76,15 @@ export class DashboardLayoutComponent {
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN]
     },
+        {
+      icon: 'view_in_ar',
+      label: I18nMenuEnum.MODEL_3D, 
+      route: RoutesUrlsEnum.MODEL_3D,
+      click: () => {
+        this.closeSidenav()
+      },
+      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER]
+    },
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
@@ -84,15 +93,6 @@ export class DashboardLayoutComponent {
         this.closeSidenav()
       },
       authorities: [RolesEnum.SUPER_ADMIN],
-    },
-        {
-      icon: 'view_in_ar',
-      label: 'Model 3d',
-      route: RoutesUrlsEnum.MODEL_3D,
-      click: () => {
-        this.closeSidenav()
-      },
-      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER]
     },
     {
       icon: 'logout',

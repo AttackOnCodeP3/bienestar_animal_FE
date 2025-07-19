@@ -1,6 +1,6 @@
 <div class="glb-viewer-container" [style.width]="width()" [style.height]="height()">
 
-  @if (errorMessage) {
+ @if (errorMessage) {
     <div class="error-overlay d-flex align-items-center justify-content-center">
       <div class="alert alert-danger" role="alert">
         <mat-icon>error</mat-icon>
@@ -16,7 +16,7 @@
     <div class="no-model-overlay d-flex align-items-center justify-content-center">
       <div class="alert alert-info" role="alert">
         <mat-icon>info</mat-icon>
-        No hay modelo 3D disponible para este animal (ID: {{ animalId() }})
+        {{ i18nService.i18nModel3DEnum.NO_MODEL_AVAILABLE | translate }} (ID: {{ animalId() }})
       </div>
     </div>
   }

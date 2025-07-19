@@ -15,6 +15,7 @@ import {
   I18nMessagesEnum,
   I18nPagesEnum,
   I18nTablesEnum,
+  I18nModel3DEnum,
 } from '@common/enums/i18n';
 
 /**
@@ -87,6 +88,9 @@ export class I18nService {
     return I18nCommonEnum;
   }
 
+    get i18nModel3DEnum() {
+    return I18nModel3DEnum;
+  }
   /**
    * Gets the translated value of a label from the internationalization file.
    * @param key Key of the label to search for.

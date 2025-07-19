@@ -16,10 +16,12 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Constants } from '@common/constants/constants';
 import { Model3DAnimalHttpService } from 'app/services/http/model-3d-animal-http-service/model-3d-animal.service';
+import { I18nService } from '@services/general';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-glb-viewer',
-  imports: [CommonModule, MatIcon],
+  imports: [CommonModule, MatIcon, TranslatePipe],
   templateUrl: './glb-viewer.component.html',
   styleUrl: './glb-viewer.component.scss',
   changeDetection: Constants.changeDetectionStrategy,
@@ -64,7 +66,8 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
   private loader = new GLTFLoader();
   private currentModelUrl: string | null = null;
   readonly model3DAnimalHttpService = inject(Model3DAnimalHttpService);
-
+  readonly i18nService = inject(I18nService);
+  
   constructor() {
     effect(() => {
       if (this.animalId() && this.scene) {
@@ -76,7 +79,7 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
       if (model3D?.urlModelo && this.scene) {
         this.loadGLBModel(model3D.urlModelo);
       } else if (model3D && !model3D.urlModelo && this.animalId()) {
-        this.errorMessage = 'No hay modelo 3D disponible para este animal';
+        this.errorMessage = this.i18nService.instant(this.i18nService.i18nModel3DEnum.NO_MODEL_AVAILABLE);
         this.isLoading = false;
       }
     });
@@ -98,10 +101,13 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
     if (this.animalId()) {
       this.loadModelFromDatabase();
     } else {
-      this.errorMessage = 'Se requiere animalId';
+      this.errorMessage = this.i18nService.instant(
+        this.i18nService.i18nModel3DEnum.ANIMAL_ID_REQUIRED
+      );
       this.isLoading = false;
     }
   }
+
   /**
    * Load model from database using animal ID
    * @author nav
@@ -265,31 +271,29 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
    * @author nav
    */ private onModelError(error: any): void {
     console.error('Error loading GLB model:', error);
-    if (
-      error instanceof TypeError &&
-      error.message.includes('Failed to fetch')
-    ) {
-      this.errorMessage =
-        'Error de CORS: El servidor no permite cargar este modelo desde este dominio. Usa una URL compatible con CORS.';
+    const i18nKeys = this.i18nService.i18nModel3DEnum;
+    
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      this.errorMessage = this.i18nService.instant(i18nKeys.CORS_ERROR);
     } else if (
       error.message?.includes('NetworkError') ||
       error.message?.includes('CORS')
     ) {
-      this.errorMessage =
-        'Error de red o CORS: Verifica que la URL del modelo sea accesible y permita solicitudes cross-origin.';
+      this.errorMessage = this.i18nService.instant(i18nKeys.NETWORK_ERROR);
     } else if (error.status === 404) {
-      this.errorMessage =
-        'Modelo no encontrado (404). Verifica que la URL sea correcta.';
+      this.errorMessage = this.i18nService.instant(i18nKeys.NOT_FOUND_ERROR);
     } else if (error.status === 0) {
-      this.errorMessage =
-        'Error de conexión. Verifica tu conexión a internet o que la URL sea accesible.';
+      this.errorMessage = this.i18nService.instant(i18nKeys.CONNECTION_ERROR);
+    } else if (error.status === 500) {
+      this.errorMessage = this.i18nService.instant(i18nKeys.SERVER_ERROR);
     } else {
-      this.errorMessage = `Error al cargar el modelo 3D: ${
-        error.message || 'Error desconocido'
+      this.errorMessage = `${this.i18nService.instant(i18nKeys.UNKNOWN_ERROR)}: ${
+        error.message || this.i18nService.instant(i18nKeys.UNKNOWN_ERROR)
       }`;
     }
     this.isLoading = false;
   }
+
 
   /**
    * Fit model to scene by calculating bounding box and adjusting scale/position

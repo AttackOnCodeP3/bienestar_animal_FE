@@ -19,6 +19,7 @@
     "home": "Inicio",
     "gamification": "Gamificación",
     "reports": "Reportes",
+    "model-3d": "Modelo 3D",
     "user-management": "Gestión de usuarios",
     "logout": "Cerrar sesión"
   },
@@ -72,7 +73,7 @@
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
-      "mustMatch": "Las contraseñas no coincide",
+      "mustMatch": "Las contraseñas no coinciden",
       "email": "Debe ser un correo electrónico válido",
       "maxlength": "Debe tener máximo",
       "minlength": "Debe tener al menos",
@@ -214,5 +215,42 @@
   "AdmFoto_1": "Foto no encontrada",
   "badCredentialsException": "Usuario o contraseña incorrectos",
   "AdmUsuario_1_Usuario": "El usuario indicado ya existe",
-  "AdmCiudadano_0_Usuario": "Error agregado para probar las respuestas con BLException desde Bienestar Animal"
+  "AdmCiudadano_0_Usuario": "Error agregado para probar las respuestas con BLException desde Bienestar Animal",
+  "================== MODEL 3D ==================": "",
+  "model3D": {
+    "title": "Modelo 3D",
+    "subtitle": "Visualizador de Modelos 3D",
+    "description": "Visor interactivo para modelos 3D de animales",
+    "loadingModel": "Cargando modelo 3D...",
+    "loadingProgress": "Progreso de carga",
+    "noModelAvailable": "No hay modelo 3D disponible para este animal",
+    "modelNotFound": "Modelo 3D no encontrado",
+    "errors": {
+      "corsError": "Error de CORS: El servidor no permite cargar este modelo desde este dominio. Usa una URL compatible con CORS.",
+      "networkError": "Error de red o CORS: Verifica que la URL del modelo sea accesible y permita solicitudes cross-origin.",
+      "notFoundError": "Modelo no encontrado (404). Verifica que la URL sea correcta.",
+      "connectionError": "Error de conexión. Verifica tu conexión a internet o que la URL sea accesible.",
+      "serverError": "Error del servidor. Por favor intente nuevamente más tarde.",
+      "unknownError": "Error desconocido al cargar el modelo 3D",
+      "animalIdRequired": "Se requiere el ID del animal para cargar el modelo 3D",
+      "modelIdRequired": "Se requiere el ID del modelo 3D para la operación"
+    },
+    "actions": {
+      "loadModel": "Cargar Modelo",
+      "reloadModel": "Recargar Modelo",
+      "toggleRotation": "Alternar Rotación",
+      "resetView": "Restablecer Vista"
+    },
+    "status": {
+      "loadingFromDatabase": "Cargando modelo desde la base de datos...",
+      "loadingFromUrl": "Cargando modelo desde URL...",
+      "modelLoadedSuccessfully": "Modelo cargado exitosamente"
+    },
+    "generation": {
+      "generateModel": "Generar Modelo 3D",
+      "generatingModel": "Generando modelo 3D...",
+      "modelGeneratedSuccessfully": "Modelo 3D generado exitosamente",
+      "generationFailed": "Error al generar el modelo 3D"
+    }
+  }
 }

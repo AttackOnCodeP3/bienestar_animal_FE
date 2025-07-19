@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseHttpService } from '../base-http-service/base-http.service';
 import { Constants } from '@common/constants/constants';
@@ -6,11 +6,14 @@ import { IResponse, ISearch } from '@common/interfaces/http';
 import { AlertTypeEnum } from '@common/enums';
 import { createPageArray } from '@common/utils';
 import { Model3DAnimal } from '@models';
+import { I18nService } from '@services/general';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Model3DAnimalHttpService extends BaseHttpService<Model3DAnimal> {
+    private readonly i18nService = inject(I18nService);
+
   
   protected override source = Constants.MODEL_3D_ANIMAL_URL;
 
