@@ -21,7 +21,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Set up authenticated git
-        run: git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/AttackOnCodeP3/bienestar_animal_BE.git
+        run: git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/AttackOnCodeP3/bienestar_animal_FE.git
 
       - name: Merge Desarrollo into QA
         run: |
