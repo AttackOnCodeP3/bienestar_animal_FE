@@ -15,7 +15,9 @@ import {
   I18nMessagesEnum,
   I18nPagesEnum,
   I18nTablesEnum,
-    I18nModel3DEnum,
+  I18nPagesValidationsEnum,
+  I18nModel3DEnum,
+    
 } from '@common/enums/i18n';
 
 /**
