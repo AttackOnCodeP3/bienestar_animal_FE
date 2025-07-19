@@ -17,16 +17,17 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Yarn (classic way)
+        run: npm install --global yarn
+
+      - name: Install dependencies with Yarn
+        run: yarn install
 
       - name: Build Angular project
         run: ng build
 
-      - name: Run Angular app
+      - name: Run Angular app with ng serve and health check
         run: |
-          npm install -g http-server
-          npx http-server ./dist &
-          sleep 10
-          curl -f http://localhost:8080 || (echo "Health check failed!" && exit 1)
-        if: true # Esto se pone en falso si no se quiere ejecutar el servidor que checkea el app corriendo en vivo
+          nohup ng serve --host 0.0.0.0 --port 4200 > ng-serve.log 2>&1 &
+          sleep 15
+          curl -f http://localhost:4200 || (echo "Health check failed!" && exit 1)
