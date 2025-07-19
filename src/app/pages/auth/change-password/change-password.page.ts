@@ -17,6 +17,7 @@ import { LogoBienestarAnimalComponent } from "@components/icons";
   selector: 'app-change-password',
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss'],
+  standalone: true, 
   imports: [PasswordResetComponent, LogoBienestarAnimalComponent]
 })
 export class ChangePassword {
