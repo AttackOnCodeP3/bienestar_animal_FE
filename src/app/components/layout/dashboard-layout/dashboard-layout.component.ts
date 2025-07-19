@@ -6,7 +6,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatActionList, MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
 import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {BreakpointsEnum, PagesUrlsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem, IMenuItemChild} from '@common/interfaces';
 import {I18nService, ThemeService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
@@ -88,11 +88,62 @@ export class DashboardLayoutComponent {
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
-      route:  RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
+      route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_USER_MANAGEMENT}`,
       click: () => {
-        this.closeSidenav()
       },
+      children: [
+        {
+          label: I18nMenuEnum.USER_MANAGEMENT,
+          route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_USER_MANAGEMENT}`,
+          click: () => {
+            this.closeSidenav()
+          },
+          authorities: [RolesEnum.SUPER_ADMIN],
+        },
+        {
+          label: I18nMenuEnum.CREATE_USER,
+          route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_CREATE_USER}`,
+          click: () => {
+            this.closeSidenav()
+          },
+          authorities: [RolesEnum.SUPER_ADMIN],
+        }
+      ],
       authorities: [RolesEnum.SUPER_ADMIN],
+    },
+    {
+      icon: 'apartment',
+      label: I18nMenuEnum.MUNICIPALITIES,
+      authorities: [RolesEnum.SUPER_ADMIN],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.VIEW_MUNICIPALITIES,
+          route: `${RoutesUrlsEnum.MUNICIPALITIES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MUNICIPALITY_LIST}`,
+          authorities: [RolesEnum.SUPER_ADMIN],
+          click: () => this.closeSidenav(),
+        },
+        {
+          label: I18nMenuEnum.CREATE_MUNICIPALITY,
+          route: `${RoutesUrlsEnum.MUNICIPALITIES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MUNICIPALITY_CREATE}`,
+          authorities: [RolesEnum.SUPER_ADMIN],
+          click: () => this.closeSidenav(),
+        },
+      ],
+    },
+    {
+      icon: 'pets',
+      label: I18nMenuEnum.ANIMAL,
+      authorities: [RolesEnum.COMMUNITY_USER],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.CREATE_ANIMAL_PROFILE,
+          route: `${RoutesUrlsEnum.ANIMAL}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.CREATE_ANIMAL_PROFILE}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        },
+      ],
     },
     {
       icon: 'logout',
@@ -100,7 +151,7 @@ export class DashboardLayoutComponent {
       route: RoutesUrlsEnum.VOID_ROUTE,
       click: () => this.authHttpService.logout(),
       authorities: [...this.allRoles()]
-    }
+    },
   ])
 
   /**

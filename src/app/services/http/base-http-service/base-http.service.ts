@@ -21,8 +21,24 @@ export class BaseHttpService<T> {
     
   }
 
+  /** Returns IResponse with metadata */
+  /**
+   *
+   * @param id
+   * @author gjimenez
+   */
   find(id: string | number): Observable<IResponse<T>> {
     return this.http.get<IResponse<T>>(this.sourceUrl + '/' + id);
+  }
+
+  /** Returns only the T data */
+  /**
+   *
+   * @param id
+   * @author gjimenez
+   */
+  getOne(id: number): Observable<T> {
+    return this.http.get<T>(this.sourceUrl + '/' + id);
   }
 
   findAll(): Observable<IResponse<T[]>> {
@@ -37,15 +53,16 @@ export class BaseHttpService<T> {
       setSearchMeta,
       setTotalItems,
       context
-    }: {
+    }
+    : {
       updateSignal: WritableSignal<T[]>;
       page: number;
       size: number;
       setSearchMeta: (meta: Partial<ISearch>) => void;
       setTotalItems: (totalPages: number) => void;
       context: string;
-    }) {
-    return this.findAllWithParams({page, size}).subscribe({
+    }): void {
+    this.findAllWithParams({page, size}).subscribe({
       next: (res) => {
         this.logService.debug({
           message: `Fetched data from ${context}`,
@@ -106,7 +123,7 @@ export class BaseHttpService<T> {
     let queryParams = new HttpParams();
     Object.keys(params).forEach(key => {
       queryParams = queryParams.append(key, params[key]);
-    })
+    });
     return queryParams;
   }
 
@@ -114,6 +131,7 @@ export class BaseHttpService<T> {
    * Handles errors from HTTP requests and displays an alert.
    * @param message
    * @param context
+   * @author dgutierrez
    */
   handleError(
     {
@@ -131,15 +149,12 @@ export class BaseHttpService<T> {
       // Error thrown from interceptor as `throw new Error(...)`
       if (err instanceof Error && err.message) {
         finalMessage = err.message;
-
         // Structured backend error: { mensaje: '...' }
       } else if (err?.mensaje) {
         finalMessage = err.mensaje;
-
         // Angular HTTP error with error.mensaje
       } else if (err?.error?.mensaje) {
         finalMessage = err.error.mensaje;
-
         // Error como string simple
       } else if (typeof err === 'string') {
         finalMessage = err;

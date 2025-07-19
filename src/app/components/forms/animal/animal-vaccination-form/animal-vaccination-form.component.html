@@ -1,0 +1,35 @@
+<form [formGroup]="form()">
+  <h4>¿Se ha aplicado este control?</h4>
+  <mat-selection-list formControlName="selectedVaccines" multiple>
+    @for (vac of vaccineList(); track vac.id) {
+      <mat-list-option [value]="vac.id">{{ vac.name }}</mat-list-option>
+    }
+  </mat-selection-list>
+
+  @for (grp of vaccinesDatesGroups; track $index) {
+    <div [formGroup]="grp" class="row align-items-center g-2">
+      <div class="col-lg-2 fw-semibold">
+        {{ getNameVaccine(grp.get('id')?.value) }}
+      </div>
+      <div class="col-lg-8">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Fecha de aplicación</mat-label>
+          <input
+            matInput
+            [matDatepicker]="matDatepicker"
+            formControlName="fecha"
+            [errorStateMatcher]="formsService().matcher"
+            [max]="formsService().maxTodayDate"
+            readonly
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="matDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #matDatepicker></mat-datepicker>
+          @let fechaControl = grp.get('fecha');
+          @if (formsService().isFieldInvalid(fechaControl)) {
+            <mat-error>{{ formsService().getErrorMessage(fechaControl) }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  }
+</form>

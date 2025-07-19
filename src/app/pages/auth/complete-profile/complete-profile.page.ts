@@ -21,7 +21,7 @@ import {
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {Municipality, User} from '@models';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
-import {AlertTypeEnum, PagesUrlsEnum} from '@common/enums';
+import {AlertTypeEnum, MunicipalityStatusEnum, PagesUrlsEnum} from '@common/enums';
 import {CompleteProfileRequestDTO} from '@models/dto';
 import {UserRegistrationFormService} from '@services/forms';
 
@@ -39,6 +39,7 @@ import {UserRegistrationFormService} from '@services/forms';
   ],
   templateUrl: './complete-profile.page.html',
   styleUrl: './complete-profile.page.scss',
+  providers: [UserRegistrationFormService],
   changeDetection: Constants.changeDetectionStrategy
 })
 export class CompleteProfilePage implements OnInit {
@@ -101,7 +102,7 @@ export class CompleteProfilePage implements OnInit {
     const completeProfileRequestDTO = CompleteProfileRequestDTO.fromUser(
       new User({
         ...rest,
-        municipality: new Municipality({ id: volunteerMunicipality?.id })
+        municipality: new Municipality({id: volunteerMunicipality?.id})
       }),
       this.userRegistrationFormService.volunteerIntent()
     );

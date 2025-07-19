@@ -1,0 +1,84 @@
+<mat-expansion-panel class="mb-4" expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h1>Informacion basica general</h1>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-animal-basic-info-form
+    [form]="formAnimalBasicInfo"
+    [formsService]="formsService"
+    [i18nService]="i18nService"
+    [sexList]="sexHttpService.sexList()"
+    [speciesList]="speciesHttpService.speciesList()"
+    [raceListBySpecies]="raceHttpService.raceListBySpecies()"
+    (speciesSelectionChange)="onSpeciesSelectionChange($event)"
+  />
+</mat-expansion-panel>
+
+@if (formsService.isControlHasValue('species', formAnimalBasicInfo)) {
+  <mat-expansion-panel class="mb-4" expanded="true" @fade>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Vacunación</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-vaccination-form
+      (syncVaccinesDatesChange)="onSyncVaccinesDatesChange($event)"
+      [formsService]="formsService"
+      [form]="formAnimalVaccination"
+      [vaccineList]="vaccineHttpService.vaccineListBySpecies()"
+    />
+  </mat-expansion-panel>
+}
+
+<mat-expansion-panel class="mb-4" expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Desparasitación</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-animal-deworming-form
+    [form]="formDeworming"
+    [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
+    [formsService]="formsService"
+    [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
+</mat-expansion-panel>
+
+<mat-expansion-panel class="mb-4" expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>
+        Castración / Esterilización
+      </h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-animal-neutering-form
+    [form]="formNeutering"
+    [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
+    [formsService]="formsService"
+    [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
+</mat-expansion-panel>
+
+<mat-expansion-panel class="mb-4" expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>
+        Control de pulgas y garrapatas
+      </h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-animal-flea-control-form
+    [form]="formFleaAndTickControl"
+    [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
+    [formsService]="formsService"
+    [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
+</mat-expansion-panel>
+
+<div class="text-end mb-5" (click)="onSubmit()">
+  <button matButton="tonal">Registrar animal</button>
+</div>

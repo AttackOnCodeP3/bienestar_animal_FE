@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {RoutesUrlsEnum} from '@common/enums';
-import {authGuard, guestGuard} from '@core/guards';
+import {guestGuard} from '@core/guards';
 
 /**
  * Defines the authentication routes for the application.

@@ -4,6 +4,7 @@ import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {InputType} from '@common/types';
 import {I18nService, LogService} from '@services/general';
 import {I18nFormsEnum} from '@common/enums/i18n';
+import {IIdentifiable} from '@common/interfaces';
 
 /**
  * Service for managing forms, including validation and error handling.
@@ -20,6 +21,13 @@ export class FormsService {
   private readonly i18nService = inject(I18nService)
 
   matcher = new CustomErrorStateMatcher();
+
+  /**
+   * Maximum date allowed for date inputs, set to today.
+   * This is used to restrict date pickers to not allow future dates.
+   * @author dgutierrez
+   */
+  readonly maxTodayDate = new Date();
 
   /**
    * Map of input types to their corresponding text representation for error messages.
@@ -152,6 +160,30 @@ export class FormsService {
   }
 
   /**
+   * Checks if a control is valid within a FormGroup.
+   * @param name The name of the control to check.
+   * @param form The FormGroup containing the control.
+   * @returns True if the control is valid, false otherwise.
+   * @author dgutierrez
+   */
+  isControlValid(name: string, form: FormGroup): boolean {
+    const control = this.getControl(name, form);
+    return !!control && control.valid;
+  }
+
+  /**
+   * Checks if a control has a value within a FormGroup.
+   * @param name The name of the control to check.
+   * @param form The FormGroup containing the control.
+   * @returns True if the control has a value, false otherwise.
+   * @author dgutierrez
+   */
+  isControlHasValue(name: string, form: FormGroup): boolean {
+    const control = this.getControl(name, form);
+    return !!control && control.value !== null && control.value !== undefined && control.value !== '';
+  }
+
+  /**
    * Returns the formatted error message if the control is invalid,
    * otherwise returns null. Useful for direct binding in templates.
    * @param control The form control to evaluate.
@@ -178,5 +210,54 @@ export class FormsService {
       const control = form.get(key);
       return this.isFieldInvalid(control);
     });
+  }
+
+  /**
+   * Logs the names of invalid fields in the form.
+   * @param form The FormGroup to check for invalid fields.
+   * @author dgutierrez
+   */
+  logFormErrors(form: FormGroup): void {
+    if (!form || !form.controls) {
+      this.logService.error({
+        message: 'FormsService: logFormErrors: Form is null or has no controls.',
+      });
+      return;
+    }
+
+    const invalidFields = this.getInvalidFields(form);
+    if (!invalidFields.length) {
+      this.logService.info({
+        message: 'FormsService: logFormErrors: All fields are valid.',
+      });
+      return;
+    }
+
+    this.logService.error({
+      message: `FormsService: logFormErrors: Invalid fields: ${invalidFields.join(', ')}`,
+    });
+  }
+
+  /**
+   * Generic function to compare objects by a key.
+   * Useful for use in compareWith of mat-select.
+   * @returns A function that compares two objects by that key.
+   * @author dgutierrez
+   */
+  getGenericCompareFn<T>(key: keyof T): (o1: T | null, o2: T | null) => boolean {
+    return (o1: T | null, o2: T | null): boolean => {
+      return !!o1 && !!o2 && o1[key] === o2[key];
+    };
+  }
+
+  /**
+   * Generic comparison function for objects implementing IIdentifiable.
+   * @param o1 Object 1 to compare, must implement IIdentifiable interface.
+   * @param o2 Object 2 to compare, must implement IIdentifiable interface.
+   * @return True if both objects have the same id, false otherwise.
+   * @author dgutierrez
+   */
+  genericCompare<T extends IIdentifiable>(o1: T, o2: T): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
 }

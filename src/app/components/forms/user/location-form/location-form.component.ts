@@ -1,4 +1,4 @@
-import {Component, input, model, OnInit, output, OnDestroy} from '@angular/core';
+import {Component, input, model, OnInit, output, OnDestroy, computed} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {Canton, District, Neighborhood} from '@models';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -59,6 +59,13 @@ export class LocationFormComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
+  /**
+   * Handles changes in the canton selection.
+   * @param canton The selected canton.
+   * @param districtCtrl The control for districts.
+   * @param neighborhoodCtrl The control for neighborhoods.
+   * @author dgutierrez
+   */
   private handleCantonChange(canton: Canton, districtCtrl: AbstractControl | null, neighborhoodCtrl: AbstractControl | null): void {
     if (districtCtrl) {
       if (canton) {
@@ -78,6 +85,12 @@ export class LocationFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Handles changes in the district selection.
+   * @param district The selected district.
+   * @param neighborhoodCtrl The control for neighborhoods.
+   * @author dgutierrez
+   */
   private handleDistrictChange(district: District, neighborhoodCtrl: AbstractControl | null): void {
     if (neighborhoodCtrl) {
       if (district) {

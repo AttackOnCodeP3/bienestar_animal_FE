@@ -1,13 +1,13 @@
 import {Routes} from '@angular/router';
 import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {authGuard, profileCompletedGuard, roleGuard} from '@core/guards';
-import {DashboardLayoutComponent} from '@components/general';
+import {DashboardLayoutComponent} from '@components/layout';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: RoutesUrlsEnum.AUTH,
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: RoutesUrlsEnum.AUTH,
@@ -21,27 +21,48 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: RoutesUrlsEnum.HOME,
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: RoutesUrlsEnum.HOME,
-        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER])],
+        canActivate: [roleGuard([
+          RolesEnum.SUPER_ADMIN,
+          RolesEnum.MUNICIPAL_ADMIN,
+          RolesEnum.VOLUNTEER_USER,
+          RolesEnum.COMMUNITY_USER,
+        ])],
         loadComponent: () => import('@pages/home/home.page').then(m => m.HomePage),
       },
       {
         path: RoutesUrlsEnum.GAMIFICATION,
-        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER])],
+        canActivate: [roleGuard([
+          RolesEnum.SUPER_ADMIN,
+          RolesEnum.VOLUNTEER_USER,
+        ])],
         loadChildren: () => import('@pages/gamification/gamification.routes').then(m => m.GAMIFICATION_ROUTES),
       },
       {
         path: RoutesUrlsEnum.REPORTS,
-        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN])],
+        canActivate: [roleGuard([
+          RolesEnum.SUPER_ADMIN,
+          RolesEnum.MUNICIPAL_ADMIN,
+        ])],
         loadChildren: () => import('@pages/reports/reports.routes').then(m => m.REPORTS_ROUTES),
       },
       {
         path: RoutesUrlsEnum.SECURITY,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN])],
         loadChildren: () => import('@pages/security/security.routes').then(m => m.SECURITY_ROUTES),
-        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN])]
+      },
+      {
+        path: RoutesUrlsEnum.MUNICIPALITIES,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN])],
+        loadChildren: () => import('@pages/municipalities/municipality.routes').then(m => m.MUNICIPALITY_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.ANIMAL,
+        canActivate: [roleGuard([RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
       }
            , {
         path: RoutesUrlsEnum.MODEL_3D,
