@@ -80,4 +80,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly NEIGHBORHOODS: string = '/neighborhoods'
   static readonly NEIGHBORHOODS_URL: string = UnmutableConstants.NEIGHBORHOODS;
+
+  // ==================================================================
+  // ROUTES FOR MODEL 3D ANIMAL SERVICES
+  // =================================================================
+  private static readonly MODEL_3D_ANIMAL: string = '/model3d-animal'
+  static readonly MODEL_3D_ANIMAL_URL: string = UnmutableConstants.MODEL_3D_ANIMAL;
 }

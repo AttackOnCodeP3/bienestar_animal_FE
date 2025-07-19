@@ -61,10 +61,13 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "bienestar_animal:build:production"
+              "buildTarget": "bienestar_animal:build:production",
+              "proxyConfig": "proxy.conf.json"
             },
             "development": {
-              "buildTarget": "bienestar_animal:build:development"
+              "buildTarget": "bienestar_animal:build:development",
+              "proxyConfig": "proxy.conf.json"
+
             }
           },
           "defaultConfiguration": "development"

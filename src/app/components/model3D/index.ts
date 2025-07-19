@@ -1,0 +1,1 @@
+export * from "./glb-viewer/glb-viewer.component";

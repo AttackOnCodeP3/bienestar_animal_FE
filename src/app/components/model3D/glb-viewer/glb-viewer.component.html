@@ -1,0 +1,25 @@
+<div class="glb-viewer-container" [style.width]="width()" [style.height]="height()">
+
+  @if (errorMessage) {
+    <div class="error-overlay d-flex align-items-center justify-content-center">
+      <div class="alert alert-danger" role="alert">
+        <mat-icon>error</mat-icon>
+        {{ errorMessage }}
+        @if (animalId()) {
+          <br><small>Animal ID: {{ animalId() }}</small>
+        }
+      </div>
+    </div>
+  }
+
+  @if (!isLoading && !errorMessage && animalId() && !model3DAnimalHttpService.currentModel3D()?.urlModelo) {
+    <div class="no-model-overlay d-flex align-items-center justify-content-center">
+      <div class="alert alert-info" role="alert">
+        <mat-icon>info</mat-icon>
+        No hay modelo 3D disponible para este animal (ID: {{ animalId() }})
+      </div>
+    </div>
+  }
+
+  <canvas #canvas class="three-canvas"></canvas>
+</div>

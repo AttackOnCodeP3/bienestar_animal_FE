@@ -40,4 +40,7 @@ export enum RoutesUrlsEnum {
 
   //Security routes
   SECURITY_USER_MANAGEMENT = 'user-management',
+
+  MODEL_3D = 'model-3d',
+
 }

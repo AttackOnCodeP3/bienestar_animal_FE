@@ -6,3 +6,4 @@ export * from "./interest-http-service/interest-http.service";
 export * from "./municipality-http-service/municipality-http.service";
 export * from "./neighborhood-http-service/neighborhood-http.service";
 export * from "./user-http-service/user-http.service";
+export * from "./model-3d-animal-http-service/model-3d-animal.service";

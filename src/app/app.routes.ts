@@ -43,6 +43,11 @@ export const routes: Routes = [
         loadChildren: () => import('@pages/security/security.routes').then(m => m.SECURITY_ROUTES),
         canActivate: [roleGuard([RolesEnum.SUPER_ADMIN])]
       }
+           , {
+        path: RoutesUrlsEnum.MODEL_3D,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER])],
+        loadComponent: () => import('@pages/model-3d/model-3d').then(m => m.TestGlbViewer),
+      }
     ]
   }
 ];
