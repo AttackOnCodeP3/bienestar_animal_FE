@@ -123,6 +123,20 @@ export class DashboardLayoutComponent {
       ],
     },
     {
+      icon: 'pets',
+      label: I18nMenuEnum.ANIMAL,
+      authorities: [RolesEnum.COMMUNITY_USER],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.CREATE_ANIMAL_PROFILE,
+          route: `${RoutesUrlsEnum.ANIMAL}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.CREATE_ANIMAL_PROFILE}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        },
+      ],
+    },
+    {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: RoutesUrlsEnum.VOID_ROUTE,

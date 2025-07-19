@@ -5,3 +5,4 @@ export * from "./form-validation-error.interface";
 export * from "./identifiable.interface";
 export * from "./menu-item.interface";
 export * from "./supported-language.interface";
+export * from "./vaccine-applied.interface";

@@ -1,0 +1,116 @@
+<form [formGroup]="form()">
+  <div class="row">
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <!--{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}-->
+        <mat-label>Nombre</mat-label>
+        <!--[placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"-->
+        <input
+          type="text"
+          matInput
+          formControlName="name"
+          [errorStateMatcher]="formsService().matcher"
+          />
+        @let nameControl = form().get('name');
+        @if (formsService().isFieldInvalid(nameControl)) {
+          <mat-error>{{ formsService().getErrorMessage(nameControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <!--{{ i18nService().i18nFormsEnum.CANTON_LABEL | translate }}-->
+        <mat-label>
+          Especie
+        </mat-label>
+        <mat-select formControlName="species" [compareWith]="formsService().genericCompare" (selectionChange)="onSpeciesChange($event)">
+          @for ( specie of speciesList(); track specie.id) {
+            <mat-option [value]="specie">{{ specie.name }}</mat-option>
+          }
+        </mat-select>
+        @let speciesControl = form().get('species');
+        @if (formsService().isFieldInvalid(speciesControl)) {
+          <mat-error>{{ formsService().getErrorMessage(speciesControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    @if (raceListBySpecies().length) {
+      <div class="col-lg-4 mb-3" @fade>
+        <mat-form-field appearance="outline" class="w-100">
+          <!--{{ i18nService().i18nFormsEnum.CANTON_LABEL | translate }}-->
+          <mat-label>
+            Raza
+          </mat-label>
+          <mat-select formControlName="race" [compareWith]="formsService().genericCompare">
+            @for ( specie of raceListBySpecies(); track specie.id) {
+              <mat-option [value]="specie">{{ specie.name }}</mat-option>
+            }
+          </mat-select>
+          @let raceControl = form().get('race');
+          @if (formsService().isFieldInvalid(raceControl)) {
+            <mat-error>{{ formsService().getErrorMessage(raceControl) }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    }
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <!--{{ i18nService().i18nFormsEnum.BIRTH_DATE_LABEL | translate }}-->
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="birthDate"
+          [max]="formsService().maxTodayDate"
+          [errorStateMatcher]="formsService().matcher"
+          readonly
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        @let birthDateControl = form().get('birthDate');
+        @if (formsService().isFieldInvalid(birthDateControl)) {
+          <mat-error>{{ formsService().getErrorMessage(birthDateControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <!--{{ i18nService().i18nFormsEnum.CANTON_LABEL | translate }}-->
+        <mat-label>
+          Sexo
+        </mat-label>
+        <mat-select formControlName="sex" [compareWith]="formsService().genericCompare">
+          @for ( sex of sexList(); track sex.id) {
+            <mat-option [value]="sex">{{ sex.name }}</mat-option>
+          }
+        </mat-select>
+        @let sexControl = form().get('sex');
+        @if (formsService().isFieldInvalid(sexControl)) {
+          <mat-error>{{ formsService().getErrorMessage(sexControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <!--{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}-->
+        <mat-label>Peso aproximado</mat-label>
+        <!--[placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"-->
+        <input
+          type="number"
+          matInput
+          formControlName="weight"
+          [errorStateMatcher]="formsService().matcher"
+        />
+        @let weightControl = form().get('weight');
+        @if (formsService().isFieldInvalid(weightControl)) {
+          <mat-error>{{ formsService().getErrorMessage(weightControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+</form>

@@ -11,6 +11,8 @@
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
+    "animal": "Animal",
+    "create-animal-profile": "Create Animal Profile",
     "create-user": "Create User",
     "createMunicipality": "Create Municipality",
     "gamification": "Gamification",
@@ -179,6 +181,10 @@
     "create-user-page": {
       "userCreatedSuccessfully": "User created successfully",
       "roleRequired": "Role is required"
+    },
+    "create-animal-profile-page": {
+      "animalProfileCreatedSuccessfully": "Perfil de animal creado exitosamente",
+      "animalProfileVaccinationRequired": "El perfil del animal requiere al menos indicar una vacunación"
     }
   },
   "================== MATERIAL ==================": "",

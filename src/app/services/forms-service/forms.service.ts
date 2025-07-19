@@ -23,6 +23,13 @@ export class FormsService {
   matcher = new CustomErrorStateMatcher();
 
   /**
+   * Maximum date allowed for date inputs, set to today.
+   * This is used to restrict date pickers to not allow future dates.
+   * @author dgutierrez
+   */
+  readonly maxTodayDate = new Date();
+
+  /**
    * Map of input types to their corresponding text representation for error messages.
    * This is used to provide localized error messages based on the type of input field.
    * @author dgutierrez
@@ -150,6 +157,30 @@ export class FormsService {
    */
   getControl(name: string, form: FormGroup): AbstractControl | null {
     return form.get(name);
+  }
+
+  /**
+   * Checks if a control is valid within a FormGroup.
+   * @param name The name of the control to check.
+   * @param form The FormGroup containing the control.
+   * @returns True if the control is valid, false otherwise.
+   * @author dgutierrez
+   */
+  isControlValid(name: string, form: FormGroup): boolean {
+    const control = this.getControl(name, form);
+    return !!control && control.valid;
+  }
+
+  /**
+   * Checks if a control has a value within a FormGroup.
+   * @param name The name of the control to check.
+   * @param form The FormGroup containing the control.
+   * @returns True if the control has a value, false otherwise.
+   * @author dgutierrez
+   */
+  isControlHasValue(name: string, form: FormGroup): boolean {
+    const control = this.getControl(name, form);
+    return !!control && control.value !== null && control.value !== undefined && control.value !== '';
   }
 
   /**

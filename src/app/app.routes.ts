@@ -58,6 +58,11 @@ export const routes: Routes = [
         path: RoutesUrlsEnum.MUNICIPALITIES,
         canActivate: [roleGuard([RolesEnum.SUPER_ADMIN])],
         loadChildren: () => import('@pages/municipalities/municipality.routes').then(m => m.MUNICIPALITY_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.ANIMAL,
+        canActivate: [roleGuard([RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
       }
     ]
   }
