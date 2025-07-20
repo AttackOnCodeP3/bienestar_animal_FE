@@ -50,7 +50,6 @@ export class Model3DListPage implements OnInit {
   constructor() {
     this.form = this.fb.group({
       animalId: [null, Validators.required],
-      image: [null, Validators.required],
     });
   }
 
@@ -60,26 +59,9 @@ export class Model3DListPage implements OnInit {
 
   }
 
-  onImageChange(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0] || null;
-    this.selectedImage = file;
-    this.form.patchValue({ image: file });
-    this.form.get('image')?.updateValueAndValidity();
+
+  get selectedAnimalId(): number | null {
+    return this.form.get('animalId')?.value ?? null;
   }
 
-  submit(): void {
-    if (this.form.invalid || !this.selectedImage) {
-      this.alertService.displayAlert({
-  type: AlertTypeEnum.ERROR,
-  messageKey: 'Por favor complete todos los campos.',
-});
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('animalId', this.form.value.animalId);
-    formData.append('image', this.selectedImage);
-
-    this.model3dService.createModel3D(formData);
-  }
 }
