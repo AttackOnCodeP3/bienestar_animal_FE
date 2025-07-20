@@ -1,0 +1,30 @@
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+    <h1>Listar Modelo 3D</h1>
+  </div>
+</app-general-container-component>
+
+<form [formGroup]="form"xx>
+  <div class="row">
+    <div class="col-lg-6 mb-3">
+    <mat-form-field appearance="outline" class="w-100">
+  <mat-label>Animal</mat-label>
+  <mat-select formControlName="animalId" required>
+    <mat-option *ngFor="let animal of animals" [value]="animal.id">
+      {{ animal.name }}
+    </mat-option>
+  </mat-select>
+  @let animalIdControl = form.get('animalId');
+  @if (formsService.isFieldInvalid(animalIdControl)) {
+    <mat-error>{{ formsService.getErrorMessage(animalIdControl) }}</mat-error>
+  }
+</mat-form-field>
+   
+    </div>
+    <div class="col-lg-6 mb-3">
+  
+    </div>
+  </div>
+  <div class="text-end">
+  </div>
+</form>

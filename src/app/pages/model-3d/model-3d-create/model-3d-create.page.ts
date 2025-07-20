@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, effect } from '@angular/core';
 import { Model3DCreateHttpService } from '@services/http/model-3d-animal-http-service/model-3d-create-http.service';
 import {GeneralContainerComponent} from '@components/layout';
 import {CommonModule} from '@angular/common';
@@ -41,7 +41,12 @@ export class Model3DCreatePage implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly model3dService = inject(Model3DCreateHttpService);
   private readonly alertService = inject(AlertService);
+  readonly formsService = inject(FormsService);
 
+    private readonly animalsEffect = effect(() => {
+    this.animals = this.model3dService.animals();
+  });
+  
   constructor() {
     this.form = this.fb.group({
       animalId: [null, Validators.required],
@@ -51,7 +56,6 @@ export class Model3DCreatePage implements OnInit {
 
   ngOnInit() {
     this.model3dService.loadMyAnimals();
-this.animals = this.model3dService.animals();
   }
 
   onImageChange(event: Event) {
