@@ -27,6 +27,8 @@ import {SanitaryControlTypeEnum} from '@common/enums';
 import {CommunityAnimalRegistrationFormService} from '@services/forms';
 import {CreateAnimalRequestDto} from '@models/dto';
 import {LocationService} from '../../../services/location-service/location.service';
+import {GeneralContainerComponent} from '@components/layout';
+import {TranslatePipe} from '@ngx-translate/core';
 
 /**
  * Page for creating an animal profile.
@@ -42,6 +44,8 @@ import {LocationService} from '../../../services/location-service/location.servi
     AnimalVaccinationFormComponent,
     MatButton,
     MatExpansionModule,
+    GeneralContainerComponent,
+    TranslatePipe,
   ],
   templateUrl: './create-animal-profile.page.html',
   styleUrl: './create-animal-profile.page.scss',
