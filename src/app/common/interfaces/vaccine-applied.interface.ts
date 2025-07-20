@@ -1,8 +1,8 @@
 /**
- * Interface representing a vaccine applied to a patient.
+ * Interface representing a vaccine applied to an animal.
  * @author dgutierrez
  */
 export interface IVaccineApplied {
-  id: number;
-  fecha: Date | null
+  vaccineId: number;
+  applicationDate: string | null
 }
