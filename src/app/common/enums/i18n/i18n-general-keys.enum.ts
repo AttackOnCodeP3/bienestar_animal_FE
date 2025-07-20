@@ -21,4 +21,5 @@ export enum I18nGeneralKeysEnum {
   PERSONAL_INFORMATION = I18nGeneralKeysEnum.GENERAL + '.personalInformation',
   LOCATION = I18nGeneralKeysEnum.GENERAL + '.location',
   ROLES = I18nGeneralKeysEnum.GENERAL + '.roles',
+  HAS_THIS_CONTROL_BEEN_APPLIED = I18nGeneralKeysEnum.GENERAL + '.hasThisControlBeenApplied',
 }
