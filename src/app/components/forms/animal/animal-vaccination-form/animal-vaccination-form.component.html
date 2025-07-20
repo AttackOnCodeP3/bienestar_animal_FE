@@ -1,5 +1,5 @@
 <form [formGroup]="form()">
-  <h4>¿Se ha aplicado este control?</h4>
+  <h4>{{ i18nService().i18nGeneralEnum.HAS_THIS_CONTROL_BEEN_APPLIED | translate }}</h4>
   <mat-selection-list formControlName="selectedVaccines" multiple>
     @for (vac of vaccineList(); track vac.id) {
       <mat-list-option [value]="vac.id">{{ vac.name }}</mat-list-option>
@@ -13,7 +13,9 @@
       </div>
       <div class="col-lg-8">
         <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Fecha de aplicación</mat-label>
+          <mat-label>
+            {{ i18nService().i18nFormsEnum.APPLICATION_DATE_LABEL | translate }}
+          </mat-label>
           <input
             matInput
             [matDatepicker]="matDatepicker"
@@ -21,6 +23,7 @@
             [errorStateMatcher]="formsService().matcher"
             [max]="formsService().maxTodayDate"
             readonly
+            [placeholder]="i18nService().i18nFormsEnum.APPLICATION_DATE_PLACEHOLDER | translate"
           />
           <mat-datepicker-toggle matIconSuffix [for]="matDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #matDatepicker></mat-datepicker>
