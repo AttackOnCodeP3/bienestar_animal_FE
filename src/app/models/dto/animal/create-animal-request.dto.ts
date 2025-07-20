@@ -1,6 +1,6 @@
 import {Animal} from '../../animal';
-import {SanitaryControl} from '../../sanitary-control';
-import {VaccineApplication} from '../../vaccine-application';
+import {VaccineApplicationDto} from './vaccine-application.dto';
+import {SanitaryControlDto} from './sanitary-control.dto';
 
 
 /**
@@ -9,15 +9,15 @@ import {VaccineApplication} from '../../vaccine-application';
  */
 export class CreateAnimalRequestDto {
   name: string | null;
-  birthDate: string | null;
+  birthDate: Date | string | null;
   weight: number | null;
   speciesId: number | null;
   sexId: number | null;
   raceId: number | null;
   latitude: number | null;
   longitude: number | null;
-  sanitaryControl: SanitaryControl[];
-  vaccineApplications: VaccineApplication[];
+  sanitaryControls: SanitaryControlDto[];
+  vaccineApplications: VaccineApplicationDto[];
 
   constructor(values: Partial<CreateAnimalRequestDto>) {
     this.name = values.name ??= null;
@@ -28,7 +28,7 @@ export class CreateAnimalRequestDto {
     this.raceId = values.raceId ??= null;
     this.latitude = values.latitude ??= null;
     this.longitude = values.longitude ??= null;
-    this.sanitaryControl = values.sanitaryControl ??= [];
+    this.sanitaryControls = values.sanitaryControls ??= [];
     this.vaccineApplications = values.vaccineApplications ??= [];
   }
 

@@ -157,7 +157,8 @@
   "validations": {
     "general": {
       "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados.",
-      "invalidIdToUpdate": "No fue posible encontrar los datos. Serás redirigido para intentarlo nuevamente."
+      "invalidIdToUpdate": "No fue posible encontrar los datos. Serás redirigido para intentarlo nuevamente.",
+      "locationNotAvailable": "La ubicación no está disponible."
     },
     "register-page": {
       "registeredSuccessfully": "Registrado exitosamente, por favor inicie sesión"

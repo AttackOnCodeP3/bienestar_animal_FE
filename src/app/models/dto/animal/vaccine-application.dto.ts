@@ -5,7 +5,7 @@ import {IVaccineApplied} from '@common/interfaces';
  * @author dgutierrez
  */
 export class VaccineApplicationDto {
-  vaccineId: string | null;
+  vaccineId: number | null;
   applicationDate: string | null;
 
   constructor(values: Partial<VaccineApplicationDto> = {}) {
@@ -13,11 +13,17 @@ export class VaccineApplicationDto {
     this.applicationDate = values.applicationDate ??= null;
   }
 
-  fromIVaccineApplied(vaccineApplied: Partial<IVaccineApplied>) {
+  /**
+   * Creates a VaccineApplicationDto from an IVaccineApplied object.
+   * @param vaccineApplied - The IVaccineApplied object to convert.
+   * @returns A new instance of VaccineApplicationDto.
+   * @author dgutierrez
+   */
+  static fromIVaccineApplied(vaccineApplied: Partial<IVaccineApplied>) {
     const {vaccineId, applicationDate} = vaccineApplied;
     return new VaccineApplicationDto({
       vaccineId,
-      applicationDate,
+      applicationDate
     });
   }
 }

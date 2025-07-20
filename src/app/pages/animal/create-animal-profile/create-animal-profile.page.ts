@@ -1,7 +1,6 @@
 import {Component, computed, effect, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {Subscription} from 'rxjs';
 import {
@@ -12,6 +11,7 @@ import {
   AnimalVaccinationFormComponent,
 } from '@components/forms/animal';
 import {
+  CommunityAnimalHttpService,
   RaceHttpService,
   SanitaryControlResponseHttpService,
   SanitaryControlTypeHttpService,
@@ -19,13 +19,14 @@ import {
   SpeciesHttpService,
   VaccineHttpService,
 } from '@services/http';
-import {Race, SanitaryControlType, Sex, Species} from '@models';
+import {SanitaryControlType, Species} from '@models';
 import {fade} from '@animations/fade';
 import {IVaccineApplied} from '@common/interfaces';
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {SanitaryControlTypeEnum} from '@common/enums';
 import {CommunityAnimalRegistrationFormService} from '@services/forms';
-import {VaccineApplication} from '../../../models/vaccine-application';
+import {CreateAnimalRequestDto} from '@models/dto';
+import {LocationService} from '../../../services/location-service/location.service';
 
 /**
  * Page for creating an animal profile.
@@ -58,7 +59,9 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   readonly sexHttpService = inject(SexHttpService);
   readonly speciesHttpService = inject(SpeciesHttpService);
   readonly vaccineHttpService = inject(VaccineHttpService);
+  readonly communityAnimalHttpService = inject(CommunityAnimalHttpService);
   readonly communityAnimalRegistrationFormService = inject(CommunityAnimalRegistrationFormService);
+  readonly locationService = inject(LocationService);
 
   readonly sanitaryControlTypeList = this.sanitaryControlTypeHttpService.sanitaryControlTypeList;
   private readonly dewormingControlType = computed(() =>
@@ -71,7 +74,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
     this.getSanitaryControlTypeById(SanitaryControlTypeEnum.NEUTERING, this.sanitaryControlTypeList())
   );
 
-  readonly formAnimalBasicInfo = this.buildCreateAnimalProfileForm();
+  readonly formAnimalBasicInfo = this.communityAnimalRegistrationFormService.buildCreateAnimalProfileForm();
   readonly formAnimalVaccination = this.communityAnimalRegistrationFormService.buildVaccinationForm();
   readonly formDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
   readonly formFleaAndTickControl = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
@@ -106,7 +109,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
     this.formDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sanitaryControlResponseHttpService.getAll();
     this.sanitaryControlTypeHttpService.getAll();
     this.sexHttpService.getAll();
@@ -139,16 +142,62 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
       })
       return;
     }
+    this.registerAnimalProfile();
   }
 
-  private registerAnimalProfile() {
+  /**
+   * Completes the animal profile registration by sending the form data to the server.
+   * @author dgutierrez
+   */
+  private async registerAnimalProfile() {
+    const vaccineApplicationsDto = this.communityAnimalRegistrationFormService.buildVaccineAppliedDto(this.vaccinesAppliedDates());
 
+    const {name, sex, species, birthDate, weight, race} = this.formAnimalBasicInfo.getRawValue();
+
+    const sanitaryControlDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlDto(
+      this.formDeworming,
+    );
+    const sanitaryControlFleaAndTick = this.communityAnimalRegistrationFormService.buildSanitaryControlDto(
+      this.formFleaAndTickControl,
+    );
+    const sanitaryControlNeutering = this.communityAnimalRegistrationFormService.buildSanitaryControlDto(
+      this.formNeutering,
+    );
+
+    const {success, coordinates} = await this.locationService.getUserLocation();
+
+    if (!success) {
+      this.alertService.displayAlert({
+        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_LOCATION_NOT_AVAILABLE
+      });
+    }
+
+    const createAnimalRequestDto = new CreateAnimalRequestDto({
+      birthDate,
+      name,
+      raceId: race?.id,
+      sanitaryControls: [sanitaryControlDeworming, sanitaryControlFleaAndTick, sanitaryControlNeutering],
+      sexId: sex?.id,
+      speciesId: species?.id,
+      latitude: coordinates?.latitude,
+      longitude: coordinates?.longitude,
+      vaccineApplications: vaccineApplicationsDto,
+      weight,
+    });
+    this.communityAnimalHttpService.registerCommunityAnimal(createAnimalRequestDto, this.resetForms.bind(this));
   }
 
-  private getRegisterApplications() {
-    return this.vaccinesAppliedDates().map((vaccineApplied) => {
-      return VaccineApplication.fromIVaccineApplied(vaccineApplied, this.formAnimalBasicInfo.get('species')?.value as Species);
-    })
+  /**
+   * Resets all forms to their initial state.
+   * @author dgutierrez
+   */
+  private resetForms() {
+    this.formAnimalBasicInfo.reset();
+    this.formAnimalVaccination.reset();
+    this.formDeworming.reset();
+    this.formFleaAndTickControl.reset();
+    this.formNeutering.reset();
+    this.vaccinesAppliedDates.set([]);
   }
 
   /**
@@ -160,36 +209,6 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   onSpeciesSelectionChange(species: Species) {
     this.vaccineHttpService.getBySpecies(species.id!);
     this.raceHttpService.getBySpeciesId(species.id!)
-  }
-
-  /**
-   * Builds the form for creating an animal profile.
-   * @author dgutierrez
-   */
-  private buildCreateAnimalProfileForm() {
-    return this.formsService.formsBuilder.group({
-      name: this.formsService.formsBuilder.control('', {
-        nonNullable: true,
-        validators: [Validators.required],
-      }),
-      species: this.formsService.formsBuilder.control<Species | null>(null, {
-        validators: [Validators.required],
-      }),
-      race: this.formsService.formsBuilder.control<Race | null>(null, {
-        validators: [Validators.required],
-      }),
-      birthDate: this.formsService.formsBuilder.control<Date>(new Date(), {
-        nonNullable: true,
-        validators: [Validators.required],
-      }),
-      sex: this.formsService.formsBuilder.control<Sex | null>(null, {
-        validators: [Validators.required],
-      }),
-      weight: this.formsService.formsBuilder.control<number>(0, {
-        validators: [Validators.required],
-        nonNullable: true
-      })
-    });
   }
 
 

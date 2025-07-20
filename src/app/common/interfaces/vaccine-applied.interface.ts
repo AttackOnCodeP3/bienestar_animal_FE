@@ -3,6 +3,6 @@
  * @author dgutierrez
  */
 export interface IVaccineApplied {
-  id: number;
-  fecha: Date | null
+  vaccineId: number;
+  applicationDate: string | null
 }
