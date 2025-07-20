@@ -88,24 +88,24 @@ export class AnimalVaccinationFormComponent implements OnInit, OnDestroy {
   private syncDatesArray(ids: number[]) {
     const oldValues = new Map<number, Date | null>();
     this.vaccinesDatesGroups.forEach(grp => {
-      oldValues.set(grp.get('id')?.value, grp.get('fecha')?.value);
+      oldValues.set(grp.get('vaccineId')?.value, grp.get('applicationDate')?.value);
     });
 
     this.vaccinesDates.clear();
 
     ids.forEach(id => {
-      const previousFecha = oldValues.get(id) ?? null;
+      const previousDate = oldValues.get(id) ?? null;
 
-      const grupo = this.formsService().formsBuilder.group({
-        id: [id],
-        fecha: [previousFecha, [Validators.required]]
+      const group = this.formsService().formsBuilder.group({
+        vaccineId: [id],
+        applicationDate: [previousDate, [Validators.required]]
       });
 
-      grupo.get('fecha')?.valueChanges.subscribe(() => {
+      group.get('applicationDate')?.valueChanges.subscribe(() => {
         this.emitVaccinesDates();
       });
 
-      this.vaccinesDates.push(grupo);
+      this.vaccinesDates.push(group);
     });
 
     this.emitVaccinesDates();
@@ -116,10 +116,10 @@ export class AnimalVaccinationFormComponent implements OnInit, OnDestroy {
    * @author dgutierrez
    */
   private emitVaccinesDates() {
-    const datesArray = this.vaccinesDatesGroups.map(grp => ({
-      id: grp.get('id')?.value,
-      fecha: grp.get('fecha')?.value
+    const vaccinesArray: IVaccineApplied[] = this.vaccinesDatesGroups.map(grp => ({
+      vaccineId: grp.get('vaccineId')?.value,
+      applicationDate: grp.get('applicationDate')?.value
     }));
-    this.syncVaccinesDatesChange.emit(datesArray);
+    this.syncVaccinesDatesChange.emit(vaccinesArray);
   }
 }

@@ -9,7 +9,7 @@
   @for (grp of vaccinesDatesGroups; track $index) {
     <div [formGroup]="grp" class="row align-items-center g-2">
       <div class="col-lg-2 fw-semibold">
-        {{ getNameVaccine(grp.get('id')?.value) }}
+        {{ getNameVaccine(grp.get('vaccineId')?.value) }}
       </div>
       <div class="col-lg-8">
         <mat-form-field appearance="outline" class="w-100">
@@ -17,16 +17,16 @@
           <input
             matInput
             [matDatepicker]="matDatepicker"
-            formControlName="fecha"
+            formControlName="applicationDate"
             [errorStateMatcher]="formsService().matcher"
             [max]="formsService().maxTodayDate"
             readonly
           />
           <mat-datepicker-toggle matIconSuffix [for]="matDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #matDatepicker></mat-datepicker>
-          @let fechaControl = grp.get('fecha');
-          @if (formsService().isFieldInvalid(fechaControl)) {
-            <mat-error>{{ formsService().getErrorMessage(fechaControl) }}</mat-error>
+          @let applicationDate = grp.get('applicationDate');
+          @if (formsService().isFieldInvalid(applicationDate)) {
+            <mat-error>{{ formsService().getErrorMessage(applicationDate) }}</mat-error>
           }
         </mat-form-field>
       </div>
