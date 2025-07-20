@@ -5,7 +5,7 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div class="row">
 
-    <!-- Especie -->
+    <!-- Especies -->
     <div class="col-md-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Especie</mat-label>
@@ -17,7 +17,7 @@
       </mat-form-field>
     </div>
 
-    <!-- Sexo -->
+    <!-- Sex -->
     <div class="col-md-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Sexo</mat-label>
@@ -30,7 +30,7 @@
       </mat-form-field>
     </div>
 
-    <!-- Edad estimada -->
+    <!-- Age -->
     <div class="col-md-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Edad estimada</mat-label>
@@ -43,7 +43,7 @@
       </mat-form-field>
     </div>
 
-    <!-- Condición física -->
+    <!-- Physical -->
     <div class="col-md-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Condición física</mat-label>
@@ -58,7 +58,7 @@
       </mat-form-field>
     </div>
 
-    <!-- Comportamiento -->
+    <!-- Behavior -->
     <div class="col-md-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Comportamiento</mat-label>
@@ -74,23 +74,20 @@
       </mat-form-field>
     </div>
 
-    <!-- Distrito -->
     <div class="col-md-4 mb-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Distrito</mat-label>
-        <input matInput type="text" formControlName="district">
-      </mat-form-field>
+      <app-location-form
+        [cantonsList]="cantonHttpService.cantonList()"
+        [districtsList]="cantonHttpService.districtsByCanton()"
+        [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
+        (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
+        (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
+        [form]="form"
+        [i18nService]="i18nService"
+        [formsService]="formsService">
+      </app-location-form>
     </div>
 
-    <!-- Barrio -->
-    <div class="col-md-4 mb-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Barrio</mat-label>
-        <input matInput type="text" formControlName="neighborhood">
-      </mat-form-field>
-    </div>
-
-    <!-- Observaciones -->
+    <!-- observations -->
     <div class="col-md-12 mb-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Observaciones</mat-label>
@@ -98,23 +95,20 @@
       </mat-form-field>
     </div>
 
-    <!-- Latitud -->
-    <div class="col-md-6 mb-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Latitud</mat-label>
-        <input matInput type="number" formControlName="latitude">
-      </mat-form-field>
+    <!-- Upload img -->
+    <div class="col-md-12 mb-3">
+      <label><strong>Subir Imagen (opcional):</strong></label>
+      <input type="file" accept="image/*" (change)="handleImageUpload($event)">
     </div>
 
-    <!-- Longitud -->
-    <div class="col-md-6 mb-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Longitud</mat-label>
-        <input matInput type="number" formControlName="longitude">
-      </mat-form-field>
+    <!-- IMG preview -->
+    <div class="col-md-12 mb-3" *ngIf="imagePreview">
+      <label><strong>Vista previa:</strong></label><br>
+      <img [src]="imagePreview" alt="Vista previa de imagen" style="max-width: 300px; border: 1px solid #ccc; border-radius: 4px;" />
     </div>
 
-    <!-- Botón Enviar -->
+
+    <!-- Send -->
     <div class="col-12 text-end">
       <button matButton="tonal" type="submit">Registrar</button>
     </div>

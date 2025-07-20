@@ -17,6 +17,7 @@ export class CreateAbandonedAnimalRequestDTO {
   latitude: number | null;
   longitude: number | null;
   photoBase64?: string | null;
+  canton: number | null;
 
   constructor(values: Partial<CreateAbandonedAnimalRequestDTO> = {}) {
     this.species = values.species ?? null;
@@ -30,6 +31,7 @@ export class CreateAbandonedAnimalRequestDTO {
     this.latitude = values.latitude ?? null;
     this.longitude = values.longitude ?? null;
     this.photoBase64 = values.photoBase64 ?? null;
+    this.canton = values.canton ?? null;
   }
 
   static fromAbandonedAnimal(animal: Partial<AbandonedAnimal>): CreateAbandonedAnimalRequestDTO {
@@ -39,8 +41,6 @@ export class CreateAbandonedAnimalRequestDTO {
       estimatedAge: animal.estimatedAge,
       physicalCondition: animal.physicalCondition,
       behavior: animal.behavior,
-      district: animal.district,
-      neighborhood: animal.neighborhood,
       observations: animal.observations,
       latitude: animal.latitude,
       longitude: animal.longitude,
