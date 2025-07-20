@@ -1,15 +1,15 @@
 import {Component, computed, effect, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {FormGroup, Validators} from '@angular/forms';
+import {Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {Subscription} from 'rxjs';
 import {
   AnimalBasicInfoFormComponent,
-  AnimalVaccinationFormComponent,
   AnimalDewormingFormComponent,
+  AnimalFleaControlFormComponent,
   AnimalNeuteringFormComponent,
-  AnimalFleaControlFormComponent
+  AnimalVaccinationFormComponent,
 } from '@components/forms/animal';
 import {
   RaceHttpService,
@@ -19,12 +19,13 @@ import {
   SpeciesHttpService,
   VaccineHttpService,
 } from '@services/http';
-import {Race, SanitaryControlResponse, SanitaryControlType, Sex, Species} from '@models';
+import {Race, SanitaryControlType, Sex, Species} from '@models';
 import {fade} from '@animations/fade';
 import {IVaccineApplied} from '@common/interfaces';
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {SanitaryControlTypeEnum} from '@common/enums';
 import {CommunityAnimalRegistrationFormService} from '@services/forms';
+import {VaccineApplication} from '../../../models/vaccine-application';
 
 /**
  * Page for creating an animal profile.
@@ -35,11 +36,11 @@ import {CommunityAnimalRegistrationFormService} from '@services/forms';
   imports: [
     AnimalBasicInfoFormComponent,
     AnimalDewormingFormComponent,
+    AnimalFleaControlFormComponent,
     AnimalNeuteringFormComponent,
     AnimalVaccinationFormComponent,
     MatButton,
     MatExpansionModule,
-    AnimalFleaControlFormComponent,
   ],
   templateUrl: './create-animal-profile.page.html',
   styleUrl: './create-animal-profile.page.scss',
@@ -71,7 +72,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   );
 
   readonly formAnimalBasicInfo = this.buildCreateAnimalProfileForm();
-  readonly formAnimalVaccination = this.buildVaccinationForm();
+  readonly formAnimalVaccination = this.communityAnimalRegistrationFormService.buildVaccinationForm();
   readonly formDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
   readonly formFleaAndTickControl = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
   readonly formNeutering = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
@@ -102,7 +103,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor() {
-    this.formDeworming = this.buildSanitaryControlForm();
+    this.formDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
   }
 
   ngOnInit() {
@@ -138,6 +139,16 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
       })
       return;
     }
+  }
+
+  private registerAnimalProfile() {
+
+  }
+
+  private getRegisterApplications() {
+    return this.vaccinesAppliedDates().map((vaccineApplied) => {
+      return VaccineApplication.fromIVaccineApplied(vaccineApplied, this.formAnimalBasicInfo.get('species')?.value as Species);
+    })
   }
 
   /**
@@ -181,35 +192,6 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Builds the vaccination form for the animal profile.
-   * @author dgutierrez
-   */
-  private buildVaccinationForm() {
-    return this.formsService.formsBuilder.group({
-      selectedVaccines: this.formsService.formsBuilder.control<number[]>([], {nonNullable: true}),
-      vaccinesDates: this.formsService.formsBuilder.array<FormGroup>([])
-    });
-  }
-
-  /**
-   * @author dgutierrez
-   */
-  private buildSanitaryControlForm() {
-    return this.formsService.formsBuilder.group({
-      productUsed: this.formsService.formsBuilder.control<string>('', {
-        nonNullable: true,
-        validators: [Validators.required]
-      }),
-      lastApplicationDate: this.formsService.formsBuilder.control<Date>(new Date(), {
-        nonNullable: true,
-        validators: [Validators.required]
-      }),
-      sanitaryControlResponse: this.formsService.formsBuilder.control<SanitaryControlResponse | null>(null, {
-        validators: [Validators.required]
-      }),
-    });
-  }
 
   /**
    * Gets the sanitary control response by its ID in the list of the sanitary control response service.

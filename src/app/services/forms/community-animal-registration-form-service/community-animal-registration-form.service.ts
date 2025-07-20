@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import { SanitaryControlResponseEnum } from '@common/enums';
+import {SanitaryControlResponseEnum} from '@common/enums';
 import {FormsService} from '@services/general';
 import {FormGroup, Validators} from '@angular/forms';
 import {ISanitaryControlForm} from '@common/interfaces/forms';
@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
  * Service for managing the community animal registration form.
  * @author dgutierrez
  */
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CommunityAnimalRegistrationFormService {
   readonly formsService = inject(FormsService)
 
@@ -98,5 +98,16 @@ export class CommunityAnimalRegistrationFormService {
     } else {
       form.get('sanitaryControlType')?.setValue(type);
     }
+  }
+
+  /**
+   * Builds the vaccination form for the animal profile.
+   * @author dgutierrez
+   */
+  buildVaccinationForm() {
+    return this.formsService.formsBuilder.group({
+      selectedVaccines: this.formsService.formsBuilder.control<number[]>([], {nonNullable: true}),
+      vaccinesDates: this.formsService.formsBuilder.array<FormGroup>([])
+    });
   }
 }

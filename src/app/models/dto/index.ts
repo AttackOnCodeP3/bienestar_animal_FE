@@ -1,3 +1,5 @@
+export * from "./animal/create-animal-request.dto";
+export * from "./generic/age.dto";
 export * from "./municipality/create-municipality-request.dto";
 export * from "./municipality/update-municipality-status-request.dto";
 export * from "./user/complete-profile-request.dto";

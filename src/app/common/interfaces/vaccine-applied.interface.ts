@@ -1,5 +1,5 @@
 /**
- * Interface representing a vaccine applied to a patient.
+ * Interface representing a vaccine applied to an animal.
  * @author dgutierrez
  */
 export interface IVaccineApplied {
