@@ -9,7 +9,6 @@ export enum I18nMenuEnum {
   HOME = I18nMenuEnum.MENU + '.home',
   GAMIFICATION = I18nMenuEnum.MENU + '.gamification',
   REPORTS = I18nMenuEnum.MENU + '.reports',
-  MODEL_3D = I18nMenuEnum.MENU + '.model-3d',
   USER_MANAGEMENT = I18nMenuEnum.MENU + '.user-management',
   MUNICIPALITIES = I18nMenuEnum.MENU + '.municipalities',
   VIEW_MUNICIPALITIES = I18nMenuEnum.MENU + '.viewMunicipalities',
@@ -18,4 +17,7 @@ export enum I18nMenuEnum {
   ANIMAL = I18nMenuEnum.MENU + '.animal',
   CREATE_ANIMAL_PROFILE = I18nMenuEnum.MENU + '.create-animal-profile',
   LOGOUT = I18nMenuEnum.MENU + '.logout',
+  MODEL_3D = I18nMenuEnum.MENU + '.model-3d',
+  VIEW_MODEL_3D = I18nMenuEnum.MENU + '.viewModel3D',
+  CREATE_MODEL_3D = I18nMenuEnum.MENU + '.createModel3D',
 }

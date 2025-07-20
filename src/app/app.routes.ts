@@ -2,6 +2,8 @@ import {Routes} from '@angular/router';
 import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {authGuard, profileCompletedGuard, roleGuard} from '@core/guards';
 import {DashboardLayoutComponent} from '@components/layout';
+import { MODEL_3D_ROUTES } from '@pages/model-3d/model-3d.routes';
+
 
 export const routes: Routes = [
   {
@@ -65,10 +67,16 @@ export const routes: Routes = [
         loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
       }
            , {
-        path: RoutesUrlsEnum.MODEL_3D,
-        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER])],
-        loadComponent: () => import('@pages/model-3d/model-3d').then(m => m.TestGlbViewer),
-      }
+  path: RoutesUrlsEnum.MODEL_3D,
+  canActivate: [roleGuard([
+    RolesEnum.SUPER_ADMIN,
+    RolesEnum.MUNICIPAL_ADMIN,
+    RolesEnum.VOLUNTEER_USER,
+    RolesEnum.COMMUNITY_USER
+  ])],
+  loadChildren: () => import('@pages/model-3d/model-3d.routes').then(m => m.MODEL_3D_ROUTES),
+}
+                  
     ]
   }
 ];

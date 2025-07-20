@@ -51,6 +51,9 @@ export enum RoutesUrlsEnum {
   //Animal
   CREATE_ANIMAL_PROFILE = 'create-animal-profile',
 
+  //model 3d
   MODEL_3D = 'model-3d',
+  MODEL_3D_LIST = 'model-3d-list',
+  MODEL_3D_CREATE = 'model-3d-create',
 
 }

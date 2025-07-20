@@ -29,9 +29,11 @@
     "logout": "Cerrar sesión",
     "municipalities": "Gestión de municipalidades",
     "reports": "Reportes",
-    "model-3d": "Modelo 3D",
     "user-management": "Gestión de usuarios",
-    "viewMunicipalities": "Ver municipalidades"
+    "viewMunicipalities": "Ver municipalidades",
+     "model-3d": "Modelo 3D",
+      "viewModel3D": "Ver modelos 3D",
+  "createModel3D": "Crear modelo 3D"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",

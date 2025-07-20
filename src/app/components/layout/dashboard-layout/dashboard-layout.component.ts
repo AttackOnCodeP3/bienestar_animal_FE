@@ -76,15 +76,27 @@ export class DashboardLayoutComponent {
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN]
     },
-        {
-      icon: 'view_in_ar',
-      label: I18nMenuEnum.MODEL_3D, 
-      route: RoutesUrlsEnum.MODEL_3D,
-      click: () => {
-        this.closeSidenav()
+            {
+        icon: 'view_in_ar',
+        label: I18nMenuEnum.MODEL_3D,
+        authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER],
+       click: () => {},
+        children: [
+          {
+            label: I18nMenuEnum.VIEW_MODEL_3D,
+            route: `${RoutesUrlsEnum.MODEL_3D}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MODEL_3D_LIST}`,
+            authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER],
+            click: () => this.closeSidenav(),
+          },
+  {
+  label: I18nMenuEnum.CREATE_MODEL_3D,
+  route: `${RoutesUrlsEnum.MODEL_3D}/${RoutesUrlsEnum.MODEL_3D_CREATE}`,
+  authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER],
+  click: () => this.closeSidenav(),
+}
+        ]
       },
-      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN, RolesEnum.VOLUNTEER_USER, RolesEnum.COMMUNITY_USER]
-    },
+    
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
