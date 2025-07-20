@@ -1,0 +1,123 @@
+<app-general-container-component>
+  <h1>Registrar Animal Abandonado</h1>
+</app-general-container-component>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+
+    <!-- Especie -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Especie</mat-label>
+        <mat-select formControlName="species">
+          @for (s of speciesHttp.speciesList(); track s.id) {
+            <mat-option [value]="s.name">{{ s.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Sexo -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="sex">
+          <mat-option [value]="null">Ninguno</mat-option>
+          @for (s of sexHttp.sexList(); track s.id) {
+            <mat-option [value]="s.name">{{ s.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Edad estimada -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Edad estimada</mat-label>
+        <mat-select formControlName="estimatedAge">
+          <mat-option value="Cachorro (menor a 6 meses)">Cachorro (menor a 6 meses)</mat-option>
+          <mat-option value="Joven (6 meses – 2 años)">Joven (6 meses – 2 años)</mat-option>
+          <mat-option value="Adulto (2 a 7 años)">Adulto (2 a 7 años)</mat-option>
+          <mat-option value="Senior (más de 7 años)">Senior (más de 7 años)</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Condición física -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Condición física</mat-label>
+        <mat-select formControlName="physicalCondition">
+          <mat-option value="Saludable">Saludable</mat-option>
+          <mat-option value="Desnutrido">Desnutrido</mat-option>
+          <mat-option value="Herido">Herido</mat-option>
+          <mat-option value="Enfermo">Enfermo</mat-option>
+          <mat-option value="Muy delgado">Muy delgado</mat-option>
+          <mat-option value="Con parásitos visibles">Con parásitos visibles</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Comportamiento -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Comportamiento</mat-label>
+        <mat-select formControlName="behavior">
+          <mat-option value="Acostado">Acostado</mat-option>
+          <mat-option value="De pie">De pie</mat-option>
+          <mat-option value="Sentado">Sentado</mat-option>
+          <mat-option value="Caminando">Caminando</mat-option>
+          <mat-option value="Asustado">Asustado</mat-option>
+          <mat-option value="Agresivo">Agresivo</mat-option>
+          <mat-option value="Descansando">Descansando</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Distrito -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Distrito</mat-label>
+        <input matInput type="text" formControlName="district">
+      </mat-form-field>
+    </div>
+
+    <!-- Barrio -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Barrio</mat-label>
+        <input matInput type="text" formControlName="neighborhood">
+      </mat-form-field>
+    </div>
+
+    <!-- Observaciones -->
+    <div class="col-md-12 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput rows="3" formControlName="observations"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Latitud -->
+    <div class="col-md-6 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Latitud</mat-label>
+        <input matInput type="number" formControlName="latitude">
+      </mat-form-field>
+    </div>
+
+    <!-- Longitud -->
+    <div class="col-md-6 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Longitud</mat-label>
+        <input matInput type="number" formControlName="longitude">
+      </mat-form-field>
+    </div>
+
+    <!-- Botón Enviar -->
+    <div class="col-12 text-end">
+      <button matButton="tonal" type="submit">Registrar</button>
+    </div>
+
+  </div>
+</form>

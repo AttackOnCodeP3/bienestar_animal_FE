@@ -50,4 +50,6 @@ export enum RoutesUrlsEnum {
 
   //Animal
   CREATE_ANIMAL_PROFILE = 'create-animal-profile',
+  ABANDONED_ANIMAL = 'abandoned-animal',
+  CREATE_ABANDONED_ANIMAL = 'create-abandoned-animal',
 }

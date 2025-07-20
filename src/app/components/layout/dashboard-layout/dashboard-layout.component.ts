@@ -137,12 +137,26 @@ export class DashboardLayoutComponent {
       ],
     },
     {
+      icon: 'pets',
+      label: I18nMenuEnum.ABANDONED_ANIMAL,
+      authorities: [RolesEnum.CENSISTA_USER],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.CREATE_ABANDONED_ANIMAL,
+          route: `${RoutesUrlsEnum.ABANDONED_ANIMAL}/${RoutesUrlsEnum.CREATE_ABANDONED_ANIMAL}`,
+          authorities: [RolesEnum.CENSISTA_USER],
+          click: () => this.closeSidenav(),
+        }
+      ],
+    },
+    {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,
       route: RoutesUrlsEnum.VOID_ROUTE,
       click: () => this.authHttpService.logout(),
       authorities: [...this.allRoles()]
-    },
+    }
   ])
 
   /**

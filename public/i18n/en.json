@@ -12,6 +12,8 @@
   "================== COMPONENT LABELS ==================": "",
   "menu": {
     "animal": "Animal",
+    "abandonedAnimal": "Abandoned Animal",
+    "createAbandonedAnimal": "Create Abandoned Animal",
     "create-animal-profile": "Create Animal Profile",
     "create-user": "Create User",
     "createMunicipality": "Create Municipality",
