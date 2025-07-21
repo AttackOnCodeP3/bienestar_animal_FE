@@ -155,7 +155,7 @@ export class CreateAbandonedAnimalPage implements OnInit {
       neighborhood: raw.neighborhood?.name ?? null
     });
 
-    this.abandonedAnimalHttp.save(dto, this.form);
+    this.abandonedAnimalHttp.save(dto, () => this.form.reset());
   }
 
   /**

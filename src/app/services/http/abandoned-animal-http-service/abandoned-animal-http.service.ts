@@ -25,19 +25,20 @@ export class AbandonedAnimalHttpService extends BaseHttpService<AbandonedAnimal>
 
   /**
    * Registers an abandoned animal using a DTO.
-   * Optionally resets the form on success.
+   * Optionally runs a callback after success.
+   *
    * @param dto Abandoned animal DTO
-   * @param form Optional reactive form group
+   * @param callback Optional callback to execute after success
    * @author gjimenez
    */
-  save(dto: CreateAbandonedAnimalRequestDTO, form?: FormGroup): void {
+  save(dto: CreateAbandonedAnimalRequestDTO, callback?: VoidFunction): void {
     this.add(dto).subscribe({
       next: (response) => {
         this.alertService.displayAlert({
           type: AlertTypeEnum.SUCCESS,
           messageKey: response.message
         });
-        form?.reset();
+        if (callback) callback();
       },
       error: this.handleError({
         message: 'Error registering abandoned animal',
