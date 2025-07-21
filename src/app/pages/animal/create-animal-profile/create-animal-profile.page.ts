@@ -144,6 +144,11 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
       this.alertService.displayAlert({
         messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
       })
+      this.formsService.logFormErrors(this.formAnimalBasicInfo)
+      this.formsService.logFormErrors(this.formAnimalVaccination);
+      this.formsService.logFormErrors(this.formDeworming);
+      this.formsService.logFormErrors(this.formFleaAndTickControl);
+      this.formsService.logFormErrors(this.formNeutering);
       return;
     }
     this.registerAnimalProfile();
@@ -198,9 +203,9 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   private resetForms() {
     this.formAnimalBasicInfo.reset();
     this.formAnimalVaccination.reset();
-    this.formDeworming.reset();
-    this.formFleaAndTickControl.reset();
-    this.formNeutering.reset();
+    this.communityAnimalRegistrationFormService.resetSanitaryControlForm(this.formDeworming);
+    this.communityAnimalRegistrationFormService.resetSanitaryControlForm(this.formFleaAndTickControl);
+    this.communityAnimalRegistrationFormService.resetSanitaryControlForm(this.formNeutering);
     this.vaccinesAppliedDates.set([]);
   }
 

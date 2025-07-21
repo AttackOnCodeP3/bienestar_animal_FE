@@ -133,7 +133,7 @@ export class CommunityAnimalRegistrationFormService {
       race: this.formsService.formsBuilder.control<Race | null>(null, {
         validators: [Validators.required],
       }),
-      birthDate: this.formsService.formsBuilder.control<Date>(new Date(), {
+      birthDate: this.formsService.formsBuilder.control<Date | null>(null, {
         nonNullable: true,
         validators: [Validators.required],
       }),
@@ -164,5 +164,22 @@ export class CommunityAnimalRegistrationFormService {
       sanitaryControlTypeId: sanitaryControlForm.get('sanitaryControlType')?.value?.id ?? null,
       sanitaryControlResponseId: sanitaryControlForm.get('sanitaryControlResponse')?.value?.id ?? null,
     });
+  }
+
+  /**
+   * Resets the sanitary control form to its initial state. Saves the current sanitary control type
+   * and restores it after resetting the form.
+   * @param form The form to reset.
+   * @author dgutierrez
+   */
+  resetSanitaryControlForm(form: FormGroup): void {
+    //first save the current sanitary control type
+    const sanitaryControlType = form.get('sanitaryControlType')?.value;
+
+    //reset the form because, this cleans the validators and doesn't show the error messages
+    form.reset();
+
+    //then set the sanitary control type back
+    form.get('sanitaryControlType')?.setValue(sanitaryControlType);
   }
 }
