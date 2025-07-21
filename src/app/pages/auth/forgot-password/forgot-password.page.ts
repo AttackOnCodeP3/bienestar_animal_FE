@@ -40,7 +40,7 @@ export class ForgotPasswordPage {
   private readonly ForgotPasswordHttpService  = inject(ForgotPasswordHttpService );
   readonly i18nService = inject(I18nService);
 
-  loading = signal(false);
+  readonly loading = signal(false);
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
