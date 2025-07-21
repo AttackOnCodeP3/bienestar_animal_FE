@@ -50,6 +50,11 @@
     "title": "Volunteer",
     "description": "If you wish to be a volunteer, please indicate if you want to and if so, select the municipality where you would like to offer your services."
   },
+  "reset-password-component": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password"
+  },
+
   "animal-basic-info-form-component": {
     "title": "Basic General Information"
   },
@@ -110,7 +115,9 @@
       "maxlength": "Must be at most",
       "minlength": "Must be at least",
       "pattern": "Invalid format",
-      "required": "Required field"
+      "required": "Required field",
+      "min": "Must be greater than or equal to",
+      "max": "Must be less than or equal to"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -158,6 +165,11 @@
     "title": "Complete your profile",
     "subtitle": "Please complete your profile to continue"
   },
+  "forgot-password-page": {
+    "title": "Recover Password",
+    "subtitle": "Enter your email to recover your password"
+  },
+
   "user-management-page": {
     "title": "User Management"
   },
@@ -252,9 +264,11 @@
     "register": "Register",
     "registerNow": "Register Now",
     "save": "Save",
+    "send": "Send",
     "updateMunicipality": "Update Municipality",
     "updateUser": "Update User",
-    "userManagement": "User Management"
+    "userManagement": "User Management",
+    "registerAnimal": "Register Animal"
   },
   "matSnackBarMessages": {
     "http": {

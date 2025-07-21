@@ -41,6 +41,10 @@ export const AUTH_ROUTES: Routes = [
     loadComponent: () => import('@pages/auth/forgot-password/forgot-password.page').then(m => m.ForgotPasswordPage),
   },
   {
+    path: RoutesUrlsEnum.CHANGE_PASSWORD,
+    loadComponent: () => import('@pages/auth/change-password/change-password.page').then(m => m.ChangePasswordPage),
+  },
+  {
     path: RoutesUrlsEnum.SOCIAL_CALLBACK,
     loadComponent: () => import('@pages/auth/social-callback/social-callback.page').then(m => m.SocialCallbackPage),
   }

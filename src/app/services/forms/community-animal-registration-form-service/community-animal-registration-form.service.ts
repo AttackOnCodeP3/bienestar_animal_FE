@@ -5,9 +5,8 @@ import {FormGroup, Validators} from '@angular/forms';
 import {ISanitaryControlForm} from '@common/interfaces/forms';
 import {Race, SanitaryControlResponse, SanitaryControlType, Sex, Species} from '@models';
 import {Subscription} from 'rxjs';
-import {SanitaryControlDto} from '../../../models/dto/animal/sanitary-control.dto';
 import {IVaccineApplied} from '@common/interfaces';
-import {VaccineApplicationDto} from '../../../models/dto/animal/vaccine-application.dto';
+import {VaccineApplicationDto, SanitaryControlDto} from '@models/dto';
 
 /**
  * Service for managing the community animal registration form.
@@ -35,12 +34,10 @@ export class CommunityAnimalRegistrationFormService {
    */
   buildSanitaryControlForm(): FormGroup<ISanitaryControlForm> {
     return this.formsService.formsBuilder.group({
-      productUsed: this.formsService.formsBuilder.control<string>('', {
-        nonNullable: true,
+      productUsed: this.formsService.formsBuilder.control<string | null>(null, {
         validators: [Validators.required],
       }),
-      lastApplicationDate: this.formsService.formsBuilder.control<Date>(new Date(), {
-        nonNullable: true,
+      lastApplicationDate: this.formsService.formsBuilder.control<Date | null>(null, {
         validators: [Validators.required],
       }),
       sanitaryControlResponse: this.formsService.formsBuilder.control<SanitaryControlResponse | null>(null, {
@@ -71,11 +68,17 @@ export class CommunityAnimalRegistrationFormService {
 
       if (productUsed) {
         productUsed.setValidators(isDisabled ? [] : [Validators.required]);
+        if (isDisabled) {
+          lastApplicationDate?.setValue(null);
+        }
         productUsed.updateValueAndValidity();
       }
 
       if (lastApplicationDate) {
         lastApplicationDate.setValidators(isDisabled ? [] : [Validators.required]);
+        if (isDisabled) {
+          productUsed?.setValue(null);
+        }
         lastApplicationDate.updateValueAndValidity();
       }
     });
@@ -130,7 +133,7 @@ export class CommunityAnimalRegistrationFormService {
       race: this.formsService.formsBuilder.control<Race | null>(null, {
         validators: [Validators.required],
       }),
-      birthDate: this.formsService.formsBuilder.control<Date>(new Date(), {
+      birthDate: this.formsService.formsBuilder.control<Date | null>(null, {
         nonNullable: true,
         validators: [Validators.required],
       }),
@@ -138,7 +141,7 @@ export class CommunityAnimalRegistrationFormService {
         validators: [Validators.required],
       }),
       weight: this.formsService.formsBuilder.control<number>(0, {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.min(1)],
         nonNullable: true
       })
     });
@@ -161,5 +164,22 @@ export class CommunityAnimalRegistrationFormService {
       sanitaryControlTypeId: sanitaryControlForm.get('sanitaryControlType')?.value?.id ?? null,
       sanitaryControlResponseId: sanitaryControlForm.get('sanitaryControlResponse')?.value?.id ?? null,
     });
+  }
+
+  /**
+   * Resets the sanitary control form to its initial state. Saves the current sanitary control type
+   * and restores it after resetting the form.
+   * @param form The form to reset.
+   * @author dgutierrez
+   */
+  resetSanitaryControlForm(form: FormGroup): void {
+    //first save the current sanitary control type
+    const sanitaryControlType = form.get('sanitaryControlType')?.value;
+
+    //reset the form because, this cleans the validators and doesn't show the error messages
+    form.reset();
+
+    //then set the sanitary control type back
+    form.get('sanitaryControlType')?.setValue(sanitaryControlType);
   }
 }

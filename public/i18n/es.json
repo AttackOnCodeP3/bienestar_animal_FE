@@ -50,6 +50,11 @@
     "title": "Voluntario",
     "description": "Si desea ser voluntario, por favor indique si lo desea y si es así, seleccione la municipalidad donde quisiera prestar sus servicios."
   },
+  "reset-password-component": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password"
+  },
+
   "animal-basic-info-form-component": {
     "title": "Información básica general"
   },
@@ -110,7 +115,9 @@
       "maxlength": "Debe tener máximo",
       "minlength": "Debe tener al menos",
       "pattern": "El formato no es correcto",
-      "required": "Campo requerido"
+      "required": "Campo requerido",
+      "min": "Debe ser mayor o igual a",
+      "max": "Debe ser menor o igual a"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -158,6 +165,11 @@
     "title": "Complete su perfil",
     "subtitle": "Por favor complete su perfil para continuar"
   },
+  "forgot-password-page": {
+    "title": "Recuperar contraseña",
+    "subtitle": "Ingrese su correo electrónico para recuperar su contraseña"
+  },
+
   "user-management-page": {
     "title": "Gestión de usuarios"
   },
@@ -257,10 +269,12 @@
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
     "registerNow": "Regístrate ahora",
+    "send": "Enviar",
     "save": "Guardar",
     "updateMunicipality": "Actualizar municipalidad",
     "updateUser": "Actualizar usuario",
-    "userManagement": "Gestión de usuarios"
+    "userManagement": "Gestión de usuarios",
+    "registerAnimal": "Registrar animal"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

@@ -97,5 +97,7 @@
 </mat-expansion-panel>
 
 <div class="text-end mb-5" (click)="onSubmit()">
-  <button matButton="tonal">Registrar animal</button>
+  <button matButton="tonal">
+    {{ i18nService.i18nButtonsEnum.BUTTON_REGISTER_ANIMAL | translate }}
+  </button>
 </div>
