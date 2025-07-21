@@ -15,4 +15,5 @@ export * from "./sanitary-control-type-http-service/sanitary-control-type-http.s
 export * from "./sex-http-service/sex-http.service";
 export * from "./species-http-service/species-http.service";
 export * from "./user-http-service/user-http.service";
+export * from "./forgot-pw-http-service/forgot-pw-http.service";
 export * from "./vaccine-http-service/vaccine-http.service";
