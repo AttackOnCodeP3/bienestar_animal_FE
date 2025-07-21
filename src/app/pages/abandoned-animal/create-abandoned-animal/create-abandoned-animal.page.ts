@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +20,9 @@ import { CreateAbandonedAnimalRequestDTO } from '../../../models/dto/abandoned-a
 import {LocationService} from '../../../services/location-service/location.service';
 import {LocationFormComponent} from '@components/forms/user';
 import { ChangeDetectorRef } from '@angular/core';
+import {EstimatedAgeEnum} from '@common/enums/tables/estimated-age.enum';
+import {PhysicalConditionEnum} from '@common/enums/tables/physical-condition.enum';
+import {BehaviorEnum} from '@common/enums/tables/behavior.enum';
 
 @Component({
   selector: 'app-create-abandoned-animal',
@@ -63,6 +66,10 @@ export class CreateAbandonedAnimalPage implements OnInit {
   readonly formsService = inject(FormsService);
   readonly authService = inject(AuthHttpService);
   readonly cdRef = inject(ChangeDetectorRef);
+  readonly estimatedAgeList = signal<string[]>(Object.values(EstimatedAgeEnum));
+  readonly physicalConditionList = signal<string[]>(Object.values(PhysicalConditionEnum));
+  readonly behaviorList = signal<string[]>(Object.values(BehaviorEnum));
+
 
 
   readonly form = this.buildForm();

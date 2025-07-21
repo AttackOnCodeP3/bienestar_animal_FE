@@ -35,10 +35,9 @@
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Edad estimada</mat-label>
         <mat-select formControlName="estimatedAge">
-          <mat-option value="Cachorro (menor a 6 meses)">Cachorro (menor a 6 meses)</mat-option>
-          <mat-option value="Joven (6 meses – 2 años)">Joven (6 meses – 2 años)</mat-option>
-          <mat-option value="Adulto (2 a 7 años)">Adulto (2 a 7 años)</mat-option>
-          <mat-option value="Senior (más de 7 años)">Senior (más de 7 años)</mat-option>
+          @for (age of estimatedAgeList(); track age) {
+            <mat-option [value]="age">{{ age }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </div>
@@ -48,12 +47,9 @@
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Condición física</mat-label>
         <mat-select formControlName="physicalCondition">
-          <mat-option value="Saludable">Saludable</mat-option>
-          <mat-option value="Desnutrido">Desnutrido</mat-option>
-          <mat-option value="Herido">Herido</mat-option>
-          <mat-option value="Enfermo">Enfermo</mat-option>
-          <mat-option value="Muy delgado">Muy delgado</mat-option>
-          <mat-option value="Con parásitos visibles">Con parásitos visibles</mat-option>
+          @for (condition of physicalConditionList(); track condition) {
+            <mat-option [value]="condition">{{ condition }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </div>
@@ -63,13 +59,9 @@
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Comportamiento</mat-label>
         <mat-select formControlName="behavior">
-          <mat-option value="Acostado">Acostado</mat-option>
-          <mat-option value="De pie">De pie</mat-option>
-          <mat-option value="Sentado">Sentado</mat-option>
-          <mat-option value="Caminando">Caminando</mat-option>
-          <mat-option value="Asustado">Asustado</mat-option>
-          <mat-option value="Agresivo">Agresivo</mat-option>
-          <mat-option value="Descansando">Descansando</mat-option>
+          @for (behavior of behaviorList(); track behavior) {
+            <mat-option [value]="behavior">{{ behavior }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </div>
