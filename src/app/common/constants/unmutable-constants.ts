@@ -115,6 +115,12 @@ export abstract class UnmutableConstants {
   static readonly COMMUNITY_ANIMALS_URL: string = UnmutableConstants.COMMUNITY_ANIMALS;
 
   // ==================================================================
+  // ROUTES FOR ABANDONED ANIMALS SERVICES
+  // =================================================================
+  private static readonly ANIMALS_ABANDONED: string = '/animals/abandoned';
+  static readonly ANIMALS_ABANDONED_URL: string = UnmutableConstants.ANIMALS_ABANDONED;
+
+  // ==================================================================
   // ROUTES FOR SPECIES SERVICES
   // =================================================================
   private static readonly SPECIES: string = '/species';

@@ -14,6 +14,8 @@ export enum I18nMenuEnum {
   CREATE_MUNICIPALITY = I18nMenuEnum.MENU + '.createMunicipality',
   CREATE_USER = I18nMenuEnum.MENU + '.create-user',
   ANIMAL = I18nMenuEnum.MENU + '.animal',
+  ABANDONED_ANIMAL = "menu.abandonedAnimal",
+  CREATE_ABANDONED_ANIMAL = "menu.createAbandonedAnimal",
   CREATE_ANIMAL_PROFILE = I18nMenuEnum.MENU + '.create-animal-profile',
   LOGOUT = I18nMenuEnum.MENU + '.logout',
 }

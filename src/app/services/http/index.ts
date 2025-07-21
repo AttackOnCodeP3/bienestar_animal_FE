@@ -17,3 +17,6 @@ export * from "./species-http-service/species-http.service";
 export * from "./user-http-service/user-http.service";
 export * from "./forgot-pw-http-service/forgot-pw-http.service";
 export * from "./vaccine-http-service/vaccine-http.service";
+export * from "./abandoned-animal-http-service/abandoned-animal-http.service";
+
+
