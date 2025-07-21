@@ -213,8 +213,19 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   onSpeciesSelectionChange(species: Species) {
     this.vaccineHttpService.getBySpecies(species.id!);
     this.raceHttpService.getBySpeciesId(species.id!)
+
+    // clean the list of vaccines applied because the species has changed
+    this.resetFormAnimalVaccination()
   }
 
+  /**
+   * Resets the animal vaccination form.
+   * @author dgutierrez
+   */
+  private resetFormAnimalVaccination() {
+    this.formAnimalVaccination.reset();
+    this.vaccinesAppliedDates.set([]);
+  }
 
   /**
    * Gets the sanitary control response by its ID in the list of the sanitary control response service.

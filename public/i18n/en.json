@@ -108,7 +108,9 @@
       "maxlength": "Must be at most",
       "minlength": "Must be at least",
       "pattern": "Invalid format",
-      "required": "Required field"
+      "required": "Required field",
+      "min": "Debe ser mayor o igual a",
+      "max": "Debe ser menor o igual a"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -252,7 +254,8 @@
     "save": "Save",
     "updateMunicipality": "Update Municipality",
     "updateUser": "Update User",
-    "userManagement": "User Management"
+    "userManagement": "User Management",
+    "registerAnimal": "Register Animal"
   },
   "matSnackBarMessages": {
     "http": {

@@ -5,9 +5,8 @@ import {FormGroup, Validators} from '@angular/forms';
 import {ISanitaryControlForm} from '@common/interfaces/forms';
 import {Race, SanitaryControlResponse, SanitaryControlType, Sex, Species} from '@models';
 import {Subscription} from 'rxjs';
-import {SanitaryControlDto} from '../../../models/dto/animal/sanitary-control.dto';
 import {IVaccineApplied} from '@common/interfaces';
-import {VaccineApplicationDto} from '../../../models/dto/animal/vaccine-application.dto';
+import {VaccineApplicationDto, SanitaryControlDto} from '@models/dto';
 
 /**
  * Service for managing the community animal registration form.
@@ -35,12 +34,10 @@ export class CommunityAnimalRegistrationFormService {
    */
   buildSanitaryControlForm(): FormGroup<ISanitaryControlForm> {
     return this.formsService.formsBuilder.group({
-      productUsed: this.formsService.formsBuilder.control<string>('', {
-        nonNullable: true,
+      productUsed: this.formsService.formsBuilder.control<string | null>(null, {
         validators: [Validators.required],
       }),
-      lastApplicationDate: this.formsService.formsBuilder.control<Date>(new Date(), {
-        nonNullable: true,
+      lastApplicationDate: this.formsService.formsBuilder.control<Date | null>(null, {
         validators: [Validators.required],
       }),
       sanitaryControlResponse: this.formsService.formsBuilder.control<SanitaryControlResponse | null>(null, {
@@ -71,11 +68,17 @@ export class CommunityAnimalRegistrationFormService {
 
       if (productUsed) {
         productUsed.setValidators(isDisabled ? [] : [Validators.required]);
+        if (isDisabled) {
+          lastApplicationDate?.setValue(null);
+        }
         productUsed.updateValueAndValidity();
       }
 
       if (lastApplicationDate) {
         lastApplicationDate.setValidators(isDisabled ? [] : [Validators.required]);
+        if (isDisabled) {
+          productUsed?.setValue(null);
+        }
         lastApplicationDate.updateValueAndValidity();
       }
     });
@@ -138,7 +141,7 @@ export class CommunityAnimalRegistrationFormService {
         validators: [Validators.required],
       }),
       weight: this.formsService.formsBuilder.control<number>(0, {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.min(1)],
         nonNullable: true
       })
     });
