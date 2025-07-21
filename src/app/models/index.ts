@@ -14,4 +14,6 @@ export * from "./sex";
 export * from "./species";
 export * from "./user";
 export * from "./vaccine";
+export * from "./abandoned-animal";
+
 export * from "./model-3d-animal";

@@ -32,6 +32,7 @@ export const routes: Routes = [
             RolesEnum.MUNICIPAL_ADMIN,
             RolesEnum.VOLUNTEER_USER,
             RolesEnum.COMMUNITY_USER,
+          RolesEnum.CENSISTA_USER,
           ]),
         ],
         loadComponent: () =>
@@ -74,19 +75,14 @@ export const routes: Routes = [
       {
         path: RoutesUrlsEnum.ANIMAL,
         canActivate: [roleGuard([RolesEnum.COMMUNITY_USER])],
-        loadChildren: () =>
-          import('@pages/animal/animal.routes').then((m) => m.ANIMAL_ROUTES),
+        loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
       },
+
       {
-        path: RoutesUrlsEnum.MODEL_3D,
-        canActivate: [
-          roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.COMMUNITY_USER]),
-        ],
-        loadChildren: () =>
-          import('@pages/model-3d/model-3d.routes').then(
-            (m) => m.MODEL_3D_ROUTES
-          ),
+        path: RoutesUrlsEnum.ABANDONED_ANIMAL,
+        canActivate: [roleGuard([RolesEnum.CENSISTA_USER])],
+        loadChildren: () => import('@pages/abandoned-animal/abandoned-animal.routes').then(m => m.ABANDONED_ANIMAL_ROUTES),
       },
-    ],
-  },
+    ]
+  }
 ];

@@ -152,13 +152,25 @@ export class DashboardLayoutComponent {
         },
       ],
     },
+    {
+      icon: 'pets',
+      label: I18nMenuEnum.ABANDONED_ANIMAL,
+      authorities: [RolesEnum.CENSISTA_USER],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.CREATE_ABANDONED_ANIMAL,
+          route: `${RoutesUrlsEnum.ABANDONED_ANIMAL}/${RoutesUrlsEnum.CREATE_ABANDONED_ANIMAL}`,
+          authorities: [RolesEnum.CENSISTA_USER],
+          click: () => this.closeSidenav(),
+        }
+      ],
+    },
      {
       icon: 'view_in_ar',
       label: I18nMenuEnum.MODEL_3D,
       authorities: [
         RolesEnum.SUPER_ADMIN,
-        RolesEnum.MUNICIPAL_ADMIN,
-        RolesEnum.VOLUNTEER_USER,
         RolesEnum.COMMUNITY_USER,
       ],
       click: () => {},
@@ -168,8 +180,6 @@ export class DashboardLayoutComponent {
           route: `${RoutesUrlsEnum.MODEL_3D}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.MODEL_3D_LIST}`,
           authorities: [
             RolesEnum.SUPER_ADMIN,
-            RolesEnum.MUNICIPAL_ADMIN,
-            RolesEnum.VOLUNTEER_USER,
             RolesEnum.COMMUNITY_USER,
           ],
           click: () => this.closeSidenav(),
@@ -179,8 +189,6 @@ export class DashboardLayoutComponent {
           route: `${RoutesUrlsEnum.MODEL_3D}/${RoutesUrlsEnum.MODEL_3D_CREATE}`,
           authorities: [
             RolesEnum.SUPER_ADMIN,
-            RolesEnum.MUNICIPAL_ADMIN,
-            RolesEnum.VOLUNTEER_USER,
             RolesEnum.COMMUNITY_USER,
           ],
           click: () => this.closeSidenav(),
@@ -194,7 +202,7 @@ export class DashboardLayoutComponent {
       route: RoutesUrlsEnum.VOID_ROUTE,
       click: () => this.authHttpService.logout(),
       authorities: [...this.allRoles()],
-    },
+    }
   ]);
 
   /**
