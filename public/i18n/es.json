@@ -16,7 +16,8 @@
     "actions": "Acciones",
     "edit": "Editar",
     "delete": "Eliminar",
-    "roles": "Roles"
+    "roles": "Roles",
+    "hasThisControlBeenApplied": "¿Se ha aplicado este control?"
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
@@ -52,6 +53,21 @@
     "subtitle": "Enter your new password"
   },
 
+  "animal-basic-info-form-component": {
+    "title": "Información básica general"
+  },
+  "animal-deworming-form-component": {
+    "title": "Desparacitación"
+  },
+  "animal-flea-control-form-component": {
+    "title": "Control de pulgas"
+  },
+  "animal-neutering-form-component": {
+    "title": "Castración/Esterilización"
+  },
+  "animal-vaccination-form-component": {
+    "title": "Vacunación"
+  },
   "================== INPUT LABELS =====================": "",
   "inputs": {
     "labels": {
@@ -86,7 +102,9 @@
       "responsibleRole": "Cargo del responsable",
       "sex": "Sexo",
       "species": "Especie",
-      "status": "Estado"
+      "status": "Estado",
+      "productUsed": "Producto utilizado",
+      "applicationDate": "Fecha de aplicación"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -125,7 +143,10 @@
       "responsibleName": "Ingrese el nombre del responsable",
       "responsibleRole": "Ingrese el cargo del responsable",
       "species": "Seleccione la especie",
-      "status": "Seleccione el estado"
+      "status": "Seleccione el estado",
+      "sex": "Seleccione el sexo",
+      "productUsed": "Digite el producto utilizado",
+      "applicationDate": "Seleccione la fecha de aplicación"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -163,11 +184,15 @@
   "edit-user-page": {
     "title": "Editando usuario"
   },
+  "create-animal-profile-page": {
+    "title": "Creando perfil de animal"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
       "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados.",
-      "invalidIdToUpdate": "No fue posible encontrar los datos. Serás redirigido para intentarlo nuevamente."
+      "invalidIdToUpdate": "No fue posible encontrar los datos. Serás redirigido para intentarlo nuevamente.",
+      "locationNotAvailable": "La ubicación no está disponible."
     },
     "register-page": {
       "registeredSuccessfully": "Registrado exitosamente, por favor inicie sesión"

@@ -2,6 +2,7 @@ export * from "./animal-types-http-service/animal-types-http.service";
 export * from "./auth-http-service/auth-http.service";
 export * from "./base-http-service/base-http.service";
 export * from "./canton-http-service/canton-http.service";
+export * from "./community-animal-http-service/community-animal-http.service";
 export * from "./district-http-service/district-http.service";
 export * from "./interest-http-service/interest-http.service";
 export * from "./municipality-http-service/municipality-http.service";
