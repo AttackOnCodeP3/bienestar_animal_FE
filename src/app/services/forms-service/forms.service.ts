@@ -20,7 +20,7 @@ export class FormsService {
   private readonly logService = inject(LogService);
   private readonly i18nService = inject(I18nService)
 
-  matcher = new CustomErrorStateMatcher();
+  readonly matcher = new CustomErrorStateMatcher();
 
   /**
    * Maximum date allowed for date inputs, set to today.
@@ -77,6 +77,8 @@ export class FormsService {
       minlength,
       pattern,
       required,
+      min,
+      max,
     ] = await Promise.all([
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MUST_MATCH),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_EMAIL),
@@ -84,6 +86,8 @@ export class FormsService {
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MINLENGTH),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_PATTERN),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_REQUIRED),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MIN),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MAX),
     ]);
 
     this.errorMessages.set('mustMatch', () => mustMatch);
@@ -92,6 +96,8 @@ export class FormsService {
     this.errorMessages.set('minlength', type => `${minlength} {{requiredLength}} ${this.inputTextMap.get(type)}`);
     this.errorMessages.set('pattern', () => pattern);
     this.errorMessages.set('required', () => required);
+    this.errorMessages.set('min', type => `${min} {{min}}`);
+    this.errorMessages.set('max', type => `${max} {{max}}`);
   }
 
   /**

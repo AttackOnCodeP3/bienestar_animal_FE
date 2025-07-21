@@ -4,6 +4,12 @@
     @for (vac of vaccineList(); track vac.id) {
       <mat-list-option [value]="vac.id">{{ vac.name }}</mat-list-option>
     }
+    @let selectedVaccinesControl = form().get('selectedVaccines');
+    @if (formsService().isFieldInvalid(selectedVaccinesControl)) {
+      <mat-error>
+        {{ formsService().getErrorMessage(selectedVaccinesControl) }}
+      </mat-error>
+    }
   </mat-selection-list>
 
   @for (grp of vaccinesDatesGroups; track $index) {
@@ -18,11 +24,11 @@
           </mat-label>
           <input
             matInput
-            [matDatepicker]="matDatepicker"
             formControlName="applicationDate"
+            readonly
+            [matDatepicker]="matDatepicker"
             [errorStateMatcher]="formsService().matcher"
             [max]="formsService().maxTodayDate"
-            readonly
             [placeholder]="i18nService().i18nFormsEnum.APPLICATION_DATE_PLACEHOLDER | translate"
           />
           <mat-datepicker-toggle matIconSuffix [for]="matDatepicker"></mat-datepicker-toggle>
