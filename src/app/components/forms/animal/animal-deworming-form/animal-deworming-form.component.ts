@@ -23,7 +23,8 @@ import {fade} from '@animations/fade';
     MatFormField,
     MatError,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    TranslatePipe 
   ],
   templateUrl: './animal-deworming-form.component.html',
   styleUrl: './animal-deworming-form.component.scss',

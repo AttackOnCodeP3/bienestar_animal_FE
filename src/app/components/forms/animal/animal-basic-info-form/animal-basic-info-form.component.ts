@@ -7,6 +7,8 @@ import {Constants} from '@common/constants/constants';
 import {FormsService, I18nService} from '@services/general';
 import {Race, Sex, Species} from '@models';
 import {fade} from '@animations/fade';
+import {TranslatePipe} from '@ngx-translate/core';
+
 import {
   MatDatepicker,
   MatDatepickerInput,
@@ -33,7 +35,8 @@ import {
     MatDatepickerInput,
     MatDatepickerToggle,
     MatSuffix,
-    MatDatepickerModule
+    MatDatepickerModule,
+    TranslatePipe
   ],
   templateUrl: './animal-basic-info-form.component.html',
   styleUrl: './animal-basic-info-form.component.scss',
