@@ -1,11 +1,17 @@
 <form [formGroup]="form()">
-  <h4>¿Se ha aplicado este control?</h4>
+  <h4>{{ i18nService().i18nGeneralEnum.HAS_THIS_CONTROL_BEEN_APPLIED | translate }}</h4>
   <div class="mb-3">
     <mat-radio-group formControlName="sanitaryControlResponse" class="d-flex flex-column">
       @for (sanitaryControlResponse of sanitaryControlResponseList(); track sanitaryControlResponse.id) {
         <mat-radio-button class="mb-2" [value]="sanitaryControlResponse">
           {{ sanitaryControlResponse.name }}
         </mat-radio-button>
+      }
+      @let sanitaryControlResponseControl = form().get('sanitaryControlResponse');
+      @if (formsService().isFieldInvalid(sanitaryControlResponseControl)) {
+        <mat-error>
+          {{ formsService().getErrorMessage(sanitaryControlResponseControl) }}
+        </mat-error>
       }
     </mat-radio-group>
   </div>
@@ -15,32 +21,37 @@
 
       <div class="col-lg-4 mb-3">
         <mat-form-field appearance="outline" class="w-100">
-          <!--{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}-->
           <mat-label>
-            Nombre del producto
+            {{ i18nService().i18nFormsEnum.PRODUCT_USED_LABEL | translate }}
           </mat-label>
-          <!--[placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"-->
           <input
             type="text"
             matInput
             formControlName="productUsed"
+            [placeholder]="i18nService().i18nFormsEnum.PRODUCT_USED_PLACEHOLDER | translate"
             [errorStateMatcher]="formsService().matcher"
             />
           @let productUsedControl = form().get('productUsed');
           @if (formsService().isFieldInvalid(productUsedControl)) {
-            <mat-error>{{ formsService().getErrorMessage(productUsedControl) }}</mat-error>
+            <mat-error>
+              {{ formsService().getErrorMessage(productUsedControl) }}
+            </mat-error>
           }
         </mat-form-field>
       </div>
 
       <div class="col-lg-4 mb-3">
         <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Fecha de aplicación</mat-label>
+          <mat-label>
+            {{ i18nService().i18nFormsEnum.APPLICATION_DATE_LABEL | translate }}
+          </mat-label>
           <input
             matInput
-            [matDatepicker]="matDatepicker"
             formControlName="lastApplicationDate"
+            readonly
+            [matDatepicker]="matDatepicker"
             [errorStateMatcher]="formsService().matcher"
+            [placeholder]="i18nService().i18nFormsEnum.APPLICATION_DATE_PLACEHOLDER | translate"
             [max]="formsService().maxTodayDate"
           />
           <mat-datepicker-toggle matIconSuffix [for]="matDatepicker"></mat-datepicker-toggle>

@@ -1,7 +1,16 @@
+
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>{{ i18nService.i18nPagesEnum.CREATE_ANIMAL_PROFILE_PAGE_TITLE | translate }}</h1>
+  </div>
+</app-general-container-component>
+
 <mat-expansion-panel class="mb-4" expanded="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      <h1>Informacion basica general</h1>
+      <h2>
+        {{ i18nService.i18nComponentsEnum.ANIMAL_BASIC_INFO_FORM_TITLE | translate }}
+      </h2>
     </mat-panel-title>
   </mat-expansion-panel-header>
 
@@ -20,13 +29,16 @@
   <mat-expansion-panel class="mb-4" expanded="true" @fade>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <h2>Vacunación</h2>
+        <h2>
+          {{ i18nService.i18nComponentsEnum.ANIMAL_VACCINATION_FORM_TITLE | translate }}
+        </h2>
       </mat-panel-title>
     </mat-expansion-panel-header>
 
     <app-animal-vaccination-form
       (syncVaccinesDatesChange)="onSyncVaccinesDatesChange($event)"
       [formsService]="formsService"
+      [i18nService]="i18nService"
       [form]="formAnimalVaccination"
       [vaccineList]="vaccineHttpService.vaccineListBySpecies()"
     />
@@ -36,7 +48,9 @@
 <mat-expansion-panel class="mb-4" expanded="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      <h2>Desparasitación</h2>
+      <h2>
+        {{ i18nService.i18nComponentsEnum.ANIMAL_DEWORMING_FORM_TITLE | translate }}
+      </h2>
     </mat-panel-title>
   </mat-expansion-panel-header>
 
@@ -44,6 +58,7 @@
     [form]="formDeworming"
     [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
     [formsService]="formsService"
+    [i18nService]="i18nService"
     [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
 </mat-expansion-panel>
 
@@ -51,7 +66,7 @@
   <mat-expansion-panel-header>
     <mat-panel-title>
       <h2>
-        Castración / Esterilización
+        {{ i18nService.i18nComponentsEnum.ANIMAL_NEUTERING_FORM_TITLE | translate }}
       </h2>
     </mat-panel-title>
   </mat-expansion-panel-header>
@@ -60,6 +75,7 @@
     [form]="formNeutering"
     [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
     [formsService]="formsService"
+    [i18nService]="i18nService"
     [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
 </mat-expansion-panel>
 
@@ -67,7 +83,7 @@
   <mat-expansion-panel-header>
     <mat-panel-title>
       <h2>
-        Control de pulgas y garrapatas
+        {{ i18nService.i18nComponentsEnum.ANIMAL_FLEA_CONTROL_FORM_TITLE | translate }}
       </h2>
     </mat-panel-title>
   </mat-expansion-panel-header>
@@ -76,9 +92,12 @@
     [form]="formFleaAndTickControl"
     [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
     [formsService]="formsService"
+    [i18nService]="i18nService"
     [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
 </mat-expansion-panel>
 
 <div class="text-end mb-5" (click)="onSubmit()">
-  <button matButton="tonal">Registrar animal</button>
+  <button matButton="tonal">
+    {{ i18nService.i18nButtonsEnum.BUTTON_REGISTER_ANIMAL | translate }}
+  </button>
 </div>

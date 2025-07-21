@@ -15,6 +15,7 @@ export enum PagesUrlsEnum {
   LOGIN = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.LOGIN,
   REGISTER = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.REGISTER,
   FORGOT_PASSWORD = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.FORGOT_PASSWORD,
+  CHANGE_PASSWORD = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.CHANGE_PASSWORD,
   ACCESS_DENIED = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ACCESS_DENIED,
   COMPLETE_PROFILE = RoutesUrlsEnum.AUTH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLETE_PROFILE,
 

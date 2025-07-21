@@ -7,8 +7,8 @@ import {SanitaryControlResponse, SanitaryControlType} from '@models';
  * @author dgutierrez
  */
 export interface ISanitaryControlForm {
-  productUsed: FormControl<string>;
-  lastApplicationDate: FormControl<Date>;
+  productUsed: FormControl<string | null>;
+  lastApplicationDate: FormControl<Date | null>;
   sanitaryControlResponse: FormControl<SanitaryControlResponse | null>;
   /**
    * Type of sanitary control, such as vaccination, deworming, sterilization, etc.

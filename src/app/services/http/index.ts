@@ -2,6 +2,7 @@ export * from "./animal-types-http-service/animal-types-http.service";
 export * from "./auth-http-service/auth-http.service";
 export * from "./base-http-service/base-http.service";
 export * from "./canton-http-service/canton-http.service";
+export * from "./community-animal-http-service/community-animal-http.service";
 export * from "./district-http-service/district-http.service";
 export * from "./interest-http-service/interest-http.service";
 export * from "./municipality-http-service/municipality-http.service";
@@ -14,6 +15,7 @@ export * from "./sanitary-control-type-http-service/sanitary-control-type-http.s
 export * from "./sex-http-service/sex-http.service";
 export * from "./species-http-service/species-http.service";
 export * from "./user-http-service/user-http.service";
+export * from "./forgot-pw-http-service/forgot-pw-http.service";
 export * from "./vaccine-http-service/vaccine-http.service";
 export * from "./model-3d-animal-http-service/model-3d-animal-http.service";
 export * from "./model-3d-create-http.service/model-3d-create-http.service";

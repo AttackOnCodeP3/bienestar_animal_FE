@@ -1,8 +1,7 @@
-import { Routes } from '@angular/router';
-import { RolesEnum, RoutesUrlsEnum } from '@common/enums';
-import { authGuard, profileCompletedGuard, roleGuard } from '@core/guards';
+import {  Routes  } from '@angular/router';
+import {  RolesEnum, RoutesUrlsEnum  } from '@common/enums';
+import {  authGuard, profileCompletedGuard, roleGuard, forgotPasswordGuard   } from '@core/guards';
 import { DashboardLayoutComponent } from '@components/layout';
-import { MODEL_3D_ROUTES } from '@pages/model-3d/model-3d.routes';
 
 export const routes: Routes = [
   {
@@ -18,7 +17,7 @@ export const routes: Routes = [
   {
     path: RoutesUrlsEnum.DASHBOARD,
     component: DashboardLayoutComponent,
-    canActivate: [authGuard, profileCompletedGuard],
+    canActivate: [authGuard, profileCompletedGuard, forgotPasswordGuard],
     children: [
       {
         path: '',

@@ -1,16 +1,18 @@
 import {inject, Injectable} from '@angular/core';
-import { SanitaryControlResponseEnum } from '@common/enums';
+import {SanitaryControlResponseEnum} from '@common/enums';
 import {FormsService} from '@services/general';
 import {FormGroup, Validators} from '@angular/forms';
 import {ISanitaryControlForm} from '@common/interfaces/forms';
-import {SanitaryControlResponse, SanitaryControlType} from '@models';
+import {Race, SanitaryControlResponse, SanitaryControlType, Sex, Species} from '@models';
 import {Subscription} from 'rxjs';
+import {IVaccineApplied} from '@common/interfaces';
+import {VaccineApplicationDto, SanitaryControlDto} from '@models/dto';
 
 /**
  * Service for managing the community animal registration form.
  * @author dgutierrez
  */
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CommunityAnimalRegistrationFormService {
   readonly formsService = inject(FormsService)
 
@@ -32,12 +34,10 @@ export class CommunityAnimalRegistrationFormService {
    */
   buildSanitaryControlForm(): FormGroup<ISanitaryControlForm> {
     return this.formsService.formsBuilder.group({
-      productUsed: this.formsService.formsBuilder.control<string>('', {
-        nonNullable: true,
+      productUsed: this.formsService.formsBuilder.control<string | null>(null, {
         validators: [Validators.required],
       }),
-      lastApplicationDate: this.formsService.formsBuilder.control<Date>(new Date(), {
-        nonNullable: true,
+      lastApplicationDate: this.formsService.formsBuilder.control<Date | null>(null, {
         validators: [Validators.required],
       }),
       sanitaryControlResponse: this.formsService.formsBuilder.control<SanitaryControlResponse | null>(null, {
@@ -68,11 +68,17 @@ export class CommunityAnimalRegistrationFormService {
 
       if (productUsed) {
         productUsed.setValidators(isDisabled ? [] : [Validators.required]);
+        if (isDisabled) {
+          lastApplicationDate?.setValue(null);
+        }
         productUsed.updateValueAndValidity();
       }
 
       if (lastApplicationDate) {
         lastApplicationDate.setValidators(isDisabled ? [] : [Validators.required]);
+        if (isDisabled) {
+          productUsed?.setValue(null);
+        }
         lastApplicationDate.updateValueAndValidity();
       }
     });
@@ -98,5 +104,82 @@ export class CommunityAnimalRegistrationFormService {
     } else {
       form.get('sanitaryControlType')?.setValue(type);
     }
+  }
+
+  /**
+   * Builds the vaccination form for the animal profile.
+   * @author dgutierrez
+   */
+  buildVaccinationForm() {
+    return this.formsService.formsBuilder.group({
+      selectedVaccines: this.formsService.formsBuilder.control<number[]>([], {nonNullable: true}),
+      vaccinesDates: this.formsService.formsBuilder.array<FormGroup>([])
+    });
+  }
+
+  /**
+   * Builds the form for creating an animal profile.
+   * @author dgutierrez
+   */
+  buildCreateAnimalProfileForm() {
+    return this.formsService.formsBuilder.group({
+      name: this.formsService.formsBuilder.control('', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      species: this.formsService.formsBuilder.control<Species | null>(null, {
+        validators: [Validators.required],
+      }),
+      race: this.formsService.formsBuilder.control<Race | null>(null, {
+        validators: [Validators.required],
+      }),
+      birthDate: this.formsService.formsBuilder.control<Date | null>(null, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      sex: this.formsService.formsBuilder.control<Sex | null>(null, {
+        validators: [Validators.required],
+      }),
+      weight: this.formsService.formsBuilder.control<number>(0, {
+        validators: [Validators.required, Validators.min(1)],
+        nonNullable: true
+      })
+    });
+  }
+
+  /**
+   * Builds the vaccine application DTO from the applied vaccines.
+   * @param appliedVaccines An array of applied vaccines.
+   * @return An array of VaccineApplicationDto objects.
+   * @author dgutierrez
+   */
+  buildVaccineAppliedDto(appliedVaccines: IVaccineApplied[]): VaccineApplicationDto[] {
+    return appliedVaccines.map((vaccine) => VaccineApplicationDto.fromIVaccineApplied(vaccine));
+  }
+
+  buildSanitaryControlDto(sanitaryControlForm: FormGroup): SanitaryControlDto {
+    return new SanitaryControlDto({
+      lastApplicationDate: sanitaryControlForm.get('lastApplicationDate')?.value ?? null,
+      productUsed: sanitaryControlForm.get('productUsed')?.value ?? null,
+      sanitaryControlTypeId: sanitaryControlForm.get('sanitaryControlType')?.value?.id ?? null,
+      sanitaryControlResponseId: sanitaryControlForm.get('sanitaryControlResponse')?.value?.id ?? null,
+    });
+  }
+
+  /**
+   * Resets the sanitary control form to its initial state. Saves the current sanitary control type
+   * and restores it after resetting the form.
+   * @param form The form to reset.
+   * @author dgutierrez
+   */
+  resetSanitaryControlForm(form: FormGroup): void {
+    //first save the current sanitary control type
+    const sanitaryControlType = form.get('sanitaryControlType')?.value;
+
+    //reset the form because, this cleans the validators and doesn't show the error messages
+    form.reset();
+
+    //then set the sanitary control type back
+    form.get('sanitaryControlType')?.setValue(sanitaryControlType);
   }
 }

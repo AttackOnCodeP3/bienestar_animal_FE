@@ -1,3 +1,4 @@
+export * from "./animal";
 export * from "./animal-type";
 export * from "./canton";
 export * from "./district";

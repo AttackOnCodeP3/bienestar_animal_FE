@@ -12,9 +12,17 @@ export enum I18nPagesEnum {
   USER_MANAGEMENT_PAGE = 'user-management-page',
   CREATE_USER_PAGE = 'create-user-page',
   EDIT_USER_PAGE = 'edit-user-page',
+  CREATE_ANIMAL_PROFILE_PAGE = 'create-animal-profile-page',
+
   // Login page
   LOGIN_PAGE_TITLE = I18nPagesEnum.LOGIN_PAGE + '.title',
   LOGIN_PAGE_OR_REGISTER_WITH = I18nPagesEnum.LOGIN_PAGE + '.orRegisterWith',
+
+  // Forgot Password page
+  FORGOT_PASSWORD_PAGE = 'forgot-password-page',
+  FORGOT_PASSWORD_PAGE_TITLE = I18nPagesEnum.FORGOT_PASSWORD_PAGE + '.title',
+  FORGOT_PASSWORD_PAGE_SUBTITLE = I18nPagesEnum.FORGOT_PASSWORD_PAGE + '.subtitle',
+
 
   // Register page
   REGISTER_PAGE_TITLE = I18nPagesEnum.REGISTER_PAGE + '.title',
@@ -37,4 +45,7 @@ export enum I18nPagesEnum {
 
   // Edit User page
   EDIT_USER_PAGE_TITLE = I18nPagesEnum.EDIT_USER_PAGE + '.title',
+
+  // Animal Profile page
+  CREATE_ANIMAL_PROFILE_PAGE_TITLE = I18nPagesEnum.CREATE_ANIMAL_PROFILE_PAGE + '.title',
 }
