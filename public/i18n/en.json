@@ -110,7 +110,7 @@
       "pattern": "Invalid format",
       "required": "Required field",
       "min": "Must be greater than or equal to",
-      "max": "Debe ser menor o igual a"
+      "max": "Must be less than or equal to"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
