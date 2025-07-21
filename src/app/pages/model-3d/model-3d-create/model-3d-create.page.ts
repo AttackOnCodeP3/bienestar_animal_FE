@@ -9,10 +9,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
-import {TranslatePipe} from '@ngx-translate/core';
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {PagesUrlsEnum} from '@common/enums';
 import { AlertTypeEnum } from '@common/enums';
+import { ImageUploadHttpService } from 'app/services/http/image-upload-http.service.ts/image-upload-http.service';
 
 
 
@@ -27,19 +27,19 @@ import { AlertTypeEnum } from '@common/enums';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    TranslatePipe,
     GeneralContainerComponent,
-    MatIcon
   ]
 })
 export class Model3DCreatePage implements OnInit {
   form: FormGroup;
   animals: { id: number, name: string }[] = [];
   selectedImage: File | null = null;
+imageError: string | null = null;
   isSubmitting = false;
 
   private readonly fb = inject(FormBuilder);
   private readonly model3dService = inject(Model3DCreateHttpService);
+    private readonly imageUploadService = inject(ImageUploadHttpService);
   private readonly alertService = inject(AlertService);
   readonly formsService = inject(FormsService);
 
@@ -53,30 +53,53 @@ export class Model3DCreatePage implements OnInit {
       image: [null, Validators.required]
     });
   }
+    
 
   ngOnInit() {
     this.model3dService.loadMyAnimals();
   }
 
-  onImageChange(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0] || null;
-    this.selectedImage = file;
-    this.form.patchValue({ image: file });
-    this.form.get('image')?.updateValueAndValidity();
+  onImageChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      if (!file.type.startsWith('image/')) {
+        this.imageError = 'Solo se permiten archivos de imagen.';
+        this.selectedImage = null;
+        return;
+      }
+      this.selectedImage = file;
+      this.imageError = null;
+      this.form.get('image')?.setValue(file);
+    } else {
+      this.selectedImage = null;
+      this.imageError = 'Debe seleccionar una imagen.';
+      this.form.get('image')?.setValue(null);
+    }
   }
-submit() {
+
+submit(): void {
   if (this.form.invalid || !this.selectedImage) {
-    this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Por favor complete todos los campos.' });
+    this.alertService.displayAlert({
+      type: AlertTypeEnum.ERROR,
+      messageKey: 'Por favor complete todos los campos.'
+    });
     return;
   }
   this.isSubmitting = true;
-  const formData = new FormData();
-  formData.append('animalId', this.form.value.animalId);
-  // Only append if not null
-  if (this.selectedImage) {
-    formData.append('image', this.selectedImage);
-  }
-  this.model3dService.createModel3D(formData);
-  this.isSubmitting = false;
+  this.imageUploadService.uploadImage(
+    this.selectedImage,
+    (url: string) => {
+      this.model3dService.createModel3DTaskV25(this.form.value.animalId, url);
+      this.isSubmitting = false;
+    },
+    () => {
+      this.alertService.displayAlert({
+        type: AlertTypeEnum.ERROR,
+        messageKey: 'Error subiendo la imagen.'
+      });
+      this.isSubmitting = false;
+    }
+  );
 }
 }

@@ -23,7 +23,7 @@ export class Model3DCreateHttpService {
           this.animals.set(res.data);
           this.loadingAnimals.set(false);
         },
-        error: (err: any) => { // <-- add ': any'
+        error: (err: any) => { 
   this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Error cargando animales' });
           this.animals.set([]);
           this.loadingAnimals.set(false);
@@ -39,10 +39,33 @@ export class Model3DCreateHttpService {
         next: () => {
           this.createSuccess.set(true);
 this.alertService.displayAlert({ type: AlertTypeEnum.SUCCESS, messageKey: 'Modelo 3D enviado correctamente.' });        },
-        error: (err: any) => { // <-- add ': any'
+        error: (err: any) => { 
           this.createError.set('Error creando modelo 3D');
 this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Error creando modelo 3D' });        }
       });
   }
+
+createModel3DTaskV25(animalId: number, imageUrl: string) {
+  const params = new URLSearchParams();
+  params.set('animal_id', animalId.toString());
+  params.set('image_url', imageUrl);
+
+  this.createSuccess.set(false);
+  this.createError.set(null);
+  this.http.post(
+    `${this.baseUrl}/model3d-animal/createTaskV25?${params.toString()}`,
+    null // No body, params go in URL
+  ).subscribe({
+    next: () => {
+      this.createSuccess.set(true);
+      this.alertService.displayAlert({ type: AlertTypeEnum.SUCCESS, messageKey: 'Modelo 3D enviado correctamente.' });
+    },
+    error: (err: any) => {
+      this.createError.set('Error creando modelo 3D');
+      this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Error creando modelo 3D' });
+    }
+  });
+}
+
 
 }

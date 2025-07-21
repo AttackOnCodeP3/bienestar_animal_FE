@@ -1,7 +1,6 @@
 import {Component, input, output} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel, MatSuffix} from '@angular/material/input';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {TranslatePipe} from '@ngx-translate/core';
 import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect, MatSelectChange} from '@angular/material/select';
 import {Constants} from '@common/constants/constants';
@@ -28,7 +27,6 @@ import {
     MatInput,
     MatLabel,
     ReactiveFormsModule,
-    TranslatePipe,
     MatOption,
     MatSelect,
     MatDatepicker,

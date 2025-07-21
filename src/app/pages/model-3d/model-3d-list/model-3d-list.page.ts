@@ -29,9 +29,7 @@ import { Model3DCreateHttpService } from '@services/http/model-3d-animal-http-se
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    TranslatePipe,
     GeneralContainerComponent,
-    MatIcon,
     GlbViewerComponent,
   ],
 })

@@ -20,7 +20,6 @@ import {fade} from '@animations/fade';
     ReactiveFormsModule,
     MatRadioGroup,
     MatRadioButton,
-    TranslatePipe,
     MatFormField,
     MatError,
     MatInputModule,
