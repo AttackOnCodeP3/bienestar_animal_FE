@@ -6,21 +6,21 @@ import { LogoBienestarAnimalComponent } from "@components/icons";
 
 /**
  * Component responsible for handling the change password functionality.
- * 
+ *
  * This component displays the UI for users to change their password.
  * It utilizes the `PasswordResetComponent` for the password reset form
  * and the `LogoBienestarAnimalComponent` for branding.
- * 
+ *
  * @author @aBlancoC
  */
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss'],
-  standalone: true, 
+  standalone: true,
   imports: [PasswordResetComponent, LogoBienestarAnimalComponent]
 })
-export class ChangePassword {
+export class ChangePasswordPage {
  readonly i18nService = inject(I18nService);
 
   private readonly alertService = inject(AlertService)

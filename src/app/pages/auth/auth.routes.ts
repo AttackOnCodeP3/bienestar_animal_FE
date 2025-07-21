@@ -42,7 +42,7 @@ export const AUTH_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.CHANGE_PASSWORD,
-    loadComponent: () => import('@pages/auth/change-password/change-password.page').then(m => m.ChangePassword),
+    loadComponent: () => import('@pages/auth/change-password/change-password.page').then(m => m.ChangePasswordPage),
   },
   {
     path: RoutesUrlsEnum.SOCIAL_CALLBACK,
