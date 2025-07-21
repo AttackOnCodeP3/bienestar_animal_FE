@@ -20,18 +20,18 @@ export class CreateAbandonedAnimalRequestDTO {
   canton: number | null;
 
   constructor(values: Partial<CreateAbandonedAnimalRequestDTO> = {}) {
-    this.species = values.species ?? null;
-    this.sex = values.sex ?? null;
-    this.estimatedAge = values.estimatedAge ?? null;
-    this.physicalCondition = values.physicalCondition ?? null;
-    this.behavior = values.behavior ?? null;
-    this.district = values.district ?? null;
-    this.neighborhood = values.neighborhood ?? null;
-    this.observations = values.observations ?? null;
-    this.latitude = values.latitude ?? null;
-    this.longitude = values.longitude ?? null;
-    this.photoBase64 = values.photoBase64 ?? null;
-    this.canton = values.canton ?? null;
+    this.species = values.species ??= null;
+    this.sex = values.sex ??= null;
+    this.estimatedAge = values.estimatedAge ??= null;
+    this.physicalCondition = values.physicalCondition ??= null;
+    this.behavior = values.behavior ??= null;
+    this.district = values.district ??= null;
+    this.neighborhood = values.neighborhood ??= null;
+    this.observations = values.observations ??= null;
+    this.latitude = values.latitude ??= null;
+    this.longitude = values.longitude ??= null;
+    this.photoBase64 = values.photoBase64 ??= null;
+    this.canton = values.canton ??= null;
   }
 
   static fromAbandonedAnimal(animal: Partial<AbandonedAnimal>): CreateAbandonedAnimalRequestDTO {

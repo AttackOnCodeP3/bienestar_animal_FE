@@ -18,17 +18,17 @@ export class AbandonedAnimal {
   photoBase64?: string | null;
 
   constructor(values: Partial<AbandonedAnimal> = {}) {
-    this.id = values.id ?? null;
-    this.species = values.species ?? null;
-    this.sex = values.sex ?? null;
-    this.estimatedAge = values.estimatedAge ?? null;
-    this.physicalCondition = values.physicalCondition ?? null;
-    this.behavior = values.behavior ?? null;
-    this.district = values.district ?? null;
-    this.neighborhood = values.neighborhood ?? null;
-    this.observations = values.observations ?? null;
-    this.latitude = values.latitude ?? null;
-    this.longitude = values.longitude ?? null;
-    this.photoBase64 = values.photoBase64 ?? null;
+    this.id = values.id ??= null;
+    this.species = values.species ??= null;
+    this.sex = values.sex ??= null;
+    this.estimatedAge = values.estimatedAge ??= null;
+    this.physicalCondition = values.physicalCondition ??= null;
+    this.behavior = values.behavior ??= null;
+    this.district = values.district ??= null;
+    this.neighborhood = values.neighborhood ??= null;
+    this.observations = values.observations ??= null;
+    this.latitude = values.latitude ??= null;
+    this.longitude = values.longitude ??= null;
+    this.photoBase64 = values.photoBase64 ??= null;
   }
 }
