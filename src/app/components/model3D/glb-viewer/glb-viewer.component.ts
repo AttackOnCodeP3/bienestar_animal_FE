@@ -19,7 +19,7 @@ import { I18nService } from '@services/general';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Model3DCreateHttpService, Model3DAnimalHttpService } from '@services/http';
 /**component for 3D model visalization
- * @autor nav
+ * @author nav
  * */
 
 @Component({
