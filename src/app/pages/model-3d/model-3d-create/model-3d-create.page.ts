@@ -2,7 +2,7 @@ import { Component, OnInit, inject, effect } from '@angular/core';
 import { GeneralContainerComponent } from '@components/layout';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; 
 import {
   FormControl,
   ReactiveFormsModule,
@@ -19,6 +19,7 @@ import { PagesUrlsEnum } from '@common/enums';
 import { AlertTypeEnum } from '@common/enums';
 import {ImageUploadHttpService, Model3DCreateHttpService} from '@services/http';
 
+
 @Component({
   selector: 'app-model-3d-create',
   templateUrl: './model-3d-create.page.html',
@@ -31,6 +32,7 @@ import {ImageUploadHttpService, Model3DCreateHttpService} from '@services/http';
     MatSelectModule,
     MatButtonModule,
     GeneralContainerComponent,
+    MatIcon 
   ],
 })
 export class Model3DCreatePage implements OnInit {
@@ -45,6 +47,8 @@ export class Model3DCreatePage implements OnInit {
   private readonly imageUploadService = inject(ImageUploadHttpService);
   private readonly alertService = inject(AlertService);
   readonly formsService = inject(FormsService);
+  private readonly router = inject(Router);
+
 
   private readonly animalsEffect = effect(() => {
     this.animals = this.model3dService.animals();
@@ -103,5 +107,8 @@ export class Model3DCreatePage implements OnInit {
         this.isSubmitting = false;
       }
     );
+  }
+  navigateToListModel3D() {
+    this.router.navigate([PagesUrlsEnum.MODEL_3D_LIST]);
   }
 }
