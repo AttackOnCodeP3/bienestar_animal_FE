@@ -49,7 +49,6 @@ export class PasswordResetComponent {
   private readonly authHttpService = inject(AuthHttpService);
   readonly loading = signal(false);
   readonly submitted = signal(false);
-  submitted = signal(false);
   passwordResetForm = this.createPasswordResetForm();
 
   createPasswordResetForm(): FormGroup {
