@@ -109,8 +109,8 @@
       "minlength": "Must be at least",
       "pattern": "Invalid format",
       "required": "Required field",
-      "min": "Debe ser mayor o igual a",
-      "max": "Debe ser menor o igual a"
+      "min": "Must be greater than or equal to",
+      "max": "Must be less than or equal to"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
