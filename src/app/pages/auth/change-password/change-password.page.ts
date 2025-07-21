@@ -23,7 +23,7 @@ import { LogoBienestarAnimalComponent } from "@components/icons";
 export class ChangePassword {
  readonly i18nService = inject(I18nService);
 
-  constructor(private alertService: AlertService) {}
+  private readonly alertService = inject(AlertService)
 
 
 }
