@@ -15,9 +15,12 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Constants } from '@common/constants/constants';
-import { Model3DAnimalHttpService } from 'app/services/http/model-3d-animal-http-service/model-3d-animal.service';
 import { I18nService } from '@services/general';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Model3DCreateHttpService, Model3DAnimalHttpService } from '@services/http';
+/**component for 3D model visalization
+ * @autor nav
+ * */
 
 @Component({
   selector: 'app-glb-viewer',
@@ -27,35 +30,12 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: Constants.changeDetectionStrategy,
 })
 export class GlbViewerComponent implements OnInit, OnDestroy {
-  /**
-   * Animal ID to load the 3D model from database
-   * @author nav
-   */
   readonly animalId = input<number>();
-  /**
-   * Width of the viewer container
-   * @author nav
-   */
   readonly width = input<string>('100%');
-  /**
-   * Height of the viewer container
-   * @author nav
-   */
   readonly height = input<string>('100%');
-  /**
-   * Enable or disable auto-rotation
-   * @author nav
-   */
   readonly autoRotate = input<boolean>(true);
-  /**
-   * Show loading indicator
-   * @author nav
-   */
   isLoading = true;
-  /**
-   * Error message if loading fails
-   * @author nav
-   */
+
   errorMessage: string | null = null;
   private readonly canvas = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
   private scene!: THREE.Scene;
@@ -67,7 +47,7 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
   private currentModelUrl: string | null = null;
   readonly model3DAnimalHttpService = inject(Model3DAnimalHttpService);
   readonly i18nService = inject(I18nService);
-  
+
   constructor() {
     effect(() => {
       if (this.animalId() && this.scene) {
@@ -79,7 +59,9 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
       if (model3D?.urlModelo && this.scene) {
         this.loadGLBModel(model3D.urlModelo);
       } else if (model3D && !model3D.urlModelo && this.animalId()) {
-        this.errorMessage = this.i18nService.instant(this.i18nService.i18nModel3DEnum.NO_MODEL_AVAILABLE);
+        this.errorMessage = this.i18nService.instant(
+          this.i18nService.i18nModel3DEnum.NO_MODEL_AVAILABLE
+        );
         this.isLoading = false;
       }
     });
@@ -115,9 +97,7 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
   private loadModelFromDatabase(): void {
     this.isLoading = true;
     this.errorMessage = null;
-    // Limpiar modelo anterior
     this.clearScene();
-    // Cargar desde la base de datos
     this.model3DAnimalHttpService.getByAnimalId(this.animalId()!);
   }
   /**
@@ -257,7 +237,7 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
             child.material.color.g < 0.1 &&
             child.material.color.b < 0.1
           ) {
-            child.material.color.setRGB(0, 0, 0); // Forzar negro puro
+            child.material.color.setRGB(0, 0, 0);
           }
         }
       }
@@ -272,8 +252,11 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
    */ private onModelError(error: any): void {
     console.error('Error loading GLB model:', error);
     const i18nKeys = this.i18nService.i18nModel3DEnum;
-    
-    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+
+    if (
+      error instanceof TypeError &&
+      error.message.includes('Failed to fetch')
+    ) {
       this.errorMessage = this.i18nService.instant(i18nKeys.CORS_ERROR);
     } else if (
       error.message?.includes('NetworkError') ||
@@ -287,13 +270,12 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
     } else if (error.status === 500) {
       this.errorMessage = this.i18nService.instant(i18nKeys.SERVER_ERROR);
     } else {
-      this.errorMessage = `${this.i18nService.instant(i18nKeys.UNKNOWN_ERROR)}: ${
-        error.message || this.i18nService.instant(i18nKeys.UNKNOWN_ERROR)
-      }`;
+      this.errorMessage = `${this.i18nService.instant(
+        i18nKeys.UNKNOWN_ERROR
+      )}: ${error.message || this.i18nService.instant(i18nKeys.UNKNOWN_ERROR)}`;
     }
     this.isLoading = false;
   }
-
 
   /**
    * Fit model to scene by calculating bounding box and adjusting scale/position

@@ -8,22 +8,21 @@ describe('GlbViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GlbViewerComponent]
-    })
-    .compileComponents();
+      imports: [GlbViewerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GlbViewerComponent);
     component = fixture.componentInstance;
-    
+
     const mockCanvas = document.createElement('canvas');
     mockCanvas.width = 800;
     mockCanvas.height = 600;
-    
+
     Object.defineProperty(component, 'canvas', {
       value: () => ({ nativeElement: mockCanvas }),
-      writable: true
+      writable: true,
     });
-    
+
     fixture.detectChanges();
   });
 
@@ -48,7 +47,7 @@ describe('GlbViewerComponent', () => {
   it('should accept custom width and height', () => {
     fixture.componentRef.setInput('width', '500px');
     fixture.componentRef.setInput('height', '300px');
-    
+
     expect(component.width()).toBe('500px');
     expect(component.height()).toBe('300px');
   });
@@ -67,7 +66,7 @@ describe('GlbViewerComponent', () => {
   it('should display error message when errorMessage is set', () => {
     component.errorMessage = 'Test error message';
     fixture.detectChanges();
-    
+
     const compiled = fixture.nativeElement;
     const errorElement = compiled.querySelector('.error-overlay');
     expect(errorElement).toBeTruthy();
@@ -77,7 +76,7 @@ describe('GlbViewerComponent', () => {
   it('should hide loading when isLoading is false', () => {
     component.isLoading = false;
     fixture.detectChanges();
-    
+
     const compiled = fixture.nativeElement;
     const loadingElement = compiled.querySelector('.loading-overlay');
     expect(loadingElement).toBeFalsy();
@@ -94,10 +93,10 @@ describe('GlbViewerComponent', () => {
     fixture.componentRef.setInput('width', '600px');
     fixture.componentRef.setInput('height', '500px');
     fixture.detectChanges();
-    
+
     const compiled = fixture.nativeElement;
     const containerElement = compiled.querySelector('.glb-viewer-container');
-    
+
     expect(containerElement.style.width).toBe('600px');
     expect(containerElement.style.height).toBe('500px');
   });

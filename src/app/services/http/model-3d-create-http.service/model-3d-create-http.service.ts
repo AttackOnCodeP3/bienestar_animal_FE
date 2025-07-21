@@ -2,13 +2,16 @@ import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from '@services/general';
 import { AlertTypeEnum } from '@common/enums';
+import { Constants } from '@common/constants/constants'; 
 
 
 @Injectable({ providedIn: 'root' })
 export class Model3DCreateHttpService {
-  private readonly baseUrl = 'http://localhost:8080';
+  private readonly baseUrl = Constants.appHost;
   private readonly http = inject(HttpClient);
   private readonly alertService = inject(AlertService);
+  private readonly createTaskV25Endpoint = '/model3d-animal/createTaskV25';
+  private readonly communityAnimalsMine = '/community-animals/mine';
 
   readonly animals = signal<{ id: number, name: string }[]>([]);
   readonly loadingAnimals = signal(false);
@@ -17,14 +20,14 @@ export class Model3DCreateHttpService {
 
   loadMyAnimals() {
     this.loadingAnimals.set(true);
-    this.http.get<{ data: { id: number, name: string }[] }>(`${this.baseUrl}/community-animals/mine`)
+    this.http.get<{ data: { id: number, name: string }[] }>(`${this.baseUrl}${this.communityAnimalsMine}`)
       .subscribe({
         next: res => {
           this.animals.set(res.data);
           this.loadingAnimals.set(false);
         },
-        error: (err: any) => { 
-  this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Error cargando animales' });
+        error: (err: any) => {
+        this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Error cargando animales' });
           this.animals.set([]);
           this.loadingAnimals.set(false);
         }
@@ -34,7 +37,7 @@ export class Model3DCreateHttpService {
   createModel3D(formData: FormData) {
     this.createSuccess.set(false);
     this.createError.set(null);
-    this.http.post(`${this.baseUrl}/model3d-animal/createTaskV25`, formData)
+    this.http.post(`${this.baseUrl}${this.createTaskV25Endpoint}`, formData)
       .subscribe({
         next: () => {
           this.createSuccess.set(true);
@@ -54,7 +57,7 @@ createModel3DTaskV25(animalId: number, imageUrl: string) {
   this.createError.set(null);
   this.http.post(
     `${this.baseUrl}/model3d-animal/createTaskV25?${params.toString()}`,
-    null // No body, params go in URL
+    null 
   ).subscribe({
     next: () => {
       this.createSuccess.set(true);
@@ -66,6 +69,4 @@ createModel3DTaskV25(animalId: number, imageUrl: string) {
     }
   });
 }
-
-
 }

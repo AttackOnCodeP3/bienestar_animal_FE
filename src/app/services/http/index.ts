@@ -15,4 +15,6 @@ export * from "./sex-http-service/sex-http.service";
 export * from "./species-http-service/species-http.service";
 export * from "./user-http-service/user-http.service";
 export * from "./vaccine-http-service/vaccine-http.service";
-export * from "./model-3d-animal-http-service/model-3d-animal.service";
+export * from "./model-3d-animal-http-service/model-3d-animal-http.service";
+export * from "./model-3d-create-http.service/model-3d-create-http.service";
+export * from "./image-upload-http-service.ts/image-upload-http.service";

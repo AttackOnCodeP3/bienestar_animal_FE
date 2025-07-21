@@ -14,9 +14,11 @@
             {{ animal.name }}
           </mat-option>
         </mat-select>
-        @let animalIdControl = form.get('animalId');
-        @if (formsService.isFieldInvalid(animalIdControl)) {
-          <mat-error>{{ formsService.getErrorMessage(animalIdControl) }}</mat-error>
+        @let animalIdControl = form.get('animalId'); @if
+        (formsService.isFieldInvalid(animalIdControl)) {
+        <mat-error
+          >{{ formsService.getErrorMessage(animalIdControl) }}</mat-error
+        >
         }
       </mat-form-field>
     </div>
@@ -32,11 +34,11 @@
         accept="image/*"
         required
         class="form-control"
-        style="padding: 0.5rem 0.75rem;"
+        style="padding: 0.5rem 0.75rem"
       />
       <small class="text-muted mt-1">Formatos permitidos: JPG, PNG, GIF.</small>
       @if (imageError) {
-        <mat-error class="mt-1">{{ imageError }}</mat-error>
+      <mat-error class="mt-1">{{ imageError }}</mat-error>
       }
     </div>
   </div>
