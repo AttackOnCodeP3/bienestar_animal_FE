@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
   templateUrl: './model-3d-list.page.html',
   styleUrls: ['./model-3d-list.page.scss'],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: Constants.changeDetectionStrategy
   imports: [
     CommonModule,
     ReactiveFormsModule,
