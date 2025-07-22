@@ -83,6 +83,13 @@ export const routes: Routes = [
         canActivate: [roleGuard([RolesEnum.CENSISTA_USER])],
         loadChildren: () => import('@pages/abandoned-animal/abandoned-animal.routes').then(m => m.ABANDONED_ANIMAL_ROUTES),
       },
+   {
+      path: RoutesUrlsEnum.MODEL_3D,
+      canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.COMMUNITY_USER])],
+      loadChildren: () =>
+        import('@pages/model-3d/model-3d.routes').then((m) => m.MODEL_3D_ROUTES),
+    },
+
     ]
   }
 ];
