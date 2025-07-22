@@ -70,8 +70,9 @@ export class App {
       preferredLanguage.startsWith(lang.code)
     );
 
-    const languageCode = matchedLanguage ? matchedLanguage.code : LanguagesEnum.SPANISH;
-
+    //The default language is hardcoded to Spanish as per the request to remove the requirement.
+    //const languageCode = matchedLanguage ? matchedLanguage.code : LanguagesEnum.SPANISH;
+    const languageCode = LanguagesEnum.SPANISH; // Default to Spanish
     this.translateService.use(languageCode).subscribe(() => {
       this.i18nService.setPreferenceLanguage(this.i18nService.getPreferenceLanguageByCode(languageCode) || null);
       this.logService.debug({

@@ -7,6 +7,12 @@
           {{ sanitaryControlResponse.name }}
         </mat-radio-button>
       }
+      @let sanitaryControlResponseControl = form().get('sanitaryControlResponse');
+      @if (formsService().isFieldInvalid(sanitaryControlResponseControl)) {
+        <mat-error>
+          {{ formsService().getErrorMessage(sanitaryControlResponseControl) }}
+        </mat-error>
+      }
     </mat-radio-group>
   </div>
 
@@ -39,8 +45,9 @@
           </mat-label>
           <input
             matInput
-            [matDatepicker]="matDatepicker"
             formControlName="lastApplicationDate"
+            readonly
+            [matDatepicker]="matDatepicker"
             [errorStateMatcher]="formsService().matcher"
             [max]="formsService().maxTodayDate"
             [placeholder]="i18nService().i18nFormsEnum.APPLICATION_DATE_PLACEHOLDER | translate"

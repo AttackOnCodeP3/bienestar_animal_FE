@@ -38,7 +38,7 @@ export abstract class UnmutableConstants {
   static readonly AUTH_SIGN_UP_URL: string = UnmutableConstants.AUTH_URL + '/signup'
   static readonly AUTH_SOCIAL_SUCCESS_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/success'
   static readonly AUTH_SOCIAL_COMPLETE_USER_PROFILE_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/complete-profile'
-  static readonly REQUEST_PASSWORD_CHANGE_URL: string ='/requestPasswordChange'
+  static readonly REQUEST_PASSWORD_CHANGE_URL: string = '/requestPasswordChange'
   static readonly URL_AUTH_WITH_GOOGLE: string = "http://localhost:8080/oauth2/authorization/google"
 
   // ==================================================================
@@ -46,6 +46,8 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly USERS: string = '/users'
   static readonly USERS_URL: string = UnmutableConstants.USERS;
+  static readonly FORGOT_PASSWORD_URL: string = UnmutableConstants.USERS + '/password/forgot-password';
+  static readonly CHANGE_PASSWORD_URL: string = UnmutableConstants.USERS + '/password/password-reset';
 
   // ==================================================================
   // ROUTES FOR ADMIN SERVICES
@@ -113,6 +115,12 @@ export abstract class UnmutableConstants {
   static readonly COMMUNITY_ANIMALS_URL: string = UnmutableConstants.COMMUNITY_ANIMALS;
 
   // ==================================================================
+  // ROUTES FOR ABANDONED ANIMALS SERVICES
+  // =================================================================
+  private static readonly ANIMALS_ABANDONED: string = '/animals/abandoned';
+  static readonly ANIMALS_ABANDONED_URL: string = UnmutableConstants.ANIMALS_ABANDONED;
+
+  // ==================================================================
   // ROUTES FOR SPECIES SERVICES
   // =================================================================
   private static readonly SPECIES: string = '/species';
@@ -148,4 +156,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly SANITARY_CONTROL_TYPES: string = '/sanitary-control-types';
   static readonly SANITARY_CONTROL_TYPES_URL: string = UnmutableConstants.SANITARY_CONTROL_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL 3D ANIMAL SERVICES
+  // =================================================================
+  private static readonly MODEL_3D_ANIMAL: string = '/model3d-animal'
+  static readonly MODEL_3D_ANIMAL_URL: string = UnmutableConstants.MODEL_3D_ANIMAL;
 }

@@ -1,13 +1,14 @@
 import {Component, input, output} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel, MatSuffix} from '@angular/material/input';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {TranslatePipe} from '@ngx-translate/core';
 import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect, MatSelectChange} from '@angular/material/select';
 import {Constants} from '@common/constants/constants';
 import {FormsService, I18nService} from '@services/general';
 import {Race, Sex, Species} from '@models';
 import {fade} from '@animations/fade';
+import {TranslatePipe} from '@ngx-translate/core';
+
 import {
   MatDatepicker,
   MatDatepickerInput,
@@ -28,14 +29,14 @@ import {
     MatInput,
     MatLabel,
     ReactiveFormsModule,
-    TranslatePipe,
     MatOption,
     MatSelect,
     MatDatepicker,
     MatDatepickerInput,
     MatDatepickerToggle,
     MatSuffix,
-    MatDatepickerModule
+    MatDatepickerModule,
+    TranslatePipe
   ],
   templateUrl: './animal-basic-info-form.component.html',
   styleUrl: './animal-basic-info-form.component.scss',

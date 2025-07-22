@@ -12,6 +12,8 @@
   "================== COMPONENT LABELS ==================": "",
   "menu": {
     "animal": "Animal",
+    "abandonedAnimal": "Abandoned Animal",
+    "createAbandonedAnimal": "Create Abandoned Animal",
     "create-animal-profile": "Create Animal Profile",
     "create-user": "Create User",
     "createMunicipality": "Create Municipality",
@@ -20,6 +22,7 @@
     "logout": "Logout",
     "municipalities": "Municipality Management",
     "reports": "Reports",
+    "model-3d": "3D Model",
     "user-management": "User Management",
     "viewMunicipalities": "View Municipalities"
   },
@@ -48,6 +51,11 @@
     "title": "Volunteer",
     "description": "If you wish to be a volunteer, please indicate if you want to and if so, select the municipality where you would like to offer your services."
   },
+  "reset-password-component": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password"
+  },
+
   "animal-basic-info-form-component": {
     "title": "Basic General Information"
   },
@@ -108,7 +116,9 @@
       "maxlength": "Must be at most",
       "minlength": "Must be at least",
       "pattern": "Invalid format",
-      "required": "Required field"
+      "required": "Required field",
+      "min": "Must be greater than or equal to",
+      "max": "Must be less than or equal to"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -156,6 +166,11 @@
     "title": "Complete your profile",
     "subtitle": "Please complete your profile to continue"
   },
+  "forgot-password-page": {
+    "title": "Recover Password",
+    "subtitle": "Enter your email to recover your password"
+  },
+
   "user-management-page": {
     "title": "User Management"
   },
@@ -235,7 +250,7 @@
   },
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
-    "alreadyHaveAnAccount": "¿Already have an account?",
+    "alreadyHaveAnAccount": "Already have an account?",
     "close": "Close",
     "closeSession": "Close Session",
     "completeProfile": "Complete Profile",
@@ -250,9 +265,11 @@
     "register": "Register",
     "registerNow": "Register Now",
     "save": "Save",
+    "send": "Send",
     "updateMunicipality": "Update Municipality",
     "updateUser": "Update User",
-    "userManagement": "User Management"
+    "userManagement": "User Management",
+    "registerAnimal": "Register Animal"
   },
   "matSnackBarMessages": {
     "http": {
@@ -292,5 +309,42 @@
   "AdmFoto_1": "Photo not found",
   "badCredentialsException": "Incorrect username or password",
   "AdmUser_1_Usuario": "The indicated user already exists",
-  "AdmAnimal_0_Usuario": "Error added to test responses with BLException from Bienestar Animal"
+  "AdmAnimal_0_Usuario": "Error added to test responses with BLException from Bienestar Animal",
+  "================== MODEL 3D ==================": "",
+  "model3D": {
+    "title": "3D Model",
+    "subtitle": "3D Model Viewer",
+    "description": "Interactive viewer for animal 3D models",
+    "loadingModel": "Loading 3D model...",
+    "loadingProgress": "Loading progress",
+    "noModelAvailable": "No 3D model available for this animal",
+    "modelNotFound": "3D model not found",
+    "errors": {
+      "corsError": "CORS error: The server does not allow loading this model from this domain. Use a CORS-compatible URL.",
+      "networkError": "Network or CORS error: Verify that the model URL is accessible and allows cross-origin requests.",
+      "notFoundError": "Model not found (404). Verify that the URL is correct.",
+      "connectionError": "Connection error. Check your internet connection or verify that the URL is accessible.",
+      "serverError": "Server error. Please try again later.",
+      "unknownError": "Unknown error loading the 3D model",
+      "animalIdRequired": "Animal ID is required to load the 3D model",
+      "modelIdRequired": "Model ID is required for the operation"
+    },
+    "actions": {
+      "loadModel": "Load Model",
+      "reloadModel": "Reload Model",
+      "toggleRotation": "Toggle Rotation",
+      "resetView": "Reset View"
+    },
+    "status": {
+      "loadingFromDatabase": "Loading model from database...",
+      "loadingFromUrl": "Loading model from URL...",
+      "modelLoadedSuccessfully": "Model loaded successfully"
+    },
+    "generation": {
+      "generateModel": "Generate 3D Model",
+      "generatingModel": "Generating 3D model...",
+      "modelGeneratedSuccessfully": "3D model generated successfully",
+      "generationFailed": "Failed to generate 3D model"
+    }
+  }
 }

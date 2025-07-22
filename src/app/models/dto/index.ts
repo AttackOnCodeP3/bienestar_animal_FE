@@ -1,4 +1,6 @@
 export * from "./animal/create-animal-request.dto";
+export * from "./animal/sanitary-control.dto";
+export * from "./animal/vaccine-application.dto";
 export * from "./generic/age.dto";
 export * from "./municipality/create-municipality-request.dto";
 export * from "./municipality/update-municipality-status-request.dto";

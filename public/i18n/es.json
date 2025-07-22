@@ -22,6 +22,8 @@
   "================== COMPONENT LABELS ==================": "",
   "menu": {
     "animal": "Animal",
+    "abandonedAnimal": "Animal abandonado",
+    "createAbandonedAnimal": "Crear animal abandonado",
     "create-animal-profile": "Crear perfil de animal",
     "create-user": "Crear usuario",
     "createMunicipality": "Crear municipalidad",
@@ -31,7 +33,10 @@
     "municipalities": "Gestión de municipalidades",
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
-    "viewMunicipalities": "Ver municipalidades"
+    "viewMunicipalities": "Ver municipalidades",
+     "model-3d": "Modelo 3D",
+      "viewModel3D": "Ver modelos 3D",
+      "createModel3D": "Crear modelo 3D"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
@@ -48,6 +53,11 @@
     "title": "Voluntario",
     "description": "Si desea ser voluntario, por favor indique si lo desea y si es así, seleccione la municipalidad donde quisiera prestar sus servicios."
   },
+  "reset-password-component": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password"
+  },
+
   "animal-basic-info-form-component": {
     "title": "Información básica general"
   },
@@ -103,12 +113,14 @@
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
-      "mustMatch": "Las contraseñas no coincide",
+      "mustMatch": "Las contraseñas no coinciden",
       "email": "Debe ser un correo electrónico válido",
       "maxlength": "Debe tener máximo",
       "minlength": "Debe tener al menos",
       "pattern": "El formato no es correcto",
-      "required": "Campo requerido"
+      "required": "Campo requerido",
+      "min": "Debe ser mayor o igual a",
+      "max": "Debe ser menor o igual a"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -156,6 +168,11 @@
     "title": "Complete su perfil",
     "subtitle": "Por favor complete su perfil para continuar"
   },
+  "forgot-password-page": {
+    "title": "Recuperar contraseña",
+    "subtitle": "Ingrese su correo electrónico para recuperar su contraseña"
+  },
+
   "user-management-page": {
     "title": "Gestión de usuarios"
   },
@@ -255,10 +272,12 @@
     "noAccount": "¿No tiene una cuenta?",
     "register": "Registrar",
     "registerNow": "Regístrate ahora",
+    "send": "Enviar",
     "save": "Guardar",
     "updateMunicipality": "Actualizar municipalidad",
     "updateUser": "Actualizar usuario",
-    "userManagement": "Gestión de usuarios"
+    "userManagement": "Gestión de usuarios",
+    "registerAnimal": "Registrar animal"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {
@@ -299,5 +318,42 @@
   "AdmFoto_1": "Foto no encontrada",
   "badCredentialsException": "Usuario o contraseña incorrectos",
   "AdmUsuario_1_Usuario": "El usuario indicado ya existe",
-  "AdmCiudadano_0_Usuario": "Error agregado para probar las respuestas con BLException desde Bienestar Animal"
+  "AdmCiudadano_0_Usuario": "Error agregado para probar las respuestas con BLException desde Bienestar Animal",
+  "================== MODEL 3D ==================": "",
+  "model3D": {
+    "title": "Modelo 3D",
+    "subtitle": "Visualizador de Modelos 3D",
+    "description": "Visor interactivo para modelos 3D de animales",
+    "loadingModel": "Cargando modelo 3D...",
+    "loadingProgress": "Progreso de carga",
+    "noModelAvailable": "No hay modelo 3D disponible para este animal",
+    "modelNotFound": "Modelo 3D no encontrado",
+    "errors": {
+      "corsError": "Error de CORS: El servidor no permite cargar este modelo desde este dominio. Usa una URL compatible con CORS.",
+      "networkError": "Error de red o CORS: Verifica que la URL del modelo sea accesible y permita solicitudes cross-origin.",
+      "notFoundError": "Modelo no encontrado (404). Verifica que la URL sea correcta.",
+      "connectionError": "Error de conexión. Verifica tu conexión a internet o que la URL sea accesible.",
+      "serverError": "Error del servidor. Por favor intente nuevamente más tarde.",
+      "unknownError": "Error desconocido al cargar el modelo 3D",
+      "animalIdRequired": "Se requiere el ID del animal para cargar el modelo 3D",
+      "modelIdRequired": "Se requiere el ID del modelo 3D para la operación"
+    },
+    "actions": {
+      "loadModel": "Cargar Modelo",
+      "reloadModel": "Recargar Modelo",
+      "toggleRotation": "Alternar Rotación",
+      "resetView": "Restablecer Vista"
+    },
+    "status": {
+      "loadingFromDatabase": "Cargando modelo desde la base de datos...",
+      "loadingFromUrl": "Cargando modelo desde URL...",
+      "modelLoadedSuccessfully": "Modelo cargado exitosamente"
+    },
+    "generation": {
+      "generateModel": "Generar Modelo 3D",
+      "generatingModel": "Generando modelo 3D...",
+      "modelGeneratedSuccessfully": "Modelo 3D generado exitosamente",
+      "generationFailed": "Error al generar el modelo 3D"
+    }
+  }
 }

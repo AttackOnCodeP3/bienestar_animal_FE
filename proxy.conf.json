@@ -1,0 +1,15 @@
+{
+  "/api/fal-media/*": {
+    "target": "https://v3.fal.media",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/fal-media": ""
+    },
+    "headers": {
+      "Origin": "https://v3.fal.media",
+      "Referer": "https://v3.fal.media"
+    }
+  }
+}
