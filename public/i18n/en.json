@@ -12,6 +12,8 @@
   "================== COMPONENT LABELS ==================": "",
   "menu": {
     "animal": "Animal",
+    "abandonedAnimal": "Abandoned Animal",
+    "createAbandonedAnimal": "Create Abandoned Animal",
     "create-animal-profile": "Create Animal Profile",
     "create-user": "Create User",
     "createMunicipality": "Create Municipality",
@@ -48,6 +50,11 @@
     "title": "Volunteer",
     "description": "If you wish to be a volunteer, please indicate if you want to and if so, select the municipality where you would like to offer your services."
   },
+  "reset-password-component": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password"
+  },
+
   "animal-basic-info-form-component": {
     "title": "Basic General Information"
   },
@@ -158,6 +165,11 @@
     "title": "Complete your profile",
     "subtitle": "Please complete your profile to continue"
   },
+  "forgot-password-page": {
+    "title": "Recover Password",
+    "subtitle": "Enter your email to recover your password"
+  },
+
   "user-management-page": {
     "title": "User Management"
   },
@@ -252,6 +264,7 @@
     "register": "Register",
     "registerNow": "Register Now",
     "save": "Save",
+    "send": "Send",
     "updateMunicipality": "Update Municipality",
     "updateUser": "Update User",
     "userManagement": "User Management",

@@ -1,6 +1,6 @@
-import {Routes} from '@angular/router';
-import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
-import {authGuard, profileCompletedGuard, roleGuard} from '@core/guards';
+import { Routes } from '@angular/router';
+import { RolesEnum, RoutesUrlsEnum } from '@common/enums';
+import { authGuard, profileCompletedGuard, roleGuard, forgotPasswordGuard  } from '@core/guards';
 import {DashboardLayoutComponent} from '@components/layout';
 
 export const routes: Routes = [
@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: RoutesUrlsEnum.DASHBOARD,
     component: DashboardLayoutComponent,
-    canActivate: [authGuard, profileCompletedGuard],
+    canActivate: [authGuard, profileCompletedGuard, forgotPasswordGuard],
     children: [
       {
         path: '',
@@ -30,6 +30,7 @@ export const routes: Routes = [
           RolesEnum.MUNICIPAL_ADMIN,
           RolesEnum.VOLUNTEER_USER,
           RolesEnum.COMMUNITY_USER,
+          RolesEnum.CENSISTA_USER,
         ])],
         loadComponent: () => import('@pages/home/home.page').then(m => m.HomePage),
       },
@@ -63,7 +64,13 @@ export const routes: Routes = [
         path: RoutesUrlsEnum.ANIMAL,
         canActivate: [roleGuard([RolesEnum.COMMUNITY_USER])],
         loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
-      }
+      },
+
+      {
+        path: RoutesUrlsEnum.ABANDONED_ANIMAL,
+        canActivate: [roleGuard([RolesEnum.CENSISTA_USER])],
+        loadChildren: () => import('@pages/abandoned-animal/abandoned-animal.routes').then(m => m.ABANDONED_ANIMAL_ROUTES),
+      },
     ]
   }
 ];

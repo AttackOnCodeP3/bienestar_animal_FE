@@ -38,7 +38,7 @@ export abstract class UnmutableConstants {
   static readonly AUTH_SIGN_UP_URL: string = UnmutableConstants.AUTH_URL + '/signup'
   static readonly AUTH_SOCIAL_SUCCESS_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/success'
   static readonly AUTH_SOCIAL_COMPLETE_USER_PROFILE_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/complete-profile'
-  static readonly REQUEST_PASSWORD_CHANGE_URL: string ='/requestPasswordChange'
+  static readonly REQUEST_PASSWORD_CHANGE_URL: string = '/requestPasswordChange'
   static readonly URL_AUTH_WITH_GOOGLE: string = "http://localhost:8080/oauth2/authorization/google"
 
   // ==================================================================
@@ -46,6 +46,8 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly USERS: string = '/users'
   static readonly USERS_URL: string = UnmutableConstants.USERS;
+  static readonly FORGOT_PASSWORD_URL: string = UnmutableConstants.USERS + '/forgot-password';
+  static readonly CHANGE_PASSWORD_URL: string = UnmutableConstants.USERS + '/password-reset';
 
   // ==================================================================
   // ROUTES FOR ADMIN SERVICES
@@ -111,6 +113,12 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly COMMUNITY_ANIMALS: string = '/community-animals';
   static readonly COMMUNITY_ANIMALS_URL: string = UnmutableConstants.COMMUNITY_ANIMALS;
+
+  // ==================================================================
+  // ROUTES FOR ABANDONED ANIMALS SERVICES
+  // =================================================================
+  private static readonly ANIMALS_ABANDONED: string = '/animals/abandoned';
+  static readonly ANIMALS_ABANDONED_URL: string = UnmutableConstants.ANIMALS_ABANDONED;
 
   // ==================================================================
   // ROUTES FOR SPECIES SERVICES
