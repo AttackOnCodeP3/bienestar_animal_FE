@@ -34,7 +34,6 @@ import {BehaviorEnum} from '@common/enums/tables/behavior.enum';
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
-    TranslatePipe,
     GeneralContainerComponent,
     LocationFormComponent
   ],
