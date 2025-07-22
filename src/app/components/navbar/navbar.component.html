@@ -7,9 +7,6 @@
     }
     <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
     <div class="d-flex flex-grow-1 justify-content-end">
-      <button mat-icon-button [matMenuTriggerFor]="languageMenu">
-        <mat-icon class="icon-color-scheme">{{ i18n.currentLanguage()?.icon }}</mat-icon>
-      </button>
       <button mat-icon-button [matMenuTriggerFor]="themeMenu">
         <mat-icon class="icon-color-scheme">{{ theme.selectedTheme()?.icon }}</mat-icon>
       </button>
@@ -24,18 +21,6 @@
       >
         <mat-icon>{{ themeItem.icon }}</mat-icon>
         <span>{{ themeItem.label | translate }}</span>
-      </button>
-    }
-  </mat-menu>
-  <mat-menu #languageMenu>
-    @for (languageItem of i18n.supportedLanguages(); track languageItem.label) {
-      <button
-        [class.selected-language]="i18n.currentLanguage()?.label === languageItem.label"
-        mat-menu-item
-        (click)="i18n.setPreferenceLanguage(languageItem)"
-      >
-        <mat-icon>{{ languageItem.icon }}</mat-icon>
-        <span>{{ languageItem.label | translate }}</span>
       </button>
     }
   </mat-menu>
