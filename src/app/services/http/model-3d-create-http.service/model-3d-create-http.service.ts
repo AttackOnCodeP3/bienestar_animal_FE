@@ -10,8 +10,8 @@ export class Model3DCreateHttpService {
   private readonly baseUrl = Constants.appHost;
   private readonly http = inject(HttpClient);
   private readonly alertService = inject(AlertService);
-  private readonly createTaskV25Endpoint = '/model3d-animal/createTaskV25';
-  private readonly communityAnimalsMine = '/community-animals/mine';
+  private readonly createTaskV25Endpoint = Constants.createTaskV25;
+  private readonly communityAnimalsMine = Constants.communityAnimalsMine;
 
   readonly animals = signal<{ id: number, name: string }[]>([]);
   readonly loadingAnimals = signal(false);

@@ -25,6 +25,8 @@ import { AlertService, FormsService } from '@services/general';
 import { PagesUrlsEnum } from '@common/enums';
 import { Model3DCreateHttpService } from '@services/http';
 import { Router } from '@angular/router';
+import { Constants } from '@common/constants/constants';
+
 
 
 @Component({
@@ -32,7 +34,7 @@ import { Router } from '@angular/router';
   templateUrl: './model-3d-list.page.html',
   styleUrls: ['./model-3d-list.page.scss'],
   standalone: true,
-  changeDetection: Constants.changeDetectionStrategy
+  changeDetection: Constants.changeDetectionStrategy,
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -25,4 +25,14 @@ export class Constants extends UnmutableConstants {
    * Used for debugging purposes
    */
   static readonly debugMode: boolean = true
+  /**
+   * Endpoint for create 3D Model
+   * @author nav
+   */
+  static readonly createTaskV25: string = '/model3d-animal/createTaskV25';
+
+  /**
+   * Endpoint to get the animals related to the user connected
+   */
+  static readonly communityAnimalsMine: string  = '/community-animals/mine';
 }
