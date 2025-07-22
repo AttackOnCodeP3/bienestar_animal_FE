@@ -156,4 +156,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly SANITARY_CONTROL_TYPES: string = '/sanitary-control-types';
   static readonly SANITARY_CONTROL_TYPES_URL: string = UnmutableConstants.SANITARY_CONTROL_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL 3D ANIMAL SERVICES
+  // =================================================================
+  private static readonly MODEL_3D_ANIMAL: string = '/model3d-animal'
+  static readonly MODEL_3D_ANIMAL_URL: string = UnmutableConstants.MODEL_3D_ANIMAL;
 }

@@ -10,3 +10,4 @@ export * from "./i18n-messages.enum";
 export * from "./i18n-pages-validations.enum";
 export * from "./i18n-pages.enum";
 export * from "./i18n-tables.enum";
+export * from "./i18n-model3d.enum";
