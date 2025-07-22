@@ -134,7 +134,7 @@ export class Model3DAnimalHttpService extends BaseHttpService<Model3DAnimal> {
     if (!model3D.id) {
       this.alertService.displayAlert({
         type: AlertTypeEnum.ERROR,
-        messageKey: '3D Model ID is required for update',
+        message '3D Model ID is required for update',
       });
       return;
     }

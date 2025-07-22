@@ -27,7 +27,7 @@ export class Model3DCreateHttpService {
           this.loadingAnimals.set(false);
         },
         error: (err: any) => {
-        this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Error cargando animales' });
+        this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'error.loadingAnimals' });
           this.animals.set([]);
           this.loadingAnimals.set(false);
         }
