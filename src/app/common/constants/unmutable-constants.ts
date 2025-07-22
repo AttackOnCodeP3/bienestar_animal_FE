@@ -115,6 +115,12 @@ export abstract class UnmutableConstants {
   static readonly COMMUNITY_ANIMALS_URL: string = UnmutableConstants.COMMUNITY_ANIMALS;
 
   // ==================================================================
+  // ROUTES FOR ABANDONED ANIMALS SERVICES
+  // =================================================================
+  private static readonly ANIMALS_ABANDONED: string = '/animals/abandoned';
+  static readonly ANIMALS_ABANDONED_URL: string = UnmutableConstants.ANIMALS_ABANDONED;
+
+  // ==================================================================
   // ROUTES FOR SPECIES SERVICES
   // =================================================================
   private static readonly SPECIES: string = '/species';
@@ -150,4 +156,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly SANITARY_CONTROL_TYPES: string = '/sanitary-control-types';
   static readonly SANITARY_CONTROL_TYPES_URL: string = UnmutableConstants.SANITARY_CONTROL_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL 3D ANIMAL SERVICES
+  // =================================================================
+  private static readonly MODEL_3D_ANIMAL: string = '/model3d-animal'
+  static readonly MODEL_3D_ANIMAL_URL: string = UnmutableConstants.MODEL_3D_ANIMAL;
 }
