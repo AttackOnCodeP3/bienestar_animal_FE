@@ -101,19 +101,16 @@ export class RegisterPage implements OnInit {
       this.userRegistrationFormService.volunteerIntent()
     );
 
-    this.authHttpService.registerUser(registerUserRequestDTO).subscribe({
-      next: () => {
-        this.alertService.displayAlert({
-          messageKey: this.i18nService.i18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
-          type: AlertTypeEnum.SUCCESS
-        });
-        this.userRegistrationFormService.formUserRegistration.reset()
-        this.navigateToLogin();
-      },
-      error: (error) => {
-        this.alertService.displayAlert({message: error.error.description});
-      }
+    this.authHttpService.registerUser2(registerUserRequestDTO, this.callBackAfterRegister.bind(this))
+  }
+
+  private callBackAfterRegister() {
+    this.alertService.displayAlert({
+      messageKey: this.i18nService.i18nPagesValidationsEnum.REGISTER_PAGE_REGISTERED_SUCCESSFULLY,
+      type: AlertTypeEnum.SUCCESS
     });
+    this.userRegistrationFormService.formUserRegistration.reset();
+    this.navigateToLogin();
   }
 
   /**

@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import {Constants} from '@common/constants/constants';
 import {ILoginResponse} from '@common/interfaces/http';
-import {RolesEnum} from '@common/enums';
-import {LogService, StorageService} from '@services/general';
+import {AlertTypeEnum, RolesEnum} from '@common/enums';
+import {AlertService, LogService, StorageService} from '@services/general';
 import {User} from '@models';
 import {RegisterUserRequestDTO, CompleteProfileRequestDTO} from '@models/dto';
 
@@ -17,6 +17,7 @@ export class AuthHttpService {
   private readonly httpClient = inject(HttpClient);
   private readonly logService = inject(LogService)
   private readonly storageService = inject(StorageService);
+  private readonly alertService = inject(AlertService);
 
   private readonly userSignal = signal<User>(new User({ email: '', authorities: [] }));
   private readonly accessTokenSignal = signal<string | null>(null);
@@ -101,6 +102,20 @@ export class AuthHttpService {
    */
   registerUser(registerUserRequestDTO: RegisterUserRequestDTO): Observable<ILoginResponse> {
     return this.httpClient.post<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_SIGN_UP_URL, registerUserRequestDTO);
+  }
+
+  registerUser2(registerUserRequestDTO: RegisterUserRequestDTO, callBack?: VoidFunction) {
+    return this.httpClient.post<ILoginResponse>(Constants.apiBaseUrl + Constants.AUTH_SIGN_UP_URL, registerUserRequestDTO).subscribe({
+      next: (response: ILoginResponse) => {
+        if (callBack) {
+          callBack();
+        }
+      },
+      error: this.handleError({
+        message: 'Ocurrió un error al registrar el animal comunitario',
+        context: `${this.constructor.name}#registerCommunityAnimal`,
+      }),
+    })
   }
 
   /**
@@ -209,5 +224,45 @@ export class AuthHttpService {
         lineBreak: true
       });
     }));
+  }
+
+  /**
+   * Handles errors from HTTP requests and displays an alert.
+   * @param message
+   * @param context
+   * @author dgutierrez
+   */
+  private handleError(
+    {
+      message,
+      context = 'HTTP Error',
+    }: {
+      message: string;
+      context?: string;
+    }): (err: any) => void {
+    return (err: any) => {
+      console.error(`${context}:`, err);
+
+      let finalMessage = message;
+
+      // Error thrown from interceptor as `throw new Error(...)`
+      if (err instanceof Error && err.message) {
+        finalMessage = err.message;
+        // Structured backend error: { mensaje: '...' }
+      } else if (err?.mensaje) {
+        finalMessage = err.mensaje;
+        // Angular HTTP error with error.mensaje
+      } else if (err?.error?.mensaje) {
+        finalMessage = err.error.mensaje;
+        // Error como string simple
+      } else if (typeof err === 'string') {
+        finalMessage = err;
+      }
+
+      this.alertService.displayAlert({
+        type: AlertTypeEnum.ERROR,
+        messageKey: finalMessage,
+      });
+    };
   }
 }
