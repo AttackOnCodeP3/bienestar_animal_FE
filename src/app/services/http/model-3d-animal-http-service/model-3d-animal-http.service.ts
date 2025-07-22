@@ -130,29 +130,29 @@ export class Model3DAnimalHttpService extends BaseHttpService<Model3DAnimal> {
    * @returns void
    * @author nav
    */
-  update(model3D: Model3DAnimal): void {
-    if (!model3D.id) {
-      this.alertService.displayAlert({
-        type: AlertTypeEnum.ERROR,
-        message '3D Model ID is required for update',
-      });
-      return;
-    }
-
-    this.edit(model3D.id, model3D).subscribe({
-      next: (response) => {
-        this.alertService.displayAlert({
-          type: AlertTypeEnum.SUCCESS,
-          messageKey: response.message,
-        });
-        this.getAll();
-      },
-      error: this.handleError({
-        message: 'An error occurred updating the 3D model',
-        context: `${this.constructor.name}#update`,
-      }),
+ update(model3D: Model3DAnimal): void {
+  if (!model3D.id) {
+    this.alertService.displayAlert({
+      type: AlertTypeEnum.ERROR,
+      message: '3D Model ID is required for update',
     });
+    return;
   }
+
+  this.edit(model3D.id, model3D).subscribe({
+    next: (response) => {
+      this.alertService.displayAlert({
+        type: AlertTypeEnum.SUCCESS,
+        messageKey: response.message,
+      });
+      this.getAll();
+    },
+    error: this.handleError({
+      message: 'An error occurred updating the 3D model',
+      context: `${this.constructor.name}#update`,
+    }),
+  });
+}
 
   /**
    * Deletes a 3D model by its ID.
