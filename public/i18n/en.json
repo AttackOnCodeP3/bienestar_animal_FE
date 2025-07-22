@@ -30,7 +30,8 @@
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete",
-    "roles": "Roles"
+    "roles": "Roles",
+    "hasThisControlBeenApplied": "Has this control been applied?"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
@@ -46,6 +47,21 @@
   "volunteer-option-form-component": {
     "title": "Volunteer",
     "description": "If you wish to be a volunteer, please indicate if you want to and if so, select the municipality where you would like to offer your services."
+  },
+  "animal-basic-info-form-component": {
+    "title": "Basic General Information"
+  },
+  "animal-deworming-form-component": {
+    "title": "Deworming"
+  },
+  "animal-flea-control-form-component": {
+    "title": "Flea Control"
+  },
+  "animal-neutering-form-component": {
+    "title": "Neutering/Sterilization"
+  },
+  "animal-vaccination-form-component": {
+    "title": "Vaccination"
   },
   "================== INPUT LABELS =====================": "",
   "inputs": {
@@ -81,7 +97,9 @@
       "responsibleRole": "Responsible Role",
       "sex": "Sex",
       "species": "Species",
-      "status": "Status"
+      "status": "Status",
+      "productUsed": "Product Used",
+      "applicationDate": "Application Date"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -120,7 +138,10 @@
       "responsibleName": "Enter the name of the responsible",
       "responsibleRole": "Enter the position of the responsible",
       "species": "Select species",
-      "status": "Select status"
+      "status": "Select status",
+      "sex": "Seleccione el sexo",
+      "productUsed": "Enter product used",
+      "applicationDate": "Enter application date"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -156,11 +177,15 @@
     "title": "Creating Municipality",
     "municipalityCreatedSuccessfully": "Municipality created successfully"
   },
+  "create-animal-profile-page": {
+    "title": "Creating Animal Profile"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
       "invalidFields": "There are invalid fields. Please check the entered data.",
-      "invalidIdToUpdate": "Unable to find the data. You will be redirected to try again."
+      "invalidIdToUpdate": "Unable to find the data. You will be redirected to try again.",
+      "locationNotAvailable": "Location not available."
     },
     "register-page": {
       "registeredSuccessfully": "Successfully registered, please log in"
@@ -173,8 +198,8 @@
       "roleRequired": "Role is required"
     },
     "create-animal-profile-page": {
-      "animalProfileCreatedSuccessfully": "Perfil de animal creado exitosamente",
-      "animalProfileVaccinationRequired": "El perfil del animal requiere al menos indicar una vacunación"
+      "animalProfileCreatedSuccessfully": "Animal profile created successfully",
+      "animalProfileVaccinationRequired": "Vaccination is required for the animal profile"
     }
   },
   "================== MATERIAL ==================": "",

@@ -7,7 +7,7 @@ import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
 import {MatError, MatFormField} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 import {SanitaryControlResponseEnum} from '@common/enums';
-import {FormsService} from '@services/general';
+import {FormsService, I18nService} from '@services/general';
 import {Constants} from '@common/constants/constants';
 import {SanitaryControlResponse} from '@models';
 import {CommunityAnimalRegistrationFormService} from '@services/forms';
@@ -33,10 +33,11 @@ import {fade} from '@animations/fade';
   changeDetection: Constants.changeDetectionStrategy
 })
 export class AnimalDewormingFormComponent {
-  readonly form = input.required<FormGroup>();
-  readonly formsService = input.required<FormsService>()
-  readonly sanitaryControlResponseList = input.required<SanitaryControlResponse[]>()
   readonly communityAnimalRegistrationFormService = input.required<CommunityAnimalRegistrationFormService>();
+  readonly form = input.required<FormGroup>();
+  readonly formsService = input.required<FormsService>();
+  readonly i18nService = input.required<I18nService>();
+  readonly sanitaryControlResponseList = input.required<SanitaryControlResponse[]>();
 
   get sanitaryControlResponseValueId() {
     return this.form().get('sanitaryControlResponse')?.value?.id

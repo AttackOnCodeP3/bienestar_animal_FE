@@ -2,13 +2,12 @@
   <div class="row">
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <!--{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}-->
-        <mat-label>Nombre</mat-label>
-        <!--[placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"-->
+        <mat-label>{{ i18nService().i18nFormsEnum.NAME_LABEL | translate }}</mat-label>
         <input
           type="text"
           matInput
           formControlName="name"
+          [placeholder]="i18nService().i18nFormsEnum.NAME_PLACEHOLDER | translate"
           [errorStateMatcher]="formsService().matcher"
           />
         @let nameControl = form().get('name');
@@ -20,11 +19,15 @@
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <!--{{ i18nService().i18nFormsEnum.CANTON_LABEL | translate }}-->
         <mat-label>
-          Especie
+          {{ i18nService().i18nFormsEnum.SPECIES_LABEL | translate }}
         </mat-label>
-        <mat-select formControlName="species" [compareWith]="formsService().genericCompare" (selectionChange)="onSpeciesChange($event)">
+        <mat-select
+          [placeholder]="i18nService().i18nFormsEnum.SPECIES_PLACEHOLDER | translate"
+          formControlName="species"
+          [compareWith]="formsService().genericCompare"
+          (selectionChange)="onSpeciesChange($event)"
+        >
           @for ( specie of speciesList(); track specie.id) {
             <mat-option [value]="specie">{{ specie.name }}</mat-option>
           }
@@ -39,11 +42,14 @@
     @if (raceListBySpecies().length) {
       <div class="col-lg-4 mb-3" @fade>
         <mat-form-field appearance="outline" class="w-100">
-          <!--{{ i18nService().i18nFormsEnum.CANTON_LABEL | translate }}-->
           <mat-label>
-            Raza
+            {{ i18nService().i18nFormsEnum.BREED_LABEL | translate }}
           </mat-label>
-          <mat-select formControlName="race" [compareWith]="formsService().genericCompare">
+          <mat-select
+            [placeholder]="i18nService().i18nFormsEnum.BREED_PLACEHOLDER | translate"
+            formControlName="race"
+            [compareWith]="formsService().genericCompare"
+          >
             @for ( specie of raceListBySpecies(); track specie.id) {
               <mat-option [value]="specie">{{ specie.name }}</mat-option>
             }
@@ -58,9 +64,11 @@
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <!--{{ i18nService().i18nFormsEnum.BIRTH_DATE_LABEL | translate }}-->
-        <mat-label>Fecha de nacimiento</mat-label>
+        <mat-label>
+          {{ i18nService().i18nFormsEnum.BIRTH_DATE_LABEL | translate }}
+        </mat-label>
         <input
+          [placeholder]="i18nService().i18nFormsEnum.BIRTH_DATE_PLACEHOLDER | translate"
           matInput
           [matDatepicker]="picker"
           formControlName="birthDate"
@@ -79,11 +87,13 @@
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <!--{{ i18nService().i18nFormsEnum.CANTON_LABEL | translate }}-->
         <mat-label>
-          Sexo
+          {{ i18nService().i18nFormsEnum.SEX_LABEL | translate }}
         </mat-label>
-        <mat-select formControlName="sex" [compareWith]="formsService().genericCompare">
+        <mat-select
+          [placeholder]="i18nService().i18nFormsEnum.SEX_PLACEHOLDER | translate"
+          formControlName="sex"
+          [compareWith]="formsService().genericCompare">
           @for ( sex of sexList(); track sex.id) {
             <mat-option [value]="sex">{{ sex.name }}</mat-option>
           }
@@ -97,13 +107,14 @@
 
     <div class="col-lg-4 mb-3">
       <mat-form-field appearance="outline" class="w-100">
-        <!--{{ i18nService().i18nFormsEnum.IDENTIFICATION_CARD_LABEL | translate }}-->
-        <mat-label>Peso aproximado</mat-label>
-        <!--[placeholder]="i18nService().i18nFormsEnum.IDENTIFICATION_CARD_PLACEHOLDER | translate"-->
+        <mat-label>
+          {{ i18nService().i18nFormsEnum.APPROXIMATE_WEIGHT_LABEL | translate }}
+        </mat-label>
         <input
           type="number"
           matInput
           formControlName="weight"
+          [placeholder]="i18nService().i18nFormsEnum.APPROXIMATE_WEIGHT_PLACEHOLDER | translate"
           [errorStateMatcher]="formsService().matcher"
         />
         @let weightControl = form().get('weight');
