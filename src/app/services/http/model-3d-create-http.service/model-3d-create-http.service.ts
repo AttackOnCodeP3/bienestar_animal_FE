@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertService } from '@services/general';
 import { AlertTypeEnum } from '@common/enums';
 import { Constants } from '@common/constants/constants'; 
+import { IAnimalBasic } from '@common/interfaces/animal-basic';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +14,7 @@ export class Model3DCreateHttpService {
   private readonly createTaskV25Endpoint = Constants.createTaskV25;
   private readonly communityAnimalsMine = Constants.communityAnimalsMine;
 
-  readonly animals = signal<{ id: number, name: string }[]>([]);
+  readonly animals = signal<IAnimalBasic[]>([]);
   readonly loadingAnimals = signal(false);
   readonly createSuccess = signal(false);
   readonly createError = signal<string | null>(null);

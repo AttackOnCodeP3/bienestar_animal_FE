@@ -26,6 +26,7 @@ import { PagesUrlsEnum } from '@common/enums';
 import { Model3DCreateHttpService } from '@services/http';
 import { Router } from '@angular/router';
 import { Constants } from '@common/constants/constants';
+import { IAnimalBasic } from '@common/interfaces/animal-basic';
 
 
 
@@ -49,7 +50,7 @@ import { Constants } from '@common/constants/constants';
 })
 export class Model3DListPage implements OnInit {
   form: FormGroup;
-  animals: { id: number; name: string }[] = [];
+  animals: IAnimalBasic[] = [];
   selectedImage: File | null = null;
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);

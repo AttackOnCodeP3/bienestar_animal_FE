@@ -343,4 +343,20 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+/**
+ * Returns true if there is no error, not loading, an animalId is present,
+ * and there is no model available for the current animal.
+ * Used to show the "no model available" message.
+ * @author nav
+ */
+showNoModelAvailable(): boolean {
+  return (
+    !this.isLoading &&
+    !this.errorMessage &&
+    !!this.animalId() &&
+    !this.model3DAnimalHttpService.currentModel3D()?.urlModelo
+  );
+}
+
 }

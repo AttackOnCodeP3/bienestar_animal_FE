@@ -12,7 +12,7 @@
     </div>
   }
 
-  @if (!isLoading && !errorMessage && animalId() && !model3DAnimalHttpService.currentModel3D()?.urlModelo) {
+  @if(showNoModelAvailable()){
     <div class="no-model-overlay d-flex align-items-center justify-content-center">
       <div class="alert alert-info" role="alert">
         <mat-icon>info</mat-icon>
