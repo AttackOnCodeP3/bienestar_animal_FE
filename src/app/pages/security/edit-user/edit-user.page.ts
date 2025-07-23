@@ -102,10 +102,6 @@ export class EditUserPage implements OnInit {
 
     this.userHttpService.update(updateUserRequest);
     this.router.navigate([PagesUrlsEnum.SECURITY_USER_MANAGEMENT])
-    this.alertService.displayAlert({
-      messageKey: this.i18nService.i18nPagesValidationsEnum.EDIT_USER_PAGE_USER_UPDATED_SUCCESSFULLY,
-      type: AlertTypeEnum.SUCCESS
-    })
   }
 
   /**
