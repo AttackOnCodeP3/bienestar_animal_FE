@@ -1,0 +1,59 @@
+<app-navbar [matSidenav]="matSidenav()" />
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="!isScreenSmall()" [mode]="sideNavMode()" [style.width]="'260px'" class="px-1">
+    <mat-nav-list class="mx-1 ms-lg-1 me-lg-0">
+      <mat-accordion>
+        @for (item of menuItemsSorted(); track item) {
+          @if (item?.children?.length && authHttpService.hasAnyRole(item?.authorities)) {
+            <mat-expansion-panel class="mb-2" [disabled]="item?.isDisabled">
+              <mat-expansion-panel-header class="px-3">
+                <mat-panel-title>
+                  <mat-icon>{{ item?.icon }}</mat-icon>
+                  <span class="ms-2">{{ item?.label! | translate }}</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <mat-action-list>
+                @for (child of item?.children; track child) {
+                  @if (authHttpService.hasAnyRole(child.authorities)) {
+                    <mat-list-item
+                      class="mb-2"
+                      [disabled]="child.isDisabled"
+                      [routerLink]="child.isDisabled ? null : child.route"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      [tabindex]="getTabIndex(child)"
+                      (click)="child?.click()"
+                      routerLinkActive="mdc-list-item--activated"
+                    >
+                      <span>{{ child.label! | translate }}</span>
+                    </mat-list-item>
+                  }
+                }
+              </mat-action-list>
+            </mat-expansion-panel>
+          } @else {
+            @if (authHttpService.hasAnyRole(item?.authorities)) {
+              <mat-list-item
+                class="mb-2"
+                [disabled]="item?.isDisabled"
+                [routerLink]="item?.isDisabled ? null : item?.route"
+                [tabindex]="getTabIndex(item)"
+                (click)="item?.click()"
+                routerLinkActive="mdc-list-item--activated pointer"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <mat-icon matListItemIcon>{{ item?.icon }}</mat-icon>
+                <span>{{ item?.label! | translate }}</span>
+              </mat-list-item>
+            }
+          }
+        }
+      </mat-accordion>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet/>
+  </mat-sidenav-content>
+</mat-sidenav-container>

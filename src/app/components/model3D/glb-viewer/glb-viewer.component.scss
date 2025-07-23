@@ -1,0 +1,47 @@
+@use "sass:map";
+
+.glb-viewer-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.three-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-overlay,
+.error-overlay,
+.no-model-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+.loading-overlay {
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .loading-text {
+    font-size: 1rem;
+    color: #6c757d;
+    text-align: center;
+  }
+}
+
+.error-overlay .alert,
+.no-model-overlay .alert {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

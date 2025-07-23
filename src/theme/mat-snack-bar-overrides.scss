@@ -1,0 +1,35 @@
+@use '@angular/material' as material;
+@use "theme-colors" as theme;
+@use "mixins" as mixins;
+@use 'sass:map';
+
+
+@include mixins.light-mode {
+  .mat-snack-error {
+    @include material.snack-bar-overrides((
+      button-color: var(--mat-sys-on-error-container),
+      supporting-text-color: var(--mat-sys-on-error-container),
+      container-color: var(--mat-sys-error-container),
+    ));
+  }
+}
+
+@include mixins.dark-mode {
+  .mat-snack-error {
+    @include material.snack-bar-overrides((
+      button-color: var(--mat-sys-on-error),
+      supporting-text-color: var(--mat-sys-on-error),
+      container-color: var(--mat-sys-error),
+    ));
+  }
+}
+
+.mat-snack-success {
+  @include material.snack-bar-overrides((
+    button-color: var(--mat-sys-on-primary),
+    supporting-text-color: var(--mat-sys-on-primary),
+    container-color: var(--mat-sys-secondary),
+  ));
+}
+
+

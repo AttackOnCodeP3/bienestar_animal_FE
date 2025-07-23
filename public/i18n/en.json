@@ -11,18 +11,286 @@
   },
   "================== COMPONENT LABELS ==================": "",
   "menu": {
-    "home": "Home",
+    "animal": "Animal",
+    "abandonedAnimal": "Abandoned Animal",
+    "createAbandonedAnimal": "Create Abandoned Animal",
+    "create-animal-profile": "Create Animal Profile",
+    "create-user": "Create User",
+    "createMunicipality": "Create Municipality",
     "gamification": "Gamification",
+    "home": "Home",
+    "logout": "Logout",
+    "municipalities": "Municipality Management",
     "reports": "Reports",
-    "logout": "Logout"
+    "model-3d": "3D Model",
+    "user-management": "User Management",
+    "viewMunicipalities": "View Municipalities"
+  },
+  "general": {
+    "provideTemporaryShelter": "Provide a temporary shelter",
+    "personalInformation": "Personal Information",
+    "location": "Location",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "roles": "Roles",
+    "hasThisControlBeenApplied": "Has this control been applied?"
+  },
+  "it-worked-as-nursery-home-form-component": {
+    "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
+    "descriptionNurseryHome": "Temporary homes that provide adequate space, food, hygiene, and shelter for pets (dogs and cats) that need a family to offer them a temporary home while a permanent home is found."
+  },
+  "interests-form-component": {
+    "title": "Interests",
+    "description": "Select your associated interests to receive training and other personalized content."
+  },
+  "password-form-component": {
+    "title": "Password"
+  },
+  "volunteer-option-form-component": {
+    "title": "Volunteer",
+    "description": "If you wish to be a volunteer, please indicate if you want to and if so, select the municipality where you would like to offer your services."
+  },
+  "reset-password-component": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password"
+  },
+
+  "animal-basic-info-form-component": {
+    "title": "Basic General Information"
+  },
+  "animal-deworming-form-component": {
+    "title": "Deworming"
+  },
+  "animal-flea-control-form-component": {
+    "title": "Flea Control"
+  },
+  "animal-neutering-form-component": {
+    "title": "Neutering/Sterilization"
+  },
+  "animal-vaccination-form-component": {
+    "title": "Vaccination"
+  },
+  "================== INPUT LABELS =====================": "",
+  "inputs": {
+    "labels": {
+      "address": "Address",
+      "age": "Age",
+      "ageAccordingToObservation": "Age According to Observation",
+      "animalCondition": "Animal Condition",
+      "approximateWeight": "Approximate Weight",
+      "birthDate": "Birth Date",
+      "breed": "Breed",
+      "canton": "Canton",
+      "confirmPassword": "Confirm Password",
+      "currentPassword": "Current Password",
+      "district": "District",
+      "email": "Email",
+      "emailAddress": "Email Address",
+      "identificationCard": "Identification Card",
+      "isNurseryHome": "Is Nursery Home?",
+      "lastName": "Last Name",
+      "name": "Name",
+      "neighborhoodCommunityOrVillage": "Neighborhood/Community or Village",
+      "newPassword": "New Password",
+      "password": "Password",
+      "phone": "Phone",
+      "phoneNumber": "Phone Number",
+      "pleaseSelectACanton": "Please select a canton",
+      "pleaseSelectADistrict": "Please select a district",
+      "pleaseSelectAMunicipality": "Please select a municipality",
+      "pleaseSelectANeighborhood": "Please select a neighborhood",
+      "productName": "Product Name",
+      "responsibleName": "Responsible Name",
+      "responsibleRole": "Responsible Role",
+      "sex": "Sex",
+      "species": "Species",
+      "status": "Status",
+      "productUsed": "Product Used",
+      "applicationDate": "Application Date"
+    },
+    "================== FORM VALIDATIONS ==================": "",
+    "formValidations": {
+      "mustMatch": "Passwords do not match",
+      "email": "Must be a valid email address",
+      "maxlength": "Must be at most",
+      "minlength": "Must be at least",
+      "pattern": "Invalid format",
+      "required": "Required field",
+      "min": "Must be greater than or equal to",
+      "max": "Must be less than or equal to"
+    },
+    "================== FORM PLACEHOLDERS ==================": "",
+    "formPlaceholders": {
+      "address": "Enter address",
+      "age": "Enter age",
+      "ageAccordingToObservation": "Enter age according to observation",
+      "animalCondition": "Select animal condition",
+      "approximateWeight": "Enter approximate weight",
+      "birthDate": "Enter the birth date",
+      "breed": "Select breed",
+      "canton": "Enter canton",
+      "confirmPassword": "Confirm your password",
+      "currentPassword": "Enter current password",
+      "district": "Enter district",
+      "email": "Enter email",
+      "emailAddress": "Enter email address",
+      "identificationCard": "Enter the identification card",
+      "isNurseryHome": "Select if it is a nursery home",
+      "lastName": "Enter last name",
+      "municipality": "Select municipality",
+      "name": "Enter name",
+      "neighborhoodCommunityOrVillage": "Enter neighborhood/community or village",
+      "newPassword": "Enter new password",
+      "password": "Enter password",
+      "phoneNumber": "Enter the phone number",
+      "productName": "Enter product name",
+      "responsibleName": "Enter the name of the responsible",
+      "responsibleRole": "Enter the position of the responsible",
+      "species": "Select species",
+      "status": "Select status",
+      "sex": "Seleccione el sexo",
+      "productUsed": "Enter product used",
+      "applicationDate": "Enter application date"
+    }
   },
   "================== PAGES LABELS ==================": "",
   "login-page": {
-    "title": "Login"
+    "title": "Login",
+    "orRegisterWith": "Or register with"
+  },
+  "register-page": {
+    "title": "Register and be part of it"
+  },
+  "complete-profile-page": {
+    "title": "Complete your profile",
+    "subtitle": "Please complete your profile to continue"
+  },
+  "forgot-password-page": {
+    "title": "Recover Password",
+    "subtitle": "Enter your email to recover your password"
+  },
+
+  "user-management-page": {
+    "title": "User Management"
+  },
+  "municipalities-management-page": {
+    "title": "Municipality Management"
+  },
+  "edit-municipality-page": {
+    "title": "Editing Municipality",
+    "municipalityUpdatedSuccessfully": "Municipality updated successfully"
+  },
+  "create-user-page": {
+    "title": "Create User"
+  },
+  "edit-user-page": {
+    "title": "Editing User",
+    "userUpdatedSuccessfully": "User updated successfully"
+  },
+  "create-municipality-page": {
+    "title": "Creating Municipality",
+    "municipalityCreatedSuccessfully": "Municipality created successfully"
+  },
+  "create-animal-profile-page": {
+    "title": "Creating Animal Profile"
+  },
+  "================== VALIDATIONS ==================": "",
+  "validations": {
+    "general": {
+      "invalidFields": "There are invalid fields. Please check the entered data.",
+      "invalidIdToUpdate": "Unable to find the data. You will be redirected to try again.",
+      "locationNotAvailable": "Location not available."
+    },
+    "register-page": {
+      "registeredSuccessfully": "Successfully registered, please log in"
+    },
+    "complete-profile-page": {
+      "profileCompletedSuccessfully": "Profile completed successfully"
+    },
+    "create-user-page": {
+      "userCreatedSuccessfully": "User created successfully",
+      "roleRequired": "Role is required"
+    },
+    "create-animal-profile-page": {
+      "animalProfileCreatedSuccessfully": "Animal profile created successfully",
+      "animalProfileVaccinationRequired": "Vaccination is required for the animal profile"
+    }
+  },
+  "================== MATERIAL ==================": "",
+  "matPaginator": {
+    "itemsPerPageLabel": "Items per page",
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page",
+    "firstPageLabel": "First page",
+    "lastPageLabel": "Last page",
+    "of": "of"
+  },
+  "================== COMMON ==================": "",
+  "common": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "================== TABLES ==================": "",
+  "tables": {
+    "columns": {
+      "name": "Name",
+      "lastname": "Last Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "status": "Status",
+      "actions": "Actions",
+      "active": "Active",
+      "activateDesactivate": "Activate/Deactivate",
+      "block": "Block"
+    },
+    "emptyMessage": {
+      "noDataAvailable": "No data available"
+    }
+  },
+  "================== BUTTON TEXT ===========================": "",
+  "buttons": {
+    "alreadyHaveAnAccount": "Already have an account?",
+    "close": "Close",
+    "closeSession": "Close Session",
+    "completeProfile": "Complete Profile",
+    "createMunicipality": "Create Municipality",
+    "createUser": "Create User",
+    "createYourAccountHere": "Create your account here",
+    "forgotPassword": "Forgot Password?",
+    "login": "Login",
+    "logout": "Logout",
+    "municipalitiesManagement": "Municipality Management",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "registerNow": "Register Now",
+    "save": "Save",
+    "send": "Send",
+    "updateMunicipality": "Update Municipality",
+    "updateUser": "Update User",
+    "userManagement": "User Management",
+    "registerAnimal": "Register Animal"
+  },
+  "matSnackBarMessages": {
+    "http": {
+      "operationCompletedSuccessfully": "Operation completed successfully",
+      "anErrorOccurredPleaseTryAgain": "An error occurred, please try again",
+      "hereIsSomeInformation": "Here is some information",
+      "warningPleaseCheckTheData": "Warning, please check the data",
+      "notification": "Notification"
+    },
+    "auth": {
+      "completeProfileToContinue": "Complete your profile to continue"
+    }
   },
   "================== HTTP ERROR LIST ==================": "",
   "httpErrors": {
-    "noInternetConnection": "No internet connection, check your connection first, and try again"
+    "noInternetConnection": "No internet connection, check your connection first, and try again",
+    "badRequest": "Incorrect request, please check the entered data",
+    "internalServerError": "Internal server error, please try again later",
+    "notFound": "Resource not found",
+    "serviceUnavailable": "Service unavailable, please try again later",
+    "unauthorized": "Unauthorized, please log in"
   },
   "================== BL ERROR LIST ==================": "",
   "generalServices": {
@@ -30,11 +298,53 @@
     "errorInsertingData": "An error occurred while inserting the data",
     "serviceError": "An error occurred with the service, please contact the administrator"
   },
+  "INVALID_CREDENTIALS": "Incorrect username or password",
+  "ACCOUNT_LOCKED": "The account is locked. Please contact the administrator.",
+  "ACCESS_DENIED": "You do not have permission to access",
+  "JWT_INVALID_SIGNATURE": "Invalid JWT signature",
+  "JWT_EXPIRED": "The token has expired",
+  "INTERNAL_ERROR": "An unknown error occurred. Please contact the administrator.",
   "Gen_0": "Unknown error",
   "Gen_1": "An unexpected error has occurred. Please contact the administrator.",
-  "================== BL AdmFoto ERROR LIST ==================": "",
   "AdmFoto_1": "Photo not found",
   "badCredentialsException": "Incorrect username or password",
   "AdmUser_1_Usuario": "The indicated user already exists",
-  "AdmAnimal_0_Usuario": "Error added to test responses with BLException from Bienestar Animal"
+  "AdmAnimal_0_Usuario": "Error added to test responses with BLException from Bienestar Animal",
+  "================== MODEL 3D ==================": "",
+  "model3D": {
+    "title": "3D Model",
+    "subtitle": "3D Model Viewer",
+    "description": "Interactive viewer for animal 3D models",
+    "loadingModel": "Loading 3D model...",
+    "loadingProgress": "Loading progress",
+    "noModelAvailable": "No 3D model available for this animal",
+    "modelNotFound": "3D model not found",
+    "errors": {
+      "corsError": "CORS error: The server does not allow loading this model from this domain. Use a CORS-compatible URL.",
+      "networkError": "Network or CORS error: Verify that the model URL is accessible and allows cross-origin requests.",
+      "notFoundError": "Model not found (404). Verify that the URL is correct.",
+      "connectionError": "Connection error. Check your internet connection or verify that the URL is accessible.",
+      "serverError": "Server error. Please try again later.",
+      "unknownError": "Unknown error loading the 3D model",
+      "animalIdRequired": "Animal ID is required to load the 3D model",
+      "modelIdRequired": "Model ID is required for the operation"
+    },
+    "actions": {
+      "loadModel": "Load Model",
+      "reloadModel": "Reload Model",
+      "toggleRotation": "Toggle Rotation",
+      "resetView": "Reset View"
+    },
+    "status": {
+      "loadingFromDatabase": "Loading model from database...",
+      "loadingFromUrl": "Loading model from URL...",
+      "modelLoadedSuccessfully": "Model loaded successfully"
+    },
+    "generation": {
+      "generateModel": "Generate 3D Model",
+      "generatingModel": "Generating 3D model...",
+      "modelGeneratedSuccessfully": "3D model generated successfully",
+      "generationFailed": "Failed to generate 3D model"
+    }
+  }
 }

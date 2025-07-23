@@ -1,0 +1,67 @@
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      {{i18nService.i18nPagesEnum.USER_MANAGEMENT_PAGE_TITLE | translate}}
+    </h1>
+    <button matButton="elevated" (click)="onNavigateToCreateUser()">
+      <mat-icon>add</mat-icon>
+      {{i18nService.i18nButtonsEnum.BUTTON_CREATE_USER | translate}}
+    </button>
+  </div>
+</app-general-container-component>
+
+<div class="box-shadow-1">
+  <table mat-table [dataSource]="dataSource()">
+
+    <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.NAME">
+      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_NAME | translate}}</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.LASTNAME">
+      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_LASTNAME | translate}}</th>
+      <td mat-cell *matCellDef="let element">{{ element.lastname }}</td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.EMAIL">
+      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_EMAIL | translate}}</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.ACTIVE">
+      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_ACTIVE | translate}}</th>
+      <td mat-cell *matCellDef="let element">{{ element.active | i18nBoolean | async }}</td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.BLOCK">
+      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_BLOCK | translate}}</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-slide-toggle
+          [checked]="isActiveUser(element)"
+          (change)="onToggle(element, $event)">
+        </mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="this.tableService.userManagementDisplayedColumnsTableEnum.ACTIONS">
+      <th mat-header-cell *matHeaderCellDef>{{i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate}}</th>
+      <td mat-cell *matCellDef="let element">
+        <button matIconButton (click)="onNavigateToEditUser(element.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="tableService.pageSizeOptions"
+    [length]="userHttpService.search.totalElements || 0"
+    [pageSize]="userHttpService.search.pageSize || userHttpService.search.size"
+    [pageIndex]="(userHttpService.search.pageNumber || userHttpService.search.page || 1) - 1"
+    (page)="onPageChange($event)"
+    showFirstLastButtons="true">
+  </mat-paginator>
+</div>

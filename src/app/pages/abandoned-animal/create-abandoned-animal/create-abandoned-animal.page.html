@@ -1,0 +1,109 @@
+<app-general-container-component>
+  <h1>Registrar Animal Abandonado</h1>
+</app-general-container-component>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+
+    <!-- Especies -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Especie</mat-label>
+        <mat-select formControlName="species">
+          @for (s of speciesHttp.speciesList(); track s.id) {
+            <mat-option [value]="s.name">{{ s.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Sex -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="sex">
+          <mat-option [value]="null">Ninguno</mat-option>
+          @for (s of sexHttp.sexList(); track s.id) {
+            <mat-option [value]="s.name">{{ s.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Age -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Edad estimada</mat-label>
+        <mat-select formControlName="estimatedAge">
+          @for (age of estimatedAgeList(); track age) {
+            <mat-option [value]="age">{{ age }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Physical -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Condición física</mat-label>
+        <mat-select formControlName="physicalCondition">
+          @for (condition of physicalConditionList(); track condition) {
+            <mat-option [value]="condition">{{ condition }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Behavior -->
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Comportamiento</mat-label>
+        <mat-select formControlName="behavior">
+          @for (behavior of behaviorList(); track behavior) {
+            <mat-option [value]="behavior">{{ behavior }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <app-location-form
+        [cantonsList]="cantonHttpService.cantonList()"
+        [districtsList]="cantonHttpService.districtsByCanton()"
+        [neighbourhoodsList]="districtHttpService.neighborhoodsByDistrict()"
+        (selectedCanton)="cantonHttpService.getDistrictsByCantonId($event.id!)"
+        (selectedDistrict)="districtHttpService.getNeighborhoodsByDistrictId($event.id!)"
+        [form]="form"
+        [i18nService]="i18nService"
+        [formsService]="formsService">
+      </app-location-form>
+    </div>
+
+    <!-- observations -->
+    <div class="col-md-12 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput rows="3" formControlName="observations"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Upload img -->
+    <div class="col-md-12 mb-3">
+      <label><strong>Subir Imagen (opcional):</strong></label>
+      <input type="file" accept="image/*" (change)="handleImageUpload($event)">
+    </div>
+
+    <!-- IMG preview -->
+    <div class="col-md-12 mb-3" *ngIf="imagePreview">
+      <label><strong>Vista previa:</strong></label><br>
+      <img [src]="imagePreview" alt="Vista previa de imagen" style="max-width: 300px; border: 1px solid #ccc; border-radius: 4px;" />
+    </div>
+
+
+    <!-- Send -->
+    <div class="col-12 text-end">
+      <button matButton="tonal" type="submit">Registrar</button>
+    </div>
+
+  </div>
+</form>

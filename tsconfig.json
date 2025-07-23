@@ -18,23 +18,43 @@
     "paths": {
       "@components/*": ["app/components/*"],
 
-      "@services/general": ["app/services/index.ts"],
-      "@services/http/*": ["app/services/http/*"],
+      "@services/general": ["app/services/index.ts"], // Alias for general services index file
+      "@services/http": ["app/services/http/index.ts"], // Alias for http index file
+      "@services/http/*": ["app/services/http/*"], // Alias for http directory
+      "@services/forms": ["app/services/forms/index.ts"], // Alias for forms index file
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
       "@common/enums/*": ["app/common/enums/*"],
       "@common/enums/i18n": ["app/common/enums/i18n/index.ts"], // Alias for i18n enums index file
+      "common/enums/tables": ["app/common/enums/tables/index.ts"], // Alias for tables enums index file
       "@common/interfaces": ["app/common/interfaces/index.ts"], // Alias for interfaces index file
       "@common/interfaces/*": ["app/common/interfaces/*"],
+      "@common/interfaces/http": ["app/common/interfaces/http/index.ts"], // Alias for http interfaces index file
+      "@common/interfaces/forms": ["app/common/interfaces/forms/index.ts"], // Alias for forms interfaces index file
       "@common/types": ["app/common/types/index.ts"], // Alias for types index file
       "@common/types/*": ["app/common/types/*"],
       "@common/constants/*": ["app/common/constants/*"],
+      "common/forms/*": ["app/common/forms/*"], // Alias for forms directory
+      "@common/forms": ["app/common/forms/index.ts"], // Alias for forms index file
+      "@common/utils": ["app/common/utils/index.ts"], // Alias for utils index file
 
-      "@animations/fade": ["app/animations/fade/index.ts"], // Alias for animations index fade file
-      "@animations/fade/*": ["app/animations/fade/*"],
+      "@animations/fade": ["app/common/animations/fade/index.ts"], // Alias for animations index fade file
+      "@animations/fade/*": ["app/common/animations/fade/*"],
 
-      "@animations/slide": ["app/animations/slide/index.ts"], // Alias for animations index slide file
-      "@animations/slide/*": ["app/animations/slide/*"],
+      "@animations/slide": ["app/common/animations/slide/index.ts"], // Alias for animations index slide file
+      "@animations/slide/*": ["app/common/animations/slide/*"],
+
+      "@components/user": ["app/components/user/index.ts"], // Alias for user component index file
+      "@components/animal": ["app/components/animal/index.ts"], // Alias for animal component index file
+      "@components/general": ["app/components/index.ts"], // Alias for general component index file
+      "@components/layout": ["app/components/layout/index.ts"], // Alias for layout component index file
+
+      "@models": ["app/models/index.ts"], // Alias for models index file
+      "@models/dto": ["app/models/dto/index.ts"], // Alias for DTO models index file
+
+      "@core/guards": ["app/core/guards/index.ts"], // Alias for guards index file
+      "@core/interceptors": ["app/core/interceptors/index.ts"], // Alias for interceptors index file
+      "@core/pipes": ["app/core/pipes/index.ts"], // Alias for pipes index file
 
       "@pages/*": ["app/pages/*"],
     }
@@ -44,7 +64,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "typeCheckHostBindings": true,
-    "strictTemplates": true
   },
   "files": [],
   "references": [

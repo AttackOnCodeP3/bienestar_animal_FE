@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '@angular/material' as material;
+@use "theme-colors" as theme;
+@use "mixins" as mixins;
+
+@include mixins.light-mode {
+  .btn-contrast {
+    @include material.button-overrides((
+      filled-container-color: map.get(theme.$primary-palette, 0),
+    ));
+  }
+}
+
+@include mixins.dark-mode {
+  .btn-contrast {
+    @include material.button-overrides((
+      filled-container-color: map.get(theme.$primary-palette, 100),
+    ));
+  }
+}
+
+.btn-secondary-1 {
+  @include material.button-overrides((
+    filled-container-color: var(--mat-sys-secondary-fixed),
+    filled-label-text-color: var(--mat-sys-on-secondary-fixed),
+  ));
+}

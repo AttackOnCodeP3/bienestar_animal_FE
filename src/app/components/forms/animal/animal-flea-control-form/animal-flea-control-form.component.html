@@ -1,0 +1,65 @@
+<form [formGroup]="form()">
+  <h4>{{ i18nService().i18nGeneralEnum.HAS_THIS_CONTROL_BEEN_APPLIED | translate }}</h4>
+  <div class="mb-3">
+    <mat-radio-group formControlName="sanitaryControlResponse" class="d-flex flex-column">
+      @for (sanitaryControlResponse of sanitaryControlResponseList(); track sanitaryControlResponse.id) {
+        <mat-radio-button class="mb-2" [value]="sanitaryControlResponse">
+          {{ sanitaryControlResponse.name }}
+        </mat-radio-button>
+      }
+      @let sanitaryControlResponseControl = form().get('sanitaryControlResponse');
+      @if (formsService().isFieldInvalid(sanitaryControlResponseControl)) {
+        <mat-error>
+          {{ formsService().getErrorMessage(sanitaryControlResponseControl) }}
+        </mat-error>
+      }
+    </mat-radio-group>
+  </div>
+
+  @if (sanitaryControlResponseValueId === communityAnimalRegistrationFormService().sanitaryControlResponseEnum.YES) {
+    <div class="row" @fade>
+
+      <div class="col-lg-4 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>
+            {{ i18nService().i18nFormsEnum.PRODUCT_USED_LABEL | translate }}
+          </mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="productUsed"
+            [errorStateMatcher]="formsService().matcher"
+            [placeholder]="i18nService().i18nFormsEnum.PRODUCT_USED_PLACEHOLDER | translate"
+          />
+          @let productUsedControl = form().get('productUsed');
+          @if (formsService().isFieldInvalid(productUsedControl)) {
+            <mat-error>{{ formsService().getErrorMessage(productUsedControl) }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>
+            {{ i18nService().i18nFormsEnum.APPLICATION_DATE_LABEL | translate }}
+          </mat-label>
+          <input
+            matInput
+            formControlName="lastApplicationDate"
+            readonly
+            [matDatepicker]="matDatepicker"
+            [errorStateMatcher]="formsService().matcher"
+            [max]="formsService().maxTodayDate"
+            [placeholder]="i18nService().i18nFormsEnum.APPLICATION_DATE_PLACEHOLDER | translate"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="matDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #matDatepicker></mat-datepicker>
+          @let lastApplicationDateControl = form().get('lastApplicationDate');
+          @if (formsService().isFieldInvalid(lastApplicationDateControl)) {
+            <mat-error>{{ formsService().getErrorMessage(lastApplicationDateControl) }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  }
+</form>

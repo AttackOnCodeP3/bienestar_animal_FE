@@ -12,7 +12,7 @@ import {RoutesUrlsEnum} from '@common/enums/routes-urls.enum';
  *
  * @author dgutierrez
  */
-export const GEMIFICATION_ROUTES: Routes = [
+export const GAMIFICATION_ROUTES: Routes = [
   {
     path: RoutesUrlsEnum.VOID_ROUTE,
     redirectTo: RoutesUrlsEnum.REWARDS_SYSTEM,
@@ -20,6 +20,6 @@ export const GEMIFICATION_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.REWARDS_SYSTEM,
-    loadComponent: () => import('@pages/gamification/rewards-system/rewards-system').then(m => m.RewardsSystem),
+    loadComponent: () => import('@pages/gamification/rewards-system/rewards-system.page').then(m => m.RewardsSystemPage),
   }
 ]

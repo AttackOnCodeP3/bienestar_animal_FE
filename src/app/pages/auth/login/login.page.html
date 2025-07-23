@@ -1,0 +1,77 @@
+<app-navbar [showMenuToggle]="false" />
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="container">
+    <div class="row justify-content-center rounded py-5 bg-primary-contrast">
+      <div class="col-md-6 col-lg-5">
+        <div class="text-center">
+          <app-logo-bienestar-animal listCssClasses="max-width-500px" />
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5">
+        <h1 class="text-center mb-4">{{i18nService.i18nPagesEnum.LOGIN_PAGE_TITLE | translate}}</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{i18nService.i18nFormsEnum.EMAIL_LABEL | translate}}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                [errorStateMatcher]="formsService.matcher"
+                [placeholder]="i18nService.i18nFormsEnum.EMAIL_PLACEHOLDER | translate" />
+              @let emailControl = loginForm.get('email');
+              @if (formsService.isFieldInvalid(emailControl)) {
+                <mat-error>{{ formsService.getErrorMessage(emailControl) }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ i18nService.i18nFormsEnum.PASSWORD_LABEL | translate }}</mat-label>
+              <input
+                type="password"
+                matInput
+                formControlName="password"
+                [errorStateMatcher]="formsService.matcher"
+                [placeholder]="i18nService.i18nFormsEnum.PASSWORD_PLACEHOLDER | translate" />
+              @let passwordControl = loginForm.get('password');
+              @if (formsService.isFieldInvalid(passwordControl)) {
+                <mat-error>{{ formsService.getErrorMessage(passwordControl) }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="mb-4">
+            <button type="submit" matButton="filled" class="w-100">
+              {{i18nService.i18nButtonsEnum.BUTTON_LOGIN | translate}}
+            </button>
+          </div>
+
+          <div class="mb-4 d-flex justify-content-between">
+            <button
+              matButton="text"
+              matTooltip="{{ i18nService.i18nButtonsEnum.BUTTON_CREATE_YOUR_ACCOUNT_HERE | translate }}"
+              type="button"
+              (click)="onNavigateToRegister()">
+              {{ i18nService.i18nButtonsEnum.BUTTON_NO_ACCOUNT | translate }}
+            </button>
+            <button type="button" matButton="text" (click)="onNavigateToForgotPassword()">
+              {{i18nService.i18nButtonsEnum.BUTTON_FORGOT_PASSWORD | translate}}
+            </button>
+          </div>
+          <mat-divider/>
+          <p class="text-center text-secondary mb-3">{{i18nService.i18nPagesEnum.LOGIN_PAGE_OR_REGISTER_WITH | translate}}</p>
+
+          <div class="text-center">
+            <button matIconButton type="button" (click)="onNavigateToAuthenticationWithGoogle()">
+              <mat-icon svgIcon="google-sign-in"></mat-icon>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

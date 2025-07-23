@@ -9,6 +9,7 @@
 export abstract class UnmutableConstants {
 
   static readonly HEADER_AUTH: string = 'Authorization'
+  static readonly AUTHORITIES: string = 'authorities'
 
 
   // ==================================================================
@@ -22,25 +23,143 @@ export abstract class UnmutableConstants {
   static readonly LS_APP_PREFERENCE_PREFIX: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'app-preference-'
   static readonly LS_APP_PREFERENCE_SCHEME: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + UnmutableConstants.LS_APP_PREFERENCE_PREFIX + 'scheme'
   static readonly LS_APP_PREFERENCE_LANGUAGE: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + UnmutableConstants.LS_APP_PREFERENCE_PREFIX + 'language'
+  static readonly LS_APP_AUTH_USER: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'authUser'
+  static readonly LS_ACCESS_TOKEN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'access_token'
+  static readonly LS_EXPIRES_IN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'expiresIn'
 
   static readonly IMAGE_QUALITY: number = 50
-
-
-  // ==================================================================
-  // PARTIAL ROUTES FOR SERVICES
-  // ==================================================================
 
   // ==================================================================
   // ROUTES FOR SECURITY/AUTH SERVICES
   // ==================================================================
-  private static readonly SECURITY: string = '/security'
-  static readonly AUTH_URL: string = UnmutableConstants.SECURITY + '/auth'
-  static readonly REQUEST_PASSWORD_CHANGE_URL: string =
-    UnmutableConstants.SECURITY + '/requestPasswordChange'
+  private static readonly AUTH_URL: string = '/auth'
+  static readonly AUTH_SOCIAL_URL: string = UnmutableConstants.AUTH_URL + '/social';
+  static readonly AUTH_LOGIN_URL: string = UnmutableConstants.AUTH_URL + '/login'
+  static readonly AUTH_SIGN_UP_URL: string = UnmutableConstants.AUTH_URL + '/signup'
+  static readonly AUTH_SOCIAL_SUCCESS_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/success'
+  static readonly AUTH_SOCIAL_COMPLETE_USER_PROFILE_URL: string = UnmutableConstants.AUTH_SOCIAL_URL + '/complete-profile'
+  static readonly REQUEST_PASSWORD_CHANGE_URL: string = '/requestPasswordChange'
+  static readonly URL_AUTH_WITH_GOOGLE: string = "http://localhost:8080/oauth2/authorization/google"
 
   // ==================================================================
-  // ROUTES FOR COMPANION ANIMAL SERVICES
+  // ROUTES FOR USERS SERVICES
   // =================================================================
-  private static readonly COMPANION_ANIMAL: string = '/CompanionAnimal'
-  static readonly REGISTER_COMPANION_ANIMAL_URL: string = UnmutableConstants.COMPANION_ANIMAL + '/registerCompanionAnimal'
+  private static readonly USERS: string = '/users'
+  static readonly USERS_URL: string = UnmutableConstants.USERS;
+  static readonly FORGOT_PASSWORD_URL: string = UnmutableConstants.USERS + '/password/forgot-password';
+  static readonly CHANGE_PASSWORD_URL: string = UnmutableConstants.USERS + '/password/password-reset';
+
+  // ==================================================================
+  // ROUTES FOR ADMIN SERVICES
+  // =================================================================
+  private static readonly ADMIN: string = '/admin'
+  static readonly ADMIN_REGISTER_USER_URL: string = UnmutableConstants.ADMIN;
+
+  // ==================================================================
+  // ROUTES FOR INTEREST SERVICES
+  // =================================================================
+  private static readonly INTERESTS: string = '/interests'
+  static readonly INTERESTS_URL: string = UnmutableConstants.INTERESTS;
+
+  // ==================================================================
+  // ROUTES FOR ROLE SERVICES
+  // =================================================================
+  private static readonly ROLES: string = '/roles'
+  static readonly ROLES_URL: string = UnmutableConstants.ROLES;
+
+  // ==================================================================
+  // ROUTES FOR MUNICIPALITY SERVICES
+  // =================================================================
+  private static readonly MUNICIPALITIES: string = '/municipalities'
+  static readonly MUNICIPALITIES_URL: string = UnmutableConstants.MUNICIPALITIES;
+
+  // ==================================================================
+  // ROUTES FOR MUNICIPALITY SERVICES
+  // =================================================================
+  private static readonly MUNICIPALITIES_STATUS: string = "/municipality-statuses";
+  static readonly MUNICIPALITIES_STATUS_URL: string = UnmutableConstants.MUNICIPALITIES_STATUS;
+
+  // USER
+
+  //Canton, District, Neighborhood
+
+  // ==================================================================
+  // ROUTES FOR CANTON SERVICES
+  // =================================================================
+  private static readonly CANTONS: string = '/cantons'
+  static readonly CANTONS_URL: string = UnmutableConstants.CANTONS;
+
+  // ==================================================================
+  // ROUTES FOR DISTRICT SERVICES
+  // =================================================================
+  private static readonly DISTRICTS: string = '/districts'
+  static readonly DISTRICTS_URL: string = UnmutableConstants.DISTRICTS;
+
+  // ==================================================================
+  // ROUTES FOR NEIGHBORHOOD SERVICES
+  // =================================================================
+  private static readonly NEIGHBORHOODS: string = '/neighborhoods'
+  static readonly NEIGHBORHOODS_URL: string = UnmutableConstants.NEIGHBORHOODS;
+
+
+  // ==================================================================
+  // ROUTES FOR RACES SERVICES
+  // =================================================================
+  private static readonly RACES: string = '/races';
+  static readonly RACES_URL: string = UnmutableConstants.RACES;
+
+  // ==================================================================
+  // ROUTES FOR COMMUNITY ANIMALS SERVICES
+  // =================================================================
+  private static readonly COMMUNITY_ANIMALS: string = '/community-animals';
+  static readonly COMMUNITY_ANIMALS_URL: string = UnmutableConstants.COMMUNITY_ANIMALS;
+
+  // ==================================================================
+  // ROUTES FOR ABANDONED ANIMALS SERVICES
+  // =================================================================
+  private static readonly ANIMALS_ABANDONED: string = '/animals/abandoned';
+  static readonly ANIMALS_ABANDONED_URL: string = UnmutableConstants.ANIMALS_ABANDONED;
+
+  // ==================================================================
+  // ROUTES FOR SPECIES SERVICES
+  // =================================================================
+  private static readonly SPECIES: string = '/species';
+  static readonly SPECIES_URL: string = UnmutableConstants.SPECIES;
+
+  // ==================================================================
+  // ROUTES FOR ANIMAL TYPES SERVICES
+  // =================================================================
+  private static readonly ANIMAL_TYPES: string = '/animal-types';
+  static readonly ANIMAL_TYPES_URL: string = UnmutableConstants.ANIMAL_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR SEX SERVICES
+  // =================================================================
+  private static readonly SEX: string = '/sex';
+  static readonly SEX_URL: string = UnmutableConstants.SEX;
+
+  // ==================================================================
+  // ROUTES FOR VACCINE SERVICES
+  // =================================================================
+  private static readonly VACCINES: string = '/vaccines';
+  static readonly VACCINE_URL: string = UnmutableConstants.VACCINES;
+  static readonly VACCINE_BY_SPECIES_URL: string = 'by-species';
+
+  // ==================================================================
+  // ROUTES FOR SANITARY CONTROL RESPONSES SERVICES
+  // =================================================================
+  private static readonly SANITARY_CONTROL_RESPONSES: string = '/sanitary-control-responses';
+  static readonly SANITARY_CONTROL_RESPONSES_URL: string = UnmutableConstants.SANITARY_CONTROL_RESPONSES;
+
+  // ==================================================================
+  // ROUTES FOR SANITARY CONTROL TYPE SERVICES
+  // =================================================================
+  private static readonly SANITARY_CONTROL_TYPES: string = '/sanitary-control-types';
+  static readonly SANITARY_CONTROL_TYPES_URL: string = UnmutableConstants.SANITARY_CONTROL_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL 3D ANIMAL SERVICES
+  // =================================================================
+  private static readonly MODEL_3D_ANIMAL: string = '/model3d-animal'
+  static readonly MODEL_3D_ANIMAL_URL: string = UnmutableConstants.MODEL_3D_ANIMAL;
 }
