@@ -82,7 +82,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   readonly formAnimalVaccination = this.communityAnimalRegistrationFormService.buildVaccinationForm();
   readonly formDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
   readonly formFleaAndTickControl = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
-  readonly formNeutering = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
+  readonly formNeutering = this.communityAnimalRegistrationFormService.buildSanitaryControlForm({includeLastApplicationDate: false, includeProductUsed: false});
 
   /**
    * Effect to assign sanitary control types to the respective forms.
@@ -121,7 +121,6 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formDeworming));
     this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formFleaAndTickControl));
-    this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formNeutering));
   }
 
   ngOnDestroy() {

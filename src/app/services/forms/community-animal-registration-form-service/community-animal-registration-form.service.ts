@@ -32,8 +32,10 @@ export class CommunityAnimalRegistrationFormService {
    * @returns A typed FormGroup representing a sanitary control form.
    * @author dgutierrez
    */
-  buildSanitaryControlForm(): FormGroup<ISanitaryControlForm> {
-    return this.formsService.formsBuilder.group({
+  buildSanitaryControlForm({includeProductUsed = true, includeLastApplicationDate = true}: {includeProductUsed?: boolean; includeLastApplicationDate?:boolean;
+    } = {}
+  ): FormGroup<ISanitaryControlForm> {
+    const formGroup = this.formsService.formsBuilder.group<ISanitaryControlForm>({
       productUsed: this.formsService.formsBuilder.control<string | null>(null, {
         validators: [Validators.required],
       }),
@@ -44,6 +46,14 @@ export class CommunityAnimalRegistrationFormService {
         validators: [Validators.required],
       }),
     });
+    if (!includeProductUsed) {
+      formGroup.get('productUsed')?.disable();
+    }
+
+    if (!includeLastApplicationDate) {
+      formGroup.get('lastApplicationDate')?.disable();
+    }
+    return formGroup;
   }
 
   /**
