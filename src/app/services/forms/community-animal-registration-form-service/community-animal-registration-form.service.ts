@@ -32,7 +32,7 @@ export class CommunityAnimalRegistrationFormService {
    * @returns A typed FormGroup representing a sanitary control form.
    * @author dgutierrez
    */
-  buildSanitaryControlForm({includeProductUsed = true, includeLastApplicationDate = true}: {includeProductUsed?: boolean; includeLastApplicationDate?:boolean;
+  buildSanitaryControlForm({includeProductUsed = true, includeLastApplicationDate = true}: {includeProductUsed?: boolean; includeLastApplicationDate?: boolean;
     } = {}
   ): FormGroup<ISanitaryControlForm> {
     const formGroup = this.formsService.formsBuilder.group<ISanitaryControlForm>({
