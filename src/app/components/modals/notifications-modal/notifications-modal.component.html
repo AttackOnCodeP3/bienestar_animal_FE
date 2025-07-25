@@ -16,9 +16,7 @@
 
   @if (notificationHttpService.isNotificationsEmpty()) {
     <ng-lottie [options]="animationOptions"/>
-    <div class="d-flex justify-content-center">
-      <p class="mat-sys-body-large-imp">{{i18nService.i18nComponentsEnum.NOTIFICATIONS_MODAL_NO_NOTIFICATIONS | translate}}</p>
-    </div>
+    <p class="text-center">{{i18nService.i18nComponentsEnum.NOTIFICATIONS_MODAL_NO_NOTIFICATIONS | translate}}</p>
   }
   @for (notification of notificationHttpService.myNotificationList(); track notification.id) {
     <div class="notif-item">
