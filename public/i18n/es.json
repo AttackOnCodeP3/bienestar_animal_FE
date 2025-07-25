@@ -38,6 +38,10 @@
       "viewModel3D": "Ver modelos 3D",
       "createModel3D": "Crear modelo 3D"
   },
+  "notifications-modal-component": {
+    "title": "Notificaciones",
+    "noNotifications": "No hay notificaciones disponibles"
+  },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
     "descriptionNurseryHome": "Hogares temporales que presentan las condiciones adecuadas de espacio, alimentación, higiene y refugio para mascotas (perros y gatos) que necesitan de una familia que les brinde un hogar temporal mientras se les encuentre una casa definitiva."

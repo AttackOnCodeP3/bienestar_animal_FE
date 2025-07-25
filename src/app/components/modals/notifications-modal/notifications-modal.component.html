@@ -1,0 +1,48 @@
+<h2 mat-dialog-title class="mat-sys-headline-medium-imp">{{i18nService.i18nComponentsEnum.NOTIFICATIONS_MODAL_TITLE | translate}}</h2>
+
+<mat-dialog-content
+  infinite-scroll
+  [infiniteScrollThrottle]="throttle"
+  [infiniteScrollDistance]="scrollDistance"
+  (scrolled)="onLoadNextPageNotifications()"
+  [scrollWindow]="false"
+  class="mat-typography"
+>
+  @if (notificationHttpService.isNotificationsLoading()){
+    <div class="d-flex justify-content-center">
+      <mat-spinner/>
+    </div>
+  }
+
+  @if (notificationHttpService.isNotificationsEmpty()) {
+    <ng-lottie [options]="animationOptions"/>
+    <div class="d-flex justify-content-center">
+      <p class="mat-sys-body-large-imp">{{i18nService.i18nComponentsEnum.NOTIFICATIONS_MODAL_NO_NOTIFICATIONS | translate}}</p>
+    </div>
+  }
+  @for (notification of notificationHttpService.myNotificationList(); track notification.id) {
+    <div class="notif-item">
+      <div class="notif-avatar">
+        <mat-icon>notifications</mat-icon>
+      </div>
+      <div class="notif-content">
+        <div class="notif-title">{{ notification.title }}</div>
+        <div class="notif-description">{{ notification.description }}</div>
+        <div class="notif-meta">
+          <mat-icon class="notif-icon">schedule</mat-icon>
+          <span class="notif-time">{{ notification.dateIssued | date:'short' }}</span>
+        </div>
+      </div>
+    </div>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    matButton="filled"
+    cdkFocusInitial
+    mat-dialog-close
+  >
+    {{i18nService.i18nButtonsEnum.BUTTON_CLOSE | translate}}
+  </button>
+</mat-dialog-actions>

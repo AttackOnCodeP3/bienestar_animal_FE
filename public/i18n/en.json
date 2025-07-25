@@ -36,6 +36,10 @@
     "roles": "Roles",
     "hasThisControlBeenApplied": "Has this control been applied?"
   },
+  "notifications-modal-component": {
+    "title": "Notifications",
+    "noNotifications": "No notifications available"
+  },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
     "descriptionNurseryHome": "Temporary homes that provide adequate space, food, hygiene, and shelter for pets (dogs and cats) that need a family to offer them a temporary home while a permanent home is found."

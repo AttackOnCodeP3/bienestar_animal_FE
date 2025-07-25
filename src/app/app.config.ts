@@ -15,6 +15,7 @@ import {MatPaginatorCustomService, MissingI18nService} from '@services/general';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {accessTokenInterceptor, baseUrlInterceptor, handleErrorsInterceptor} from '@core/interceptors';
 import {MatPaginatorIntl} from '@angular/material/paginator';
+import {provideLottieOptions} from 'ngx-lottie';
 
 registerLocaleData(localeEn)
 
@@ -37,6 +38,9 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRouter(routes),
     provideZonelessChangeDetection(),
+    provideLottieOptions({
+      player: () => import('lottie-web'),
+    }),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,

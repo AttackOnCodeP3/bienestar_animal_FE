@@ -162,4 +162,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly MODEL_3D_ANIMAL: string = '/model3d-animal'
   static readonly MODEL_3D_ANIMAL_URL: string = UnmutableConstants.MODEL_3D_ANIMAL;
+
+  // ==================================================================
+  // ROUTES FOR MODEL NOTIFICATION SERVICES
+  // =================================================================
+  private static readonly NOTIFICATIONS: string = '/notifications';
+  static readonly NOTIFICATIONS_URL: string = UnmutableConstants.NOTIFICATIONS;
 }
