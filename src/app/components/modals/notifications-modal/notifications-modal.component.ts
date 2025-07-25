@@ -23,6 +23,12 @@ import {I18nService} from '@services/general';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LottieAnimationsPathsEnum} from '@common/enums';
 
+/**
+ * Component for displaying a modal dialog with user notifications.
+ * It fetches notifications from the server and displays them in a scrollable list.
+ * The component supports infinite scrolling to load more notifications as the user scrolls down.
+ * @author dgutierrez
+ */
 @Component({
   selector: 'app-notifications-modal-component',
   imports: [
@@ -62,6 +68,9 @@ export class NotificationsModalComponent implements OnInit {
     this.notificationHttpService.getMyNotifications();
   }
 
+  /**
+   * @author dgutierrez
+   */
   onLoadNextPageNotifications(): void {
     this.notificationHttpService.getMyNotifications({
       nextPage: true
