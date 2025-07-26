@@ -10,8 +10,8 @@
       @if (authHttpService.isAuthenticated()) {
         <button
           matIconButton
-          [matBadge]="notificationHttpService.notificationCountByStatusRead()"
-          [matBadgeHidden]="notificationHttpService.showMyNotificationCountBadgeRead()"
+          [matBadge]="notificationHttpService.myUnreadCount()"
+          [matBadgeHidden]="notificationHttpService.showMyUnreadBadge()"
           (click)="openNotificationsModal()">
           <mat-icon>
             notifications

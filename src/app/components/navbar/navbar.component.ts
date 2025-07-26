@@ -45,11 +45,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     if (this.authHttpService.isAuthenticated()) {
-      this.notificationHttpService.countMyNotificationsByStatus(NotificationStatusEnum.READ)
+      this.notificationHttpService.countMyUnreadNotifications()
     }
   }
 
   openNotificationsModal() {
+    this.notificationHttpService.markAllMyNotificationsAsRead();
     this.modalService.openNotificationsModal();
   }
 }
