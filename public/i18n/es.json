@@ -34,9 +34,12 @@
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
     "viewMunicipalities": "Ver municipalidades",
-     "model-3d": "Modelo 3D",
-      "viewModel3D": "Ver modelos 3D",
-      "createModel3D": "Crear modelo 3D"
+    "model-3d": "Modelo 3D",
+    "viewModel3D": "Ver modelos 3D",
+    "createModel3D": "Crear modelo 3D",
+    "notificationRules": "Reglas de notificación",
+    "notificationRulesEdit": "Editar reglas",
+    "notificationRulesList": "Lista de reglas"
   },
   "notifications-modal-component": {
     "title": "Notificaciones",
@@ -61,7 +64,6 @@
     "title": "Reset Password",
     "subtitle": "Enter your new password"
   },
-
   "animal-basic-info-form-component": {
     "title": "Información básica general"
   },
@@ -176,7 +178,6 @@
     "title": "Recuperar contraseña",
     "subtitle": "Ingrese su correo electrónico para recuperar su contraseña"
   },
-
   "user-management-page": {
     "title": "Gestión de usuarios"
   },
@@ -197,6 +198,9 @@
   },
   "create-animal-profile-page": {
     "title": "Creando perfil de animal"
+  },
+  "notification-rules-page": {
+    "title": "Reglas de notificación"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {

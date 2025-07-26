@@ -12,6 +12,7 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Constants} from '@common/constants/constants';
 
 import {I18nService, ModalService, ThemeService} from '@services/general';
+import {AuthHttpService} from '@services/http';
 
 @Component({
   selector: 'app-navbar',
@@ -35,6 +36,7 @@ export class NavbarComponent {
 
   readonly showMenuToggle = input<boolean>(true)
   readonly matSidenav = input<MatSidenav>();
+  readonly authHttpService = inject(AuthHttpService);
 
   readonly theme = inject(ThemeService)
   readonly i18n = inject(I18nService);

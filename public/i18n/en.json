@@ -24,7 +24,11 @@
     "reports": "Reports",
     "model-3d": "3D Model",
     "user-management": "User Management",
-    "viewMunicipalities": "View Municipalities"
+    "viewMunicipalities": "View Municipalities",
+    "notificationRules": "Notification Rules",
+    "notificationRulesCreate": "Create Notification Rule",
+    "notificationRulesEdit": "Edit Notification Rule",
+    "notificationRulesList": "Notification Rules List"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
@@ -198,6 +202,9 @@
   },
   "create-animal-profile-page": {
     "title": "Creating Animal Profile"
+  },
+  "notification-rules-page": {
+    "title": "Notification Rules"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {

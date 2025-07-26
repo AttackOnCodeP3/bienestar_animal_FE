@@ -6,6 +6,7 @@ const PATH_DASHBOARD_ROUTES = 'dashboard';
 const PATH_SECURITY_ROUTES = 'security';
 const PATH_MUNICIPALITIES = 'municipalities';
 const PATH_ANIMAL_ROUTES = 'animal';
+const PATH_NOTIFICATION_RULES = 'notification-rules';
 const VOID_PATH = '';
 
 export enum RoutesUrlsEnum {
@@ -15,6 +16,7 @@ export enum RoutesUrlsEnum {
   DASHBOARD = PATH_DASHBOARD_ROUTES,
   SECURITY = PATH_SECURITY_ROUTES,
   ANIMAL = PATH_ANIMAL_ROUTES,
+  NOTIFICATION_RULES = PATH_NOTIFICATION_RULES,
 
   // Main routes
   HOME = PATH_HOME_ROUTES,
@@ -59,4 +61,7 @@ export enum RoutesUrlsEnum {
   MODEL_3D_LIST = 'model-3d-list',
   MODEL_3D_CREATE = 'model-3d-create',
 
+  //Notification Rules Municipality
+  NOTIFICATION_RULES_EDIT = 'notification-rules-edit',
+  NOTIFICATION_RULES_LIST = 'notification-rules-list',
 }

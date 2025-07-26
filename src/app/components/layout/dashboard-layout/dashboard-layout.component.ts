@@ -1,8 +1,8 @@
-import { Component, computed, inject, signal, viewChild } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
-import { MatIcon } from '@angular/material/icon';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import {Component, computed, inject, signal, viewChild} from '@angular/core';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {TranslatePipe} from '@ngx-translate/core';
+import {MatIcon} from '@angular/material/icon';
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {
   MatActionList,
   MatListItem,
@@ -15,14 +15,14 @@ import {
   MatSidenavContainer,
   MatSidenavContent,
 } from '@angular/material/sidenav';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { BreakpointsEnum, RolesEnum, RoutesUrlsEnum } from '@common/enums';
-import { IMenuItem, IMenuItemChild } from '@common/interfaces';
-import { I18nService, ThemeService } from '@services/general';
-import { I18nMenuEnum } from '@common/enums/i18n';
-import { Constants } from '@common/constants/constants';
-import { AuthHttpService } from '@services/http';
-import { NavbarComponent } from '@components/general';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {IMenuItem, IMenuItemChild} from '@common/interfaces';
+import {I18nService, ThemeService} from '@services/general';
+import {I18nMenuEnum} from '@common/enums/i18n';
+import {Constants} from '@common/constants/constants';
+import {AuthHttpService} from '@services/http';
+import {NavbarComponent} from '@components/general';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -92,12 +92,13 @@ export class DashboardLayoutComponent {
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN],
     },
-  
+
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
       route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_USER_MANAGEMENT}`,
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.USER_MANAGEMENT,
@@ -122,7 +123,8 @@ export class DashboardLayoutComponent {
       icon: 'apartment',
       label: I18nMenuEnum.MUNICIPALITIES,
       authorities: [RolesEnum.SUPER_ADMIN],
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.VIEW_MUNICIPALITIES,
@@ -142,7 +144,8 @@ export class DashboardLayoutComponent {
       icon: 'pets',
       label: I18nMenuEnum.ANIMAL,
       authorities: [RolesEnum.COMMUNITY_USER],
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.CREATE_ANIMAL_PROFILE,
@@ -156,7 +159,8 @@ export class DashboardLayoutComponent {
       icon: 'pets',
       label: I18nMenuEnum.ABANDONED_ANIMAL,
       authorities: [RolesEnum.CENSISTA_USER],
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.CREATE_ABANDONED_ANIMAL,
@@ -166,14 +170,15 @@ export class DashboardLayoutComponent {
         }
       ],
     },
-     {
+    {
       icon: 'view_in_ar',
       label: I18nMenuEnum.MODEL_3D,
       authorities: [
         RolesEnum.SUPER_ADMIN,
         RolesEnum.COMMUNITY_USER,
       ],
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.VIEW_MODEL_3D,
@@ -195,7 +200,13 @@ export class DashboardLayoutComponent {
         },
       ],
     },
-
+    {
+      icon: 'notification_settings',
+      label: I18nMenuEnum.NOTIFICATION_RULES,
+      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN],
+      click: () => this.closeSidenav(),
+      route: `${RoutesUrlsEnum.NOTIFICATION_RULES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.NOTIFICATION_RULES_LIST}`,
+    },
     {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,

@@ -14,6 +14,7 @@ export * from "./municipality-http-service/municipality-http.service";
 export * from "./municipality-status-http-service/municipality-status-http.service";
 export * from "./neighborhood-http-service/neighborhood-http.service";
 export * from "./notification-http-service/notification-http.service";
+export * from "./notification-rules-http-service/notification-rules-http.service";
 export * from "./race-http-service/race-http.service";
 export * from "./role-http-service/role-http.service";
 export * from "./sanitary-control-response-http-service/sanitary-control-response-http.service";
