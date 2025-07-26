@@ -1,1 +1,43 @@
-<p>notification-rules-edit works!</p>
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h1>
+        {{i18nService.i18nPagesEnum.NOTIFICATION_RULES_PAGE_EDIT_TITLE | translate}}
+      </h1>
+      <mat-chip class="mat-chip-primary">
+        <h2>{{notificationRuleToUpdate()?.type}}</h2>
+      </mat-chip>
+    </div>
+    <button matButton="elevated" (click)="navigateToListNotificationRules()">
+      <mat-icon>
+        arrow_back
+      </mat-icon>
+      {{i18nService.i18nButtonsEnum.BUTTON_RULES_MANAGEMENT | translate}}
+    </button>
+  </div>
+</app-general-container-component>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-lg-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{i18nService.i18nFormsEnum.VALUE_LABEL | translate}}</mat-label>
+        <input
+          matInput
+          formControlName="value"
+          [errorStateMatcher]="formsService.matcher"
+          [placeholder]="i18nService.i18nFormsEnum.VALUE_PLACEHOLDER | translate"
+          type="number" />
+        @let valueControl = form.get('value');
+        @if (formsService.isFieldInvalid(valueControl)) {
+          <mat-error>{{ formsService.getErrorMessage(valueControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="text-end">
+    <button matButton="tonal" type="submit">
+      {{ i18nService.i18nButtonsEnum.BUTTON_UPDATE_NOTIFICATION_RULE | translate }}
+    </button>
+  </div>
+</form>

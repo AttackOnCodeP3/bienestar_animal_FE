@@ -8,8 +8,14 @@
     <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
     <div class="d-flex flex-grow-1 justify-content-end">
       @if (authHttpService.isAuthenticated()) {
-        <button matIconButton matBadge="20" [matBadgeHidden]="false" (click)="openNotificationsModal()">
-          <mat-icon>notifications</mat-icon>
+        <button
+          matIconButton
+          [matBadge]="notificationHttpService.notificationCountByStatusRead()"
+          [matBadgeHidden]="notificationHttpService.showMyNotificationCountBadgeRead()"
+          (click)="openNotificationsModal()">
+          <mat-icon>
+            notifications
+          </mat-icon>
         </button>
       }
       <button mat-icon-button [matMenuTriggerFor]="themeMenu">

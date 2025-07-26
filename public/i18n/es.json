@@ -115,7 +115,8 @@
       "species": "Especie",
       "status": "Estado",
       "productUsed": "Producto utilizado",
-      "applicationDate": "Fecha de aplicación"
+      "applicationDate": "Fecha de aplicación",
+      "value": "Valor"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -159,7 +160,8 @@
       "status": "Seleccione el estado",
       "sex": "Seleccione el sexo",
       "productUsed": "Digite el producto utilizado",
-      "applicationDate": "Seleccione la fecha de aplicación"
+      "applicationDate": "Seleccione la fecha de aplicación",
+      "value": "Ingrese el valor"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -199,8 +201,11 @@
   "create-animal-profile-page": {
     "title": "Creando perfil de animal"
   },
-  "notification-rules-page": {
+  "notification-rules-page-list": {
     "title": "Reglas de notificación"
+  },
+  "notification-rules-page-edit": {
+    "title": "Editando regla de notificación"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {
@@ -286,7 +291,10 @@
     "updateMunicipality": "Actualizar municipalidad",
     "updateUser": "Actualizar usuario",
     "userManagement": "Gestión de usuarios",
-    "registerAnimal": "Registrar animal"
+    "registerAnimal": "Registrar animal",
+    "rulesManagement": "Gestión de reglas",
+    "update": "Actualizar",
+    "updateNotificationRule": "Actualizar regla de notificación"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

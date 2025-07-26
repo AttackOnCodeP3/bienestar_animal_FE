@@ -1,5 +1,5 @@
 import {  Routes  } from '@angular/router';
-import {RoutesUrlsEnum} from '@common/enums';
+import {RouteParamPathsEnum, RoutesUrlsEnum} from '@common/enums';
 
 export const NOTIFICATION_RULES_ROUTES: Routes = [
   {
@@ -8,7 +8,7 @@ export const NOTIFICATION_RULES_ROUTES: Routes = [
     pathMatch: 'full'
   },
   {
-    path: RoutesUrlsEnum.NOTIFICATION_RULES_EDIT,
+    path: RoutesUrlsEnum.NOTIFICATION_RULES_EDIT + RouteParamPathsEnum.NOTIFICATION_RULE_ID,
     loadComponent: () => import('@pages/notification-rules/notification-rules-edit/notification-rules-edit.page').then(m => m.NotificationRulesEditPage)
   },
   {

@@ -79,7 +79,7 @@ export class MunicipalityEditPage implements OnInit {
   ngOnInit(): void {
     this.municipalityStatusHttpService.getAll();
     this.cantonHttpService.getAll();
-    this.inicializeMunicipalityToUpdate();
+    this.initializeMunicipalityToUpdate();
     this.disableUnmodifiableFormControls();
   }
 
@@ -136,7 +136,7 @@ export class MunicipalityEditPage implements OnInit {
    * Initializes the municipality to update based on the ID from the route parameters.
    * @author dgutierrez
    */
-  private inicializeMunicipalityToUpdate() {
+  private initializeMunicipalityToUpdate() {
     const municipalityId = Number(this.route.snapshot.paramMap.get(RouteParamsEnum.MUNICIPALITY_ID));
 
     if (!this.validateMunicipalityId(municipalityId)) {

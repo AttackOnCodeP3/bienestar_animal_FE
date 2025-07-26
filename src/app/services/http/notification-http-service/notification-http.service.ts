@@ -13,6 +13,9 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
 
   readonly myNotificationList = signal<Notification[]>([]);
   readonly notificationSelected = signal<Notification | null>(null);
+  readonly notificationCountByStatusRead = signal<number>(0);
+  readonly showMyNotificationCountBadgeRead = computed(() => this.notificationCountByStatusRead() <= 0);
+  readonly myNotificationCountByStatus = signal<number>(0);
   private readonly isLoading = signal<boolean>(false);
   readonly isNotificationsLoading = computed(() => this.isLoading());
   readonly isNotificationsEmpty = computed(() => {
@@ -62,6 +65,44 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
       error: this.handleError({
         message: 'An error occurred while retrieving the notification by ID.',
         context: `${this.constructor.name}#getNotificationById`,
+      }),
+    });
+  }
+
+  /**
+   * Counts notifications for the current user by status ID.
+   * @param statusId Status ID to filter notifications.
+   * @author dgutierrez
+   */
+  countMyNotificationsByStatus(statusId: number): void {
+    this.http.get<IResponse<number>>(`${this.sourceUrl}/count-my-notifications-by-status`, {
+      params: this.buildUrlParams({ statusId }),
+    }).subscribe({
+      next: (res) => {
+        this.myNotificationCountByStatus.set(res.data);
+      },
+      error: this.handleError({
+        message: 'Ocurrió un error al contar tus notificaciones por estado.',
+        context: `${this.constructor.name}#countMyNotificationsByStatus`,
+      }),
+    });
+  }
+
+  /**
+   * Fetches the count of notifications by status ID and updates the signal.
+   * @param statusId ID of the notification status to filter by.
+   * @author dgutierrez
+   */
+  countByStatus(statusId: number): void {
+    this.http.get<IResponse<number>>(`${this.sourceUrl}/count-by-status`, {
+      params: this.buildUrlParams({ statusId }),
+    }).subscribe({
+      next: (res) => {
+        this.notificationCountByStatusRead.set(res.data);
+      },
+      error: this.handleError({
+        message: 'Ocurrió un error al contar las notificaciones por estado.',
+        context: `${this.constructor.name}#countByStatus`,
       }),
     });
   }

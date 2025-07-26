@@ -2,8 +2,9 @@ import {computed, Injectable, signal} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {BaseHttpService} from '@services/http';
 import {createPageArray} from '@common/utils';
-import {ISearch, IResponse} from '@common/interfaces/http';
+import {IResponse, ISearch} from '@common/interfaces/http';
 import {MunicipalPreventiveCareConfigurationDTO} from '@models/dto';
+import {AlertTypeEnum} from '@common/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,13 @@ export class NotificationRulesHttpService extends BaseHttpService<MunicipalPreve
   protected override source = Constants.MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS_URL;
 
   readonly configurationList = signal<MunicipalPreventiveCareConfigurationDTO[]>([]);
-  readonly selectedConfiguration = signal<MunicipalPreventiveCareConfigurationDTO | null>(null);
+  /**
+   * Signal to hold the selected municipal preventive care configuration.
+   * It can be null if no configuration is selected.
+   * This is used to store the configuration details when fetched by ID or updated.
+   * @author dgutierrez
+   */
+  readonly selectedConfigurationId = signal<MunicipalPreventiveCareConfigurationDTO | null>(null);
   private readonly isLoading = signal<boolean>(false);
 
   readonly isConfigurationsLoading = computed(() => this.isLoading());
@@ -56,7 +63,7 @@ export class NotificationRulesHttpService extends BaseHttpService<MunicipalPreve
   getConfigurationById(id: number, callback?: VoidFunction): void {
     this.http.get<IResponse<MunicipalPreventiveCareConfigurationDTO>>(`${this.sourceUrl}/${id}`).subscribe({
       next: (res) => {
-        this.selectedConfiguration.set(res.data);
+        this.selectedConfigurationId.set(res.data);
         callback?.();
       },
       error: this.handleError({
@@ -76,7 +83,11 @@ export class NotificationRulesHttpService extends BaseHttpService<MunicipalPreve
   updateConfiguration(id: number, payload: Partial<MunicipalPreventiveCareConfigurationDTO>, callback?: VoidFunction): void {
     this.http.put<IResponse<MunicipalPreventiveCareConfigurationDTO>>(`${this.sourceUrl}/${id}`, payload).subscribe({
       next: (res) => {
-        this.selectedConfiguration.set(res.data);
+        this.selectedConfigurationId.set(res.data);
+        this.alertService.displayAlert({
+          type: AlertTypeEnum.SUCCESS,
+          message: res.message,
+        })
         callback?.();
       },
       error: this.handleError({
