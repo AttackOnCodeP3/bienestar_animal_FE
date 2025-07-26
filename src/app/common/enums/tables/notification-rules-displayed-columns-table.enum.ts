@@ -3,5 +3,7 @@
  * @author dgutierrez
  */
 export enum NotificationRulesDisplayedColumnsTableEnum {
-
+  NAME = 'name',
+  VALUE = 'value',
+  ACTIONS = 'actions',
 }

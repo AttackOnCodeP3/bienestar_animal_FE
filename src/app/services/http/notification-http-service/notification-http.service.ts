@@ -1,4 +1,4 @@
-import {computed, Injectable, signal} from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Constants } from '@common/constants/constants';
 import { createPageArray } from '@common/utils';
 import { IResponse, ISearch } from '@common/interfaces/http';
@@ -30,13 +30,6 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
     return this.search.page ?? 1;
   }
 
-  set searchPage(searchPage: number) {
-    this.search.page = searchPage;
-    if (this.search.page < 1) {
-      this.search.page = 1;
-    }
-  }
-
   /**
    * Public method to load notifications with optional pagination control.
    *
@@ -49,7 +42,7 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
     nextPage?: boolean;
     previousPage?: boolean;
   } = {}): void {
-    this.updatePage(options);
+    this.search = this.updatePageState(this.search, options);
     this.fetchNotifications();
   }
 
@@ -58,6 +51,7 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
    *
    * @param notificationId Notification ID
    * @param callback Optional callback on success
+   * @author dgutierrez
    */
   getNotificationById(notificationId: number, callback?: VoidFunction): void {
     this.http.get<IResponse<Notification>>(`${this.sourceUrl}/${notificationId}`).subscribe({
@@ -72,18 +66,10 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
     });
   }
 
-  private updatePage(options: { page?: number; nextPage?: boolean; previousPage?: boolean }): void {
-    if (typeof options.page === 'number') {
-      this.searchPage = options.page;
-    } else if (options.nextPage) {
-      this.searchPage += 1;
-    } else if (options.previousPage) {
-      this.searchPage -= 1;
-    }
-
-    if (this.searchPage < 1) this.search.page = 1;
-  }
-
+  /**
+   * Updates a notification by its unique ID and updates the signal state.
+   * author dgutierrez
+   */
   private fetchNotifications(): void {
     const params = {
       page: this.search.page,
@@ -109,6 +95,11 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
     });
   }
 
+  /**
+   * Updates the pagination state based on the total number of pages.
+   * @param totalPages Total number of pages available
+   * @author dgutierrez
+   */
   private updatePagination(totalPages: number): void {
     this.totalItems = createPageArray(totalPages);
     if (this.searchPage > totalPages && totalPages > 0) {

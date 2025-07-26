@@ -8,22 +8,17 @@
 
 <div class="box-shadow-1">
   <mat-table [dataSource]="dataSource()">
-    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.NAME">
+    <ng-container [matColumnDef]="tableService.notificationRulesDisplayedColumnsTableEnum.NAME">
       <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_NAME | translate }}</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.type }}</mat-cell>
     </ng-container>
 
-    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.EMAIL">
-      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_EMAIL | translate }}</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.email }}</mat-cell>
+    <ng-container [matColumnDef]="tableService.notificationRulesDisplayedColumnsTableEnum.VALUE">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_VALUE | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.value }}</mat-cell>
     </ng-container>
 
-    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.STATUS">
-      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_STATUS | translate }}</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.status.name }}</mat-cell>
-    </ng-container>
-
-    <ng-container [matColumnDef]="tableService.municipalityManagementDisplayedColumnsTableEnum.ACTIONS">
+    <ng-container [matColumnDef]="tableService.notificationRulesDisplayedColumnsTableEnum.ACTIONS">
       <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <button matIconButton (click)="navigateToEditRule(element.id)">
@@ -38,9 +33,9 @@
 
   <mat-paginator
     [pageSizeOptions]="tableService.pageSizeOptions"
-    [length]="municipalityHttpService.search.totalElements || 0"
-    [pageSize]="municipalityHttpService.search.pageSize || municipalityHttpService.search.size"
-    [pageIndex]="(municipalityHttpService.search.pageNumber || municipalityHttpService.search.page || 1) - 1"
+    [length]="notificationRulesHttpService.search.totalElements || 0"
+    [pageSize]="notificationRulesHttpService.search.pageSize || notificationRulesHttpService.search.size"
+    [pageIndex]="(notificationRulesHttpService.search.pageNumber || notificationRulesHttpService.search.page || 1) - 1"
     (page)="onPageChange($event)"
     showFirstLastButtons="true">
   </mat-paginator>

@@ -5,6 +5,7 @@ export * from "./canton";
 export * from "./district";
 export * from "./interest";
 export * from "./model-3d-animal";
+export * from "./municipal-preventive-care-configuration";
 export * from "./municipality";
 export * from "./municipality-status";
 export * from "./neighborhood";

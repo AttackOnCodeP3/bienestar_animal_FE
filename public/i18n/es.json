@@ -258,7 +258,8 @@
       "actions": "Acciones",
       "active": "Activo",
       "activateDesactivate": "Activar/Desactivar",
-      "block": "Bloquear"
+      "block": "Bloquear",
+      "value": "Valor"
     },
     "emptyMessage": {
       "noDataAvailable": "No hay datos disponibles"

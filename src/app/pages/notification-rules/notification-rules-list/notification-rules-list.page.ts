@@ -1,4 +1,4 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, OnInit} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {GeneralContainerComponent} from '@components/layout';
 import {MatButton, MatIconButton} from '@angular/material/button';
@@ -18,7 +18,7 @@ import {
   MatTable,
   MatTableDataSource
 } from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {NotificationRulesDisplayedColumnsTableEnum} from 'common/enums/tables';
 import {NotificationRulesHttpService} from '@services/http';
 
@@ -51,17 +51,35 @@ import {NotificationRulesHttpService} from '@services/http';
   styleUrl: './notification-rules-list.page.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
-export class NotificationRulesListPage {
+export class NotificationRulesListPage implements OnInit {
   readonly i18nService = inject(I18nService);
   readonly tableService = inject(TableService);
   readonly notificationRulesHttpService = inject(NotificationRulesHttpService);
 
   readonly dataSource = computed(() => {
-    return new MatTableDataSource(this.)
+    return new MatTableDataSource(this.notificationRulesHttpService.configurationList());
   })
+
+  ngOnInit() {
+    this.notificationRulesHttpService.getAll();
+  }
+
   displayedColumns = [...Object.values(NotificationRulesDisplayedColumnsTableEnum)];
 
   navigateToEditRule(id: number) {
 
+  }
+
+  /**
+   * Handles pagination changes for the notification rules table.
+   * @param event The pagination event containing the new page index and size.
+   * @author dgutierrez
+   */
+  onPageChange(event: PageEvent) {
+    this.tableService.onPageChangeGeneric(
+      event,
+      this.notificationRulesHttpService.search,
+      () => this.notificationRulesHttpService.getAll()
+    );
   }
 }
