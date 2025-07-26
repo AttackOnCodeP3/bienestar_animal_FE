@@ -16,4 +16,5 @@ export enum I18nTablesEnum {
   COLUMN_NAME = I18nTablesEnum.COLUMNS + 'name',
   COLUMN_PHONE_NUMBER = I18nTablesEnum.COLUMNS + 'phoneNumber',
   COLUMN_STATUS = I18nTablesEnum.COLUMNS + 'status',
+  COLUMN_VALUE = I18nTablesEnum.COLUMNS + 'value',
 }

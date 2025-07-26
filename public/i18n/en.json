@@ -24,7 +24,11 @@
     "reports": "Reports",
     "model-3d": "3D Model",
     "user-management": "User Management",
-    "viewMunicipalities": "View Municipalities"
+    "viewMunicipalities": "View Municipalities",
+    "notificationRules": "Notification Rules",
+    "notificationRulesCreate": "Create Notification Rule",
+    "notificationRulesEdit": "Edit Notification Rule",
+    "notificationRulesList": "Notification Rules List"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
@@ -35,6 +39,10 @@
     "delete": "Delete",
     "roles": "Roles",
     "hasThisControlBeenApplied": "Has this control been applied?"
+  },
+  "notifications-modal-component": {
+    "title": "Notifications",
+    "noNotifications": "No notifications available"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
@@ -107,7 +115,8 @@
       "species": "Species",
       "status": "Status",
       "productUsed": "Product Used",
-      "applicationDate": "Application Date"
+      "applicationDate": "Application Date",
+      "value": "Value"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -151,7 +160,8 @@
       "status": "Select status",
       "sex": "Seleccione el sexo",
       "productUsed": "Enter product used",
-      "applicationDate": "Enter application date"
+      "applicationDate": "Enter application date",
+      "value": "Enter value"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -194,6 +204,12 @@
   },
   "create-animal-profile-page": {
     "title": "Creating Animal Profile"
+  },
+  "notification-rules-page-list": {
+    "title": "Notification Rules"
+  },
+  "notification-rules-page-edit": {
+    "title": "Editing Notification Rule"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {
@@ -242,7 +258,8 @@
       "actions": "Actions",
       "active": "Active",
       "activateDesactivate": "Activate/Deactivate",
-      "block": "Block"
+      "block": "Block",
+      "value": "Valor"
     },
     "emptyMessage": {
       "noDataAvailable": "No data available"
@@ -269,7 +286,10 @@
     "updateMunicipality": "Update Municipality",
     "updateUser": "Update User",
     "userManagement": "User Management",
-    "registerAnimal": "Register Animal"
+    "registerAnimal": "Register Animal",
+    "rulesManagement": "Rules Management",
+    "update": "Update",
+    "updateNotificationRule": "Update Notification Rule"
   },
   "matSnackBarMessages": {
     "http": {

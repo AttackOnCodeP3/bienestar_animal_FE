@@ -35,8 +35,13 @@ export enum PagesUrlsEnum {
   SECURITY_USER_MANAGEMENT = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
   SECURITY_CREATE_USER = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_CREATE_USER,
   SECURITY_EDIT_USER = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_EDIT_USER,
-  
-  // MODEL_3D Routes 
+
+  // MODEL_3D Routes
   MODEL_3D_CREATE = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D_CREATE,
   MODEL_3D_LIST = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D_LIST,
+
+  // Routes of the Notification Rules module
+  NOTIFICATION_RULES = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES,
+  NOTIFICATION_RULES_EDIT = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES_EDIT,
+  NOTIFICATION_RULES_LIST = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES_LIST,
 }

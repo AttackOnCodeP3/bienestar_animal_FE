@@ -48,6 +48,7 @@
       "@components/animal": ["app/components/animal/index.ts"], // Alias for animal component index file
       "@components/general": ["app/components/index.ts"], // Alias for general component index file
       "@components/layout": ["app/components/layout/index.ts"], // Alias for layout component index file
+      "@components/modals": ["app/components/modals/index.ts"], // Alias for modals index file
 
       "@models": ["app/models/index.ts"], // Alias for models index file
       "@models/dto": ["app/models/dto/index.ts"], // Alias for DTO models index file

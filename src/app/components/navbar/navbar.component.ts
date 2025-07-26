@@ -1,16 +1,24 @@
-import {Component, inject, input} from '@angular/core';
+import {Component, inject, input, OnInit} from '@angular/core';
+
 import {MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {MatBadge} from '@angular/material/badge';
 import {MatToolbar, MatToolbarRow} from '@angular/material/toolbar';
 import {MatIcon} from '@angular/material/icon';
+
 import {TranslatePipe} from '@ngx-translate/core';
+
 import {MatSidenav} from '@angular/material/sidenav';
 import {Constants} from '@common/constants/constants';
-import {I18nService, ThemeService} from '@services/general';
+
+import {I18nService, ModalService, ThemeService} from '@services/general';
+import {AuthHttpService, NotificationHttpService} from '@services/http';
+import {NotificationStatusEnum} from '@common/enums';
 
 @Component({
   selector: 'app-navbar',
   imports: [
+    MatBadge,
     MatIcon,
     MatIconButton,
     MatMenu,
@@ -24,10 +32,25 @@ import {I18nService, ThemeService} from '@services/general';
   styleUrl: './navbar.component.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  readonly modalService = inject(ModalService);
+
   readonly showMenuToggle = input<boolean>(true)
   readonly matSidenav = input<MatSidenav>();
+  readonly authHttpService = inject(AuthHttpService);
+  readonly notificationHttpService = inject(NotificationHttpService);
 
   readonly theme = inject(ThemeService)
   readonly i18n = inject(I18nService);
+
+  ngOnInit() {
+    if (this.authHttpService.isAuthenticated()) {
+      this.notificationHttpService.countMyUnreadNotifications()
+    }
+  }
+
+  openNotificationsModal() {
+    this.notificationHttpService.markAllMyNotificationsAsRead();
+    this.modalService.openNotificationsModal();
+  }
 }

@@ -1,0 +1,42 @@
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      {{i18nService.i18nPagesEnum.NOTIFICATION_RULES_PAGE_LIST_TITLE | translate}}
+    </h1>
+  </div>
+</app-general-container-component>
+
+<div class="box-shadow-1">
+  <mat-table [dataSource]="dataSource()">
+    <ng-container [matColumnDef]="tableService.notificationRulesDisplayedColumnsTableEnum.NAME">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_NAME | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.type }}</mat-cell>
+    </ng-container>
+
+    <ng-container [matColumnDef]="tableService.notificationRulesDisplayedColumnsTableEnum.VALUE">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_VALUE | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.value }}</mat-cell>
+    </ng-container>
+
+    <ng-container [matColumnDef]="tableService.notificationRulesDisplayedColumnsTableEnum.ACTIONS">
+      <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button matIconButton (click)="navigateToEditRule(element.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    [pageSizeOptions]="tableService.pageSizeOptions"
+    [length]="notificationRulesHttpService.search.totalElements || 0"
+    [pageSize]="notificationRulesHttpService.search.pageSize || notificationRulesHttpService.search.size"
+    [pageIndex]="(notificationRulesHttpService.search.pageNumber || notificationRulesHttpService.search.page || 1) - 1"
+    (page)="onPageChange($event)"
+    showFirstLastButtons="true">
+  </mat-paginator>
+</div>

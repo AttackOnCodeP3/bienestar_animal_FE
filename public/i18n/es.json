@@ -34,9 +34,16 @@
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
     "viewMunicipalities": "Ver municipalidades",
-     "model-3d": "Modelo 3D",
-      "viewModel3D": "Ver modelos 3D",
-      "createModel3D": "Crear modelo 3D"
+    "model-3d": "Modelo 3D",
+    "viewModel3D": "Ver modelos 3D",
+    "createModel3D": "Crear modelo 3D",
+    "notificationRules": "Reglas de notificación",
+    "notificationRulesEdit": "Editar reglas",
+    "notificationRulesList": "Lista de reglas"
+  },
+  "notifications-modal-component": {
+    "title": "Notificaciones",
+    "noNotifications": "No hay notificaciones disponibles"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
@@ -57,7 +64,6 @@
     "title": "Reset Password",
     "subtitle": "Enter your new password"
   },
-
   "animal-basic-info-form-component": {
     "title": "Información básica general"
   },
@@ -109,7 +115,8 @@
       "species": "Especie",
       "status": "Estado",
       "productUsed": "Producto utilizado",
-      "applicationDate": "Fecha de aplicación"
+      "applicationDate": "Fecha de aplicación",
+      "value": "Valor"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -153,7 +160,8 @@
       "status": "Seleccione el estado",
       "sex": "Seleccione el sexo",
       "productUsed": "Digite el producto utilizado",
-      "applicationDate": "Seleccione la fecha de aplicación"
+      "applicationDate": "Seleccione la fecha de aplicación",
+      "value": "Ingrese el valor"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -172,7 +180,6 @@
     "title": "Recuperar contraseña",
     "subtitle": "Ingrese su correo electrónico para recuperar su contraseña"
   },
-
   "user-management-page": {
     "title": "Gestión de usuarios"
   },
@@ -193,6 +200,12 @@
   },
   "create-animal-profile-page": {
     "title": "Creando perfil de animal"
+  },
+  "notification-rules-page-list": {
+    "title": "Reglas de notificación"
+  },
+  "notification-rules-page-edit": {
+    "title": "Editando regla de notificación"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {
@@ -250,7 +263,8 @@
       "actions": "Acciones",
       "active": "Activo",
       "activateDesactivate": "Activar/Desactivar",
-      "block": "Bloquear"
+      "block": "Bloquear",
+      "value": "Valor"
     },
     "emptyMessage": {
       "noDataAvailable": "No hay datos disponibles"
@@ -277,7 +291,10 @@
     "updateMunicipality": "Actualizar municipalidad",
     "updateUser": "Actualizar usuario",
     "userManagement": "Gestión de usuarios",
-    "registerAnimal": "Registrar animal"
+    "registerAnimal": "Registrar animal",
+    "rulesManagement": "Gestión de reglas",
+    "update": "Actualizar",
+    "updateNotificationRule": "Actualizar regla de notificación"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

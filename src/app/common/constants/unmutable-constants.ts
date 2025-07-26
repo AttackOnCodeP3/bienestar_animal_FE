@@ -114,6 +114,11 @@ export abstract class UnmutableConstants {
   private static readonly COMMUNITY_ANIMALS: string = '/community-animals';
   static readonly COMMUNITY_ANIMALS_URL: string = UnmutableConstants.COMMUNITY_ANIMALS;
 
+  /**
+   * Endpoint to get the animals related to the user connected
+   */
+  static readonly COMMUNITY_ANIMALS_MINE: string  = UnmutableConstants.COMMUNITY_ANIMALS + '/mine';
+
   // ==================================================================
   // ROUTES FOR ABANDONED ANIMALS SERVICES
   // =================================================================
@@ -162,4 +167,16 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly MODEL_3D_ANIMAL: string = '/model3d-animal'
   static readonly MODEL_3D_ANIMAL_URL: string = UnmutableConstants.MODEL_3D_ANIMAL;
+
+  // ==================================================================
+  // ROUTES FOR MODEL NOTIFICATION SERVICES
+  // =================================================================
+  private static readonly NOTIFICATIONS: string = '/notifications';
+  static readonly NOTIFICATIONS_URL: string = UnmutableConstants.NOTIFICATIONS;
+
+  // ==================================================================
+  // ROUTES FOR MODEL MUNICIPALITY NOTIFICATION RULES SERVICES
+  // =================================================================
+  private static readonly MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS: string = '/municipal-preventive-care-configurations';
+  static readonly MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS_URL = UnmutableConstants.MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS;
 }
