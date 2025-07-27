@@ -214,17 +214,17 @@ export class DashboardLayoutComponent {
       click: () => this.closeSidenav(),
       children: [
         {
-          label: I18nMenuEnum.ANNOUNCEMENT_CREATE,
-          route: `${RoutesUrlsEnum.ANNOUNCEMENTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANNOUNCEMENTS_CREATE}`,
-          authorities: [RolesEnum.MUNICIPAL_ADMIN],
-          click: () => this.closeSidenav(),
-        },
-        {
           label: I18nMenuEnum.ANNOUNCEMENT_LIST,
           route: `${RoutesUrlsEnum.ANNOUNCEMENTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANNOUNCEMENTS_LIST}`,
           authorities: [RolesEnum.MUNICIPAL_ADMIN],
           click: () => this.closeSidenav(),
         },
+        {
+          label: I18nMenuEnum.ANNOUNCEMENT_CREATE,
+          route: `${RoutesUrlsEnum.ANNOUNCEMENTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANNOUNCEMENTS_CREATE}`,
+          authorities: [RolesEnum.MUNICIPAL_ADMIN],
+          click: () => this.closeSidenav(),
+        }
       ],
     },
     {

@@ -179,4 +179,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS: string = '/municipal-preventive-care-configurations';
   static readonly MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS_URL = UnmutableConstants.MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS;
+
+  // ==================================================================
+  // ROUTES FOR MODEL ANNOUNCEMENT STATES SERVICES
+  // =================================================================
+  private static readonly ANNOUNCEMENT_STATES: string = '/announcement-states';
+  static readonly ANNOUNCEMENT_STATES_URL: string = UnmutableConstants.ANNOUNCEMENT_STATES;
 }
