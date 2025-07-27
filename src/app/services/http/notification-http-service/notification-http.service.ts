@@ -27,6 +27,7 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
   readonly unreadCount = signal<number>(0);
   readonly myStatusCount = signal<number>(0);
   readonly myUnreadCount = signal<number>(0);
+  readonly hasReachedEnd = signal<boolean>(false);
 
   readonly showUnreadBadge = computed(() => this.unreadCount() > 0);
   readonly showMyUnreadBadge = computed(() => this.myUnreadCount() <= 0);
@@ -189,9 +190,19 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
       params: this.buildUrlParams(params),
     }).subscribe({
       next: (res) => {
-        this.notificationDTOList.set(res.data);
+        if ((this.search.page ?? 1) > 1) {
+          const updatedList = [...this.notificationDTOList(), ...res.data];
+          this.notificationDTOList.set(updatedList);
+        } else {
+          this.notificationDTOList.set(res.data);
+        }
+
         this.updatePagination(res.meta?.totalPages ?? 0);
         this.search = { ...this.search, ...res.meta };
+
+        const currentPage = this.search.page ?? 1;
+        const totalPages = this.search.totalPages ?? res.meta?.totalPages ?? 1;
+        this.hasReachedEnd.set(currentPage >= totalPages);
       },
       error: this.handleError({
         message: 'Error al obtener tus notificaciones.',

@@ -36,19 +36,19 @@ import {MatCard, MatCardContent} from '@angular/material/card';
     DatePipe,
     FormsModule,
     InfiniteScrollDirective,
+    LottieComponent,
     MatButtonModule,
+    MatCard,
+    MatCardContent,
     MatDialogActions,
+    MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
     MatFormFieldModule,
     MatIcon,
     MatInputModule,
-    TranslatePipe,
-    MatDialogClose,
     MatProgressSpinner,
-    LottieComponent,
-    MatCardContent,
-    MatCard,
+    TranslatePipe,
   ],
   templateUrl: './notifications-modal.component.html',
   styleUrl: './notifications-modal.component.scss',
@@ -63,6 +63,10 @@ export class NotificationsModalComponent implements OnInit {
   readonly animationOptions: AnimationOptions = {
     path: LottieAnimationsPathsEnum.NO_NOTIFICATIONS_AVAILABLE,
   };
+
+  readonly animationsOptionsEndReached: AnimationOptions = {
+    path: LottieAnimationsPathsEnum.END_REACHED,
+  }
 
   readonly throttle = 300;
   readonly scrollDistance = 1;

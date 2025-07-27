@@ -9,12 +9,6 @@
   [scrollWindow]="false"
   class="mat-typography"
 >
-  @if (notificationHttpService.isNotificationsLoading()) {
-    <div class="d-flex justify-content-center">
-      <mat-spinner/>
-    </div>
-  }
-
   @if (notificationHttpService.isEmpty()) {
     <ng-lottie [options]="animationOptions"/>
     <p class="text-center">{{ i18nService.i18nComponentsEnum.NOTIFICATIONS_MODAL_NO_NOTIFICATIONS | translate }}</p>
@@ -40,6 +34,16 @@
 
       </div>
     </mat-card>
+  }
+
+  @if (notificationHttpService.isNotificationsLoading()) {
+    <div class="d-flex justify-content-center">
+      <mat-spinner/>
+    </div>
+  }
+
+  @if(notificationHttpService.hasReachedEnd()) {
+    <ng-lottie [options]="animationsOptionsEndReached"/>
   }
 </mat-dialog-content>
 
