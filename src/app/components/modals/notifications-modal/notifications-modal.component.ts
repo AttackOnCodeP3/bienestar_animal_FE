@@ -23,6 +23,7 @@ import {I18nService} from '@services/general';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LottieAnimationsPathsEnum} from '@common/enums';
 import {MatCard, MatCardContent} from '@angular/material/card';
+import {MatChip} from '@angular/material/chips';
 
 /**
  * Component for displaying a modal dialog with user notifications.
@@ -49,6 +50,7 @@ import {MatCard, MatCardContent} from '@angular/material/card';
     MatInputModule,
     MatProgressSpinner,
     TranslatePipe,
+    MatChip,
   ],
   templateUrl: './notifications-modal.component.html',
   styleUrl: './notifications-modal.component.scss',
