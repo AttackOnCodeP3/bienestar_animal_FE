@@ -24,7 +24,7 @@
     <div class="col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Estado del anuncio</mat-label>
-        <mat-select>
+        <mat-select placeholder="Seleccione un estado">
           @for (
             announcementState of announcementStateHttpService.announcementStatesList(); track announcementState.id) {
             <mat-option [value]="announcementState">{{ announcementState.name }}</mat-option>
