@@ -44,4 +44,10 @@ export enum PagesUrlsEnum {
   NOTIFICATION_RULES = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES,
   NOTIFICATION_RULES_EDIT = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES_EDIT,
   NOTIFICATION_RULES_LIST = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES_LIST,
+
+  // Routes of the Announcements module
+  ANNOUNCEMENTS = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS,
+  ANNOUNCEMENTS_LIST = RoutesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_LIST,
+  ANNOUNCEMENTS_CREATE = RoutesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_CREATE,
+  ANNOUNCEMENTS_EDIT = RoutesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_EDIT,
 }

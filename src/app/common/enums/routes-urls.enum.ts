@@ -64,4 +64,10 @@ export enum RoutesUrlsEnum {
   //Notification Rules Municipality
   NOTIFICATION_RULES_EDIT = 'notification-rules-edit',
   NOTIFICATION_RULES_LIST = 'notification-rules-list',
+
+  //Anouncements
+  ANNOUNCEMENTS = 'announcements',
+  ANNOUNCEMENTS_LIST = 'announcements-list',
+  ANNOUNCEMENTS_CREATE = 'announcements-create',
+  ANNOUNCEMENTS_EDIT = 'announcements-edit',
 }

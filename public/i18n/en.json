@@ -28,7 +28,10 @@
     "notificationRules": "Notification Rules",
     "notificationRulesCreate": "Create Notification Rule",
     "notificationRulesEdit": "Edit Notification Rule",
-    "notificationRulesList": "Notification Rules List"
+    "notificationRulesList": "Notification Rules List",
+    "announcements": "Announcements",
+    "announcementCreate": "Create Announcement",
+    "announcementList": "Announcement List"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",

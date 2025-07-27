@@ -39,7 +39,10 @@
     "createModel3D": "Crear modelo 3D",
     "notificationRules": "Reglas de notificación",
     "notificationRulesEdit": "Editar reglas",
-    "notificationRulesList": "Lista de reglas"
+    "notificationRulesList": "Lista de reglas",
+    "announcements": "Anuncios",
+    "announcementCreate": "Crear anuncio",
+    "announcementList": "Lista de anuncios"
   },
   "notifications-modal-component": {
     "title": "Notificaciones",
