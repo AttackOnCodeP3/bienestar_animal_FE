@@ -172,13 +172,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
       this.formNeutering,
     );
 
-    const {success, coordinates} = await this.locationService.getUserLocation();
-
-    if (!success) {
-      this.alertService.displayAlert({
-        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_LOCATION_NOT_AVAILABLE
-      });
-    }
+    const {coordinates} = await this.locationService.getUserLocation();
 
     const createAnimalRequestDto = new CreateAnimalRequestDto({
       birthDate,
