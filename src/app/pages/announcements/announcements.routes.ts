@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {RoutesUrlsEnum} from '@common/enums';
+import {RouteParamPathsEnum, RoutesUrlsEnum} from '@common/enums';
 
 /**
  * Defines the routes for the announcements feature in the application.
@@ -20,7 +20,7 @@ export const ANNOUNCEMENTS_ROUTES: Routes = [
     loadComponent: () => import('@pages/announcements/announcement-create/announcement-create.page').then(m => m.AnnouncementCreatePage)
   },
   {
-    path: RoutesUrlsEnum.ANNOUNCEMENTS_EDIT,
+    path: RoutesUrlsEnum.ANNOUNCEMENTS_EDIT + RouteParamPathsEnum.ANNOUNCEMENT_ID,
     loadComponent: () => import('@pages/announcements/announcement-edit/announcement-edit.page').then(m => m.AnnouncementEditPage)
   }
 ]

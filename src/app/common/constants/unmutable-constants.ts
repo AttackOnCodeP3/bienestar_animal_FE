@@ -185,4 +185,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly ANNOUNCEMENT_STATES: string = '/announcement-states';
   static readonly ANNOUNCEMENT_STATES_URL: string = UnmutableConstants.ANNOUNCEMENT_STATES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL ANNOUNCEMENTS SERVICES
+  // =================================================================
+  private static readonly ANNOUNCEMENTS: string = '/announcements';
+  static readonly ANNOUNCEMENTS_URL: string = UnmutableConstants.ANNOUNCEMENTS
 }

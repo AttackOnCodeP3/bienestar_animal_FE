@@ -1,5 +1,6 @@
 export * from "./abandoned-animal-http-service/abandoned-animal-http.service";
 export * from "./animal-types-http-service/animal-types-http.service";
+export * from "./announcement-http-service/announcement-http.service";
 export * from "./announcement-state-http-service/announcement-state-http.service";
 export * from "./auth-http-service/auth-http.service";
 export * from "./base-http-service/base-http.service";
