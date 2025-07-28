@@ -5,6 +5,7 @@ import {InputType} from '@common/types';
 import {I18nService, LogService} from '@services/general';
 import {I18nFormsEnum} from '@common/enums/i18n';
 import {IIdentifiable} from '@common/interfaces';
+import {FilterOptionEnum} from '@common/enums';
 
 /**
  * Service for managing forms, including validation and error handling.
@@ -62,6 +63,10 @@ export class FormsService {
 
   constructor() {
     this.initializeErrorMessages();
+  }
+
+  get filterOptionEnum() {
+    return FilterOptionEnum;
   }
 
   /**

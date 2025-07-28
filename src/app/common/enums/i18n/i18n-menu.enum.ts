@@ -25,4 +25,7 @@ export enum I18nMenuEnum {
   NOTIFICATION_RULES = I18nMenuEnum.MENU + '.notificationRules',
   NOTIFICATION_RULES_EDIT = I18nMenuEnum.MENU + '.notificationRulesEdit',
   NOTIFICATION_RULES_LIST = I18nMenuEnum.MENU + '.notificationRulesList',
+  ANNOUNCEMENTS = I18nMenuEnum.MENU + '.announcements',
+  ANNOUNCEMENT_CREATE = I18nMenuEnum.MENU + '.announcementCreate',
+  ANNOUNCEMENT_LIST = I18nMenuEnum.MENU + '.announcementList',
 }

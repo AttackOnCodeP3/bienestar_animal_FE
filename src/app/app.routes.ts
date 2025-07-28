@@ -93,6 +93,11 @@ export const routes: Routes = [
         path: RoutesUrlsEnum.NOTIFICATION_RULES,
         canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN])],
         loadChildren: () => import('@pages/notification-rules/notification-rules.routes').then(m => m.NOTIFICATION_RULES_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.ANNOUNCEMENTS,
+        canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN])],
+        loadChildren: () => import('@pages/announcements/announcements.routes').then(m => m.ANNOUNCEMENTS_ROUTES),
       }
     ]
   }

@@ -28,7 +28,10 @@
     "notificationRules": "Notification Rules",
     "notificationRulesCreate": "Create Notification Rule",
     "notificationRulesEdit": "Edit Notification Rule",
-    "notificationRulesList": "Notification Rules List"
+    "notificationRulesList": "Notification Rules List",
+    "announcements": "Announcements",
+    "announcementCreate": "Create Announcement",
+    "announcementList": "Announcement List"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
@@ -250,17 +253,24 @@
   "================== TABLES ==================": "",
   "tables": {
     "columns": {
-      "name": "Name",
-      "lastname": "Last Name",
-      "email": "Email",
-      "phoneNumber": "Phone Number",
-      "status": "Status",
       "actions": "Actions",
-      "active": "Active",
       "activateDesactivate": "Activate/Deactivate",
+      "active": "Active",
       "block": "Block",
+      "description": "Description",
+      "email": "Email",
+      "endDate": "End Date",
+      "imageUrl": "Image URL",
+      "lastname": "Last Name",
+      "name": "Name",
+      "phoneNumber": "Phone Number",
+      "startDate": "Start Date",
+      "state": "State",
+      "status": "Status",
+      "title": "Title",
       "value": "Valor"
     },
+    "noDataAvailable": "No data available",
     "emptyMessage": {
       "noDataAvailable": "No data available"
     }

@@ -1,0 +1,126 @@
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      Gestionar anuncios
+    </h1>
+    <button matButton="elevated">
+      <mat-icon>add</mat-icon>
+      Crear anuncio
+    </button>
+  </div>
+</app-general-container-component>
+
+<app-general-container-component>
+  <form class="row" [formGroup]="searchForm">
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Titulo del anuncio</mat-label>
+        <input
+          matInput
+          placeholder="Ingrese el nombre del anuncio"
+          formControlName="announcementTitle"
+        />
+        @let announcementTitleControl = searchForm.get('announcementTitle');
+        @if (formsService.isFieldInvalid(announcementTitleControl)) {
+          <mat-error>{{ formsService.getErrorMessage(announcementTitleControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Estado del anuncio</mat-label>
+        <mat-select
+          placeholder="Seleccione un estado"
+          formControlName="announcementState"
+        >
+          <mat-option [value]="formsService.filterOptionEnum.ALL">Todos los estados</mat-option>
+          @for (
+            announcementState of announcementStateHttpService.announcementStatesList(); track announcementState.id) {
+            <mat-option [value]="announcementState.id">{{ announcementState.name }}</mat-option>
+          }
+        </mat-select>
+        @let announcementStateControl = searchForm.get('announcementState');
+        @if (formsService.isFieldInvalid(announcementStateControl)) {
+          <mat-error>{{ formsService.getErrorMessage(announcementStateControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="text-end">
+      <button matButton="text" (click)="resetSearchForm()">
+        <mat-icon>
+          delete
+        </mat-icon>
+        Limpiar
+      </button>
+      <button
+        class="ms-3"
+        matButton="tonal"
+        (click)="searchAnnouncements()"
+      >
+        <mat-icon>
+          filter_list
+        </mat-icon>
+        Filtrar
+      </button>
+    </div>
+  </form>
+</app-general-container-component>
+
+@if (announcementHttpService.hasSearchedAnnouncements()) {
+  <div class="box-shadow-1">
+    <mat-table [dataSource]="dataSource()">
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.TITLE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_TITLE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.DESCRIPTION">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_DESCRIPTION | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.START_DATE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_START_DATE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.startDate }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.END_DATE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_END_DATE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.endDate }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.STATE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_STATE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.state.name }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.ACTIONS">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button matIconButton (click)="navigateToEditAnnouncement(element.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <tr class="d-flex justify-content-center my-3" *matNoDataRow>
+        <td class="d-flex align-items-center" [attr.colspan]="displayedColumns.length">
+          <mat-icon color="warn" class="no-data-icon">info</mat-icon>
+          <span class="ms-2">{{ i18nService.i18nTablesEnum.NO_DATA_AVAILABLE | translate }}</span>
+        </td>
+      </tr>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      [pageSizeOptions]="tableService.pageSizeOptions"
+      [length]="announcementHttpService.search.totalElements || 0"
+      [pageSize]="announcementHttpService.search.pageSize || announcementHttpService.search.size"
+      [pageIndex]="(announcementHttpService.search.pageNumber || announcementHttpService.search.page || 1) - 1"
+      (page)="onPageChange($event)"
+      showFirstLastButtons="true">
+    </mat-paginator>
+  </div>
+}

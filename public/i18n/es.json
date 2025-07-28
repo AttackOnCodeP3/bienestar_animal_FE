@@ -39,7 +39,10 @@
     "createModel3D": "Crear modelo 3D",
     "notificationRules": "Reglas de notificación",
     "notificationRulesEdit": "Editar reglas",
-    "notificationRulesList": "Lista de reglas"
+    "notificationRulesList": "Lista de reglas",
+    "announcements": "Anuncios",
+    "announcementCreate": "Crear anuncio",
+    "announcementList": "Lista de anuncios"
   },
   "notifications-modal-component": {
     "title": "Notificaciones",
@@ -255,17 +258,24 @@
   "================== TABLES ==================": "",
   "tables": {
     "columns": {
-      "name": "Nombre",
-      "lastname": "Apellido",
-      "email": "Correo electrónico",
-      "phoneNumber": "Número de teléfono",
-      "status": "Estado",
       "actions": "Acciones",
-      "active": "Activo",
       "activateDesactivate": "Activar/Desactivar",
+      "active": "Activo",
       "block": "Bloquear",
+      "description": "Descripción",
+      "email": "Correo electrónico",
+      "endDate": "Fecha de finalización",
+      "imageUrl": "URL de la imagen",
+      "lastname": "Apellido",
+      "name": "Nombre",
+      "phoneNumber": "Número de teléfono",
+      "startDate": "Fecha de inicio",
+      "state": "Estado",
+      "status": "Estado",
+      "title": "Título",
       "value": "Valor"
     },
+    "noDataAvailable": "No hay datos disponibles",
     "emptyMessage": {
       "noDataAvailable": "No hay datos disponibles"
     }
