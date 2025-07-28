@@ -1,3 +1,4 @@
+export * from "./abandoned-animal/create-abandoned-animal-request.dto";
 export * from "./animal/create-animal-request.dto";
 export * from "./animal/sanitary-control.dto";
 export * from "./animal/vaccine-application.dto";
@@ -5,7 +6,7 @@ export * from "./generic/age.dto";
 export * from "./municipal-preventive-care-configuration/municipal-preventive-care-configuration.dto";
 export * from "./municipality/create-municipality-request.dto";
 export * from "./municipality/update-municipality-status-request.dto";
+export * from "./notification.dto";
 export * from "./user/complete-profile-request.dto";
 export * from "./user/register-user-request.dto";
 export * from "./user/update-user-request.dto";
-export * from "./notification.dto";

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  MunicipalityManagementDisplayedColumnsTableEnum, NotificationRulesDisplayedColumnsTableEnum,
+  MunicipalityManagementDisplayedColumnsTableEnum, NotificationRulesManagementDisplayedColumnsTableEnum,
   UserManagementDisplayedColumnsTableEnum
 } from 'common/enums/tables';
 import {PageEvent} from '@angular/material/paginator';
@@ -31,7 +31,7 @@ export class TableService {
   }
 
   get notificationRulesDisplayedColumnsTableEnum() {
-    return NotificationRulesDisplayedColumnsTableEnum;
+    return NotificationRulesManagementDisplayedColumnsTableEnum;
   }
 
   /**

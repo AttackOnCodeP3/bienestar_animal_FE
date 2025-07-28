@@ -11,20 +11,25 @@
 </app-general-container-component>
 
 <app-general-container-component>
-  <div class="row">
+  <form class="row" [formGroup]="searchForm">
     <div class="col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Nombre del anuncio</mat-label>
         <input
           matInput
           placeholder="Ingrese el nombre del anuncio"
+          formControlName="announcementName"
         />
       </mat-form-field>
     </div>
     <div class="col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Estado del anuncio</mat-label>
-        <mat-select placeholder="Seleccione un estado">
+        <mat-select
+          placeholder="Seleccione un estado"
+          formControlName="announcementState"
+        >
+          <mat-option [value]="formsService.filterOptionEnum.ALL">Todos los estados</mat-option>
           @for (
             announcementState of announcementStateHttpService.announcementStatesList(); track announcementState.id) {
             <mat-option [value]="announcementState">{{ announcementState.name }}</mat-option>
@@ -32,9 +37,9 @@
         </mat-select>
       </mat-form-field>
     </div>
-  </div>
+  </form>
   <div class="text-end">
-    <button matButton="text">
+    <button matButton="text" (click)="resetSearchForm()">
       <mat-icon>
         delete
       </mat-icon>

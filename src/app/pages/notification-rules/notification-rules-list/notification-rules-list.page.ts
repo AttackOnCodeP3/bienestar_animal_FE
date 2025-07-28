@@ -19,7 +19,7 @@ import {
   MatTableDataSource
 } from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {NotificationRulesDisplayedColumnsTableEnum} from 'common/enums/tables';
+import {NotificationRulesManagementDisplayedColumnsTableEnum} from 'common/enums/tables';
 import {NotificationRulesHttpService} from '@services/http';
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
@@ -66,7 +66,7 @@ export class NotificationRulesListPage implements OnInit {
     this.notificationRulesHttpService.getAll();
   }
 
-  displayedColumns = [...Object.values(NotificationRulesDisplayedColumnsTableEnum)];
+  displayedColumns = [...Object.values(NotificationRulesManagementDisplayedColumnsTableEnum)];
 
   navigateToEditRule(id: number) {
     this.router.navigate([PagesUrlsEnum.NOTIFICATION_RULES_EDIT, id]);

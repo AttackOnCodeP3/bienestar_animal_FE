@@ -1,12 +1,16 @@
 export * from "./ languages.enum";
 export * from "./alert-panel-class.enum";
 export * from "./alert-type.enum";
+export * from "./behavior.enum";
 export * from "./breakpoints.enum";
+export * from "./estimated-age.enum";
+export * from "./filter-option.enum";
 export * from "./lottie-animations-paths.enum";
 export * from "./modal-dialog-panel-class.enum";
 export * from "./municipal-preventive-care-configuration.enum";
 export * from "./notification-status.enum";
 export * from "./pages-urls.enum";
+export * from "./physical-condition.enum";
 export * from "./rolesEnum";
 export * from "./route-param-paths.enum";
 export * from "./route-params.enum";
