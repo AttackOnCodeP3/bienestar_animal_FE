@@ -22,4 +22,10 @@ export enum I18nMenuEnum {
   MODEL_3D = I18nMenuEnum.MENU + '.model-3d',
   VIEW_MODEL_3D = I18nMenuEnum.MENU + '.viewModel3D',
   CREATE_MODEL_3D = I18nMenuEnum.MENU + '.createModel3D',
+  NOTIFICATION_RULES = I18nMenuEnum.MENU + '.notificationRules',
+  NOTIFICATION_RULES_EDIT = I18nMenuEnum.MENU + '.notificationRulesEdit',
+  NOTIFICATION_RULES_LIST = I18nMenuEnum.MENU + '.notificationRulesList',
+  ANNOUNCEMENTS = I18nMenuEnum.MENU + '.announcements',
+  ANNOUNCEMENT_CREATE = I18nMenuEnum.MENU + '.announcementCreate',
+  ANNOUNCEMENT_LIST = I18nMenuEnum.MENU + '.announcementList',
 }

@@ -82,7 +82,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
   readonly formAnimalVaccination = this.communityAnimalRegistrationFormService.buildVaccinationForm();
   readonly formDeworming = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
   readonly formFleaAndTickControl = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
-  readonly formNeutering = this.communityAnimalRegistrationFormService.buildSanitaryControlForm();
+  readonly formNeutering = this.communityAnimalRegistrationFormService.buildSanitaryControlForm({includeLastApplicationDate: false, includeProductUsed: false});
 
   /**
    * Effect to assign sanitary control types to the respective forms.
@@ -121,7 +121,6 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formDeworming));
     this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formFleaAndTickControl));
-    this.subscriptions.push(this.communityAnimalRegistrationFormService.applySanitaryControlValidations(this.formNeutering));
   }
 
   ngOnDestroy() {
@@ -173,13 +172,7 @@ export class CreateAnimalProfilePage implements OnInit, OnDestroy {
       this.formNeutering,
     );
 
-    const {success, coordinates} = await this.locationService.getUserLocation();
-
-    if (!success) {
-      this.alertService.displayAlert({
-        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_LOCATION_NOT_AVAILABLE
-      });
-    }
+    const {coordinates} = await this.locationService.getUserLocation();
 
     const createAnimalRequestDto = new CreateAnimalRequestDto({
       birthDate,

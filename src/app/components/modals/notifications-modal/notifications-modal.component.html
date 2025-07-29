@@ -1,0 +1,61 @@
+<h2 mat-dialog-title
+    class="mat-sys-headline-medium-imp">{{ i18nService.i18nComponentsEnum.NOTIFICATIONS_MODAL_TITLE | translate }}</h2>
+
+<mat-dialog-content
+  infinite-scroll
+  [infiniteScrollThrottle]="throttle"
+  [infiniteScrollDistance]="scrollDistance"
+  (scrolled)="onLoadNextPageNotifications()"
+  [scrollWindow]="false"
+  class="mat-typography"
+>
+  @if (notificationHttpService.isEmpty()) {
+    <ng-lottie [options]="animationOptions"/>
+    <p class="text-center">{{ i18nService.i18nComponentsEnum.NOTIFICATIONS_MODAL_NO_NOTIFICATIONS | translate }}</p>
+  }
+  @for (notification of notificationHttpService.notificationDTOList(); track notification.id) {
+    <mat-card class="mb-3 p-0">
+      <div class="d-flex">
+
+        <div class="d-flex flex-column justify-content-center align-items-center px-3 border-end">
+          <mat-icon class="text-primary">notifications</mat-icon>
+        </div>
+
+        <div class="flex-grow-1">
+          <mat-card-content class="p-3">
+            <div class="fw-bold fs-6" [innerHTML]="notification.title"></div>
+            <div class="mb-2" [innerHTML]="notification.description"></div>
+            <div class="row gap-2">
+              <div class="col-auto d-flex align-items-center">
+                <mat-icon class="me-1">schedule</mat-icon>
+                <span>{{ notification.dateIssued | date:'short' }}</span>
+              </div>
+              <div class="col-auto col-sm d-flex justify-content-end">
+                <mat-chip>
+                  {{notification.notificationTypeName}}
+                </mat-chip>
+              </div>
+            </div>
+          </mat-card-content>
+        </div>
+
+      </div>
+    </mat-card>
+  }
+
+  @if (notificationHttpService.isNotificationsLoading()) {
+    <div class="d-flex justify-content-center">
+      <mat-spinner/>
+    </div>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    matButton="filled"
+    cdkFocusInitial
+    mat-dialog-close
+  >
+    {{ i18nService.i18nButtonsEnum.BUTTON_CLOSE | translate }}
+  </button>
+</mat-dialog-actions>

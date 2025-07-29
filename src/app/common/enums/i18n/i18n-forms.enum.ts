@@ -54,6 +54,7 @@ export enum I18nFormsEnum {
   STATUS_LABEL = I18nFormsEnum.INPUTS_LABELS + 'status',
   PRODUCT_USED_LABEL = I18nFormsEnum.INPUTS_LABELS + 'productUsed',
   APPLICATION_DATE_LABEL = I18nFormsEnum.INPUTS_LABELS + 'applicationDate',
+  VALUE_LABEL = I18nFormsEnum.INPUTS_LABELS + 'value',
 
   // Placeholders for form inputs
   ADDRESS_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'address',
@@ -86,4 +87,5 @@ export enum I18nFormsEnum {
   SEX_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'sex',
   PRODUCT_USED_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'productUsed',
   APPLICATION_DATE_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'applicationDate',
+  VALUE_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'value',
 }

@@ -13,6 +13,8 @@ export enum I18nComponentsEnum {
   ANIMAL_NEUTERING_FORM_COMPONENT = 'animal-neutering-form-component',
   ANIMAL_VACCINATION_FORM_COMPONENT = 'animal-vaccination-form-component',
 
+  NOTIFICATIONS_MODAL_COMPONENT = 'notifications-modal-component',
+
 
   IT_WORKED_AS_NURSERY_HOME_LABEL = I18nComponentsEnum.IT_WORKED_AS_NURSERY_HOME_COMPONENT + '.currentlyWorksAsNurseryHome',
   IT_WORKED_AS_NURSERY_HOME_DESCRIPTION = I18nComponentsEnum.IT_WORKED_AS_NURSERY_HOME_COMPONENT + '.descriptionNurseryHome',
@@ -40,4 +42,7 @@ export enum I18nComponentsEnum {
   ANIMAL_NEUTERING_FORM_TITLE = I18nComponentsEnum.ANIMAL_NEUTERING_FORM_COMPONENT + '.title',
 
   ANIMAL_VACCINATION_FORM_TITLE = I18nComponentsEnum.ANIMAL_VACCINATION_FORM_COMPONENT + '.title',
+
+  NOTIFICATIONS_MODAL_TITLE = I18nComponentsEnum.NOTIFICATIONS_MODAL_COMPONENT + '.title',
+  NOTIFICATIONS_MODAL_NO_NOTIFICATIONS = I18nComponentsEnum.NOTIFICATIONS_MODAL_COMPONENT + '.noNotifications',
 }

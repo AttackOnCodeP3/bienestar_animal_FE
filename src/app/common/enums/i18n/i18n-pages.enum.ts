@@ -13,6 +13,8 @@ export enum I18nPagesEnum {
   CREATE_USER_PAGE = 'create-user-page',
   EDIT_USER_PAGE = 'edit-user-page',
   CREATE_ANIMAL_PROFILE_PAGE = 'create-animal-profile-page',
+  NOTIFICATION_RULES_PAGE_LIST = 'notification-rules-page-list',
+  NOTIFICATION_RULES_PAGE_EDIT = 'notification-rules-page-edit',
 
   // Login page
   LOGIN_PAGE_TITLE = I18nPagesEnum.LOGIN_PAGE + '.title',
@@ -48,4 +50,8 @@ export enum I18nPagesEnum {
 
   // Animal Profile page
   CREATE_ANIMAL_PROFILE_PAGE_TITLE = I18nPagesEnum.CREATE_ANIMAL_PROFILE_PAGE + '.title',
+
+  // Notification Rules page
+  NOTIFICATION_RULES_PAGE_LIST_TITLE = I18nPagesEnum.NOTIFICATION_RULES_PAGE_LIST + '.title',
+  NOTIFICATION_RULES_PAGE_EDIT_TITLE = I18nPagesEnum.NOTIFICATION_RULES_PAGE_EDIT + '.title',
 }

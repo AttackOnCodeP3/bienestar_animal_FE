@@ -26,17 +26,28 @@ export enum PagesUrlsEnum {
   REPORTS = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.REPORTS,
 
   // Routes of the Municipalities module
-  MUNICIPALITIES = RoutesUrlsEnum.MUNICIPALITIES,
-  MUNICIPALITY_LIST = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_LIST,
-  MUNICIPALITY_CREATE = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_CREATE,
-  MUNICIPALITY_EDIT = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_EDIT,
+  MUNICIPALITIES = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITIES,
+  MUNICIPALITY_LIST = PagesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_LIST,
+  MUNICIPALITY_CREATE = PagesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_CREATE,
+  MUNICIPALITY_EDIT = PagesUrlsEnum.MUNICIPALITIES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MUNICIPALITY_EDIT,
 
   // Routes of the Security module
   SECURITY_USER_MANAGEMENT = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_USER_MANAGEMENT,
   SECURITY_CREATE_USER = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_CREATE_USER,
   SECURITY_EDIT_USER = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SECURITY_EDIT_USER,
-  
-  // MODEL_3D Routes 
+
+  // MODEL_3D Routes
   MODEL_3D_CREATE = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D_CREATE,
   MODEL_3D_LIST = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.MODEL_3D_LIST,
+
+  // Routes of the Notification Rules module
+  NOTIFICATION_RULES = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES,
+  NOTIFICATION_RULES_EDIT = PagesUrlsEnum.NOTIFICATION_RULES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES_EDIT,
+  NOTIFICATION_RULES_LIST = PagesUrlsEnum.NOTIFICATION_RULES + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.NOTIFICATION_RULES_LIST,
+
+  // Routes of the Announcements module
+  ANNOUNCEMENTS = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS,
+  ANNOUNCEMENTS_LIST = RoutesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_LIST,
+  ANNOUNCEMENTS_CREATE = RoutesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_CREATE,
+  ANNOUNCEMENTS_EDIT = PagesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_EDIT,
 }

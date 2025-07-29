@@ -34,9 +34,19 @@
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
     "viewMunicipalities": "Ver municipalidades",
-     "model-3d": "Modelo 3D",
-      "viewModel3D": "Ver modelos 3D",
-      "createModel3D": "Crear modelo 3D"
+    "model-3d": "Modelo 3D",
+    "viewModel3D": "Ver modelos 3D",
+    "createModel3D": "Crear modelo 3D",
+    "notificationRules": "Reglas de notificación",
+    "notificationRulesEdit": "Editar reglas",
+    "notificationRulesList": "Lista de reglas",
+    "announcements": "Gestión de anuncios",
+    "announcementCreate": "Crear anuncio",
+    "announcementList": "Lista de anuncios"
+  },
+  "notifications-modal-component": {
+    "title": "Notificaciones",
+    "noNotifications": "No hay notificaciones disponibles"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
@@ -57,7 +67,6 @@
     "title": "Reset Password",
     "subtitle": "Enter your new password"
   },
-
   "animal-basic-info-form-component": {
     "title": "Información básica general"
   },
@@ -109,7 +118,8 @@
       "species": "Especie",
       "status": "Estado",
       "productUsed": "Producto utilizado",
-      "applicationDate": "Fecha de aplicación"
+      "applicationDate": "Fecha de aplicación",
+      "value": "Valor"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -153,7 +163,8 @@
       "status": "Seleccione el estado",
       "sex": "Seleccione el sexo",
       "productUsed": "Digite el producto utilizado",
-      "applicationDate": "Seleccione la fecha de aplicación"
+      "applicationDate": "Seleccione la fecha de aplicación",
+      "value": "Ingrese el valor"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -172,7 +183,6 @@
     "title": "Recuperar contraseña",
     "subtitle": "Ingrese su correo electrónico para recuperar su contraseña"
   },
-
   "user-management-page": {
     "title": "Gestión de usuarios"
   },
@@ -193,6 +203,12 @@
   },
   "create-animal-profile-page": {
     "title": "Creando perfil de animal"
+  },
+  "notification-rules-page-list": {
+    "title": "Reglas de notificación"
+  },
+  "notification-rules-page-edit": {
+    "title": "Editando regla de notificación"
   },
   "================== VALIDATIONS ==================": "",
   "validations": {
@@ -242,16 +258,24 @@
   "================== TABLES ==================": "",
   "tables": {
     "columns": {
-      "name": "Nombre",
-      "lastname": "Apellido",
-      "email": "Correo electrónico",
-      "phoneNumber": "Número de teléfono",
-      "status": "Estado",
       "actions": "Acciones",
-      "active": "Activo",
       "activateDesactivate": "Activar/Desactivar",
-      "block": "Bloquear"
+      "active": "Activo",
+      "block": "Bloquear",
+      "description": "Descripción",
+      "email": "Correo electrónico",
+      "endDate": "Fecha de finalización",
+      "imageUrl": "URL de la imagen",
+      "lastname": "Apellido",
+      "name": "Nombre",
+      "phoneNumber": "Número de teléfono",
+      "startDate": "Fecha de inicio",
+      "state": "Estado",
+      "status": "Estado",
+      "title": "Título",
+      "value": "Valor"
     },
+    "noDataAvailable": "No hay datos disponibles",
     "emptyMessage": {
       "noDataAvailable": "No hay datos disponibles"
     }
@@ -277,7 +301,10 @@
     "updateMunicipality": "Actualizar municipalidad",
     "updateUser": "Actualizar usuario",
     "userManagement": "Gestión de usuarios",
-    "registerAnimal": "Registrar animal"
+    "registerAnimal": "Registrar animal",
+    "rulesManagement": "Gestión de reglas",
+    "update": "Actualizar",
+    "updateNotificationRule": "Actualizar regla de notificación"
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {
