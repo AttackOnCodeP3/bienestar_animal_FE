@@ -19,6 +19,7 @@
           matInput
           placeholder="Ingrese el nombre del anuncio"
           formControlName="announcementTitle"
+          [errorStateMatcher]="formsService.matcher"
         />
         @let announcementTitleControl = searchForm.get('announcementTitle');
         @if (formsService.isFieldInvalid(announcementTitleControl)) {
@@ -32,6 +33,7 @@
         <mat-select
           placeholder="Seleccione un estado"
           formControlName="announcementState"
+          [errorStateMatcher]="formsService.matcher"
         >
           <mat-option [value]="formsService.filterOptionEnum.ALL">Todos los estados</mat-option>
           @for (
@@ -81,17 +83,19 @@
 
       <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.START_DATE">
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_START_DATE | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.startDate }}</mat-cell>
+        <mat-cell *matCellDef="let element">{{ element.startDate | date: 'dd/MM/yyyy' }}</mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.END_DATE">
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_END_DATE | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.endDate }}</mat-cell>
+        <mat-cell *matCellDef="let element">{{ element.endDate | date: 'dd/MM/yyyy' }}</mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.STATE">
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_STATE | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.state.name }}</mat-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip>{{ element.state.name }}</mat-chip>
+        </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.ACTIONS">

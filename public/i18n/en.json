@@ -47,6 +47,9 @@
     "title": "Notifications",
     "noNotifications": "No notifications available"
   },
+  "modal-viewer-picture-component": {
+    "title": "Image Preview"
+  },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
     "descriptionNurseryHome": "Temporary homes that provide adequate space, food, hygiene, and shelter for pets (dogs and cats) that need a family to offer them a temporary home while a permanent home is found."
@@ -130,7 +133,10 @@
       "pattern": "Invalid format",
       "required": "Required field",
       "min": "Must be greater than or equal to",
-      "max": "Must be less than or equal to"
+      "max": "Must be less than or equal to",
+      "acceptedMimeTypes": "File type not allowed. Please upload a file with one of the following extensions: {{allowedExtensions}}.",
+      "maxContentSize": "The file exceeds the maximum allowed size of {{maxSizeMB}} MB.",
+      "invalidSelection": "Invalid selection. Please select a valid option."
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -219,7 +225,8 @@
     "general": {
       "invalidFields": "There are invalid fields. Please check the entered data.",
       "invalidIdToUpdate": "Unable to find the data. You will be redirected to try again.",
-      "locationNotAvailable": "Location not available."
+      "locationNotAvailable": "Location not available.",
+      "noFileSelected": "No file selected."
     },
     "register-page": {
       "registeredSuccessfully": "Successfully registered, please log in"

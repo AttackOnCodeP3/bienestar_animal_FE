@@ -3,7 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {FormGroup} from '@angular/forms';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {Canton, District, Interest, Municipality, Neighborhood, Role, User} from '@models';
-import {matchFieldsValidations} from '@common/forms';
+import {matchFieldsValidator} from '@common/forms';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
 import {FormsService} from '@services/general';
 import {IFormValidationError} from '@common/interfaces';
@@ -88,7 +88,7 @@ export class UserRegistrationFormService {
       confirmPassword: new FormControl('', [Validators.required]),
       volunteerMunicipality: new FormControl<Municipality | null>(null, [Validators.required]),
     }, {
-      validators: matchFieldsValidations('password', 'confirmPassword'),
+      validators: matchFieldsValidator('password', 'confirmPassword'),
     });
   }
 

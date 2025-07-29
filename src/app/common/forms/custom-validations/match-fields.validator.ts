@@ -7,7 +7,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
  * @returns {ValidatorFn} Function that validates if the values of the two fields are equal.
  * @author dgutierrez
  */
-export function matchFieldsValidations(fieldName: string, matchingFieldName: string): ValidatorFn {
+export function matchFieldsValidator(fieldName: string, matchingFieldName: string): ValidatorFn {
   return (formGroup: AbstractControl): ValidationErrors | null => {
     const field: AbstractControl | null = formGroup.get(fieldName);
     const matchingField: AbstractControl | null = formGroup.get(matchingFieldName);

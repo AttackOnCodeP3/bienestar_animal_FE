@@ -52,11 +52,11 @@ import {MatChip} from '@angular/material/chips';
     TranslatePipe,
     MatChip,
   ],
-  templateUrl: './notifications-modal.component.html',
-  styleUrl: './notifications-modal.component.scss',
+  templateUrl: './modal-notifications.component.html',
+  styleUrl: './modal-notifications.component.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
-export class NotificationsModalComponent implements OnInit {
+export class ModalNotificationsComponent implements OnInit {
 
   readonly notificationHttpService = inject(NotificationHttpService)
   readonly data = inject<INotificationsModalDialogData>(MAT_DIALOG_DATA);

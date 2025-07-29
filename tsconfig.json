@@ -22,6 +22,7 @@
       "@services/http": ["app/services/http/index.ts"], // Alias for http index file
       "@services/http/*": ["app/services/http/*"], // Alias for http directory
       "@services/forms": ["app/services/forms/index.ts"], // Alias for forms index file
+      "@services/utils": ["app/services/utils/index.ts"], // Alias for utils index file
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
       "@common/enums/*": ["app/common/enums/*"],

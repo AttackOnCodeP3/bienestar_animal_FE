@@ -1,8 +1,9 @@
-import { computed, Injectable, signal } from '@angular/core';
-import { BaseHttpService } from '@services/http';
-import { Constants } from '@common/constants/constants';
-import { Announcement } from '@models';
-import {IResponse, ISearch, ISearchAnnouncement} from '@common/interfaces/http';
+import {computed, Injectable, signal} from '@angular/core';
+import {BaseHttpService} from '@services/http';
+import {Constants} from '@common/constants/constants';
+import {Announcement} from '@models';
+import {IHttpActionConfig, IResponse, ISearch, ISearchAnnouncement} from '@common/interfaces/http';
+import {CreateAnnouncementFormDTO} from '@models/dto';
 
 /**
  * Service to handle HTTP requests related to announcements.
@@ -74,6 +75,44 @@ export class AnnouncementHttpService extends BaseHttpService<Announcement> {
   }
 
   /**
+   * Sends a multipart/form-data request to create a new announcement
+   * associated with the currently authenticated user's municipality.
+   *
+   * Accepts an optional configuration object for:
+   * - callback: executed after successful creation
+   * - showLoading: executed before request starts
+   * - hideLoading: executed after request completes
+   *
+   * @param dto Form DTO containing all required fields.
+   * @param config Optional configuration with callbacks and loading handlers.
+   * @author dgutierrez
+   */
+  createAnnouncement(
+    dto: CreateAnnouncementFormDTO,
+    config?: IHttpActionConfig
+  ): void {
+    this.isLoading.set(true);
+    config?.showLoading?.();
+
+    const formData = dto.toFormData();
+
+    this.http.post<Announcement>(`${this.sourceUrl}/my-municipality`, formData).subscribe({
+      next: (announcement) => {
+        this.selectedAnnouncement.set(announcement);
+        config?.callback?.();
+      },
+      error: this.handleError({
+        message: 'Error creating announcement.',
+        context: `${this.constructor.name}#createAnnouncement`,
+      }),
+      complete: () => {
+        this.isLoading.set(false);
+        config?.hideLoading?.();
+      },
+    });
+  }
+
+  /**
    * Internally fetches filtered announcements for the authenticated user's municipality.
    * @param filters Object containing title and stateId (optional).
    * @author dgutierrez
@@ -93,7 +132,7 @@ export class AnnouncementHttpService extends BaseHttpService<Announcement> {
       .subscribe({
         next: (res) => {
           this.announcementList.set(res.data);
-          this.search = { ...this.search, ...res.meta };
+          this.search = {...this.search, ...res.meta};
           this.updatePagination(res.meta?.totalPages ?? 0);
           this.hasSearched.set(true);
         },
@@ -113,7 +152,7 @@ export class AnnouncementHttpService extends BaseHttpService<Announcement> {
    * @author dgutierrez
    */
   private updatePagination(totalPages: number): void {
-    this.totalItems = Array.from({ length: totalPages }, (_, i) => i + 1);
+    this.totalItems = Array.from({length: totalPages}, (_, i) => i + 1);
     if (this.searchPage > totalPages && totalPages > 0) {
       this.search.page = totalPages;
     }

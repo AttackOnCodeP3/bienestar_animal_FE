@@ -1,5 +1,3 @@
-import {Notification} from '@models';
-
 /**
  * Interface for the data passed to the Notifications Modal Dialog.
  * @author dgutierrez

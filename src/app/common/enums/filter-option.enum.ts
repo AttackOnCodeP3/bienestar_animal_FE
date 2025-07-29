@@ -3,5 +3,6 @@
  * @author dgutierrez
  */
 export enum FilterOptionEnum {
-  ALL = -1
+  ALL = -1,
+  SELECT_OPTION = 0,
 }
