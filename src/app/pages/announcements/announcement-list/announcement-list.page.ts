@@ -167,7 +167,7 @@ export class AnnouncementListPage implements OnInit {
   onViewImage(imageUrl: string) {
     this.modalService.openPictureViewerModal({
       imageSource: imageUrl
-    })
+    });
   }
 
   /**
