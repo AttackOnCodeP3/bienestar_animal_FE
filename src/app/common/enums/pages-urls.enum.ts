@@ -47,7 +47,7 @@ export enum PagesUrlsEnum {
 
   // Routes of the Announcements module
   ANNOUNCEMENTS = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS,
-  ANNOUNCEMENTS_LIST = RoutesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_LIST,
-  ANNOUNCEMENTS_CREATE = RoutesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_CREATE,
+  ANNOUNCEMENTS_LIST = PagesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_LIST,
+  ANNOUNCEMENTS_CREATE = PagesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_CREATE,
   ANNOUNCEMENTS_EDIT = PagesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_EDIT,
 }

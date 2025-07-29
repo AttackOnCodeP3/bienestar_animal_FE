@@ -11,9 +11,9 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Constants} from '@common/constants/constants';
 
-import {I18nService, ModalService, ThemeService} from '@services/general';
+import {I18nService, ThemeService} from '@services/general';
 import {AuthHttpService, NotificationHttpService} from '@services/http';
-import {NotificationStatusEnum} from '@common/enums';
+import {ModalService} from '@services/modals';
 
 @Component({
   selector: 'app-navbar',

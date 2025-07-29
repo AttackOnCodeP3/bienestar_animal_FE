@@ -308,6 +308,11 @@
     "update": "Update",
     "updateNotificationRule": "Update Notification Rule"
   },
+  "================== LOADING MESSAGES ==================": "",
+  "loadingMessages": {
+    "loading": "Loading..."
+  },
+  "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {
     "http": {
       "operationCompletedSuccessfully": "Operation completed successfully",

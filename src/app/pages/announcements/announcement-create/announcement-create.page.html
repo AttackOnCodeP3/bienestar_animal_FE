@@ -3,7 +3,7 @@
     <h1>
       Crear anuncios
     </h1>
-    <button matButton="elevated">
+    <button matButton="elevated" (click)="navigateToAnnouncementsList()">
       <mat-icon>arrow_back</mat-icon>
       Gestionar anuncios
     </button>
@@ -30,21 +30,16 @@
         </mat-form-field>
       </div>
       <div class="col-12 mb-3">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>
-            Descripción del anuncio
-          </mat-label>
-          <textarea
-            matInput
-            placeholder="Ingrese la descripción del anuncio"
+        <div class="NgxEditor__Wrapper">
+          <ngx-editor-menu [editor]="editor!"> </ngx-editor-menu>
+          <ngx-editor
             formControlName="description"
-            [errorStateMatcher]="formsService.matcher"
-          ></textarea>
-          @let descriptionControl = createAnnouncementForm.get('description');
-          @if (formsService.isFieldInvalid(descriptionControl)) {
-            <mat-error>{{ formsService.getErrorMessage(descriptionControl) }}</mat-error>
-          }
-        </mat-form-field>
+            [outputFormat]="'html'"
+            [editor]="editor!"
+            [disabled]="false"
+            [placeholder]="'Escribe la descripción del anuncio aquí...'"
+          ></ngx-editor>
+        </div>
       </div>
     </div>
   </app-general-container-component>
@@ -159,7 +154,7 @@
   </app-general-container-component>
 
   <div class="text-end">
-    <button matButton="tonal">Registrar</button>
+    <button matButton="tonal">Publicar</button>
   </div>
 </form>
 

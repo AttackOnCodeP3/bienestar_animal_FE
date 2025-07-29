@@ -3,7 +3,7 @@
     <h1>
       Gestionar anuncios
     </h1>
-    <button matButton="elevated">
+    <button matButton="elevated" (click)="navigateToCreateAnnouncement()">
       <mat-icon>add</mat-icon>
       Crear anuncio
     </button>
@@ -78,7 +78,13 @@
 
       <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.DESCRIPTION">
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_DESCRIPTION | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+        <mat-cell *matCellDef="let element">
+          @if (element.description) {
+            {{ element.description | stripHtml }}
+          } @else {
+            Sin descripción
+          }
+        </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.START_DATE">
@@ -103,6 +109,11 @@
         <mat-cell *matCellDef="let element">
           <button matIconButton (click)="navigateToEditAnnouncement(element.id)">
             <mat-icon>edit</mat-icon>
+          </button>
+          <button matIconButton (click)="onViewImage(element.imageUrl)">
+            <mat-icon>
+              visibility
+            </mat-icon>
           </button>
         </mat-cell>
       </ng-container>

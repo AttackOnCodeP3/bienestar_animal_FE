@@ -27,6 +27,8 @@ import {
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
 import {MatChip} from '@angular/material/chips';
+import {StripHtmlPipe} from '@core/pipes';
+import {ModalService} from '@services/modals';
 
 /**
  * Component for displaying a list of announcements with search functionality.
@@ -62,6 +64,7 @@ import {MatChip} from '@angular/material/chips';
     MatNoDataRow,
     DatePipe,
     MatChip,
+    StripHtmlPipe,
   ],
   templateUrl: './announcement-list.page.html',
   styleUrl: './announcement-list.page.scss',
@@ -75,6 +78,7 @@ export class AnnouncementListPage implements OnInit {
   readonly i18nService = inject(I18nService);
   readonly tableService = inject(TableService);
   readonly router = inject(Router);
+  readonly modalService = inject(ModalService);
 
   readonly searchForm = this.buildSearchForm();
   readonly displayedColumns = [...Object.values(AnnouncementManagementDisplayedColumnsTableEnum)];
@@ -153,5 +157,24 @@ export class AnnouncementListPage implements OnInit {
    */
   resetSearchForm() {
     this.searchForm.reset();
+  }
+
+  /**
+   * Opens a modal to view the image associated with the announcement.
+   * @param imageUrl
+   * @author dgutierrez
+   */
+  onViewImage(imageUrl: string) {
+    this.modalService.openPictureViewerModal({
+      imageSource: imageUrl
+    })
+  }
+
+  /**
+   * Navigates to the create announcement page.
+   * @author dgutierrez
+   */
+  navigateToCreateAnnouncement() {
+    this.router.navigate([PagesUrlsEnum.ANNOUNCEMENTS_CREATE]);
   }
 }
