@@ -54,7 +54,7 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
   readonly fileUtilsService = inject(FileUtilsService)
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
-  readonly loadingModalService = inject(LoadingModalService)
+  readonly loadingModalService = inject(LoadingModalService);
   readonly modalService = inject(ModalService);
 
   readonly createAnnouncementForm = this.buildCreateAnnouncementForm();
