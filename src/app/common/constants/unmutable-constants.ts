@@ -27,9 +27,6 @@ export abstract class UnmutableConstants {
   static readonly LS_ACCESS_TOKEN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'access_token'
   static readonly LS_EXPIRES_IN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'expiresIn'
 
-  /*timeout: Constants.LOCATION_TIMEOUT_MS,
-          maximumAge: Constants.LOCATION_MAX_AGE*/
-
   /**
    * Timeout for location requests in milliseconds.
    * This is used to set the maximum time to wait for a location response.
