@@ -1,7 +1,13 @@
 import {inject, Injectable} from '@angular/core';
-import {INotificationsModalDialogData, IViewerPictureModalDialogData} from '@common/interfaces/modals';
+import {
+  INotificationsModalDialogData,
+  IViewerPictureModalDialogData
+} from '@common/interfaces/modals';
 import {MatDialog} from '@angular/material/dialog';
-import {ModalViewerPictureViewerComponent, ModalNotificationsComponent} from '@components/modals';
+import {
+  ModalViewerPictureViewerComponent,
+  ModalNotificationsComponent,
+} from '@components/modals';
 import {ModalDialogPanelClassEnum} from '@common/enums';
 
 /**

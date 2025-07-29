@@ -313,6 +313,10 @@
     "update": "Actualizar",
     "updateNotificationRule": "Actualizar regla de notificación"
   },
+  "================== LOADING MESSAGES ==================": "",
+  "loadingMessages": {
+    "loading": "Cargando..."
+  },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {
     "http": {

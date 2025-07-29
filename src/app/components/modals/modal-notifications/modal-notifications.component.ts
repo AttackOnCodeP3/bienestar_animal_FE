@@ -66,10 +66,6 @@ export class ModalNotificationsComponent implements OnInit {
     path: LottieAnimationsPathsEnum.NO_NOTIFICATIONS_AVAILABLE,
   };
 
-  readonly animationsOptionsEndReached: AnimationOptions = {
-    path: LottieAnimationsPathsEnum.END_REACHED,
-  }
-
   readonly throttle = 300;
   readonly scrollDistance = 1;
 
