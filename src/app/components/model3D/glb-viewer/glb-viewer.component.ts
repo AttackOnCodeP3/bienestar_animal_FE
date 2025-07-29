@@ -15,9 +15,10 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Constants } from '@common/constants/constants';
-import { I18nService } from '@services/general';
+import {I18nService, LogService} from '@services/general';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Model3DCreateHttpService, Model3DAnimalHttpService } from '@services/http';
+import {HttpStatusCode} from '@angular/common/http';
 /**component for 3D model visalization
  * @author nav
  * */
@@ -38,6 +39,7 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
 
   errorMessage: string | null = null;
   private readonly canvas = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
+  private readonly logService = inject(LogService);
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
@@ -120,10 +122,14 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
         this.onModelLoaded(gltf);
       },
       (progress) => {
-        console.log(
-          'Loading progress:',
-          (progress.loaded / progress.total) * 100 + '%'
-        );
+        this.logService.debug({
+          message : 'GLB model loading progress',
+          data: {
+            loaded: progress.loaded,
+            total: (progress.loaded / progress.total) * 100 + '%',
+            url: url,
+          },
+        })
       },
       (error) => {
         this.onModelError(error);
@@ -250,7 +256,10 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
    * @param error The error object
    * @author nav
    */ private onModelError(error: any): void {
-    console.error('Error loading GLB model:', error);
+    this.logService.error({
+      message: 'Error loading GLB model',
+      data: { error: error },
+    });
     const i18nKeys = this.i18nService.i18nModel3DEnum;
 
     if (
@@ -263,11 +272,11 @@ export class GlbViewerComponent implements OnInit, OnDestroy {
       error.message?.includes('CORS')
     ) {
       this.errorMessage = this.i18nService.instant(i18nKeys.NETWORK_ERROR);
-    } else if (error.status === 404) {
+    } else if (error.status === HttpStatusCode.NotFound) {
       this.errorMessage = this.i18nService.instant(i18nKeys.NOT_FOUND_ERROR);
     } else if (error.status === 0) {
       this.errorMessage = this.i18nService.instant(i18nKeys.CONNECTION_ERROR);
-    } else if (error.status === 500) {
+    } else if (error.status === HttpStatusCode.InternalServerError) {
       this.errorMessage = this.i18nService.instant(i18nKeys.SERVER_ERROR);
     } else {
       this.errorMessage = `${this.i18nService.instant(

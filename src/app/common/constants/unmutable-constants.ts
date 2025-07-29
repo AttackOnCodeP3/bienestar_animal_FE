@@ -27,6 +27,22 @@ export abstract class UnmutableConstants {
   static readonly LS_ACCESS_TOKEN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'access_token'
   static readonly LS_EXPIRES_IN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'expiresIn'
 
+  /**
+   * Timeout for location requests in milliseconds.
+   * This is used to set the maximum time to wait for a location response.
+   * If the location is not retrieved within this time, an error will be thrown.
+   * @author dgutierrez
+   */
+  static readonly LOCATION_TIMEOUT_MS = 10000;
+
+  /**
+   * Maximum age of the location in milliseconds.
+   * This is used to determine how old the cached location can be before it is considered stale.
+   * A value of 0 means that the location should always be fresh and not cached.
+   * @author dgutierrez
+   */
+  static readonly LOCATION_MAX_AGE = 0;
+
   static readonly IMAGE_QUALITY: number = 50
 
   // ==================================================================
