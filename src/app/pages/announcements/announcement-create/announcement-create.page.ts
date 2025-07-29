@@ -51,7 +51,7 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
   readonly  announcementHttpService = inject(AnnouncementHttpService);
   readonly alertService = inject(AlertService);
   readonly announcementStateHttpService = inject(AnnouncementStateHttpService);
-  readonly fileUtilsService = inject(FileUtilsService)
+  readonly fileUtilsService = inject(FileUtilsService);
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
   readonly loadingModalService = inject(LoadingModalService);
