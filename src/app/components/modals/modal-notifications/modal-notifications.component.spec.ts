@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotificationsModalComponent } from './notifications-modal.component';
+import { ModalNotificationsComponent } from './modal-notifications.component';
 
 describe('NotificationsModal', () => {
-  let component: NotificationsModalComponent;
-  let fixture: ComponentFixture<NotificationsModalComponent>;
+  let component: ModalNotificationsComponent;
+  let fixture: ComponentFixture<ModalNotificationsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotificationsModalComponent]
+      imports: [ModalNotificationsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NotificationsModalComponent);
+    fixture = TestBed.createComponent(ModalNotificationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

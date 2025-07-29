@@ -23,6 +23,7 @@
     "@ngx-translate/http-loader": "^16.0.1",
     "bootstrap": "5.3.7",
     "lottie-web": "^5.13.0",
+    "ngx-custom-material-file-input": "^20.0.0",
     "ngx-infinite-scroll": "^20.0.0",
     "ngx-lottie": "^20.0.0",
     "rxjs": "~7.8.0",

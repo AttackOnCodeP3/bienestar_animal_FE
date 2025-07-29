@@ -8,7 +8,7 @@ import {GeneralContainerComponent} from '@components/layout';
 import {AnnouncementStateHttpService, AnnouncementHttpService} from '@services/http';
 import {AlertService, FormsService, I18nService, TableService} from '@services/general';
 import {ReactiveFormsModule, Validators} from '@angular/forms';
-import {JsonPipe} from '@angular/common';
+import {DatePipe, JsonPipe} from '@angular/common';
 import {ISearchAnnouncement} from '@common/interfaces/http';
 import {
   MatCell,
@@ -26,6 +26,7 @@ import {
 } from '@common/enums/tables/announcement-management-displayed-columns-table.enum';
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
+import {MatChip} from '@angular/material/chips';
 
 /**
  * Component for displaying a list of announcements with search functionality.
@@ -59,6 +60,8 @@ import {PagesUrlsEnum} from '@common/enums';
     MatColumnDef,
     MatHeaderCellDef,
     MatNoDataRow,
+    DatePipe,
+    MatChip,
   ],
   templateUrl: './announcement-list.page.html',
   styleUrl: './announcement-list.page.scss',
