@@ -18,6 +18,7 @@ export enum I18nMenuEnum {
   ABANDONED_ANIMAL = "menu.abandonedAnimal",
   CREATE_ABANDONED_ANIMAL = "menu.createAbandonedAnimal",
   CREATE_ANIMAL_PROFILE = I18nMenuEnum.MENU + '.create-animal-profile',
+  VIEW_ANIMAL_RECORD = I18nMenuEnum.MENU + '.view-animal-record',
   LOGOUT = I18nMenuEnum.MENU + '.logout',
   MODEL_3D = I18nMenuEnum.MENU + '.model-3d',
   VIEW_MODEL_3D = I18nMenuEnum.MENU + '.viewModel3D',
