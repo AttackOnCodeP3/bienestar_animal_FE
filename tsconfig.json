@@ -48,6 +48,7 @@
 
       "@components/user": ["app/components/user/index.ts"], // Alias for user component index file
       "@components/animal": ["app/components/animal/index.ts"], // Alias for animal component index file
+      "@components/announcements": ["app/components/announcement/index.ts"], // Alias for announcements component index file
       "@components/general": ["app/components/index.ts"], // Alias for general component index file
       "@components/layout": ["app/components/layout/index.ts"], // Alias for layout component index file
       "@components/modals": ["app/components/modals/index.ts"], // Alias for modals index file

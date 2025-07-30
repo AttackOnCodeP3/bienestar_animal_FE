@@ -22,6 +22,7 @@ import {LoadingModalService, ModalService} from '@services/modals';
 import {Editor, NgxEditorComponent, NgxEditorMenuComponent} from 'ngx-editor';
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
+import {AnnouncementFormComponent} from '@components/forms/announcement';
 
 @Component({
   selector: 'app-announcement-create-page',
@@ -40,6 +41,7 @@ import {PagesUrlsEnum} from '@common/enums';
     NgxEditorComponent,
     NgxEditorMenuComponent,
     ReactiveFormsModule,
+    AnnouncementFormComponent,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './announcement-create.page.html',

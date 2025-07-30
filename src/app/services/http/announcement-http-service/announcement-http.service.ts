@@ -4,6 +4,7 @@ import {Constants} from '@common/constants/constants';
 import {Announcement} from '@models';
 import {IHttpActionConfig, IResponse, ISearch, ISearchAnnouncement} from '@common/interfaces/http';
 import {CreateAnnouncementFormDTO} from '@models/dto';
+import {AlertTypeEnum} from '@common/enums';
 
 /**
  * Service to handle HTTP requests related to announcements.
@@ -96,9 +97,13 @@ export class AnnouncementHttpService extends BaseHttpService<Announcement> {
 
     const formData = dto.toFormData();
 
-    this.http.post<Announcement>(`${this.sourceUrl}/my-municipality`, formData).subscribe({
-      next: (announcement) => {
-        this.selectedAnnouncement.set(announcement);
+    this.http.post<IResponse<Announcement>>(`${this.sourceUrl}/my-municipality`, formData).subscribe({
+      next: (response) => {
+        this.selectedAnnouncement.set(response.data);
+        this.alertService.displayAlert({
+          type: AlertTypeEnum.SUCCESS,
+          message: response.message
+        })
         config?.callback?.();
       },
       error: this.handleError({
