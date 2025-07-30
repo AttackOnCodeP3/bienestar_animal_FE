@@ -1,0 +1,60 @@
+<!-- src/app/pages/animal/view-animal-record/view-animal-record.page.html -->
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Ver expediente animal</h1>
+  </div>
+</app-general-container-component>
+
+<mat-form-field appearance="outline" class="w-100 mb-4">
+  <mat-label>Seleccione el animal</mat-label>
+  <mat-select [(value)]="selectedAnimalId" (selectionChange)="onAnimalSelect($event.value)">
+    <mat-option *ngFor="let animal of animalList" [value]="animal.id">
+      {{ animal.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+@if (selectedAnimal) {
+  <mat-card class="mb-4">
+    <mat-card-title>
+      {{ selectedAnimal.name }} - {{ selectedAnimal.species }}
+    </mat-card-title>
+    <mat-card-content>
+      <div class="mb-2">
+        <strong>Edad</strong>
+        {{ selectedAnimal.age }}
+      </div>
+      <div class="mb-2">
+        <strong>Sexo</strong>
+        {{ selectedAnimal.sex }}
+      </div>
+      <!-- Add more fields as needed -->
+    </mat-card-content>
+  </mat-card>
+
+  <mat-expansion-panel expanded="true" class="mb-4">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Expediente animal</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+      <table mat-table [dataSource]="selectedAnimal.records" class="mat-elevation-z1 w-100">
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+          <td mat-cell *matCellDef="let record">{{ record.date | date }}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Tipo???</th>
+          <td mat-cell *matCellDef="let record">{{ record.type }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let record">{{ record.description }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['date', 'type', 'description']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['date', 'type', 'description'];"></tr>
+      </table>
+    </div>
+  </mat-expansion-panel>
+}

@@ -14,5 +14,13 @@ export const ANIMAL_ROUTES: Routes = [
   {
     path: RoutesUrlsEnum.CREATE_ANIMAL_PROFILE,
     loadComponent: () => import('@pages/animal/create-animal-profile/create-animal-profile.page').then(m => m.CreateAnimalProfilePage)
+  },
+  {
+    path: RoutesUrlsEnum.VIEW_ANIMAL_RECORD,
+    loadComponent: () => import('@pages/animal/view-animal-record/view-animal-record.page').then(m => m.ViewAnimalRecordPage)
   }
+
+
+
+
 ]
