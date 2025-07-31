@@ -87,7 +87,7 @@ export class NotificationHttpService extends BaseHttpService<Notification> {
     const params = {
       page: this.search.page,
       size: this.search.size,
-      read: false, // Asumiendo que tu backend lo acepta
+      read: false,
     };
 
     this.isUnreadLoading.set(true);
