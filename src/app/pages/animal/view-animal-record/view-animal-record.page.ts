@@ -53,4 +53,12 @@ export class ViewAnimalRecordPage implements OnInit {
     this.selectedAnimalId = animalId;
     this.selectedAnimal = this.animalList.find(a => a.id === animalId) || null;
   }
+    formatAge(age: any): string {
+    if (!age) return '';
+    let parts = [];
+    if (age.years) parts.push(`${age.years} año${age.years > 1 ? 's' : ''}`);
+    if (age.months) parts.push(`${age.months} mes${age.months > 1 ? 'es' : ''}`);
+    if (age.days) parts.push(`${age.days} día${age.days > 1 ? 's' : ''}`);
+    return parts.join(', ');
+  }
 }
