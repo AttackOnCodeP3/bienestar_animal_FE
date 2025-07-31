@@ -1,27 +1,27 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from '@angular/material/icon';
-import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatError, MatInputModule} from '@angular/material/input';
-import {MatSelect} from '@angular/material/select';
-import {FileInput, MaterialFileInputModule} from 'ngx-custom-material-file-input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MaterialFileInputModule} from 'ngx-custom-material-file-input';
 import {
   MatDatepickerModule
 } from '@angular/material/datepicker';
-import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
+import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import {Constants} from '@common/constants/constants';
 import {GeneralContainerComponent} from "@components/layout";
 import {AlertService, FormsService, I18nService} from '@services/general';
 import {AnnouncementHttpService, AnnouncementStateHttpService} from '@services/http';
-import {notSelectOptionValidator} from '@common/forms';
 import {FileUtilsService} from '@services/utils';
 import {CreateAnnouncementFormDTO} from '@models/dto';
 import {LoadingModalService, ModalService} from '@services/modals';
-import {Editor, NgxEditorComponent, NgxEditorMenuComponent} from 'ngx-editor';
+import {Editor} from 'ngx-editor';
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
+import {AnnouncementFormComponent} from '@components/forms/announcement';
+import {AnnouncementFormService} from '@services/forms';
 
 @Component({
   selector: 'app-announcement-create-page',
@@ -30,25 +30,21 @@ import {PagesUrlsEnum} from '@common/enums';
     GeneralContainerComponent,
     MatButton,
     MatDatepickerModule,
-    MatError,
     MatFormFieldModule,
     MatIcon,
     MatInputModule,
-    MatOption,
-    MatSelect,
     MaterialFileInputModule,
-    NgxEditorComponent,
-    NgxEditorMenuComponent,
     ReactiveFormsModule,
+    AnnouncementFormComponent,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), AnnouncementFormService],
   templateUrl: './announcement-create.page.html',
   styleUrl: './announcement-create.page.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
 export class AnnouncementCreatePage implements OnInit, OnDestroy {
   private readonly router = inject(Router);
-  readonly  announcementHttpService = inject(AnnouncementHttpService);
+  readonly announcementHttpService = inject(AnnouncementHttpService);
   readonly alertService = inject(AlertService);
   readonly announcementStateHttpService = inject(AnnouncementStateHttpService);
   readonly fileUtilsService = inject(FileUtilsService);
@@ -56,8 +52,7 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
   readonly i18nService = inject(I18nService);
   readonly loadingModalService = inject(LoadingModalService);
   readonly modalService = inject(ModalService);
-
-  readonly createAnnouncementForm = this.buildCreateAnnouncementForm();
+  readonly announcementFormService = inject(AnnouncementFormService);
 
   editor: Editor | undefined;
 
@@ -85,8 +80,8 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
    * @author dgutierrez
    */
   onSubmit() {
-    if (this.createAnnouncementForm.invalid) {
-      this.formsService.markFormTouchedAndDirty(this.createAnnouncementForm);
+    if (this.announcementFormService.form().invalid) {
+      this.formsService.markFormTouchedAndDirty(this.announcementFormService.form());
       this.alertService.displayAlert({
         messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
       })
@@ -114,16 +109,8 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
    * @author dgutierrez
    */
   private onAfterCreateAnnouncement() {
-    this.resetForm();
+    this.announcementFormService.form().reset();
     this.navigateToAnnouncementsList();
-  }
-
-  /**
-   * Resets the announcement creation form to its initial state.
-   * @author dgutierrez
-   */
-  private resetForm() {
-    this.createAnnouncementForm.reset();
   }
 
   /**
@@ -131,7 +118,7 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
    * @author dgutierrez
    */
   async onViewImage() {
-    const imageFile = this.getImageFile();
+    const imageFile = this.announcementFormService.getImageFile();
     if (!imageFile) {
       this.alertService.displayAlert({
         messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_NO_FILE_SELECTED
@@ -152,52 +139,15 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
       announcementState,
       startDate,
       endDate
-    } = this.createAnnouncementForm.getRawValue();
+    } = this.announcementFormService.form().getRawValue();
 
     return new CreateAnnouncementFormDTO({
       title,
       description,
       stateId: announcementState,
-      startDate: startDate ? startDate.toISOString() : null,
-      endDate: endDate ? endDate.toISOString() : null,
-      file: this.getImageFile()
-    });
-  }
-
-  /**
-   * Retrieves the image file from the form.
-   * @author dgutierrez
-   */
-  private getImageFile() {
-    const {file} = this.createAnnouncementForm.getRawValue();
-    if (!file || !file.files || file.files.length === 0) {
-      return null;
-    }
-    return file.files[0];
-  }
-
-  /**
-   * Submits the form to create a new announcement.
-   * @author dgutierrez
-   */
-  private buildCreateAnnouncementForm() {
-    return this.formsService.formsBuilder.group({
-      title: this.formsService.formsBuilder.control('', [Validators.required]),
-      description: this.formsService.formsBuilder.control(''),
-      announcementState: this.formsService.formsBuilder.control<number>(this.formsService.filterOptionEnum.SELECT_OPTION, [Validators.required, notSelectOptionValidator]),
-      startDate: this.formsService.formsBuilder.control<Date | null>(null, [Validators.required]),
-      endDate: this.formsService.formsBuilder.control<Date | null>(null, [Validators.required]),
-      file: this.formsService.formsBuilder.control<FileInput | null>(
-        null,
-        {
-          validators: this.formsService.getFileValidators({
-            acceptTypes: this.formsService.imageFileAcceptTypes.split(',').map(s => s.trim()),
-            maxSizeInMB: 1,
-            required: true
-          }),
-          nonNullable: true
-        }
-      )
+      startDate: startDate ? startDate : null,
+      endDate: endDate ? endDate : null,
+      file: this.announcementFormService.getImageFile()
     });
   }
 

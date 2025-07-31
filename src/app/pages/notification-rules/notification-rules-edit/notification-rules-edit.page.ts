@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit} from '@angular/core';
+import {Component, computed, effect, inject, OnInit} from '@angular/core';
 import {FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +13,6 @@ import {Constants} from '@common/constants/constants';
 import {NotificationRulesHttpService} from '@services/http';
 import {INotificationRuleForm} from '@common/interfaces/forms';
 import {MunicipalPreventiveCareConfigurationDTO} from '@models/dto';
-
 
 @Component({
   selector: 'app-notification-rules-edit',
@@ -44,9 +43,18 @@ export class NotificationRulesEditPage implements OnInit {
 
   readonly form = this.createFormUpdateNotificationRule();
 
-  readonly notificationRuleToUpdate = computed(() => {
-    this.updateFormWithNotificationRuleData(this.notificationRulesHttpService.selectedConfigurationId());
-    return this.notificationRulesHttpService.selectedConfigurationId()
+  readonly notificationRuleToUpdate = computed(() => this.notificationRulesHttpService.selectedConfigurationId());
+
+  /**
+   * Effect to synchronize the form with the selected notification rule data.
+   * It updates the form values when a notification rule is selected.
+   * @author dgutierrez
+   */
+  readonly syncFormWithSelectedNotificationRule = effect(() => {
+    const rule = this.notificationRulesHttpService.selectedConfigurationId();
+    if (rule) {
+      this.updateFormWithNotificationRuleData(rule);
+    }
   });
 
   ngOnInit() {

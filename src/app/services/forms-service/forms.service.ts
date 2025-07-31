@@ -65,6 +65,13 @@ export class FormsService {
   readonly maxTodayDate = new Date();
 
   /**
+   * Maximum date allowed for endDate fields, set to 3 years from now.
+   * Useful for announcement duration restrictions.
+   * @author dgutierrez
+   */
+  readonly maxDate3YearsFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 3));
+
+  /**
    * Map of input types to their corresponding text representation for error messages.
    * This is used to provide localized error messages based on the type of input field.
    * @author dgutierrez
@@ -329,16 +336,16 @@ export class FormsService {
       return;
     }
 
-    const invalidFields = this.getInvalidFields(form);
-    if (!invalidFields.length) {
-      this.logService.info({
-        message: 'FormsService: logFormErrors: All fields are valid.',
-      });
-      return;
-    }
-
-    this.logService.error({
-      message: `FormsService: logFormErrors: Invalid fields: ${invalidFields.join(', ')}`,
+    Object.entries(form.controls).forEach(([field, control]) => {
+      if (control.invalid) {
+        const errors = control.errors;
+        this.logService.error({
+          message: `FormsService: Field "${field}" is invalid.`,
+          data: {
+            errors
+          }
+        });
+      }
     });
   }
 

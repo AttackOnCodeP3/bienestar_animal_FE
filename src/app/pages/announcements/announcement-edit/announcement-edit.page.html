@@ -1,1 +1,26 @@
-<p>announcement-edit works!</p>
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      Editando anuncio
+    </h1>
+    <button matButton="elevated" (click)="navigateToAnnouncementsList()">
+      <mat-icon>arrow_back</mat-icon>
+      Gestionar anuncios
+    </button>
+  </div>
+  <mat-chip class="mat-chip-primary">
+    <h2>{{ announcementToUpdate()?.title }}</h2>
+  </mat-chip>
+</app-general-container-component>
+
+<app-announcement-form-component
+  [form]="announcementFormService.form()"
+  [formsService]="formsService"
+  (onSubmitChange)="onSubmit()"
+  (onViewImageChange)="onViewImage()"
+  [editor]="editor!"
+  [mode]="'edit'"
+  [imageUrl]="announcementToUpdate()?.imageUrl"
+  [announcementStatesList]="announcementStateHttpService.announcementStatesList()"
+/>
+
