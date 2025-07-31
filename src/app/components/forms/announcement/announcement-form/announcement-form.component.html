@@ -95,7 +95,6 @@
             formControlName="announcementState"
             [errorStateMatcher]="formsService().matcher"
             placeholder="Seleccione un estado"
-            [compareWith]="formsService().genericCompare"
           >
             <mat-option [value]="formsService().filterOptionEnum.SELECT_OPTION">
               Seleccione un estado

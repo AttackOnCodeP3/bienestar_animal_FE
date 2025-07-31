@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import {computed, inject, Injectable, signal} from '@angular/core';
 import { Constants } from '@common/constants/constants';
 import { createPageArray } from '@common/utils';
 import { IResponse, ISearch } from '@common/interfaces/http';
@@ -6,6 +6,7 @@ import { BaseHttpService } from '@services/http';
 import { Notification } from '@models';
 import {NotificationStatusEnum} from '@common/enums';
 import {NotificationDTO} from '@models/dto';
+import {AlertService} from '@services/general';
 
 @Injectable({
   providedIn: 'root',

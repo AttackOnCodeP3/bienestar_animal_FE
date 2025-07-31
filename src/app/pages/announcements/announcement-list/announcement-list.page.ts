@@ -88,7 +88,6 @@ export class AnnouncementListPage implements OnInit {
     this.announcementStateHttpService.getAll();
   }
 
-
   get searchFormFilters() {
     const {announcementTitle, announcementState} = this.searchForm.getRawValue();
 
