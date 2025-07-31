@@ -28,7 +28,7 @@
             <div class="row gap-2">
               <div class="col-auto d-flex align-items-center">
                 <mat-icon class="me-1">schedule</mat-icon>
-                <span>{{ notification.dateIssued | date: 'dd/MM/yyyy' }}</span>
+                <span>{{ notification.dateIssued | timeAgo }}</span>
               </div>
               <div class="col-auto col-sm d-flex justify-content-end">
                 <mat-chip>
