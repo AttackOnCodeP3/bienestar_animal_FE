@@ -158,7 +158,7 @@ export class AnnouncementEditPage implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes the notification rule to update by fetching its configuration from the server.
+   * Initializes the announcement to update by fetching its configuration from the server.
    * @author dgutierrez
    */
   private initializeAnnouncementToUpdate(): void {
