@@ -1,5 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Pipe to format a date as a relative time string in Spanish.
+ * It uses the Intl.RelativeTimeFormat API to provide a human-readable format like "hace
+ * x minutos", "hace x horas", etc.
+ * @author dgutierrez
+ */
 @Pipe({
   name: 'timeAgo'
 })
