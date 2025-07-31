@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   AnimalRecordHttpService
 } from '@services/http';
@@ -7,7 +7,8 @@ import {GeneralContainerComponent} from '@components/layout';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
 import {MatTable} from '@angular/material/table';
-import {DatePipe} from '@angular/common';
+import {NgFor} from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-animal-record-page',
@@ -25,27 +26,26 @@ import {DatePipe} from '@angular/common';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatTable,
-    DatePipe
+    FormsModule,
+    NgFor,
   ],
   styleUrls: ['./view-animal-record.page.scss']
 })
 export class ViewAnimalRecordPage implements OnInit {
   animalList: any[] = [];
-  selectedAnimalId: string | null = null;
+  selectedAnimalId: string | number | null = null;
   selectedAnimal: any = null;
 
-  constructor(
-
-    private animalService: AnimalRecordHttpService
-  ) {}
+  readonly animalService = inject(AnimalRecordHttpService);
 
   ngOnInit(): void {
     this.fetchAnimals();
   }
 
   fetchAnimals(): void {
-    this.animalService.getAnimals().subscribe((animals: any[]) => {
-      this.animalList = animals;
+    this.animalService.getAnimals().subscribe((response: any) => {
+      this.animalList = Array.isArray(response.data) ? response.data : [];
+      console.log('Fetched animals:', this.animalList);
     });
   }
 

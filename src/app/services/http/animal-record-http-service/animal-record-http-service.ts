@@ -14,7 +14,7 @@ export class AnimalRecordHttpService {
    * @returns Observable of animal array
    */
   getAnimals(): Observable<any[]> {
-    const url = `${Constants.apiBaseUrl}/animals`;
+    const url = `http://localhost:8080/animals/records/user/1`;
     return this.httpClient.get<any[]>(url);
   }
 
