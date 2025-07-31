@@ -6,7 +6,7 @@ import {MatFormField, MatLabel, MatOption, MatSelect} from '@angular/material/se
 import {GeneralContainerComponent} from '@components/layout';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
-import {MatTable} from '@angular/material/table';
+import {MatTable, MatTableModule, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef } from '@angular/material/table';
 import {NgFor} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -27,6 +27,11 @@ import { FormsModule } from '@angular/forms';
     MatExpansionPanelTitle,
     MatTable,
     FormsModule,
+    MatTableModule,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatHeaderCellDef,
+    MatCellDef,
     NgFor,
   ],
   styleUrls: ['./view-animal-record.page.scss']
@@ -45,7 +50,6 @@ export class ViewAnimalRecordPage implements OnInit {
   fetchAnimals(): void {
     this.animalService.getAnimals().subscribe((response: any) => {
       this.animalList = Array.isArray(response.data) ? response.data : [];
-      console.log('Fetched animals:', this.animalList);
     });
   }
 
