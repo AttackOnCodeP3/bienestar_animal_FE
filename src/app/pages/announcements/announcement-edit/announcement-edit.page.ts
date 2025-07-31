@@ -1,19 +1,22 @@
 import {Component, computed, effect, inject, OnDestroy, OnInit} from '@angular/core';
-import {Constants} from '@common/constants/constants';
-import {GeneralContainerComponent} from '@components/layout';
 import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AnnouncementHttpService, AnnouncementStateHttpService} from '@services/http';
-import {AlertService, FormsService, I18nService} from '@services/general';
-import {LoadingModalService, ModalService} from '@services/modals';
-import {AlertTypeEnum, PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
-import {AnnouncementFormComponent} from '@components/forms/announcement';
-import {AnnouncementFormService} from '@services/forms';
-import {Editor} from 'ngx-editor';
-import {FileUtilsService} from '@services/utils';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatChip} from '@angular/material/chips';
+import {Editor} from 'ngx-editor';
+
+import {AlertTypeEnum, PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
+import {AnnouncementFormComponent} from '@components/forms/announcement';
+
+import {AnnouncementFormService} from '@services/forms';
+import {LoadingModalService, ModalService} from '@services/modals';
+import {FileUtilsService} from '@services/utils';
+import {AnnouncementHttpService, AnnouncementStateHttpService} from '@services/http';
+import {AlertService, FormsService, I18nService} from '@services/general';
+import {Constants} from '@common/constants/constants';
+import {GeneralContainerComponent} from '@components/layout';
+
 import {UpdateAnnouncementFormDTO} from '@models/dto';
 
 @Component({
@@ -70,6 +73,10 @@ export class AnnouncementEditPage implements OnInit, OnDestroy {
     this.editor?.destroy();
   }
 
+  /**
+   * Handles the form submission for editing an announcement.
+   * @author dgutierrez
+   */
   onSubmit() {
     const form = this.announcementFormService.form();
     if (form.invalid) {
@@ -84,6 +91,10 @@ export class AnnouncementEditPage implements OnInit, OnDestroy {
     this.editAnnouncement();
   }
 
+  /**
+   * Submits the form to update an existing announcement.
+   * @author dgutierrez
+   */
   private editAnnouncement(): void {
     const dto = new UpdateAnnouncementFormDTO(
       this.announcementFormService.getAnnouncementFormValues()
