@@ -1,3 +1,5 @@
+import {GeneralUtil} from '@common/utils';
+
 /**
  * Data Transfer Object (DTO) for creating an announcement form.
  * @author dgutierrez
@@ -30,17 +32,12 @@ export class CreateAnnouncementFormDTO {
     if (this.description !== null) formData.append('description', this.description);
     if (this.stateId !== null) formData.append('stateId', this.stateId.toString());
 
-    const formatDateOnly = (date: Date | string): string =>
-      typeof date === 'string'
-        ? date.split('T')[0]
-        : date.toISOString().split('T')[0];
-
     if (this.startDate !== null) {
-      formData.append('startDate', formatDateOnly(this.startDate));
+      formData.append('startDate', GeneralUtil.formatDateOnly(this.startDate));
     }
 
     if (this.endDate !== null) {
-      formData.append('endDate', formatDateOnly(this.endDate));
+      formData.append('endDate', GeneralUtil.formatDateOnly(this.endDate));
     }
 
     if (this.file !== null) formData.append('file', this.file);

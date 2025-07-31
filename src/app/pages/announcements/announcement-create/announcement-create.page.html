@@ -11,7 +11,7 @@
 </app-general-container-component>
 
 <app-announcement-form-component
-  [form]="createAnnouncementForm"
+  [form]="announcementFormService.form()"
   [formsService]="formsService"
   (onSubmitChange)="onSubmit()"
   (onViewImageChange)="onViewImage()"

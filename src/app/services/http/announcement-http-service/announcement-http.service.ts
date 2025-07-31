@@ -3,8 +3,9 @@ import {BaseHttpService} from '@services/http';
 import {Constants} from '@common/constants/constants';
 import {Announcement} from '@models';
 import {IHttpActionConfig, IResponse, ISearch, ISearchAnnouncement} from '@common/interfaces/http';
-import {CreateAnnouncementFormDTO} from '@models/dto';
+import {CreateAnnouncementFormDTO, UpdateAnnouncementFormDTO} from '@models/dto';
 import {AlertTypeEnum} from '@common/enums';
+import {finalize} from 'rxjs';
 
 /**
  * Service to handle HTTP requests related to announcements.
@@ -57,22 +58,32 @@ export class AnnouncementHttpService extends BaseHttpService<Announcement> {
   }
 
   /**
-   * Fetches an announcement by its ID.
+   * Fetches a specific announcement belonging to the user's municipality.
    * @param id Announcement ID
-   * @param callback Optional callback function
+   * @param config Optional callbacks and loading handlers
    * @author dgutierrez
    */
-  getAnnouncementById(id: number, callback?: VoidFunction): void {
-    this.getOne(id).subscribe({
-      next: (announcement) => {
-        this.selectedAnnouncement.set(announcement);
-        callback?.();
-      },
-      error: this.handleError({
-        message: 'Error fetching announcement by ID.',
-        context: `${this.constructor.name}#getAnnouncementById`,
-      }),
-    });
+  getMyMunicipalityAnnouncementById(id: number, config?: IHttpActionConfig): void {
+    this.isLoading.set(true);
+    config?.showLoading?.();
+
+    this.http.get<IResponse<Announcement>>(`${this.sourceUrl}/my-municipality/${id}`)
+      .pipe(
+        finalize(() => {
+          this.isLoading.set(false);
+          config?.hideLoading?.();
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.selectedAnnouncement.set(res.data);
+          config?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error fetching announcement from your municipality.',
+          context: `${this.constructor.name}#getMyMunicipalityAnnouncementById`,
+        }),
+      });
   }
 
   /**
@@ -97,24 +108,69 @@ export class AnnouncementHttpService extends BaseHttpService<Announcement> {
 
     const formData = dto.toFormData();
 
-    this.http.post<IResponse<Announcement>>(`${this.sourceUrl}/my-municipality`, formData).subscribe({
-      next: (response) => {
-        this.selectedAnnouncement.set(response.data);
-        this.alertService.displayAlert({
-          type: AlertTypeEnum.SUCCESS,
-          message: response.message
+    this.http.post<IResponse<Announcement>>(`${this.sourceUrl}/my-municipality`, formData)
+      .pipe(
+        finalize(() => {
+          this.isLoading.set(false);
+          config?.hideLoading?.();
         })
-        config?.callback?.();
-      },
-      error: this.handleError({
-        message: 'Error creating announcement.',
-        context: `${this.constructor.name}#createAnnouncement`,
-      }),
-      complete: () => {
-        this.isLoading.set(false);
-        config?.hideLoading?.();
-      },
-    });
+      )
+      .subscribe({
+        next: (response) => {
+          this.selectedAnnouncement.set(response.data);
+          this.alertService.displayAlert({
+            type: AlertTypeEnum.SUCCESS,
+            message: response.message
+          });
+          config?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error creating announcement.',
+          context: `${this.constructor.name}#createAnnouncement`,
+        }),
+      });
+  }
+
+  /**
+   * Updates an existing announcement associated with the authenticated user's municipality.
+   * Uses multipart/form-data with updated fields and optional image file.
+   *
+   * @param id ID of the announcement to update
+   * @param dto Form DTO containing updated fields
+   * @param config Optional callbacks and loading handlers
+   * @author dgutierrez
+   */
+  updateAnnouncement(
+    id: number,
+    dto: UpdateAnnouncementFormDTO,
+    config?: IHttpActionConfig
+  ): void {
+    this.isLoading.set(true);
+    config?.showLoading?.();
+
+    const formData = dto.toFormData();
+
+    this.http.put<IResponse<Announcement>>(`${this.sourceUrl}/my-municipality/${id}`, formData)
+      .pipe(
+        finalize(() => {
+          this.isLoading.set(false);
+          config?.hideLoading?.();
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.selectedAnnouncement.set(response.data);
+          this.alertService.displayAlert({
+            type: AlertTypeEnum.SUCCESS,
+            message: response.message
+          });
+          config?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error updating announcement.',
+          context: `${this.constructor.name}#updateAnnouncement`,
+        }),
+      });
   }
 
   /**

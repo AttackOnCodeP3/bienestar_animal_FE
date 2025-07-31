@@ -53,6 +53,12 @@ export class AnnouncementFormComponent {
   readonly editor = input.required<Editor>();
   readonly mode = input.required<'create' | 'edit'>();
   readonly onSubmitChange = output<void>();
+  readonly imageUrl = input<string | null>();
+
+  get showButtonSeeImage(): boolean {
+    const fileControl = this.form().get('file')
+    return !!this.imageUrl() && this.imageUrl()?.trim() !== '' || fileControl?.value;
+  }
 
   /**
    * Method to handle the image view action.
