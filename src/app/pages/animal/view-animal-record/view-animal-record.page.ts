@@ -10,6 +10,7 @@ import {MatTable, MatTableModule, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, 
 import {NgFor} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GlbViewerComponent } from '@components/model3D';
+import { GoogleMapsComponent } from '@components/googleMaps';
 
 @Component({
   selector: 'app-view-animal-record-page',
@@ -34,7 +35,8 @@ import { GlbViewerComponent } from '@components/model3D';
     MatHeaderCellDef,
     MatCellDef,
     NgFor,
-    GlbViewerComponent
+    GlbViewerComponent,
+    GoogleMapsComponent
   ],
   styleUrls: ['./view-animal-record.page.scss']
 })
