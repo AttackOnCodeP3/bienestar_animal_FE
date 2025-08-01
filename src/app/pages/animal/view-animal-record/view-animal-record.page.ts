@@ -9,6 +9,7 @@ import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from
 import {MatTable, MatTableModule, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef } from '@angular/material/table';
 import {NgFor} from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GlbViewerComponent } from '@components/model3D';
 
 @Component({
   selector: 'app-view-animal-record-page',
@@ -33,6 +34,7 @@ import { FormsModule } from '@angular/forms';
     MatHeaderCellDef,
     MatCellDef,
     NgFor,
+    GlbViewerComponent
   ],
   styleUrls: ['./view-animal-record.page.scss']
 })
@@ -42,6 +44,7 @@ export class ViewAnimalRecordPage implements OnInit {
   selectedAnimal: any = null;
 
   readonly animalService = inject(AnimalRecordHttpService);
+  
 
   ngOnInit(): void {
     this.fetchAnimals();
