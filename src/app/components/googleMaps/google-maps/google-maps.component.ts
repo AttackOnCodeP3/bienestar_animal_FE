@@ -10,7 +10,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
       [height]="'400px'"
       [width]="'100%'"
       [center]="center()"
-      [zoom]="12"
+      [zoom]="15"
     >
       <map-marker
         [position]="center()"
