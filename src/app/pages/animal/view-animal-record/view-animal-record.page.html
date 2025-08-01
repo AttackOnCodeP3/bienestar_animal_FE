@@ -124,6 +124,9 @@
       <h2>Ubicación en mapa</h2>
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <app-google-maps [lat]="9.9333" [lng]="-84.0833"></app-google-maps>
+  <app-google-maps
+    [lat]="selectedAnimal.latitude"
+    [lng]="selectedAnimal.longitude"
+  ></app-google-maps>
 </mat-expansion-panel>
 }
