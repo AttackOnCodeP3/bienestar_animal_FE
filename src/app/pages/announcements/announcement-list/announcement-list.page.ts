@@ -86,8 +86,8 @@ export class AnnouncementListPage implements OnInit {
 
   ngOnInit() {
     this.announcementStateHttpService.getAll();
+    this.searchAnnouncements();
   }
-
 
   get searchFormFilters() {
     const {announcementTitle, announcementState} = this.searchForm.getRawValue();
