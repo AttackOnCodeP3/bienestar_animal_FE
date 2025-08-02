@@ -42,7 +42,10 @@
     "notificationRulesList": "Lista de reglas",
     "announcements": "Gestión de anuncios",
     "announcementCreate": "Crear anuncio",
-    "announcementList": "Lista de anuncios"
+    "announcementList": "Lista de anuncios",
+    "community-census": "Censo comunitario",
+    "register-community-animal": "Registrar animal comunitario"
+
   },
   "notifications-modal-component": {
     "title": "Notificaciones",

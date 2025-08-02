@@ -8,7 +8,9 @@ import {I18nPagesValidationsEnum} from '@common/enums/i18n';
 import {FormsService} from '@services/general';
 import {IFormValidationError} from '@common/interfaces';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserRegistrationFormService {
   private readonly formsService = inject(FormsService)
   readonly formUserRegistration = this.buildUserForm();

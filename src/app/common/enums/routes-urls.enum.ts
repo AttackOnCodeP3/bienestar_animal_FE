@@ -55,6 +55,7 @@ export enum RoutesUrlsEnum {
   CREATE_ANIMAL_PROFILE = 'create-animal-profile',
   ABANDONED_ANIMAL = 'abandoned-animal',
   CREATE_ABANDONED_ANIMAL = 'create-abandoned-animal',
+  REGISTER_COMMUNITY_ANIMAL_BY_CENSUS = 'register-community-animal-by-census',
 
   //model 3d
   MODEL_3D = 'model-3d',

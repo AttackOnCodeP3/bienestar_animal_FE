@@ -17,6 +17,7 @@ export class RegisterUserRequestDTO {
   wantsToBeVolunteer: boolean;
   interestIds: number[];
   roleIds: number[];
+  registeredByCensusTaker: boolean;
 
   constructor(values: Partial<RegisterUserRequestDTO> = {}) {
     this.name = values.name || null;
@@ -31,6 +32,7 @@ export class RegisterUserRequestDTO {
     this.wantsToBeVolunteer = values.wantsToBeVolunteer ?? false;
     this.interestIds = values.interestIds ? Array.from(values.interestIds) : [];
     this.roleIds = values.roleIds ? Array.from(values.roleIds) : [];
+    this.registeredByCensusTaker = values.registeredByCensusTaker ?? false;
   }
 
   /**
@@ -52,6 +54,7 @@ export class RegisterUserRequestDTO {
       municipalityId: user.municipality?.id,
       neighborhoodId: user.neighborhood?.id,
       wantsToBeVolunteer: wantsToBeVolunteer,
+      registeredByCensusTaker: false,
       roleIds: user.roles
         ? user.roles
           .map(role => role?.id)
