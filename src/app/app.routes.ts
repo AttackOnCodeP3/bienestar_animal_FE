@@ -78,7 +78,7 @@ export const routes: Routes = [
         canActivate: [
           roleGuard([
             RolesEnum.COMMUNITY_USER,
-            RolesEnum.CENSISTA_USER, // <- IMPORTANTE
+            RolesEnum.CENSISTA_USER,
           ])
         ],
         loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
