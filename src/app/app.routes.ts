@@ -98,6 +98,11 @@ export const routes: Routes = [
         path: RoutesUrlsEnum.ANNOUNCEMENTS,
         canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN])],
         loadChildren: () => import('@pages/announcements/announcements.routes').then(m => m.ANNOUNCEMENTS_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.COMPLAINTS,
+        canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/complaint/complaint.routes').then(m => m.COMPLAINTS_ROUTES),
       }
     ]
   }

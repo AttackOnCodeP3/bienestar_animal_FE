@@ -28,4 +28,7 @@ export enum I18nMenuEnum {
   ANNOUNCEMENTS = I18nMenuEnum.MENU + '.announcements',
   ANNOUNCEMENT_CREATE = I18nMenuEnum.MENU + '.announcementCreate',
   ANNOUNCEMENT_LIST = I18nMenuEnum.MENU + '.announcementList',
+  COMPLAINTS = I18nMenuEnum.MENU + '.complaints',
+  COMPLAINT_LIST = I18nMenuEnum.MENU + '.complaintList',
+  COMPLAINT_CREATE = I18nMenuEnum.MENU + '.complaintCreate',
 }

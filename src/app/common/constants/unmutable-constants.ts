@@ -133,7 +133,7 @@ export abstract class UnmutableConstants {
   /**
    * Endpoint to get the animals related to the user connected
    */
-  static readonly COMMUNITY_ANIMALS_MINE: string  = UnmutableConstants.COMMUNITY_ANIMALS + '/mine';
+  static readonly COMMUNITY_ANIMALS_MINE: string = UnmutableConstants.COMMUNITY_ANIMALS + '/mine';
 
   // ==================================================================
   // ROUTES FOR ABANDONED ANIMALS SERVICES
@@ -207,4 +207,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly ANNOUNCEMENTS: string = '/announcements';
   static readonly ANNOUNCEMENTS_URL: string = UnmutableConstants.ANNOUNCEMENTS
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINTS SERVICES
+  // =================================================================
+  private static COMPLAINT_TYPES: string = '/complaint-types';
+  static readonly COMPLAINT_TYPES_URL: string = UnmutableConstants.COMPLAINT_TYPES;
 }

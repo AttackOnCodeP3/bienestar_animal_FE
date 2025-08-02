@@ -31,7 +31,10 @@
     "notificationRulesList": "Notification Rules List",
     "announcements": "Announcements Management",
     "announcementCreate": "Create Announcement",
-    "announcementList": "Announcement List"
+    "announcementList": "Announcement List",
+    "complaints": "Complaints Management",
+    "complaintList": "Complaint List",
+    "complaintCreate": "Create Complaint"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",

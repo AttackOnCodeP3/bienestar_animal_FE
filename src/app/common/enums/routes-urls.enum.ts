@@ -70,4 +70,9 @@ export enum RoutesUrlsEnum {
   ANNOUNCEMENTS_LIST = 'announcements-list',
   ANNOUNCEMENTS_CREATE = 'announcements-create',
   ANNOUNCEMENTS_EDIT = 'announcements-edit',
+
+  //Complaints
+  COMPLAINTS = 'complaints',
+  COMPLAINTS_LIST = 'complaints-list',
+  COMPLAINTS_CREATE = 'complaints-create',
 }

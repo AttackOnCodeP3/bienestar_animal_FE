@@ -42,7 +42,10 @@
     "notificationRulesList": "Lista de reglas",
     "announcements": "Gestión de anuncios",
     "announcementCreate": "Crear anuncio",
-    "announcementList": "Lista de anuncios"
+    "announcementList": "Lista de anuncios",
+    "complaints": "Gestión de denuncias",
+    "complaintList": "Lista de denuncias",
+    "complaintCreate": "Crear denuncia"
   },
   "notifications-modal-component": {
     "title": "Notificaciones",
