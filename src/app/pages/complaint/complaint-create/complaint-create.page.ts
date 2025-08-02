@@ -6,6 +6,7 @@ import {GeneralContainerComponent} from '@components/layout';
 import {ComplaintFormComponent} from '@components/complaint';
 import {FormsService} from '@services/general';
 import {Validators} from '@angular/forms';
+import {notSelectOptionValidator} from '@common/forms';
 
 /**
  * Page for creating a new complaint.
@@ -35,10 +36,9 @@ export class ComplaintCreatePage implements OnInit {
   private buildCreateComplaintForm() {
     const formsBuilder = this.formsService.formsBuilder;
     return formsBuilder.group({
-      complaintTypeId:  formsBuilder.control(null, Validators.required),
+      complaintType: formsBuilder.control(null, [Validators.required, notSelectOptionValidator]),
       description: formsBuilder.control('', [
         Validators.required,
-        Validators.minLength(10),
         Validators.maxLength(1000)
       ]),
     })

@@ -1,14 +1,15 @@
-import {Component, inject, input} from '@angular/core';
+import {Component, inject, input, signal} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {ComplaintType} from '@models';
 import {GeneralContainerComponent} from '@components/layout';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {MatOption, MatSelect} from '@angular/material/select';
-import {MatError, MatFormField, MatLabel} from '@angular/material/input';
+import {MatHint, MatOption, MatSelect, MatSelectChange} from '@angular/material/select';
+import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormsService} from '@services/general';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
 import {JsonPipe} from '@angular/common';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-complaint-form-component',
@@ -22,7 +23,10 @@ import {JsonPipe} from '@angular/common';
     ReactiveFormsModule,
     MatIcon,
     MatTooltip,
-    JsonPipe
+    JsonPipe,
+    MatInput,
+    MatButton,
+    MatHint
   ],
   templateUrl: './complaint-form.component.html',
   styleUrl: './complaint-form.component.scss',

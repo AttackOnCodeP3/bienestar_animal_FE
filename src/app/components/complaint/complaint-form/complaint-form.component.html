@@ -3,41 +3,67 @@
     <div class="row">
       <div class="col-12">
         <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Estado del anuncio</mat-label>
+          <mat-label>
+            Tipo de denuncia
+          </mat-label>
           <mat-select
-            formControlName="complaintTypeId"
+            formControlName="complaintType"
             [errorStateMatcher]="formsService().matcher"
-            placeholder="Seleccione un estado"
+            placeholder="Seleccione un tipo de denuncia"
+            [compareWith]="formsService().genericCompare"
           >
             <mat-option [value]="formsService().filterOptionEnum.SELECT_OPTION">
-              Seleccione un estado
+              Seleccione un tipo de denuncia
             </mat-option>
             @for (complaintType of complaintTypesList(); track complaintType.id) {
-              <mat-option [value]="complaintType.id">{{ complaintType.name }}</mat-option>
+              <mat-option [value]="complaintType">{{ complaintType.name }}</mat-option>
             }
           </mat-select>
-          @let complaintTypeIdControl = form().get('complaintTypeId');
-          @if (formsService().isFieldInvalid(complaintTypeIdControl)) {
-            <mat-error>{{ formsService().getErrorMessage(complaintTypeIdControl) }}</mat-error>
+          @let complaintTypeControl = form().get('complaintType');
+          @if (formsService().isFieldInvalid(complaintTypeControl)) {
+            <mat-error>{{ formsService().getErrorMessage(complaintTypeControl) }}</mat-error>
           }
         </mat-form-field>
-        <!--show the description of the selection with a mat icon with a tooltiip-->
-        <pre><code>{{ complaintTypeIdControl?.value | json }}</code></pre>
-        @if (complaintTypeIdControl?.value) {
-          <mat-icon
-            [matTooltip]="complaintTypeIdControl?.value.description"
-            class="ms-2"
-          >
-            info
-          </mat-icon>
+        @if (complaintTypeControl?.value) {
+          <div class="text-end">
+            <mat-icon
+              [matTooltip]="complaintTypeControl?.value.description"
+              class="ms-2"
+            >
+              info
+            </mat-icon>
+          </div>
         }
       </div>
     </div>
   </app-general-container-component>
 
   <app-general-container-component>
-   <!--show the description of the selection with a icon-->
-
+    <mat-form-field class="w-100" appearance="outline" hintLabel="Máximo 1000 caracteres">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        formControlName="description"
+        matInput
+        rows="5"
+        maxlength="1000"
+        minlength="10"
+        placeholder="Ingrese una descripción de la denuncia"
+        #textAreaDescription
+        [errorStateMatcher]="formsService().matcher"
+      >
+      </textarea>
+      <mat-hint align="end">{{ textAreaDescription.value.length }}/1000</mat-hint>
+      @let descriptionControl = form().get('description');
+      @if (formsService().isFieldInvalid(descriptionControl)) {
+        <mat-error>{{ formsService().getErrorMessage(descriptionControl) }}</mat-error>
+      }
+    </mat-form-field>
   </app-general-container-component>
+
+  <div class="text-end">
+    <button matButton="tonal">
+      Realizar denuncia
+    </button>
+  </div>
 
 </form>
