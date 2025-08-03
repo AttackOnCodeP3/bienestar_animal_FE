@@ -45,6 +45,10 @@ export class ComplaintCreatePage implements OnInit {
     this.complaintTypeHttpService.getAll();
   }
 
+  /**
+   * Handles the form submission for creating a complaint.
+   * @author dgutierrez
+   */
   onSubmit() {
     if (this.complaintCreateForm.invalid) {
       this.formsService.markFormTouchedAndDirty(this.complaintCreateForm);
