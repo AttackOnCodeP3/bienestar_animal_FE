@@ -95,6 +95,7 @@ export class UserHttpService extends BaseHttpService<User> {
    * @param registerUserRequestDto The user registration request DTO containing user details.
    * @return Observable<User> The observable for the HTTP request.
    * @author dgutierrez
+   * @modifiedBy gjimenez
    */
   adminRegisterUser(registerUserRequestDto:RegisterUserRequestDTO){
     const url = Constants.apiBaseUrl + Constants.ADMIN_REGISTER_USER_URL

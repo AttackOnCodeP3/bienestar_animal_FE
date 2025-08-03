@@ -32,7 +32,7 @@ export class RegisterUserRequestDTO {
     this.wantsToBeVolunteer = values.wantsToBeVolunteer ?? false;
     this.interestIds = values.interestIds ? Array.from(values.interestIds) : [];
     this.roleIds = values.roleIds ? Array.from(values.roleIds) : [];
-    this.registeredByCensusTaker = values.registeredByCensusTaker ?? false;
+    this.registeredByCensusTaker = values.registeredByCensusTaker ??= false;
   }
 
   /**

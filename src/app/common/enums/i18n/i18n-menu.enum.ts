@@ -29,6 +29,6 @@ export enum I18nMenuEnum {
   ANNOUNCEMENTS = I18nMenuEnum.MENU + '.announcements',
   ANNOUNCEMENT_CREATE = I18nMenuEnum.MENU + '.announcementCreate',
   ANNOUNCEMENT_LIST = I18nMenuEnum.MENU + '.announcementList',
-  COMMUNITY_CENSUS = 'menu.community-census',
+  COMMUNITY_CENSUS = I18nMenuEnum.MENU + '.community-census',
   REGISTER_COMMUNITY_ANIMAL = 'menu.register-community-animal',
 }

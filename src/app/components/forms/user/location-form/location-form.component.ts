@@ -29,7 +29,7 @@ export class LocationFormComponent implements OnInit, OnDestroy {
 
   selectedCanton = output<Canton>();
   selectedDistrict = output<District>();
-  @Input() neighborhoodsList!: Neighborhood[];
+  readonly neighborhoodsList = input.required<Neighborhood[]>();
 
   ngOnInit(): void {
     const cantonControl = this.formsService().getControl('canton', this.form());
