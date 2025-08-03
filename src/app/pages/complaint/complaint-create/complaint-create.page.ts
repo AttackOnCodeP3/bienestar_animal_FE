@@ -84,34 +84,39 @@ export class ComplaintCreatePage implements OnInit {
   }
 
   /**
-   * Builds the DTO for creating a complaint.
+   * Builds the DTO for creating a complaint by extracting form values
+   * and getting user geolocation.
+   * Displays a loading modal while the location is being fetched.
+   *
+   * @returns Promise<CreateComplaintMultipartDto> with populated values,
+   *          or an empty DTO with default coordinates if location fails.
    * @author dgutierrez
    */
-  private async buildCreateComplaintDto() {
-    let createComplaintMultipartDto = new CreateComplaintMultipartDto();
+  private async buildCreateComplaintDto(): Promise<CreateComplaintMultipartDto> {
     await this.loadingModalService.show();
+
     try {
-      const {coordinates} = await this.locationService.getUserLocation();
-      const {complaintType, description} = this.complaintCreateForm.getRawValue();
+      const { coordinates } = await this.locationService.getUserLocation();
+      const { complaintType, description } = this.complaintCreateForm.getRawValue();
 
       return new CreateComplaintMultipartDto({
-        complaintTypeId: complaintType?.id,
-        description: description,
+        complaintTypeId: complaintType?.id ?? null,
+        description: description ?? null,
         image: this.getImageFile(),
         latitude: coordinates?.latitude ?? 0,
         longitude: coordinates?.longitude ?? 0,
-      })
+      });
     } catch (error) {
       this.logService.error({
         message: 'Error getting user location for complaint creation.',
-        error: error
+        error
       });
+      return new CreateComplaintMultipartDto();
     } finally {
       this.loadingModalService.hide();
     }
-
-    return createComplaintMultipartDto;
   }
+
 
   /**
    * Opens a modal to view the selected image.
