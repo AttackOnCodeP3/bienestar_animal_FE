@@ -6,7 +6,7 @@
     <input matInput [formControl]="cedulaControl" />
   </mat-form-field>
 
-  <button mat-raised-button (click)="onSearchByCedula()">
+  <button mat-raised-button color="primary" (click)="onSearchByCedula()">
     Buscar propietario
   </button>
 </app-general-container-component>
@@ -18,7 +18,7 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close="false">Cancelar</button>
-    <button mat-button mat-dialog-close="true">Registrar nuevo propietario</button>
+    <button mat-button mat-dialog-close="true" color="primary">Registrar nuevo propietario</button>
   </mat-dialog-actions>
 </ng-template>
 
@@ -27,38 +27,41 @@
     <mat-card-title>Usuario encontrado</mat-card-title>
     <mat-card-content>
       <div class="user-info-grid">
-        <mat-form-field appearance="outline" class="w-100" disabled>
+        <mat-form-field appearance="fill" class="w-100" disabled>
           <mat-label>Nombre completo</mat-label>
-          <input matInput [value]="userFound()?.name + ' ' + userFound()?.lastname" disabled />
+          <input matInput [value]="userFound()?.name + ' ' + userFound()?.lastname" disabled>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="w-100" disabled>
+        <mat-form-field appearance="fill" class="w-100" disabled>
           <mat-label>Correo electrónico</mat-label>
-          <input matInput [value]="userFound()?.email" disabled />
+          <input matInput [value]="userFound()?.email" disabled>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="w-100" disabled>
+        <mat-form-field appearance="fill" class="w-100" disabled>
           <mat-label>Número de teléfono</mat-label>
-          <input matInput [value]="userFound()?.phoneNumber" disabled />
+          <input matInput [value]="userFound()?.phoneNumber" disabled>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="w-100" disabled>
+        <mat-form-field appearance="fill" class="w-100" disabled>
           <mat-label>Fecha de nacimiento</mat-label>
-          <input matInput [value]="userFound()?.birthDate | date:'dd/MM/yyyy'" disabled />
+          <input matInput [value]="userFound()?.birthDate | date:'dd/MM/yyyy'" disabled>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="w-100" disabled>
+        <mat-form-field appearance="fill" class="w-100" disabled>
           <mat-label>¿Casa cuna?</mat-label>
-          <input matInput [value]="userFound()?.nurseryHome ? 'Sí' : 'No'" disabled />
+          <input matInput [value]="userFound()?.nurseryHome ? 'Sí' : 'No'" disabled>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="w-100" disabled>
+        <mat-form-field appearance="fill" class="w-100" disabled>
           <mat-label>Dirección</mat-label>
-          <input matInput [value]="
-            userFound()?.neighborhood?.district?.canton?.name + ', ' +
-            userFound()?.neighborhood?.district?.name + ', ' +
-            userFound()?.neighborhood?.name
-          " disabled />
+          <input matInput
+                 [value]="
+              userFound()?.neighborhood?.district?.canton?.name + ', ' +
+              userFound()?.neighborhood?.district?.name + ', ' +
+              userFound()?.neighborhood?.name
+            "
+                 disabled
+          >
         </mat-form-field>
 
         <div class="w-100 mt-3">
@@ -79,7 +82,7 @@
       </mat-form-field>
 
       <div class="text-end">
-        <button mat-raised-button (click)="onMostrarFormularioAnimales()">
+        <button mat-raised-button color="primary" (click)="onMostrarFormularioAnimales()">
           Continuar
         </button>
       </div>
@@ -106,7 +109,10 @@
       [form]="userRegistrationFormService.formUserRegistration"
       [i18nService]="i18nService"
       [formsService]="formsService"
-    ></app-location-form>
+      >
+    </app-location-form>
+
+
 
     <app-interests-form
       [listInterests]="interestHttpService.interestList() ?? []"
@@ -121,7 +127,7 @@
     />
 
     <div class="text-end mt-3">
-      <button mat-raised-button (click)="onRegisterUser()">
+      <button mat-raised-button color="primary" (click)="onRegisterUser()">
         Registrar usuario
       </button>
     </div>
@@ -129,7 +135,7 @@
 </ng-container>
 
 <ng-container *ngIf="showAnimalForm()">
-  <mat-expansion-panel class="mb-4" [expanded]="true">
+  <mat-expansion-panel class="mb-4" expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h2>Información básica del animal</h2>
@@ -147,7 +153,7 @@
     />
   </mat-expansion-panel>
 
-  <mat-expansion-panel class="mb-4" [expanded]="true">
+  <mat-expansion-panel class="mb-4" expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h2>Vacunación</h2>
@@ -162,7 +168,7 @@
     />
   </mat-expansion-panel>
 
-  <mat-expansion-panel class="mb-4" [expanded]="true">
+  <mat-expansion-panel class="mb-4" expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h2>Desparasitación</h2>
@@ -174,11 +180,10 @@
       [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
       [formsService]="formsService"
       [i18nService]="i18nService"
-      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"
-    />
+      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
   </mat-expansion-panel>
 
-  <mat-expansion-panel class="mb-4" [expanded]="true">
+  <mat-expansion-panel class="mb-4" expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h2>Castración/Esterilización</h2>
@@ -190,11 +195,10 @@
       [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
       [formsService]="formsService"
       [i18nService]="i18nService"
-      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"
-    />
+      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
   </mat-expansion-panel>
 
-  <mat-expansion-panel class="mb-4" [expanded]="true">
+  <mat-expansion-panel class="mb-4" expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h2>Control de pulgas</h2>
@@ -206,12 +210,11 @@
       [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
       [formsService]="formsService"
       [i18nService]="i18nService"
-      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"
-    />
+      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
   </mat-expansion-panel>
 
   <div class="text-end mb-5">
-    <button mat-raised-button (click)="onSubmitAnimalForms()">
+    <button mat-raised-button color="accent" (click)="onSubmitAnimalForms()">
       Registrar animales
     </button>
   </div>
