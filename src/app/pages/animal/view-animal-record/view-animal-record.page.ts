@@ -11,6 +11,7 @@ import {NgFor} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GlbViewerComponent } from '@components/model3D';
 import { GoogleMapsComponent } from '@components/googleMaps';
+import { Constants } from '@common/constants/constants';
 
 @Component({
   selector: 'app-view-animal-record-page',
@@ -53,8 +54,17 @@ export class ViewAnimalRecordPage implements OnInit {
   }
 
   fetchAnimals(): void {
-    this.animalService.getAnimals().subscribe((response: any) => {
-      this.animalList = Array.isArray(response.data) ? response.data : [];
+    const userStr = localStorage.getItem(Constants.LS_APP_AUTH_USER);
+    const user = userStr ? JSON.parse(userStr) : null;
+    const ownerId = user?.id;
+    console.log('Owner ID:', ownerId);
+    if (!ownerId) {
+      this.animalList = [];
+      return;
+    }
+    this.animalService.getAnimalsByOwnerId(ownerId).subscribe((response: any) => {
+      console.log('Fetched animals:', response);
+      this.animalList = response || [];
     });
   }
 

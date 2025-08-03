@@ -151,7 +151,13 @@ export abstract class UnmutableConstants {
   // ROUTES FOR ANIMAL TYPES SERVICES
   // =================================================================
   private static readonly ANIMAL_TYPES: string = '/animal-types';
+
   static readonly ANIMAL_TYPES_URL: string = UnmutableConstants.ANIMAL_TYPES;
+// ==================================================================
+  // ROUTES FOR ANIMAL RECORDS SERVICES
+  // =================================================================
+  private static readonly ANIMAL_RECORDS: string = '/animals/records';
+  static readonly ANIMAL_RECORDS_URL: string = UnmutableConstants.ANIMAL_RECORDS;
 
   // ==================================================================
   // ROUTES FOR SEX SERVICES

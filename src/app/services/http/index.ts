@@ -27,4 +27,4 @@ export * from "./sex-http-service/sex-http.service";
 export * from "./species-http-service/species-http.service";
 export * from "./user-http-service/user-http.service";
 export * from "./vaccine-http-service/vaccine-http.service";
-export * from "./animal-record-http-service/animal-record-http-service";
+export * from "./animal-record-http-service/animal-record-http.service";

@@ -4,6 +4,7 @@ declare interface Env {
   readonly NG_APP_API_URL: string;
   readonly NG_APP_ENV: 'development' | 'testing' | 'production';
   readonly NG_APP_API_KEY_GOOGLE_MAPS: string;
+  readonly NG_APP_API_KEY_GOOGLE_MAPS2: string;
   // Replace the following with your own environment variables.
   // Example: NGX_VERSION: string;
   [key: string]: any;
