@@ -159,17 +159,32 @@ export class DashboardLayoutComponent {
       icon: 'pets',
       label: I18nMenuEnum.ABANDONED_ANIMAL,
       authorities: [RolesEnum.CENSISTA_USER],
-      click: () => {
-      },
+      click: () => {},
       children: [
         {
           label: I18nMenuEnum.CREATE_ABANDONED_ANIMAL,
           route: `${RoutesUrlsEnum.ABANDONED_ANIMAL}/${RoutesUrlsEnum.CREATE_ABANDONED_ANIMAL}`,
           authorities: [RolesEnum.CENSISTA_USER],
           click: () => this.closeSidenav(),
-        }
+        },
       ],
     },
+
+    {
+      icon: 'pets',
+      label: I18nMenuEnum.COMMUNITY_CENSUS,
+      authorities: [RolesEnum.CENSISTA_USER],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.REGISTER_COMMUNITY_ANIMAL,
+          route: `${RoutesUrlsEnum.ANIMAL}/${RoutesUrlsEnum.REGISTER_COMMUNITY_ANIMAL_BY_CENSUS}`, // <-- ESTA ES LA CLAVE
+          authorities: [RolesEnum.CENSISTA_USER],
+          click: () => this.closeSidenav(),
+        },
+      ],
+    },
+
     {
       icon: 'view_in_ar',
       label: I18nMenuEnum.MODEL_3D,
