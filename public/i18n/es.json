@@ -45,7 +45,10 @@
     "announcementList": "Lista de anuncios",
     "complaints": "Gestión de denuncias",
     "complaintList": "Lista de denuncias",
-    "complaintCreate": "Crear denuncia"
+    "complaintCreate": "Crear denuncia",
+    "community-census": "Censo comunitario",
+    "register-community-animal": "Registrar animal comunitario"
+
   },
   "notifications-modal-component": {
     "title": "Notificaciones",
