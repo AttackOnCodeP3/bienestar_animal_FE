@@ -174,6 +174,11 @@
       "productUsed": "Digite el producto utilizado",
       "applicationDate": "Seleccione la fecha de aplicación",
       "value": "Ingrese el valor"
+    },
+    "================== FORM UNITS ==================": "",
+    "formUnits": {
+      "characters": "caracteres",
+      "digits": "dígitos"
     }
   },
   "================== PAGES LABELS ==================": "",

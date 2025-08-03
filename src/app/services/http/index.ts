@@ -6,6 +6,7 @@ export * from "./auth-http-service/auth-http.service";
 export * from "./base-http-service/base-http.service";
 export * from "./canton-http-service/canton-http.service";
 export * from "./community-animal-http-service/community-animal-http.service";
+export * from "./complaint-http-service/complaint-http.service";
 export * from "./complaint-type-http-service/complaint-type-http.service";
 export * from "./district-http-service/district-http.service";
 export * from "./forgot-pw-http-service/forgot-pw-http.service";

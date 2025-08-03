@@ -4,6 +4,7 @@ export * from "./animal/sanitary-control.dto";
 export * from "./animal/vaccine-application.dto";
 export * from "./announcement/create-announcement-form.dto";
 export * from "./announcement/update-announcement-form.dto";
+export * from "./complaint/create-complaint-multipart.dto";
 export * from "./generic/age.dto";
 export * from "./municipal-preventive-care-configuration/municipal-preventive-care-configuration.dto";
 export * from "./municipality/create-municipality-request.dto";

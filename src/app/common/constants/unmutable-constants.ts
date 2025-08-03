@@ -211,6 +211,12 @@ export abstract class UnmutableConstants {
   // ==================================================================
   // ROUTES FOR MODEL COMPLAINTS SERVICES
   // =================================================================
+  private static readonly COMPLAINTS: string = '/complaints';
+  static readonly COMPLAINTS_URL: string = UnmutableConstants.COMPLAINTS;
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINTS SERVICES
+  // =================================================================
   private static COMPLAINT_TYPES: string = '/complaint-types';
   static readonly COMPLAINT_TYPES_URL: string = UnmutableConstants.COMPLAINT_TYPES;
 }

@@ -72,17 +72,25 @@ export class FormsService {
   readonly maxDate3YearsFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 3));
 
   /**
-   * Map of input types to their corresponding text representation for error messages.
-   * This is used to provide localized error messages based on the type of input field.
+   * Map that associates input types (`InputType`) with their localized textual representation,
+   * such as "characters" or "digits", used to generate dynamic validation error messages.
+   *
+   * This map is initialized at runtime using the `i18nService`, so its values depend on
+   * the current application language.
+   *
+   * @example
+   * // Example in English:
+   * inputTextMap.get('text'); // 'characters'
+   * inputTextMap.get('number'); // 'digits'
+   *
+   * // Example in Spanish:
+   * inputTextMap.get('text'); // 'caracteres'
+   * inputTextMap.get('number'); // 'dígitos'
+   *
+   * @see initializeErrorMessages
    * @author dgutierrez
    */
-  private readonly inputTextMap: Map<InputType, string> = new Map([
-    ['text', 'characters'],
-    ['number', 'digits'],
-    ['email', 'characters'],
-    ['password', 'characters'],
-    ['tel', 'digits'],
-  ]);
+  private inputTextMap: Map<InputType, string> = new Map([]);
 
   /**
    * Map of error messages for form validation.
@@ -127,7 +135,9 @@ export class FormsService {
       max,
       acceptedMimeTypes,
       maxContentSize,
-      invalidSelection
+      invalidSelection,
+      charactersUnit,
+      digitsUnit
     ] = await Promise.all([
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MUST_MATCH),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_EMAIL),
@@ -139,7 +149,9 @@ export class FormsService {
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MAX),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_FILE_ACCEPT),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_FILE_MAX_CONTENT_SIZE),
-      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_INVALID_SELECTION)
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_INVALID_SELECTION),
+      this.i18nService.get(I18nFormsEnum.FORM_UNIT_CHARACTERS),
+      this.i18nService.get(I18nFormsEnum.FORM_UNIT_DIGITS)
     ]);
 
     this.errorMessages.set('mustMatch', () => mustMatch);
@@ -153,6 +165,14 @@ export class FormsService {
     this.errorMessages.set('acceptedMimeTypes', () => acceptedMimeTypes);
     this.errorMessages.set('maxContentSize', () => maxContentSize);
     this.errorMessages.set('invalidSelection', () => invalidSelection);
+
+    this.inputTextMap = new Map<InputType, string>([
+      ['text', charactersUnit],
+      ['number', digitsUnit],
+      ['email', charactersUnit],
+      ['password', charactersUnit],
+      ['tel', digitsUnit],
+    ]);
   }
 
   /**
