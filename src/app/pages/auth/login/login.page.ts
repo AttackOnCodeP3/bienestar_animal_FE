@@ -8,7 +8,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MatDivider} from '@angular/material/divider';
 import {MatTooltip} from '@angular/material/tooltip';
 import {LogoBienestarAnimalComponent} from '@components/icons';
-import {AlertService, FormsService, I18nService} from '@services/general';
+import {AlertService, FormsService, I18nService, LogService} from '@services/general';
 import {Router} from '@angular/router';
 import {PagesUrlsEnum} from '@common/enums';
 import {Constants} from '@common/constants/constants';
@@ -42,6 +42,7 @@ export class LoginPage {
   private readonly router = inject(Router);
   readonly formsService = inject(FormsService);
   readonly i18nService = inject(I18nService);
+  private readonly logService = inject(LogService);
 
   readonly loginForm = this.formsService.formsBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -75,7 +76,11 @@ export class LoginPage {
         this.alertService.displayAlert({
           messageKey: error.message,
         });
-        console.error(error);
+        this.logService.error({
+          message: error.message,
+          className: this.constructor.name,
+          error: error,
+        });
       }
     })
   }

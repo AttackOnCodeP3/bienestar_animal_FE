@@ -74,6 +74,10 @@ export class BaseHttpService<T> {
         });
         setSearchMeta(res.meta);
         setTotalItems(res.meta?.totalPages ?? 0);
+        this.logService.debug({
+          message: `Total items from ${context}`,
+          data: res.meta?.totalItems,
+        })
         updateSignal.set(res.data);
       },
       error: this.handleError({

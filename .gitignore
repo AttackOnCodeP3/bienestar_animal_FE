@@ -43,3 +43,7 @@ testem.log
 Thumbs.db
 
 # GitIgnore End
+.env
+.env.development
+.env.production
+.env.local

@@ -56,6 +56,7 @@ export enum RoutesUrlsEnum {
   ABANDONED_ANIMAL = 'abandoned-animal',
   CREATE_ABANDONED_ANIMAL = 'create-abandoned-animal',
   VIEW_ANIMAL_RECORD = 'view-animal-record',
+  REGISTER_COMMUNITY_ANIMAL_BY_CENSUS = 'register-community-animal-by-census',
 
   //model 3d
   MODEL_3D = 'model-3d',
@@ -65,4 +66,15 @@ export enum RoutesUrlsEnum {
   //Notification Rules Municipality
   NOTIFICATION_RULES_EDIT = 'notification-rules-edit',
   NOTIFICATION_RULES_LIST = 'notification-rules-list',
+
+  //Anouncements
+  ANNOUNCEMENTS = 'announcements',
+  ANNOUNCEMENTS_LIST = 'announcements-list',
+  ANNOUNCEMENTS_CREATE = 'announcements-create',
+  ANNOUNCEMENTS_EDIT = 'announcements-edit',
+
+  //Complaints
+  COMPLAINTS = 'complaints',
+  COMPLAINTS_LIST = 'complaints-list',
+  COMPLAINTS_CREATE = 'complaints-create',
 }

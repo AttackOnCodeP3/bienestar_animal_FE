@@ -2,6 +2,7 @@
  * Enum for internationalization menu labels.
  * @author dgutierrez
  * modify by nav
+ * @modifiedBy gjimenez 08/02/2025
  */
 export enum I18nMenuEnum {
   MENU = 'menu',
@@ -26,4 +27,12 @@ export enum I18nMenuEnum {
   NOTIFICATION_RULES = I18nMenuEnum.MENU + '.notificationRules',
   NOTIFICATION_RULES_EDIT = I18nMenuEnum.MENU + '.notificationRulesEdit',
   NOTIFICATION_RULES_LIST = I18nMenuEnum.MENU + '.notificationRulesList',
+  ANNOUNCEMENTS = I18nMenuEnum.MENU + '.announcements',
+  ANNOUNCEMENT_CREATE = I18nMenuEnum.MENU + '.announcementCreate',
+  ANNOUNCEMENT_LIST = I18nMenuEnum.MENU + '.announcementList',
+  COMPLAINTS = I18nMenuEnum.MENU + '.complaints',
+  COMPLAINT_LIST = I18nMenuEnum.MENU + '.complaintList',
+  COMPLAINT_CREATE = I18nMenuEnum.MENU + '.complaintCreate',
+  COMMUNITY_CENSUS = 'menu.community-census',
+  REGISTER_COMMUNITY_ANIMAL = 'menu.register-community-animal',
 }

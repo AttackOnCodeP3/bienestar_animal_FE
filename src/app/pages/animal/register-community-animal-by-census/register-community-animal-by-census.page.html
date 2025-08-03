@@ -1,0 +1,221 @@
+<app-general-container-component>
+  <h1>Registrar animales comunitarios</h1>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Buscar por cédula</mat-label>
+    <input matInput [formControl]="cedulaControl" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="onSearchByCedula()">
+    Buscar propietario
+  </button>
+</app-general-container-component>
+
+<ng-template #dialogConfirmarRegistroUsuario>
+  <h2 mat-dialog-title>¿Registrar nuevo propietario?</h2>
+  <mat-dialog-content>
+    No se encontró un propietario con esta cédula. ¿Desea registrar uno nuevo?
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close="false">Cancelar</button>
+    <button mat-button mat-dialog-close="true" color="primary">Registrar nuevo propietario</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-container *ngIf="userExists()">
+  <mat-card class="mt-4">
+    <mat-card-title>Usuario encontrado</mat-card-title>
+    <mat-card-content>
+      <div class="user-info-grid">
+        <mat-form-field appearance="fill" class="w-100" disabled>
+          <mat-label>Nombre completo</mat-label>
+          <input matInput [value]="userFound()?.name + ' ' + userFound()?.lastname" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100" disabled>
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput [value]="userFound()?.email" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100" disabled>
+          <mat-label>Número de teléfono</mat-label>
+          <input matInput [value]="userFound()?.phoneNumber" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100" disabled>
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input matInput [value]="userFound()?.birthDate | date:'dd/MM/yyyy'" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100" disabled>
+          <mat-label>¿Casa cuna?</mat-label>
+          <input matInput [value]="userFound()?.nurseryHome ? 'Sí' : 'No'" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100" disabled>
+          <mat-label>Dirección</mat-label>
+          <input matInput
+                 [value]="
+              userFound()?.neighborhood?.district?.canton?.name + ', ' +
+              userFound()?.neighborhood?.district?.name + ', ' +
+              userFound()?.neighborhood?.name
+            "
+                 disabled
+          >
+        </mat-form-field>
+
+        <div class="w-100 mt-3">
+          <strong>Intereses:</strong>
+          <mat-chip-list *ngIf="userFound()?.interests?.length; else noInterests">
+            <mat-chip *ngFor="let interest of userFound()?.interests">{{ interest.name }}</mat-chip>
+          </mat-chip-list>
+          <ng-template #noInterests>
+            <p class="text-muted">Sin intereses registrados</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <h3 class="mt-4">¿Cuántos animales desea registrar?</h3>
+      <mat-form-field appearance="outline">
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" [formControl]="formCantidadAnimales" />
+      </mat-form-field>
+
+      <div class="text-end">
+        <button mat-raised-button color="primary" (click)="onMostrarFormularioAnimales()">
+          Continuar
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="wantsToRegisterNewUser()">
+  <mat-card class="mt-4">
+    <h2>Registrar nuevo propietario</h2>
+
+    <app-personal-data-user-registration-form
+      [form]="userRegistrationFormService.formUserRegistration"
+      [formsService]="formsService"
+      [i18nService]="i18nService"
+    />
+
+    <app-location-form
+      [cantonsList]="cantonHttpService.cantonList()"
+      [districtsList]="districtsList()"
+      [neighbourhoodsList]="neighborhoodsList()"
+      (selectedCanton)="onSelectCanton($event)"
+      (selectedDistrict)="onSelectDistrict($event)"
+      [form]="userRegistrationFormService.formUserRegistration"
+      [i18nService]="i18nService"
+      [formsService]="formsService"
+      >
+    </app-location-form>
+
+
+
+    <app-interests-form
+      [listInterests]="interestHttpService.interestList() ?? []"
+      [(selectedInterests)]="selectedInterests"
+    />
+
+    <app-it-worked-as-nursery-home-form
+      [form]="userRegistrationFormService.formUserRegistration"
+      [formsService]="formsService"
+      [i18nService]="i18nService"
+      [checked]="userRegistrationFormService.isNurseryHome()"
+    />
+
+    <div class="text-end mt-3">
+      <button mat-raised-button color="primary" (click)="onRegisterUser()">
+        Registrar usuario
+      </button>
+    </div>
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="showAnimalForm()">
+  <mat-expansion-panel class="mb-4" expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Información básica del animal</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-basic-info-form
+      [form]="formAnimalBasicInfo"
+      [formsService]="formsService"
+      [i18nService]="i18nService"
+      [sexList]="sexHttpService.sexList()"
+      [speciesList]="speciesHttpService.speciesList()"
+      [raceListBySpecies]="raceHttpService.raceListBySpecies()"
+      (speciesSelectionChange)="onSpeciesSelectionChange($event)"
+    />
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="mb-4" expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Vacunación</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-vaccination-form
+      [form]="formAnimalVaccination"
+      [formsService]="formsService"
+      [i18nService]="i18nService"
+      [vaccineList]="vaccineHttpService.vaccineListBySpecies()"
+    />
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="mb-4" expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Desparasitación</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-deworming-form
+      [form]="formDeworming"
+      [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
+      [formsService]="formsService"
+      [i18nService]="i18nService"
+      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="mb-4" expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Castración/Esterilización</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-neutering-form
+      [form]="formNeutering"
+      [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
+      [formsService]="formsService"
+      [i18nService]="i18nService"
+      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="mb-4" expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Control de pulgas</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-animal-flea-control-form
+      [form]="formFleaControl"
+      [communityAnimalRegistrationFormService]="communityAnimalRegistrationFormService"
+      [formsService]="formsService"
+      [i18nService]="i18nService"
+      [sanitaryControlResponseList]="sanitaryControlResponseHttpService.responseList()"/>
+  </mat-expansion-panel>
+
+  <div class="text-end mb-5">
+    <button mat-raised-button color="accent" (click)="onSubmitAnimalForms()">
+      Registrar animales
+    </button>
+  </div>
+</ng-container>

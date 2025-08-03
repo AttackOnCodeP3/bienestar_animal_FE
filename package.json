@@ -24,6 +24,8 @@
     "@ngx-translate/http-loader": "^16.0.1",
     "bootstrap": "5.3.7",
     "lottie-web": "^5.13.0",
+    "ngx-custom-material-file-input": "^20.0.0",
+    "ngx-editor": "^19.0.0-beta.1",
     "ngx-infinite-scroll": "^20.0.0",
     "ngx-lottie": "^20.0.0",
     "rxjs": "~7.8.0",
@@ -32,9 +34,11 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^20.1.4",
     "@angular/build": "^20.0.3",
     "@angular/cli": "^20.0.3",
     "@angular/compiler-cli": "^20.0.0",
+    "@ngx-env/builder": "20.1.1",
     "@types/jasmine": "~5.1.0",
     "@types/three": "^0.178.1",
     "jasmine-core": "~5.7.0",

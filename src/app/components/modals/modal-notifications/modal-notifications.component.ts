@@ -24,6 +24,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {LottieAnimationsPathsEnum} from '@common/enums';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatChip} from '@angular/material/chips';
+import {TimeAgoPipe} from '@core/pipes';
 
 /**
  * Component for displaying a modal dialog with user notifications.
@@ -34,13 +35,13 @@ import {MatChip} from '@angular/material/chips';
 @Component({
   selector: 'app-notifications-modal-component',
   imports: [
-    DatePipe,
     FormsModule,
     InfiniteScrollDirective,
     LottieComponent,
     MatButtonModule,
     MatCard,
     MatCardContent,
+    MatChip,
     MatDialogActions,
     MatDialogClose,
     MatDialogContent,
@@ -49,14 +50,14 @@ import {MatChip} from '@angular/material/chips';
     MatIcon,
     MatInputModule,
     MatProgressSpinner,
+    TimeAgoPipe,
     TranslatePipe,
-    MatChip,
   ],
-  templateUrl: './notifications-modal.component.html',
-  styleUrl: './notifications-modal.component.scss',
+  templateUrl: './modal-notifications.component.html',
+  styleUrl: './modal-notifications.component.scss',
   changeDetection: Constants.changeDetectionStrategy
 })
-export class NotificationsModalComponent implements OnInit {
+export class ModalNotificationsComponent implements OnInit {
 
   readonly notificationHttpService = inject(NotificationHttpService)
   readonly data = inject<INotificationsModalDialogData>(MAT_DIALOG_DATA);
@@ -65,10 +66,6 @@ export class NotificationsModalComponent implements OnInit {
   readonly animationOptions: AnimationOptions = {
     path: LottieAnimationsPathsEnum.NO_NOTIFICATIONS_AVAILABLE,
   };
-
-  readonly animationsOptionsEndReached: AnimationOptions = {
-    path: LottieAnimationsPathsEnum.END_REACHED,
-  }
 
   readonly throttle = 300;
   readonly scrollDistance = 1;

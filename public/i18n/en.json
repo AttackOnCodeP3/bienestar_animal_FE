@@ -29,7 +29,13 @@
     "notificationRules": "Notification Rules",
     "notificationRulesCreate": "Create Notification Rule",
     "notificationRulesEdit": "Edit Notification Rule",
-    "notificationRulesList": "Notification Rules List"
+    "notificationRulesList": "Notification Rules List",
+    "announcements": "Announcements Management",
+    "announcementCreate": "Create Announcement",
+    "announcementList": "Announcement List",
+    "complaints": "Complaints Management",
+    "complaintList": "Complaint List",
+    "complaintCreate": "Create Complaint"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
@@ -44,6 +50,9 @@
   "notifications-modal-component": {
     "title": "Notifications",
     "noNotifications": "No notifications available"
+  },
+  "modal-viewer-picture-component": {
+    "title": "Image Preview"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Currently works as a nursery home",
@@ -128,7 +137,10 @@
       "pattern": "Invalid format",
       "required": "Required field",
       "min": "Must be greater than or equal to",
-      "max": "Must be less than or equal to"
+      "max": "Must be less than or equal to",
+      "acceptedMimeTypes": "File type not allowed. Please upload a file with one of the following extensions: {{allowedExtensions}}.",
+      "maxContentSize": "The file exceeds the maximum allowed size of {{maxSizeMB}} MB.",
+      "invalidSelection": "Invalid selection. Please select a valid option."
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -163,6 +175,11 @@
       "productUsed": "Enter product used",
       "applicationDate": "Enter application date",
       "value": "Enter value"
+    },
+    "================== FORM UNITS ==================": "",
+    "formUnits": {
+      "characters": "characters",
+      "digits": "digits"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -217,7 +234,8 @@
     "general": {
       "invalidFields": "There are invalid fields. Please check the entered data.",
       "invalidIdToUpdate": "Unable to find the data. You will be redirected to try again.",
-      "locationNotAvailable": "Location not available."
+      "locationNotAvailable": "Location not available.",
+      "noFileSelected": "No file selected."
     },
     "register-page": {
       "registeredSuccessfully": "Successfully registered, please log in"
@@ -251,17 +269,24 @@
   "================== TABLES ==================": "",
   "tables": {
     "columns": {
-      "name": "Name",
-      "lastname": "Last Name",
-      "email": "Email",
-      "phoneNumber": "Phone Number",
-      "status": "Status",
       "actions": "Actions",
-      "active": "Active",
       "activateDesactivate": "Activate/Deactivate",
+      "active": "Active",
       "block": "Block",
+      "description": "Description",
+      "email": "Email",
+      "endDate": "End Date",
+      "imageUrl": "Image URL",
+      "lastname": "Last Name",
+      "name": "Name",
+      "phoneNumber": "Phone Number",
+      "startDate": "Start Date",
+      "state": "State",
+      "status": "Status",
+      "title": "Title",
       "value": "Valor"
     },
+    "noDataAvailable": "No data available",
     "emptyMessage": {
       "noDataAvailable": "No data available"
     }
@@ -292,6 +317,11 @@
     "update": "Update",
     "updateNotificationRule": "Update Notification Rule"
   },
+  "================== LOADING MESSAGES ==================": "",
+  "loadingMessages": {
+    "loading": "Loading..."
+  },
+  "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {
     "http": {
       "operationCompletedSuccessfully": "Operation completed successfully",

@@ -27,6 +27,22 @@ export abstract class UnmutableConstants {
   static readonly LS_ACCESS_TOKEN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'access_token'
   static readonly LS_EXPIRES_IN: string = UnmutableConstants.LS_TOKEN_BIENESTAR_ANIMAL_PREFIX + 'expiresIn'
 
+  /**
+   * Timeout for location requests in milliseconds.
+   * This is used to set the maximum time to wait for a location response.
+   * If the location is not retrieved within this time, an error will be thrown.
+   * @author dgutierrez
+   */
+  static readonly LOCATION_TIMEOUT_MS = 10000;
+
+  /**
+   * Maximum age of the location in milliseconds.
+   * This is used to determine how old the cached location can be before it is considered stale.
+   * A value of 0 means that the location should always be fresh and not cached.
+   * @author dgutierrez
+   */
+  static readonly LOCATION_MAX_AGE = 0;
+
   static readonly IMAGE_QUALITY: number = 50
 
   // ==================================================================
@@ -117,7 +133,7 @@ export abstract class UnmutableConstants {
   /**
    * Endpoint to get the animals related to the user connected
    */
-  static readonly COMMUNITY_ANIMALS_MINE: string  = UnmutableConstants.COMMUNITY_ANIMALS + '/mine';
+  static readonly COMMUNITY_ANIMALS_MINE: string = UnmutableConstants.COMMUNITY_ANIMALS + '/mine';
 
   // ==================================================================
   // ROUTES FOR ABANDONED ANIMALS SERVICES
@@ -179,4 +195,28 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS: string = '/municipal-preventive-care-configurations';
   static readonly MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS_URL = UnmutableConstants.MUNICIPAL_PREVENTIVE_CARE_CONFIGURATIONS;
+
+  // ==================================================================
+  // ROUTES FOR MODEL ANNOUNCEMENT STATES SERVICES
+  // =================================================================
+  private static readonly ANNOUNCEMENT_STATES: string = '/announcement-states';
+  static readonly ANNOUNCEMENT_STATES_URL: string = UnmutableConstants.ANNOUNCEMENT_STATES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL ANNOUNCEMENTS SERVICES
+  // =================================================================
+  private static readonly ANNOUNCEMENTS: string = '/announcements';
+  static readonly ANNOUNCEMENTS_URL: string = UnmutableConstants.ANNOUNCEMENTS
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINTS SERVICES
+  // =================================================================
+  private static readonly COMPLAINTS: string = '/complaints';
+  static readonly COMPLAINTS_URL: string = UnmutableConstants.COMPLAINTS;
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINTS SERVICES
+  // =================================================================
+  private static COMPLAINT_TYPES: string = '/complaint-types';
+  static readonly COMPLAINT_TYPES_URL: string = UnmutableConstants.COMPLAINT_TYPES;
 }
