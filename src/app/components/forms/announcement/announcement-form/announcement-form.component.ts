@@ -49,11 +49,12 @@ export class AnnouncementFormComponent {
   readonly form = input.required<FormGroup>();
   readonly formsService = input.required<FormsService>();
   readonly announcementStatesList = input.required<AnnouncementState[]>()
-  readonly onViewImageChange = output<void>();
   readonly editor = input.required<Editor>();
   readonly mode = input.required<'create' | 'edit'>();
-  readonly onSubmitChange = output<void>();
   readonly imageUrl = input<string | null>();
+
+  readonly onViewImageChange = output<void>();
+  readonly onSubmitChange = output<void>();
 
   get showButtonSeeImage(): boolean {
     const fileControl = this.form().get('file')

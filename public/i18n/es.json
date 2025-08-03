@@ -43,6 +43,9 @@
     "announcements": "Gestión de anuncios",
     "announcementCreate": "Crear anuncio",
     "announcementList": "Lista de anuncios",
+    "complaints": "Gestión de denuncias",
+    "complaintList": "Lista de denuncias",
+    "complaintCreate": "Crear denuncia",
     "community-census": "Censo comunitario",
     "register-community-animal": "Registrar animal comunitario"
 
@@ -174,6 +177,11 @@
       "productUsed": "Digite el producto utilizado",
       "applicationDate": "Seleccione la fecha de aplicación",
       "value": "Ingrese el valor"
+    },
+    "================== FORM UNITS ==================": "",
+    "formUnits": {
+      "characters": "caracteres",
+      "digits": "dígitos"
     }
   },
   "================== PAGES LABELS ==================": "",
