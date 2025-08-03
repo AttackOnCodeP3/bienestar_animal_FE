@@ -98,6 +98,11 @@ export const routes: Routes = [
         path: RoutesUrlsEnum.ANNOUNCEMENTS,
         canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN])],
         loadChildren: () => import('@pages/announcements/announcements.routes').then(m => m.ANNOUNCEMENTS_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.ANIMAL_DIAGNOSIS,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/animal-diagnosis/animal-diagnosis.routes').then(m => m.ANIMAL_DIAGNOSIS_ROUTES),
       }
     ]
   }

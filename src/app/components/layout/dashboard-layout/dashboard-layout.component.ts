@@ -201,6 +201,35 @@ export class DashboardLayoutComponent {
       ],
     },
     {
+  icon: 'medical_information',
+  label: I18nMenuEnum.ANIMAL_DIAGNOSIS, 
+  authorities: [
+    RolesEnum.COMMUNITY_USER,
+    RolesEnum.SUPER_ADMIN,
+  ],
+  click: () => {},
+  children: [
+    {
+      label: I18nMenuEnum.VIEW_ANIMAL_DIAGNOSIS, 
+      route: `${RoutesUrlsEnum.ANIMAL_DIAGNOSIS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANIMAL_DIAGNOSIS_LIST}`,
+      authorities: [
+        RolesEnum.COMMUNITY_USER,
+        RolesEnum.SUPER_ADMIN,
+      ],
+      click: () => this.closeSidenav(),
+    },
+    {
+      label: I18nMenuEnum.CREATE_ANIMAL_DIAGNOSIS,
+      route: `${RoutesUrlsEnum.ANIMAL_DIAGNOSIS}/${RoutesUrlsEnum.ANIMAL_DIAGNOSIS_CREATE}`,
+      authorities: [
+        RolesEnum.COMMUNITY_USER,
+        RolesEnum.SUPER_ADMIN,
+      ],
+      click: () => this.closeSidenav(),
+    },
+  ],
+},
+    {
       icon: 'notification_settings',
       label: I18nMenuEnum.NOTIFICATION_RULES,
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN],

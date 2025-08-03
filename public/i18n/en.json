@@ -31,7 +31,10 @@
     "notificationRulesList": "Notification Rules List",
     "announcements": "Announcements Management",
     "announcementCreate": "Create Announcement",
-    "announcementList": "Announcement List"
+    "announcementList": "Announcement List",
+    "animalDiagnosis": "Animal Diagnosis",
+    "viewAnimalDiagnosis": "View Diagnoses",
+    "createAnimalDiagnosis": "Create Diagnosis"
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
@@ -122,7 +125,10 @@
       "status": "Status",
       "productUsed": "Product Used",
       "applicationDate": "Application Date",
-      "value": "Value"
+      "value": "Value",
+      "animal": "Animal",
+      "image": "Image",
+      "description": "Description"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -306,7 +312,8 @@
     "registerAnimal": "Register Animal",
     "rulesManagement": "Rules Management",
     "update": "Update",
-    "updateNotificationRule": "Update Notification Rule"
+    "updateNotificationRule": "Update Notification Rule",
+    "createAnimalDiagnosis": "Create diagnosis"
   },
   "================== LOADING MESSAGES ==================": "",
   "loadingMessages": {
