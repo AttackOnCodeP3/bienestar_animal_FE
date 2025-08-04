@@ -9,6 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ForgotPasswordHttpService } from '@services/http';
 import { AlertService, I18nService } from '@services/general';
 import { LogoBienestarAnimalComponent } from "@components/icons";
+import { Router } from '@angular/router';
 
 
 /**
@@ -39,6 +40,7 @@ export class ForgotPasswordPage {
 
   private readonly ForgotPasswordHttpService  = inject(ForgotPasswordHttpService );
   readonly i18nService = inject(I18nService);
+  private readonly router = inject(Router);
 
   readonly loading = signal(false);
 
@@ -56,5 +58,9 @@ export class ForgotPasswordPage {
     this.loading.set(true);
 
     this.ForgotPasswordHttpService .save(this.email.value ?? '')
+  }
+
+  goToHome() {
+    this.router.navigateByUrl('/auth/login');
   }
 }
