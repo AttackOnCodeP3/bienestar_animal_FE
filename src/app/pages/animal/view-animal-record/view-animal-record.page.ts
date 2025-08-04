@@ -63,7 +63,6 @@ export class ViewAnimalRecordPage implements OnInit {
       return;
     }
     this.animalService.getAnimalsByOwnerId(ownerId).subscribe((response: any) => {
-      console.log('Fetched animals:', response);
       this.animalList = response || [];
     });
   }

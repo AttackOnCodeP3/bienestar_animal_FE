@@ -79,25 +79,20 @@
         {{ control.productUsed || 'N/A' }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="validityStatus">
-      <th mat-header-cell *matHeaderCellDef>Vigente</th>
+
+    <ng-container matColumnDef="typeDescription">
+      <th mat-header-cell *matHeaderCellDef>Descripción</th>
       <td mat-cell *matCellDef="let control">
-        {{ control.validityStatus ? 'Sí' : 'No' }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="response">
-      <th mat-header-cell *matHeaderCellDef>Respuesta</th>
-      <td mat-cell *matCellDef="let control">
-        {{ control.sanitaryControlResponse?.name || 'N/A' }}
+        {{ control.sanitaryControlType?.description || 'N/A' }}
       </td>
     </ng-container>
     <tr
       mat-header-row
-      *matHeaderRowDef="['lastApplicationDate', 'type', 'productUsed', 'validityStatus', 'response']"
+      *matHeaderRowDef="['lastApplicationDate', 'type', 'productUsed', 'typeDescription']"
     ></tr>
     <tr
       mat-row
-      *matRowDef="let row; columns: ['lastApplicationDate', 'type', 'productUsed', 'validityStatus', 'response'];"
+      *matRowDef="let row; columns: ['lastApplicationDate', 'type', 'productUsed', 'typeDescription'];"
     ></tr>
   </table>
   } @else {
