@@ -76,4 +76,5 @@ export enum RoutesUrlsEnum {
   COMPLAINTS = 'complaints',
   COMPLAINTS_LIST = 'complaints-list',
   COMPLAINTS_CREATE = 'complaints-create',
+  COMPLAINT_MANAGE = 'complaint-manage',
 }

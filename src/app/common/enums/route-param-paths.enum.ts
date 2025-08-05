@@ -13,4 +13,5 @@ export enum RouteParamPathsEnum {
   MUNICIPALITY_ID = RouteParamPathsEnum.PARAM_PREFIX + RouteParamsEnum.MUNICIPALITY_ID,
   NOTIFICATION_RULE_ID = RouteParamPathsEnum.PARAM_PREFIX + RouteParamsEnum.NOTIFICATION_RULE_ID,
   ANNOUNCEMENT_ID = RouteParamPathsEnum.PARAM_PREFIX + RouteParamsEnum.ANNOUNCEMENT_ID,
+  COMPLAINT_ID = RouteParamPathsEnum.PARAM_PREFIX + RouteParamsEnum.COMPLAINT_ID,
 }

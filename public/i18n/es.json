@@ -291,7 +291,10 @@
       "state": "Estado",
       "status": "Estado",
       "title": "Título",
-      "value": "Valor"
+      "value": "Valor",
+      "observations": "Observaciones",
+      "complaintState": "Estado de la denuncia",
+      "complaintType": "Tipo de denuncia"
     },
     "noDataAvailable": "No hay datos disponibles",
     "emptyMessage": {

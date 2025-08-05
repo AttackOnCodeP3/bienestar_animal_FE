@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {RoutesUrlsEnum} from '@common/enums';
+import {RouteParamPathsEnum, RoutesUrlsEnum} from '@common/enums';
 
 /**
  * Routes configuration for the complaints module.
@@ -19,5 +19,9 @@ export const COMPLAINTS_ROUTES: Routes = [
   {
     path: RoutesUrlsEnum.COMPLAINTS_CREATE,
     loadComponent: () => import('./complaint-create/complaint-create.page').then(m => m.ComplaintCreatePage),
+  },
+  {
+    path: RoutesUrlsEnum.COMPLAINT_MANAGE + RouteParamPathsEnum.COMPLAINT_ID,
+    loadComponent: () => import('./complaint-manage/complaint-manage.page').then(m => m.ComplaintManagePage),
   }
 ]

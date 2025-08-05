@@ -183,6 +183,24 @@ export class AuthHttpService {
   }
 
   /**
+   * Checks if current user has municipal Community Role.
+   * @returns True if user is Community User
+   * @author dgutierrez
+   */
+  isCommunityUser(): boolean {
+    return this.hasRole(RolesEnum.COMMUNITY_USER);
+  }
+
+  /**
+   * Checks if current user has municipal admin privileges.
+   * @returns True if user is municipal admin
+   * @author dgutierrez
+   */
+  isMunicipalityAdmin(): boolean {
+    return this.hasRole(RolesEnum.MUNICIPAL_ADMIN);
+  }
+
+  /**
    * Filters routes based on user authorities.
    * @param routes List of routes to evaluate
    * @returns Only routes the user can access
