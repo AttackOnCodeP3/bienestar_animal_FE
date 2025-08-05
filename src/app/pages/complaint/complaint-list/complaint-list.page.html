@@ -1,1 +1,148 @@
-<p>complaint-list works!</p>
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      Gestionar denuncias
+    </h1>
+    @if (authHttpService.isCommunityUser()) {
+      <button matButton="elevated" (click)="navigateToCreateComplaint()">
+        <mat-icon>add</mat-icon>
+        Crear denuncia
+      </button>
+    }
+  </div>
+</app-general-container-component>
+
+
+<app-general-container-component>
+  <form class="row" [formGroup]="searchForm">
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Estado del anuncio</mat-label>
+        <mat-select
+          placeholder="Seleccione un estado"
+          formControlName="complaintStateId"
+          [errorStateMatcher]="formsService.matcher"
+        >
+          <mat-option [value]="formsService.filterOptionEnum.ALL">Todos los tipos</mat-option>
+          @for (complaintStateId of complaintStateHttpService.complaintStateList(); track complaintStateId.id) {
+            <mat-option [value]="complaintStateId.id">{{ complaintStateId.name }}</mat-option>
+          }
+        </mat-select>
+        @let complaintStateIdControl = searchForm.get('complaintStateId');
+        @if (formsService.isFieldInvalid(complaintStateIdControl)) {
+          <mat-error>{{ formsService.getErrorMessage(complaintStateIdControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Estado del anuncio</mat-label>
+        <mat-select
+          placeholder="Seleccione un estado"
+          formControlName="complaintTypeId"
+          [errorStateMatcher]="formsService.matcher"
+        >
+          <mat-option [value]="formsService.filterOptionEnum.ALL">Todos los tipos</mat-option>
+          @for (complaintTypeId of complaintTypeHttpService.complaintTypeList(); track complaintTypeId.id) {
+            <mat-option [value]="complaintTypeId.id">{{ complaintTypeId.name }}</mat-option>
+          }
+        </mat-select>
+        @let complaintTypeIdControl = searchForm.get('complaintTypeId');
+        @if (formsService.isFieldInvalid(complaintTypeIdControl)) {
+          <mat-error>{{ formsService.getErrorMessage(complaintTypeIdControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="text-end">
+      <button matButton="text" (click)="resetSearchForm()">
+        <mat-icon>
+          delete
+        </mat-icon>
+        Limpiar
+      </button>
+      <button
+        class="ms-3"
+        matButton="tonal"
+        (click)="searchComplaints()"
+      >
+        <mat-icon>
+          filter_list
+        </mat-icon>
+        Filtrar
+      </button>
+    </div>
+  </form>
+</app-general-container-component>
+
+<!--
+@if (announcementHttpService.hasSearchedAnnouncements()) {
+  <div class="box-shadow-1">
+    <mat-table [dataSource]="dataSource()">
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.TITLE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_TITLE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.DESCRIPTION">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_DESCRIPTION | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          @if (element.description) {
+            {{ element.description | stripHtml }}
+          } @else {
+            Sin descripción
+          }
+        </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.START_DATE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_START_DATE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.startDate | date: 'dd/MM/yyyy' }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.END_DATE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_END_DATE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.endDate | date: 'dd/MM/yyyy' }}</mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.STATE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_STATE | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip>{{ element.state.name }}</mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.ACTIONS">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button matIconButton (click)="navigateToEditAnnouncement(element.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button matIconButton (click)="onViewImage(element.imageUrl)">
+            <mat-icon>
+              visibility
+            </mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <tr class="d-flex justify-content-center my-3" *matNoDataRow>
+        <td class="d-flex align-items-center" [attr.colspan]="displayedColumns.length">
+          <mat-icon color="warn" class="no-data-icon">info</mat-icon>
+          <span class="ms-2">{{ i18nService.i18nTablesEnum.NO_DATA_AVAILABLE | translate }}</span>
+        </td>
+      </tr>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      [pageSizeOptions]="tableService.pageSizeOptions"
+      [length]="announcementHttpService.search.totalElements || 0"
+      [pageSize]="announcementHttpService.search.pageSize || announcementHttpService.search.size"
+      [pageIndex]="(announcementHttpService.search.pageNumber || announcementHttpService.search.page || 1) - 1"
+      (page)="onPageChange($event)"
+      showFirstLastButtons="true">
+    </mat-paginator>
+  </div>
+}-->

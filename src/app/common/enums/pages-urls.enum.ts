@@ -50,4 +50,9 @@ export enum PagesUrlsEnum {
   ANNOUNCEMENTS_LIST = PagesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_LIST,
   ANNOUNCEMENTS_CREATE = PagesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_CREATE,
   ANNOUNCEMENTS_EDIT = PagesUrlsEnum.ANNOUNCEMENTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.ANNOUNCEMENTS_EDIT,
+
+  // Routes of the Complaints module
+  COMPLAINTS = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLAINTS,
+  COMPLAINTS_LIST = PagesUrlsEnum.COMPLAINTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLAINTS_LIST,
+  COMPLAINTS_CREATE = PagesUrlsEnum.COMPLAINTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLAINTS_CREATE,
 }
