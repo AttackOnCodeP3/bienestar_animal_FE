@@ -9,6 +9,7 @@ import {AlertTypeEnum} from '@common/enums';
 /**
  * Service to handle HTTP requests related to complaints.
  * Includes creation for community users and filtered listing for municipal admins.
+ * Supports configuration for loading handlers and callbacks.
  * @author dgutierrez
  */
 @Injectable({
@@ -40,49 +41,42 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
   }
 
   /**
-   * Loads paginated and optionally filtered complaints that belong to
-   * the municipality of the authenticated MUNICIPAL_ADMIN.
-   *
-   * Only accessible to users with the MUNICIPAL_ADMIN role.
-   *
-   * @param filters Optional complaint type and state filters.
-   * @param options Optional pagination control.
+   * Retrieves paginated and optionally filtered complaints for the authenticated MUNICIPAL_ADMIN.
+   * @param config Configuration object with filters, pagination, and loading/callback handlers.
    * @author dgutierrez
    */
-  getComplaintsOfAuthenticatedMunicipalityAdmin(
-    filters: ISearchComplaint = {},
-    options: { page?: number; nextPage?: boolean; previousPage?: boolean } = {}
-  ): void {
+  getComplaintsOfAuthenticatedMunicipalityAdmin(config?: {
+    filters?: ISearchComplaint,
+    options?: { page?: number; nextPage?: boolean; previousPage?: boolean },
+    handlers?: IHttpActionConfig
+  }): void {
+    const filters = config?.filters ?? {};
+    const options = config?.options ?? {};
+    const handlers = config?.handlers;
+
     this.search = this.updatePageState(this.search, options);
-    this.fetchMunicipalComplaints(filters);
+    this.fetchMunicipalComplaints(filters, handlers);
   }
 
   /**
-   * Sends a multipart/form-data request to create a new complaint
-   * associated with the currently authenticated COMMUNITY_USER.
-   *
-   * Accepts an optional configuration object for:
-   * - callback: executed after successful creation
-   * - showLoading: invoked before request starts
-   * - hideLoading: invoked after request completes
-   *
-   * @param dto Multipart form containing complaint data.
-   * @param config Optional callbacks and loading handlers.
+   * Creates a complaint for the authenticated COMMUNITY_USER.
+   * @param config Configuration object with complaint DTO and loading/callback handlers.
    * @author dgutierrez
    */
-  createComplaint(
+  createComplaint(config: {
     dto: CreateComplaintMultipartDto,
-    config?: IHttpActionConfig
-  ): void {
+    handlers?: IHttpActionConfig
+  }): void {
+    const { dto, handlers } = config;
     this.isLoading.set(true);
-    config?.showLoading?.();
+    handlers?.showLoading?.();
 
     const formData = dto.toFormData();
 
     this.http.post<IResponse<ComplaintDto>>(this.sourceUrl, formData)
       .pipe(finalize(() => {
         this.isLoading.set(false);
-        config?.hideLoading?.();
+        handlers?.hideLoading?.();
       }))
       .subscribe({
         next: (response) => {
@@ -91,7 +85,7 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
             type: AlertTypeEnum.SUCCESS,
             message: response.message
           });
-          config?.callback?.();
+          handlers?.callback?.();
         },
         error: this.handleError({
           message: 'Error creating complaint.',
@@ -102,14 +96,18 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
 
   /**
    * Retrieves complaints created by the authenticated COMMUNITY_USER.
-   * Supports optional filtering by complaint type and state.
-   * Updates internal list and pagination state.
+   * @param config Configuration object with filters, pagination, and loading/callback handlers.
    * @author dgutierrez
    */
-  getMyComplaintsAsCommunityUser(
-    filters: ISearchComplaint = {},
-    options: { page?: number; nextPage?: boolean; previousPage?: boolean } = {}
-  ): void {
+  getMyComplaintsAsCommunityUser(config?: {
+    filters?: ISearchComplaint,
+    options?: { page?: number; nextPage?: boolean; previousPage?: boolean },
+    handlers?: IHttpActionConfig
+  }): void {
+    const filters = config?.filters ?? {};
+    const options = config?.options ?? {};
+    const handlers = config?.handlers;
+
     this.search = this.updatePageState(this.search, options);
     const params = {
       page: this.search.page,
@@ -118,15 +116,21 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
     };
 
     this.isLoading.set(true);
+    handlers?.showLoading?.();
+
     this.http.get<IResponse<ComplaintDto[]>>(`${this.sourceUrl}/my-complaints`, {
       params: this.buildUrlParams(params),
-    }).pipe(finalize(() => this.isLoading.set(false)))
+    }).pipe(finalize(() => {
+      this.isLoading.set(false);
+      handlers?.hideLoading?.();
+    }))
       .subscribe({
         next: (res) => {
           this.complaintList.set(res.data);
           this.search = { ...this.search, ...res.meta };
           this.updatePagination(res.meta?.totalPages ?? 0);
           this.hasSearched.set(true);
+          handlers?.callback?.();
         },
         error: this.handleError({
           message: 'Error fetching community complaints.',
@@ -136,144 +140,12 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
   }
 
   /**
-   * Approves a complaint. Only accessible to MUNICIPAL_ADMIN users.
-   * @param id Complaint ID
-   * @param config Optional callbacks and loading handlers
+   * Internal method to retrieve complaints from authenticated MUNICIPAL_ADMIN's municipality.
+   * @param filters Complaint filters.
+   * @param config Optional loading and callback handlers.
    * @author dgutierrez
    */
-  approveComplaint(id: number, config?: IHttpActionConfig): void {
-    this.isLoading.set(true);
-    config?.showLoading?.();
-
-    this.http.put<IResponse<ComplaintDto>>(`${this.sourceUrl}/${id}/approve`, null)
-      .pipe(finalize(() => {
-        this.isLoading.set(false);
-        config?.hideLoading?.();
-      }))
-      .subscribe({
-        next: (res) => {
-          this.selectedComplaint.set(res.data);
-          this.alertService.displayAlert({
-            type: AlertTypeEnum.SUCCESS,
-            message: res.message,
-          });
-          config?.callback?.();
-        },
-        error: this.handleError({
-          message: 'Error approving complaint.',
-          context: `${this.constructor.name}#approveComplaint`,
-        }),
-      });
-  }
-
-  /**
-   * Adds observations to a complaint and changes its state.
-   * Only MUNICIPAL_ADMIN users can perform this action.
-   * @param id Complaint ID
-   * @param observations Text for observations
-   * @param config Optional callbacks and loading handlers
-   * @author dgutierrez
-   */
-  observeComplaint(id: number, observations: string, config?: IHttpActionConfig): void {
-    this.isLoading.set(true);
-    config?.showLoading?.();
-
-    this.http.put<IResponse<ComplaintDto>>(
-      `${this.sourceUrl}/${id}/observe`,
-      { observations }
-    ).pipe(finalize(() => {
-      this.isLoading.set(false);
-      config?.hideLoading?.();
-    })).subscribe({
-      next: (res) => {
-        this.selectedComplaint.set(res.data);
-        this.alertService.displayAlert({
-          type: AlertTypeEnum.SUCCESS,
-          message: res.message,
-        });
-        config?.callback?.();
-      },
-      error: this.handleError({
-        message: 'Error adding observations.',
-        context: `${this.constructor.name}#observeComplaint`,
-      }),
-    });
-  }
-
-  /**
-   * Resubmits a complaint that was returned with observations.
-   * Only the original COMMUNITY_USER can resubmit.
-   * @param id Complaint ID
-   * @param config Optional callbacks and loading handlers
-   * @author dgutierrez
-   */
-  resubmitComplaint(id: number, config?: IHttpActionConfig): void {
-    this.isLoading.set(true);
-    config?.showLoading?.();
-
-    this.http.put<IResponse<ComplaintDto>>(`${this.sourceUrl}/${id}/resubmit`, null)
-      .pipe(finalize(() => {
-        this.isLoading.set(false);
-        config?.hideLoading?.();
-      }))
-      .subscribe({
-        next: (res) => {
-          this.selectedComplaint.set(res.data);
-          this.alertService.displayAlert({
-            type: AlertTypeEnum.SUCCESS,
-            message: res.message,
-          });
-          config?.callback?.();
-        },
-        error: this.handleError({
-          message: 'Error resubmitting complaint.',
-          context: `${this.constructor.name}#resubmitComplaint`,
-        }),
-      });
-  }
-
-  /**
-   * Completes a complaint. Only possible if the state is "Approved".
-   * MUNICIPAL_ADMIN only.
-   * @param id Complaint ID
-   * @param config Optional callbacks and loading handlers
-   * @author dgutierrez
-   */
-  completeComplaint(id: number, config?: IHttpActionConfig): void {
-    this.isLoading.set(true);
-    config?.showLoading?.();
-
-    this.http.put<IResponse<ComplaintDto>>(`${this.sourceUrl}/${id}/complete`, null)
-      .pipe(finalize(() => {
-        this.isLoading.set(false);
-        config?.hideLoading?.();
-      }))
-      .subscribe({
-        next: (res) => {
-          this.selectedComplaint.set(res.data);
-          this.alertService.displayAlert({
-            type: AlertTypeEnum.SUCCESS,
-            message: res.message,
-          });
-          config?.callback?.();
-        },
-        error: this.handleError({
-          message: 'Error completing complaint.',
-          context: `${this.constructor.name}#completeComplaint`,
-        }),
-      });
-  }
-
-  /**
-   * Internal method to fetch complaints from the backend for the municipality
-   * of the currently authenticated MUNICIPAL_ADMIN.
-   *
-   * Used by getComplaintsOfAuthenticatedMunicipalityAdmin.
-   *
-   * @param filters Optional complaint type and state filters.
-   * @author dgutierrez
-   */
-  private fetchMunicipalComplaints(filters: ISearchComplaint = {},): void {
+  private fetchMunicipalComplaints(filters: ISearchComplaint = {}, config?: IHttpActionConfig): void {
     const params = {
       page: this.search.page,
       size: this.search.size,
@@ -281,17 +153,23 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
     };
 
     this.isLoading.set(true);
+    config?.showLoading?.();
+
     this.http
       .get<IResponse<ComplaintDto[]>>(`${this.sourceUrl}/my-municipality/filter`, {
         params: this.buildUrlParams(params),
       })
-      .pipe(finalize(() => this.isLoading.set(false)))
+      .pipe(finalize(() => {
+        this.isLoading.set(false);
+        config?.hideLoading?.();
+      }))
       .subscribe({
         next: (res) => {
           this.complaintList.set(res.data);
-          this.search = {...this.search, ...res.meta};
+          this.search = { ...this.search, ...res.meta };
           this.updatePagination(res.meta?.totalPages ?? 0);
           this.hasSearched.set(true);
+          config?.callback?.();
         },
         error: this.handleError({
           message: 'Error fetching complaints.',
@@ -301,14 +179,12 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
   }
 
   /**
-   * Updates the pagination state based on total number of pages.
-   * Prevents navigating to pages beyond the available range.
-   *
-   * @param totalPages Total number of pages from the response.
+   * Updates pagination state based on total pages returned.
+   * @param totalPages Total number of available pages.
    * @author dgutierrez
    */
   private updatePagination(totalPages: number): void {
-    this.totalItems = Array.from({length: totalPages}, (_, i) => i + 1);
+    this.totalItems = Array.from({ length: totalPages }, (_, i) => i + 1);
     if (this.searchPage > totalPages && totalPages > 0) {
       this.search.page = totalPages;
     }

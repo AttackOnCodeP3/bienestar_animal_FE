@@ -7,4 +7,5 @@ export enum ComplaintManagementDisplayedColumnsTableEnum {
   OBSERVATIONS = 'observations',
   COMPLAINT_STATE = 'complaintState',
   COMPLAINT_TYPE = 'complaintType',
+  ACTIONS = 'actions',
 }

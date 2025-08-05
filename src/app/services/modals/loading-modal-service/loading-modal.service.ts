@@ -6,6 +6,7 @@ import { ModalLoadingComponent } from '@components/modals';
 import { ModalDialogPanelClassEnum } from '@common/enums';
 import { ILoadingModalDialogData } from '@common/interfaces/modals';
 import {I18nService} from '@services/general';
+import {IHttpActionConfig} from '@common/interfaces/http';
 
 /**
  * Service to manage the display of a loading modal dialog.
@@ -18,6 +19,13 @@ export class LoadingModalService {
   private readonly i18nService = inject(I18nService);
 
   private loadingRef: MatDialogRef<ModalLoadingComponent> | null = null;
+
+  get httpHandlersLoading(): IHttpActionConfig {
+    return {
+      showLoading: () => this.show(),
+      hideLoading: () => this.hide()
+    };
+  }
 
   /**
    * Shows a loading modal with an optional i18n key for a custom message.

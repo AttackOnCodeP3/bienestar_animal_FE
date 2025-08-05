@@ -11,6 +11,8 @@ import {FileUtilsService} from '@services/utils';
 import {FileInput} from 'ngx-custom-material-file-input';
 import {CreateComplaintMultipartDto} from '@models/dto';
 import {ComplaintType} from '@models';
+import {Router} from '@angular/router';
+import {PagesUrlsEnum} from '@common/enums';
 
 /**
  * Page for creating a new complaint.
@@ -38,6 +40,7 @@ export class ComplaintCreatePage implements OnInit {
   private readonly locationService = inject(LocationService);
   private readonly loadingModalService = inject(LoadingModalService);
   private readonly logService = inject(LogService);
+  private readonly router = inject(Router);
 
   readonly complaintCreateForm = this.buildCreateComplaintForm();
 
@@ -68,10 +71,11 @@ export class ComplaintCreatePage implements OnInit {
   private async registerComplaint() {
     const dto = await this.buildCreateComplaintDto();
 
-    this.complaintHttpService.createComplaint(dto, {
-      showLoading: () => this.loadingModalService.show(),
-      hideLoading: () => this.loadingModalService.hide(),
-      callback: () => this.onAfterCreateComplaint()
+    this.complaintHttpService.createComplaint({
+      dto, handlers: {
+        ...this.loadingModalService.httpHandlersLoading,
+        callback: () => this.onAfterCreateComplaint()
+      }
     })
   }
 
@@ -81,6 +85,7 @@ export class ComplaintCreatePage implements OnInit {
    */
   private async onAfterCreateComplaint() {
     this.complaintCreateForm.reset();
+    this.navigateToComplaintList();
   }
 
   /**
@@ -96,8 +101,8 @@ export class ComplaintCreatePage implements OnInit {
     await this.loadingModalService.show();
 
     try {
-      const { coordinates } = await this.locationService.getUserLocation();
-      const { complaintType, description } = this.complaintCreateForm.getRawValue();
+      const {coordinates} = await this.locationService.getUserLocation();
+      const {complaintType, description} = this.complaintCreateForm.getRawValue();
 
       return new CreateComplaintMultipartDto({
         complaintTypeId: complaintType?.id ?? null,
@@ -171,5 +176,13 @@ export class ComplaintCreatePage implements OnInit {
         }
       )
     })
+  }
+
+  /**
+   * Navigates to the complaint list page.
+   * @author dgutierrez
+   */
+  private navigateToComplaintList() {
+    this.router.navigate([PagesUrlsEnum.COMPLAINTS_LIST])
   }
 }

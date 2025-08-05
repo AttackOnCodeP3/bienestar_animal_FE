@@ -74,17 +74,12 @@
   </form>
 </app-general-container-component>
 
-<!--
-@if (announcementHttpService.hasSearchedAnnouncements()) {
+@if (complaintHttpService.hasSearchedComplaints()) {
   <div class="box-shadow-1">
     <mat-table [dataSource]="dataSource()">
-      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.TITLE">
-        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_TITLE | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
-      </ng-container>
-
-      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.DESCRIPTION">
-        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_DESCRIPTION | translate }}</mat-header-cell>
+      <ng-container [matColumnDef]="tableService.complaintManagementDisplayedColumnsTableEnum.DESCRIPTION">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_DESCRIPTION | translate }}
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">
           @if (element.description) {
             {{ element.description | stripHtml }}
@@ -94,27 +89,42 @@
         </mat-cell>
       </ng-container>
 
-      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.START_DATE">
-        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_START_DATE | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.startDate | date: 'dd/MM/yyyy' }}</mat-cell>
-      </ng-container>
-
-      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.END_DATE">
-        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_END_DATE | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.endDate | date: 'dd/MM/yyyy' }}</mat-cell>
-      </ng-container>
-
-      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.STATE">
-        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_STATE | translate }}</mat-header-cell>
+      <ng-container [matColumnDef]="tableService.complaintManagementDisplayedColumnsTableEnum.OBSERVATIONS">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_OBSERVATIONS | translate }}
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-chip>{{ element.state.name }}</mat-chip>
+          @if (element.observations) {
+            {{ element.observations }}
+          } @else {
+            <strong>Sin observaciones</strong>
+          }
         </mat-cell>
       </ng-container>
 
-      <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.ACTIONS">
+      <ng-container [matColumnDef]="tableService.complaintManagementDisplayedColumnsTableEnum.COMPLAINT_STATE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_COMPLAINT_STATE | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip>
+            {{ element.complaintStateName }}
+          </mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.complaintManagementDisplayedColumnsTableEnum.COMPLAINT_TYPE">
+        <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_COMPLAINT_TYPE | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip>
+            {{ element.complaintTypeName }}
+          </mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="tableService.complaintManagementDisplayedColumnsTableEnum.ACTIONS">
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_ACTIONS | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button matIconButton (click)="navigateToEditAnnouncement(element.id)">
+          <button matIconButton (click)="navigateComplaintManage(element.id)">
             <mat-icon>edit</mat-icon>
           </button>
           <button matIconButton (click)="onViewImage(element.imageUrl)">
@@ -138,11 +148,11 @@
 
     <mat-paginator
       [pageSizeOptions]="tableService.pageSizeOptions"
-      [length]="announcementHttpService.search.totalElements || 0"
-      [pageSize]="announcementHttpService.search.pageSize || announcementHttpService.search.size"
-      [pageIndex]="(announcementHttpService.search.pageNumber || announcementHttpService.search.page || 1) - 1"
+      [length]="complaintHttpService.search.totalElements || 0"
+      [pageSize]="complaintHttpService.search.pageSize || complaintHttpService.search.size"
+      [pageIndex]="(complaintHttpService.search.pageNumber || complaintHttpService.search.page || 1) - 1"
       (page)="onPageChange($event)"
       showFirstLastButtons="true">
     </mat-paginator>
   </div>
-}-->
+}

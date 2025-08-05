@@ -55,4 +55,5 @@ export enum PagesUrlsEnum {
   COMPLAINTS = RoutesUrlsEnum.DASHBOARD + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLAINTS,
   COMPLAINTS_LIST = PagesUrlsEnum.COMPLAINTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLAINTS_LIST,
   COMPLAINTS_CREATE = PagesUrlsEnum.COMPLAINTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLAINTS_CREATE,
+  COMPLAINT_MANAGE = PagesUrlsEnum.COMPLAINTS + RoutesUrlsEnum.SLASH + RoutesUrlsEnum.COMPLAINT_MANAGE,
 }
