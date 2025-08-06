@@ -7,7 +7,6 @@ import {GeneralContainerComponent} from '@components/layout';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
 import {MatTable, MatTableModule, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef } from '@angular/material/table';
-import {NgFor} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GlbViewerComponent } from '@components/model3D';
 import { GoogleMapsComponent } from '@components/googleMaps';
@@ -35,7 +34,6 @@ import { Constants } from '@common/constants/constants';
     MatRowDef,
     MatHeaderCellDef,
     MatCellDef,
-    NgFor,
     GlbViewerComponent,
     GoogleMapsComponent
   ],

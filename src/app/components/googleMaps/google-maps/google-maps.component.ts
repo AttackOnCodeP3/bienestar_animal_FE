@@ -2,6 +2,7 @@ import { Component, input, computed } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
+  selector: 'app-google-maps',
   imports: [GoogleMapsModule],
   template: `
     <google-map
