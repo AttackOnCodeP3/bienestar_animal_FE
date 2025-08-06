@@ -4,6 +4,8 @@ export * from "./animal-type";
 export * from "./announcement";
 export * from "./announcement-state";
 export * from "./canton";
+export * from "./complaint";
+export * from "./complaint-type";
 export * from "./district";
 export * from "./interest";
 export * from "./model-3d-animal";

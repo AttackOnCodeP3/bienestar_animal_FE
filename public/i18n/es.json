@@ -25,6 +25,7 @@
     "abandonedAnimal": "Animal abandonado",
     "createAbandonedAnimal": "Crear animal abandonado",
     "create-animal-profile": "Crear perfil de animal",
+    "view-animal-record": "Ver expediente animal",
     "create-user": "Crear usuario",
     "createMunicipality": "Crear municipalidad",
     "gamification": "Gamificación",
@@ -43,6 +44,11 @@
     "announcements": "Gestión de anuncios",
     "announcementCreate": "Crear anuncio",
     "announcementList": "Lista de anuncios",
+    "complaints": "Gestión de denuncias",
+    "complaintList": "Lista de denuncias",
+    "complaintCreate": "Crear denuncia",
+    "community-census": "Censo comunitario",
+    "register-community-animal": "Registrar animal comunitario",
     "animalDiagnosis": "Diagnóstico animal",
     "viewAnimalDiagnosis": "Ver diagnósticos",
     "createAnimalDiagnosis": "Crear diagnóstico"
@@ -178,6 +184,11 @@
       "productUsed": "Digite el producto utilizado",
       "applicationDate": "Seleccione la fecha de aplicación",
       "value": "Ingrese el valor"
+    },
+    "================== FORM UNITS ==================": "",
+    "formUnits": {
+      "characters": "caracteres",
+      "digits": "dígitos"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -287,7 +298,10 @@
       "state": "Estado",
       "status": "Estado",
       "title": "Título",
-      "value": "Valor"
+      "value": "Valor",
+      "observations": "Observaciones",
+      "complaintState": "Estado de la denuncia",
+      "complaintType": "Tipo de denuncia"
     },
     "noDataAvailable": "No hay datos disponibles",
     "emptyMessage": {

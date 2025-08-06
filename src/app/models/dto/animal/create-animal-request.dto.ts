@@ -16,6 +16,7 @@ export class CreateAnimalRequestDto {
   raceId: number | null;
   latitude: number | null;
   longitude: number | null;
+  ownerIdentificationCard?: string;
   sanitaryControls: SanitaryControlDto[];
   vaccineApplications: VaccineApplicationDto[];
 
@@ -28,6 +29,7 @@ export class CreateAnimalRequestDto {
     this.raceId = values.raceId ??= null;
     this.latitude = values.latitude ??= null;
     this.longitude = values.longitude ??= null;
+    this.ownerIdentificationCard = values.ownerIdentificationCard;
     this.sanitaryControls = values.sanitaryControls ??= [];
     this.vaccineApplications = values.vaccineApplications ??= [];
   }

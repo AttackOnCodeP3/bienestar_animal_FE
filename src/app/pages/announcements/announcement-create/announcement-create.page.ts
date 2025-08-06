@@ -95,7 +95,7 @@ export class AnnouncementCreatePage implements OnInit, OnDestroy {
    * Registers a new announcement by sending the form data to the server.
    * @author dgutierrez
    */
-  registerAnnouncement() {
+  private registerAnnouncement() {
     const dto = this.buildCreateAnnouncementDto();
     this.announcementHttpService.createAnnouncement(dto, {
       showLoading: () => this.loadingModalService.show(),

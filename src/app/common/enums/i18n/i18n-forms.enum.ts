@@ -7,6 +7,7 @@ export enum I18nFormsEnum {
   INPUTS_LABELS = I18nFormsEnum.INPUTS + 'labels.',
   INPUTS_FORMS_VALIDATIONS = I18nFormsEnum.INPUTS + 'formValidations.',
   INPUTS_FORMS_PLACEHOLDERS = I18nFormsEnum.INPUTS + 'formPlaceholders.',
+  INPUTS_FORMS_UNITS = I18nFormsEnum.INPUTS + 'formUnits.',
 
   // Form validations
   FORM_VALIDATION_EMAIL = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'email',
@@ -91,4 +92,8 @@ export enum I18nFormsEnum {
   PRODUCT_USED_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'productUsed',
   APPLICATION_DATE_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'applicationDate',
   VALUE_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'value',
+
+  // Units for form inputs
+  FORM_UNIT_CHARACTERS = I18nFormsEnum.INPUTS_FORMS_UNITS + 'characters',
+  FORM_UNIT_DIGITS = I18nFormsEnum.INPUTS_FORMS_UNITS + 'digits',
 }

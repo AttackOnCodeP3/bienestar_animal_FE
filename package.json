@@ -16,6 +16,7 @@
     "@angular/compiler": "^20.0.0",
     "@angular/core": "^20.0.0",
     "@angular/forms": "^20.0.0",
+    "@angular/google-maps": "^20.1.4",
     "@angular/material": "20.0.3",
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
@@ -32,9 +33,11 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^20.1.4",
     "@angular/build": "^20.0.3",
     "@angular/cli": "^20.0.3",
     "@angular/compiler-cli": "^20.0.0",
+    "@ngx-env/builder": "20.1.1",
     "@types/jasmine": "~5.1.0",
     "@types/three": "^0.178.1",
     "jasmine-core": "~5.7.0",

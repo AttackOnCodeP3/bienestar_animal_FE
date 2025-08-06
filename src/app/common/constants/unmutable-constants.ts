@@ -133,7 +133,7 @@ export abstract class UnmutableConstants {
   /**
    * Endpoint to get the animals related to the user connected
    */
-  static readonly COMMUNITY_ANIMALS_MINE: string  = UnmutableConstants.COMMUNITY_ANIMALS + '/mine';
+  static readonly COMMUNITY_ANIMALS_MINE: string = UnmutableConstants.COMMUNITY_ANIMALS + '/mine';
 
   // ==================================================================
   // ROUTES FOR ABANDONED ANIMALS SERVICES
@@ -151,7 +151,13 @@ export abstract class UnmutableConstants {
   // ROUTES FOR ANIMAL TYPES SERVICES
   // =================================================================
   private static readonly ANIMAL_TYPES: string = '/animal-types';
+
   static readonly ANIMAL_TYPES_URL: string = UnmutableConstants.ANIMAL_TYPES;
+// ==================================================================
+  // ROUTES FOR ANIMAL RECORDS SERVICES
+  // =================================================================
+  private static readonly ANIMAL_RECORDS: string = '/animals/records';
+  static readonly ANIMAL_RECORDS_URL: string = UnmutableConstants.ANIMAL_RECORDS;
 
   // ==================================================================
   // ROUTES FOR SEX SERVICES
@@ -214,4 +220,22 @@ export abstract class UnmutableConstants {
   private static readonly DIAGNOSIS: string = '/diagnostico';
   static readonly DIAGNOSIS_URL: string = UnmutableConstants.DIAGNOSIS;
 
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINTS SERVICES
+  // =================================================================
+  private static readonly COMPLAINTS: string = '/complaints';
+  static readonly COMPLAINTS_URL: string = UnmutableConstants.COMPLAINTS;
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINTS SERVICES
+  // =================================================================
+  private static COMPLAINT_TYPES: string = '/complaint-types';
+  static readonly COMPLAINT_TYPES_URL: string = UnmutableConstants.COMPLAINT_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINT STATES SERVICES
+  // =================================================================
+  private static COMPLAINT_STATES: string = '/complaint-states';
+  static readonly COMPLAINT_STATES_URL: string = UnmutableConstants.COMPLAINT_STATES;
 }

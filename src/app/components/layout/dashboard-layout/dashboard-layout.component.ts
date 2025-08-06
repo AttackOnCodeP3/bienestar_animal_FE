@@ -3,18 +3,8 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {TranslatePipe} from '@ngx-translate/core';
 import {MatIcon} from '@angular/material/icon';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {
-  MatActionList,
-  MatListItem,
-  MatListItemIcon,
-  MatNavList,
-} from '@angular/material/list';
-import {
-  MatDrawerMode,
-  MatSidenav,
-  MatSidenavContainer,
-  MatSidenavContent,
-} from '@angular/material/sidenav';
+import {MatActionList, MatListItem, MatListItemIcon, MatNavList,} from '@angular/material/list';
+import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent,} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {IMenuItem, IMenuItemChild} from '@common/interfaces';
@@ -153,23 +143,44 @@ export class DashboardLayoutComponent {
           authorities: [RolesEnum.COMMUNITY_USER],
           click: () => this.closeSidenav(),
         },
+        {
+          label: I18nMenuEnum.VIEW_ANIMAL_RECORD,
+          route: `${RoutesUrlsEnum.ANIMAL}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.VIEW_ANIMAL_RECORD}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        },
       ],
     },
     {
       icon: 'pets',
       label: I18nMenuEnum.ABANDONED_ANIMAL,
       authorities: [RolesEnum.CENSISTA_USER],
-      click: () => {
-      },
+      click: () => {},
       children: [
         {
           label: I18nMenuEnum.CREATE_ABANDONED_ANIMAL,
           route: `${RoutesUrlsEnum.ABANDONED_ANIMAL}/${RoutesUrlsEnum.CREATE_ABANDONED_ANIMAL}`,
           authorities: [RolesEnum.CENSISTA_USER],
           click: () => this.closeSidenav(),
-        }
+        },
       ],
     },
+
+    {
+      icon: 'pets',
+      label: I18nMenuEnum.COMMUNITY_CENSUS,
+      authorities: [RolesEnum.CENSISTA_USER],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.REGISTER_COMMUNITY_ANIMAL,
+          route: `${RoutesUrlsEnum.ANIMAL}/${RoutesUrlsEnum.REGISTER_COMMUNITY_ANIMAL_BY_CENSUS}`, // <-- ESTA ES LA CLAVE
+          authorities: [RolesEnum.CENSISTA_USER],
+          click: () => this.closeSidenav(),
+        },
+      ],
+    },
+
     {
       icon: 'view_in_ar',
       label: I18nMenuEnum.MODEL_3D,
@@ -252,6 +263,26 @@ export class DashboardLayoutComponent {
           label: I18nMenuEnum.ANNOUNCEMENT_CREATE,
           route: `${RoutesUrlsEnum.ANNOUNCEMENTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANNOUNCEMENTS_CREATE}`,
           authorities: [RolesEnum.MUNICIPAL_ADMIN],
+          click: () => this.closeSidenav(),
+        }
+      ],
+    },
+    {
+      icon: 'report',
+      label: I18nMenuEnum.COMPLAINTS,
+      authorities: [RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER],
+      click: () => this.closeSidenav(),
+      children: [
+        {
+          label: I18nMenuEnum.COMPLAINT_LIST,
+          route: `${RoutesUrlsEnum.COMPLAINTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.COMPLAINTS_LIST}`,
+          authorities: [RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        },
+        {
+          label: I18nMenuEnum.COMPLAINT_CREATE,
+          route: `${RoutesUrlsEnum.COMPLAINTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.COMPLAINTS_CREATE}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
           click: () => this.closeSidenav(),
         }
       ],
