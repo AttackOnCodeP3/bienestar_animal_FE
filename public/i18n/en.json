@@ -32,14 +32,13 @@
     "notificationRulesList": "Notification Rules List",
     "announcements": "Announcements Management",
     "announcementCreate": "Create Announcement",
-    "announcementList": "Announcement List"
+    "announcementList": "Announcement List",
     "complaints": "Complaints Management",
     "complaintList": "Complaint List",
     "complaintCreate": "Create Complaint",
     "animalDiagnosis": "Animal Diagnosis",
     "viewAnimalDiagnosis": "View Diagnoses",
     "createAnimalDiagnosis": "Create Diagnosis"
-  },
   },
   "general": {
     "provideTemporaryShelter": "Provide a temporary shelter",
