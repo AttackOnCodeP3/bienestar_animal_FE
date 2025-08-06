@@ -206,5 +206,12 @@ export abstract class UnmutableConstants {
   // ROUTES FOR MODEL ANNOUNCEMENTS SERVICES
   // =================================================================
   private static readonly ANNOUNCEMENTS: string = '/announcements';
-  static readonly ANNOUNCEMENTS_URL: string = UnmutableConstants.ANNOUNCEMENTS
+  static readonly ANNOUNCEMENTS_URL: string = UnmutableConstants.ANNOUNCEMENTS;
+
+  // ==================================================================
+  //ROUTES FOR DIAGNOSIS
+  // ================================================================
+  private static readonly DIAGNOSIS: string = '/diagnostico';
+  static readonly DIAGNOSIS_URL: string = UnmutableConstants.DIAGNOSIS;
+
 }

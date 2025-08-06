@@ -19,15 +19,15 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ 'inputs.labels.animal' | translate }}</mat-label>
           <mat-select formControlName="animalId" required>
-            <mat-option *ngFor="let animal of animals" [value]="animal.id">
-              {{ animal.name }}
-            </mat-option>
+            @for (animal of animals; track animal.id) {
+            <mat-option [value]="animal.id"> {{ animal.name }} </mat-option>
+            }
           </mat-select>
           @let animalIdControl = form.get('animalId'); @if
           (formsService.isFieldInvalid(animalIdControl)) {
-          <mat-error
-            >{{ formsService.getErrorMessage(animalIdControl) }}</mat-error
-          >
+          <mat-error>
+            {{ formsService.getErrorMessage(animalIdControl) }}
+          </mat-error>
           }
         </mat-form-field>
       </div>
@@ -39,26 +39,29 @@
             formControlName="image"
             [errorStateMatcher]="formsService.matcher"
             [accept]="formsService.imageFileAcceptTypes"
+            (change)="onImageChange($event)"
           ></ngx-mat-file-input>
           <mat-icon matSuffix>folder</mat-icon>
           @let imageControl = form.get('image'); @if
           (formsService.isFieldInvalid(imageControl)) {
-          <mat-error
-            >{{ formsService.getErrorMessage(imageControl) }}</mat-error
-          >
+          <mat-error>
+            {{ formsService.getErrorMessage(imageControl) }}
+          </mat-error>
           }
         </mat-form-field>
-        <small class="text-muted mt-1"
-          >Formatos permitidos: JPG, PNG, GIF.</small
-        >
+        <small class="text-muted mt-1">
+          Formatos permitidos: JPG, PNG, GIF.
+        </small>
       </div>
       <div class="col-12 mb-3">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ 'inputs.labels.description' | translate }}</mat-label>
           <textarea matInput rows="3" formControlName="description"></textarea>
-          @let descControl = form.get('description'); @if (descControl?.invalid
-          && (descControl?.touched || descControl?.dirty)) {
-          <mat-error>{{ formsService.getErrorMessage(descControl) }}</mat-error>
+          @let descControl = form.get('description'); @if
+          (formsService.isFieldInvalid(descControl)) {
+          <mat-error>
+            {{ formsService.getErrorMessage(descControl) }}
+          </mat-error>
           }
         </mat-form-field>
       </div>
@@ -71,8 +74,11 @@
   </form>
 </app-general-container-component>
 
-<div *ngIf="loading" class="my-4 text-center">
+@if (loading) {
+<div class="centered-loading my-4 text-center">
   <mat-spinner></mat-spinner>
   <div>{{ 'loadingMessages.loading' | translate }}</div>
 </div>
-<div *ngIf="error" class="alert alert-danger my-4">{{</div>
+} @if (error) {
+<div class="alert alert-danger my-4">{{ error }}</div>
+}
