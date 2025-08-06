@@ -40,9 +40,9 @@ import { Constants } from '@common/constants/constants';
   styleUrls: ['./view-animal-record.page.scss']
 })
 export class ViewAnimalRecordPage implements OnInit {
-  animalList: any[] = [];
+  animalList: IViewAnimalRecord[] = [];
   selectedAnimalId: string | number | null = null;
-  selectedAnimal: any = null;
+  selectedAnimal: IViewAnimalRecord | null = null;
 
   readonly animalService = inject(AnimalRecordHttpService);
   

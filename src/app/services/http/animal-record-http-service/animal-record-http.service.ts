@@ -7,7 +7,7 @@ import {BaseHttpService} from '@services/http/base-http-service/base-http.servic
 @Injectable({
   providedIn: 'root'
 })
-export class AnimalRecordHttpService extends BaseHttpService<any> {
+export class AnimalRecordHttpService extends BaseHttpService<IViewAnimalRecord> {
   protected override source = Constants.ANIMAL_RECORDS_URL;
   /**
    * Fetches the list of animals from the backend.
