@@ -22,6 +22,9 @@ export enum I18nTablesEnum {
   COLUMN_STATE = I18nTablesEnum.COLUMNS + 'state',
   COLUMN_STATUS = I18nTablesEnum.COLUMNS + 'status',
   COLUMN_TITLE = I18nTablesEnum.COLUMNS + 'title',
+  COLUMN_OBSERVATIONS = I18nTablesEnum.COLUMNS + 'observations',
+  COLUMN_COMPLAINT_STATE = I18nTablesEnum.COLUMNS + 'complaintState',
+  COLUMN_COMPLAINT_TYPE = I18nTablesEnum.COLUMNS + 'complaintType',
   COLUMN_VALUE = I18nTablesEnum.COLUMNS + 'value',
   NO_DATA_AVAILABLE = I18nTablesEnum.TABLES + 'noDataAvailable',
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  AnnouncementManagementDisplayedColumnsTableEnum,
+  AnnouncementManagementDisplayedColumnsTableEnum, ComplaintManagementDisplayedColumnsTableEnum,
   MunicipalityManagementDisplayedColumnsTableEnum,
   NotificationRulesManagementDisplayedColumnsTableEnum,
   UserManagementDisplayedColumnsTableEnum
@@ -39,6 +39,10 @@ export class TableService {
 
   get announcementManagementDisplayedColumnsTableEnum() {
     return AnnouncementManagementDisplayedColumnsTableEnum;
+  }
+
+  get complaintManagementDisplayedColumnsTableEnum() {
+    return ComplaintManagementDisplayedColumnsTableEnum;
   }
 
   /**

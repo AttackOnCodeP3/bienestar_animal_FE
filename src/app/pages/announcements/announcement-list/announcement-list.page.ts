@@ -8,7 +8,7 @@ import {GeneralContainerComponent} from '@components/layout';
 import {AnnouncementStateHttpService, AnnouncementHttpService} from '@services/http';
 import {AlertService, FormsService, I18nService, TableService} from '@services/general';
 import {ReactiveFormsModule, Validators} from '@angular/forms';
-import {DatePipe, JsonPipe} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {ISearchAnnouncement} from '@common/interfaces/http';
 import {
   MatCell,

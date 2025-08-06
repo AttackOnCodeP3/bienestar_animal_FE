@@ -225,4 +225,10 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static COMPLAINT_TYPES: string = '/complaint-types';
   static readonly COMPLAINT_TYPES_URL: string = UnmutableConstants.COMPLAINT_TYPES;
+
+  // ==================================================================
+  // ROUTES FOR MODEL COMPLAINT STATES SERVICES
+  // =================================================================
+  private static COMPLAINT_STATES: string = '/complaint-states';
+  static readonly COMPLAINT_STATES_URL: string = UnmutableConstants.COMPLAINT_STATES;
 }
