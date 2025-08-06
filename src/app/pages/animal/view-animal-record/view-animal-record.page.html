@@ -10,9 +10,9 @@
     [(ngModel)]="selectedAnimalId"
     (selectionChange)="onAnimalSelect($event.value)"
   >
-    <mat-option *ngFor="let animal of animalList ?? []" [value]="animal.id">
-      {{ animal.name }}
-    </mat-option>
+    @for (animal of animalList ?? []; track animal.id) {
+    <mat-option [value]="animal.id"> {{ animal.name }} </mat-option>
+    }
   </mat-select>
 </mat-form-field>
 

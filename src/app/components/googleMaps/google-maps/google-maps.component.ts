@@ -1,24 +1,7 @@
 import { Component, input, computed } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
 
-/**
- * GoogleMapsComponent displays a Google Map centered at the provided latitude and longitude,
- * with a marker at the center position.
- *
- * @author @aBlancoC
- *
- * @component
- * @example
- * <app-google-maps [lat]="9.9333" [lng]="-84.0833"></app-google-maps>
- *
- * @property {number} lat - The latitude for the map center and marker position.
- * @property {number} lng - The longitude for the map center and marker position.
- * @property {object} markerOptions - Options for customizing the map marker.
- * @method center - Computes the center position for the map and marker.
- */
 @Component({
-  selector: 'app-google-maps',
-  standalone: true,
   imports: [GoogleMapsModule],
   template: `
     <google-map

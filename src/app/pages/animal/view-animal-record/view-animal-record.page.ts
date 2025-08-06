@@ -57,7 +57,7 @@ export class ViewAnimalRecordPage implements OnInit {
     const userStr = localStorage.getItem(Constants.LS_APP_AUTH_USER);
     const user = userStr ? JSON.parse(userStr) : null;
     const ownerId = user?.id;
-    console.log('Owner ID:', ownerId);
+
     if (!ownerId) {
       this.animalList = [];
       return;
