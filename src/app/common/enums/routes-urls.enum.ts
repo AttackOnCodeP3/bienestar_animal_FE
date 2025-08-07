@@ -78,4 +78,9 @@ export enum RoutesUrlsEnum {
   COMPLAINTS_LIST = 'complaints-list',
   COMPLAINTS_CREATE = 'complaints-create',
   COMPLAINT_MANAGE = 'complaint-manage',
+  
+  //Animal Diagnosis
+  ANIMAL_DIAGNOSIS = 'animal-diagnosis',
+  ANIMAL_DIAGNOSIS_LIST = 'animal-diagnosis-list',
+  ANIMAL_DIAGNOSIS_CREATE = 'animal-diagnosis-create',
 }

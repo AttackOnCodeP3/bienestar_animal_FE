@@ -107,6 +107,11 @@ export const routes: Routes = [
         loadChildren: () => import('@pages/announcements/announcements.routes').then(m => m.ANNOUNCEMENTS_ROUTES),
       },
       {
+        path: RoutesUrlsEnum.ANIMAL_DIAGNOSIS,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/animal-diagnosis/animal-diagnosis.routes').then(m => m.ANIMAL_DIAGNOSIS_ROUTES),
+      },
+      {
         path: RoutesUrlsEnum.COMPLAINTS,
         canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER])],
         loadChildren: () => import('@pages/complaint/complaint.routes').then(m => m.COMPLAINTS_ROUTES),

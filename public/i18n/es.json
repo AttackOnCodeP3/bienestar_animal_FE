@@ -48,8 +48,10 @@
     "complaintList": "Lista de denuncias",
     "complaintCreate": "Crear denuncia",
     "community-census": "Censo comunitario",
-    "register-community-animal": "Registrar animal comunitario"
-
+    "register-community-animal": "Registrar animal comunitario",
+    "animalDiagnosis": "Diagnóstico animal",
+    "viewAnimalDiagnosis": "Ver diagnósticos",
+    "createAnimalDiagnosis": "Crear diagnóstico"
   },
   "notifications-modal-component": {
     "title": "Notificaciones",
@@ -129,7 +131,10 @@
       "status": "Estado",
       "productUsed": "Producto utilizado",
       "applicationDate": "Fecha de aplicación",
-      "value": "Valor"
+      "value": "Valor",
+      "animal": "Animal",
+      "image": "Imagen",
+      "description": "Descripción"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -143,7 +148,8 @@
       "max": "Debe ser menor o igual a",
       "acceptedMimeTypes": "Tipo de archivo no permitido. Por favor, suba un archivo con una de las siguientes extensiones: {{allowedExtensions}}.",
       "maxContentSize": "El archivo excede el tamaño máximo permitido de {{maxSizeMB}} MB.",
-      "invalidSelection": "Selección inválida. Por favor, seleccione una opción válida."
+      "invalidSelection": "Selección inválida. Por favor, seleccione una opción válida.",
+      "required": "Campo requerido"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -326,7 +332,8 @@
     "registerAnimal": "Registrar animal",
     "rulesManagement": "Gestión de reglas",
     "update": "Actualizar",
-    "updateNotificationRule": "Actualizar regla de notificación"
+    "updateNotificationRule": "Actualizar regla de notificación",
+    "createAnimalDiagnosis": "Crear diagnóstico"
   },
   "================== LOADING MESSAGES ==================": "",
   "loadingMessages": {

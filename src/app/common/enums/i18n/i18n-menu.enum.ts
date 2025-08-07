@@ -35,4 +35,7 @@ export enum I18nMenuEnum {
   COMPLAINT_CREATE = I18nMenuEnum.MENU + '.complaintCreate',
   COMMUNITY_CENSUS = 'menu.community-census',
   REGISTER_COMMUNITY_ANIMAL = 'menu.register-community-animal',
+  ANIMAL_DIAGNOSIS = I18nMenuEnum.MENU + '.animalDiagnosis',
+  VIEW_ANIMAL_DIAGNOSIS = I18nMenuEnum.MENU + '.viewAnimalDiagnosis',
+  CREATE_ANIMAL_DIAGNOSIS = I18nMenuEnum.MENU + '.createAnimalDiagnosis',
 }
