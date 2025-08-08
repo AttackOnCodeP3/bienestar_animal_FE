@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { ILocationResult } from '@common/interfaces';
 import {Constants} from '@common/constants/constants';
+import {LoadingModalService} from '@services/modals';
 
 /**
  * Service responsible for obtaining the user's geographic location.
@@ -22,6 +23,8 @@ import {Constants} from '@common/constants/constants';
 })
 export class LocationService {
 
+  private readonly loadingModalService = inject(LoadingModalService)
+
   /**
    * Gets the user's current geographic coordinates.
    * Returns a detailed result indicating success or the type of error.
@@ -30,6 +33,7 @@ export class LocationService {
    * @author dgutierrez
    */
   async getUserLocation(): Promise<ILocationResult> {
+    await this.loadingModalService.show();
     try {
       const position = await this.requestUserLocation();
       return {
@@ -42,6 +46,8 @@ export class LocationService {
       };
     } catch (error) {
       return this.handleLocationError(error);
+    } finally {
+      this.loadingModalService.hide();
     }
   }
 
