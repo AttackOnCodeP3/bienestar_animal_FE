@@ -1,10 +1,10 @@
 import {inject, Injectable} from '@angular/core';
-import {Validators} from '@angular/forms';
-import {ComplaintType} from '@models';
+import {FormGroup, Validators} from '@angular/forms';
+import {Complaint, ComplaintType} from '@models';
 import {notSelectOptionValidator} from '@common/forms';
 import {FileInput} from 'ngx-custom-material-file-input';
 import {FormsService} from '@services/general';
-import {CreateComplaintMultipartDto} from '@models/dto';
+import {ComplaintDto, CreateComplaintMultipartDto} from '@models/dto';
 
 /**
  * Service for managing complaint form-related functionality.
@@ -54,13 +54,31 @@ export class ComplaintFormService {
     form: ReturnType<typeof this.buildComplaintForm>,
     coords?: { latitude: number, longitude: number }
   ): CreateComplaintMultipartDto {
-    const { complaintType, description, file } = form.getRawValue();
+    const {complaintType, description, file} = form.getRawValue();
     return new CreateComplaintMultipartDto({
       complaintTypeId: complaintType?.id ?? null,
       description: description ?? null,
       image: file?.files?.[0] ?? null,
       latitude: coords?.latitude ?? 0,
       longitude: coords?.longitude ?? 0
+    });
+  }
+
+  /**
+   * Patches the complaint form with data from a ComplaintType object.
+   * @param form The complaint form to patch.
+   * @param complaintDto The complaint object containing data to patch the form.
+   * @author dgutierrez
+   */
+  patchFormWithComplaintData(form: FormGroup, complaintDto: ComplaintDto): void {
+    const complaintTypeDTO = complaintDto.complaintTypeDTO;
+    form.patchValue({
+      complaintType: new ComplaintType({
+        id: complaintTypeDTO?.id,
+        description: complaintTypeDTO?.description,
+      }),
+      description: complaintDto.description,
+      file: null
     });
   }
 

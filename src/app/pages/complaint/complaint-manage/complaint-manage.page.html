@@ -1,9 +1,25 @@
 <app-general-container-component>
-  <h1>
-    Gestionando denuncia
-  </h1>
 
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      Gestionando denuncia
+    </h1>
+    <button matButton="elevated" (click)="navigateToComplaintList()">
+      <mat-icon>arrow_back</mat-icon>
+      Gestionar denuncias
+    </button>
+  </div>
   <mat-chip class="mat-chip-primary">
-    <h2>  {{ complaintToManage()?.complaintTypeName }}</h2>
+    <h2>  {{ complaintToManage()?.complaintTypeDTO?.name }}</h2>
   </mat-chip>
 </app-general-container-component>
+
+<app-complaint-form-component
+  [complaintTypesList]="complaintTypeHttpService.complaintTypeList()"
+  [form]="complaintForm"
+  [formsService]="formsService"
+  (onViewImageChange)="onViewImage()"
+  (onSubmitChange)="onSubmit()"
+  [imageUrl]="complaintToManage()?.imageUrl"
+  [mode]="'edit'"
+/>

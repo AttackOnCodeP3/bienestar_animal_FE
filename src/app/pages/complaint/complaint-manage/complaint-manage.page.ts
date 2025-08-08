@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit} from '@angular/core';
+import {Component, computed, effect, inject, OnInit} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {GeneralContainerComponent} from '@components/layout';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -6,9 +6,12 @@ import {AlertService, FormsService, I18nService, LogService, ValidationsService}
 import {FileUtilsService} from '@services/utils';
 import {LoadingModalService, ModalService} from '@services/modals';
 import {ComplaintFormService} from '@services/forms';
-import {AuthHttpService, ComplaintHttpService} from '@services/http';
+import {AuthHttpService, ComplaintHttpService, ComplaintTypeHttpService} from '@services/http';
 import {PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
 import {MatChip} from '@angular/material/chips';
+import {ComplaintFormComponent} from '@components/forms/complaint';
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 /**
  * Page for managing complaints.
@@ -18,7 +21,10 @@ import {MatChip} from '@angular/material/chips';
   selector: 'app-complaint-manage-page',
   imports: [
     GeneralContainerComponent,
-    MatChip
+    MatChip,
+    ComplaintFormComponent,
+    MatButton,
+    MatIcon
   ],
   templateUrl: './complaint-manage.page.html',
   styleUrl: './complaint-manage.page.scss',
@@ -27,6 +33,7 @@ import {MatChip} from '@angular/material/chips';
 export class ComplaintManagePage implements OnInit {
   private readonly authHttpService = inject(AuthHttpService);
   private readonly complaintFormService = inject(ComplaintFormService);
+  readonly complaintTypeHttpService = inject(ComplaintTypeHttpService);
   private readonly complaintHttpService = inject(ComplaintHttpService);
   private readonly loadingModalService = inject(LoadingModalService);
   private readonly logService = inject(LogService);
@@ -39,10 +46,21 @@ export class ComplaintManagePage implements OnInit {
   readonly modalService = inject(ModalService);
   readonly route = inject(ActivatedRoute);
 
+  readonly complaintForm = this.complaintFormService.buildComplaintForm();
   readonly complaintToManage = computed(() => this.complaintHttpService.selectedComplaint());
+
+  readonly syncFormWithSelectedComplaint = effect(() => {
+    const complaint = this.complaintHttpService.selectedComplaint();
+    if (complaint) {
+      this.complaintFormService.patchFormWithComplaintData(this.complaintForm, complaint);
+    }
+  });
 
   ngOnInit() {
     this.initializePropertiesAsync();
+  }
+
+  onSubmit() {
   }
 
   /**
@@ -52,6 +70,7 @@ export class ComplaintManagePage implements OnInit {
    */
   private initializePropertiesAsync() {
     this.initializeComplaintToManage();
+    this.complaintTypeHttpService.getAll();
   }
 
   /**
@@ -107,6 +126,31 @@ export class ComplaintManagePage implements OnInit {
       return false;
     }
     return true;
+  }
+
+  /**
+   * Opens a modal to preview the uploaded image from the form.
+   * If no image is selected, displays an alert.
+   * @author dgutierrez
+   */
+  async onViewImage(): Promise<void> {
+    const imageFile = this.complaintFormService.getImageFile(this.complaintForm);
+    let imageSource: string | null = null;
+
+    if (imageFile) {
+      imageSource = await this.fileUtilsService.convertFileToBase64(imageFile);
+    } else {
+      imageSource = this.complaintToManage()?.imageUrl ?? null;
+    }
+
+    if (!imageSource) {
+      this.alertService.displayAlert({
+        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_NO_FILE_SELECTED
+      });
+      return;
+    }
+
+    this.modalService.openPictureViewerModal({imageSource});
   }
 
   /**

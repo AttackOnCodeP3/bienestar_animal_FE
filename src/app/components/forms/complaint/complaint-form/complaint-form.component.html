@@ -94,10 +94,12 @@
     </div>
   </app-general-container-component>
 
-  <div class="text-end">
-    <button matButton="tonal">
-      Realizar denuncia
-    </button>
-  </div>
+  @if (mode() === "create") {
+    <div class="text-end">
+      <button matButton="tonal">
+        Realizar denuncia
+      </button>
+    </div>
+  }
 
 </form>

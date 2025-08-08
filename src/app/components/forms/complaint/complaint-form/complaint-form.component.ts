@@ -10,6 +10,7 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
 import {MaterialFileInputModule} from 'ngx-custom-material-file-input';
+import {ComponentModeType} from '@common/types';
 
 /**
  * Component for creating or editing complaints.
@@ -42,6 +43,7 @@ export class ComplaintFormComponent {
   readonly formsService = input.required<FormsService>();
   readonly form = input.required<FormGroup>();
   readonly imageUrl = input<string | null>();
+  readonly mode = input<ComponentModeType>('create');
 
   readonly onViewImageChange = output<void>();
   readonly onSubmitChange = output<void>();

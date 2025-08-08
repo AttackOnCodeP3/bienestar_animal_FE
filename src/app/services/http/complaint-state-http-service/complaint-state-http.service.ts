@@ -2,7 +2,7 @@ import {Injectable, signal} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {ISearch} from '@common/interfaces/http';
 import {BaseHttpService} from '@services/http/base-http-service/base-http.service';
-import {ComplaintStateDto} from '@models/dto';
+import {ComplaintStateDTO} from '@models/dto';
 import {createPageArray} from '@common/utils';
 
 /**
@@ -14,11 +14,11 @@ import {createPageArray} from '@common/utils';
 @Injectable({
   providedIn: 'root'
 })
-export class ComplaintStateHttpService extends BaseHttpService<ComplaintStateDto> {
+export class ComplaintStateHttpService extends BaseHttpService<ComplaintStateDTO> {
 
   protected override source = Constants.COMPLAINT_STATES_URL;
 
-  readonly complaintStateList = signal<ComplaintStateDto[]>([]);
+  readonly complaintStateList = signal<ComplaintStateDTO[]>([]);
 
   search: ISearch = {
     page: 1,
