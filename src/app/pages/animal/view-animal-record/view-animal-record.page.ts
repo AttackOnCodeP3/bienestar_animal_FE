@@ -21,21 +21,9 @@ import { Constants } from '@common/constants/constants';
     MatFormField,
     MatLabel,
     MatOption,
-    MatCard,
-    MatCardContent,
-    MatCardTitle,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MatTable,
     FormsModule,
     MatTableModule,
-    MatHeaderRowDef,
-    MatRowDef,
-    MatHeaderCellDef,
-    MatCellDef,
-    GlbViewerComponent,
-    GoogleMapsComponent
+
   ],
   styleUrls: ['./view-animal-record.page.scss']
 })

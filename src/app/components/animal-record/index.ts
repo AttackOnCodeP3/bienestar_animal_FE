@@ -1,0 +1,1 @@
+export * from './view-animal-record/view-animal-record.component';

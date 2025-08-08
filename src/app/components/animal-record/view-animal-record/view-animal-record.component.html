@@ -1,0 +1,116 @@
+<mat-card class="mb-4">
+  <mat-card-title>
+    {{ animal.name }} - {{ animal.species?.name }}
+  </mat-card-title>
+  <mat-card-content>
+    <div class="mb-2">
+      <strong>Edad:</strong>
+      {{ formatAge(animal.age) }}
+    </div>
+    <div class="mb-2">
+      <strong>Sexo:</strong>
+      {{ animal.sex?.name }}
+    </div>
+    <div class="mb-2">
+      <strong>Peso:</strong>
+      {{ animal.weight }} kg
+    </div>
+    <div class="mb-2">
+      <strong>Raza:</strong>
+      {{ animal.race?.name }}
+    </div>
+    <div class="mb-2">
+      <strong>Tipo de animal:</strong>
+      {{ animal.animalType?.name }}
+    </div>
+    <div class="mb-2">
+      <strong>Fecha de nacimiento:</strong>
+      {{ animal.birthDate }}
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-expansion-panel expanded="false" class="mb-4">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Controles sanitarios</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-container *ngIf="animal?.sanitaryControls?.length > 0; else noControls">
+    <table
+      mat-table
+      [dataSource]="animal.sanitaryControls"
+      class="mat-elevation-z1 w-100"
+    >
+      <ng-container matColumnDef="lastApplicationDate">
+        <th mat-header-cell *matHeaderCellDef>Fecha aplicación</th>
+        <td mat-cell *matCellDef="let control">
+          {{ control.lastApplicationDate || "N/A" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let control">
+          {{ control.sanitaryControlType?.name }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="productUsed">
+        <th mat-header-cell *matHeaderCellDef>Producto usado</th>
+        <td mat-cell *matCellDef="let control">
+          {{ control.productUsed || "N/A" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="typeDescription">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let control">
+          {{ control.sanitaryControlType?.description || "N/A" }}
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'lastApplicationDate',
+          'type',
+          'productUsed',
+          'typeDescription'
+        ]"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: [
+            'lastApplicationDate',
+            'type',
+            'productUsed',
+            'typeDescription'
+          ]
+        "
+      ></tr>
+    </table>
+  </ng-container>
+  <ng-template #noControls>
+    <p>No hay controles sanitarios registrados para este animal.</p>
+  </ng-template>
+</mat-expansion-panel>
+
+<mat-expansion-panel expanded="false" class="mb-4">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Modelo 3D</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-glb-viewer [animalId]="animal.id" [autoRotate]="true"></app-glb-viewer>
+</mat-expansion-panel>
+
+<mat-expansion-panel expanded="false" class="mb-4">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Ubicación en mapa</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-google-maps
+    [lat]="animal.latitude"
+    [lng]="animal.longitude"
+  ></app-google-maps>
+</mat-expansion-panel>
