@@ -1,28 +1,25 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { TranslatePipe } from '@ngx-translate/core';
+import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import {
   CantonHttpService,
   DistrictHttpService,
   NeighborhoodHttpService,
   SpeciesHttpService,
   SexHttpService,
-  AbandonedAnimalHttpService, AuthHttpService
+  AbandonedAnimalHttpService,
+  AuthHttpService
 } from '@services/http';
-import {AlertService, FormsService, I18nService} from '@services/general';
-import { GeneralContainerComponent } from '@components/layout';
-import { CreateAbandonedAnimalRequestDTO } from '../../../models/dto/abandoned-animal/create-abandoned-animal-request.dto';
-import {LocationService} from '../../../services/location-service/location.service';
+import {AlertService, FormsService, I18nService, LocationService} from '@services/general';
+import {GeneralContainerComponent} from '@components/layout';
+import {CreateAbandonedAnimalRequestDTO} from '@models/dto';
 import {LocationFormComponent} from '@components/forms/user';
-import { ChangeDetectorRef } from '@angular/core';
-import {EstimatedAgeEnum} from '@common/enums/tables/estimated-age.enum';
-import {PhysicalConditionEnum} from '@common/enums/tables/physical-condition.enum';
-import {BehaviorEnum} from '@common/enums/tables/behavior.enum';
+import {ChangeDetectorRef} from '@angular/core';
+import {EstimatedAgeEnum, PhysicalConditionEnum, BehaviorEnum} from '@common/enums';
 
 @Component({
   selector: 'app-create-abandoned-animal',
@@ -68,7 +65,6 @@ export class CreateAbandonedAnimalPage implements OnInit {
   readonly estimatedAgeList = signal<string[]>(Object.values(EstimatedAgeEnum));
   readonly physicalConditionList = signal<string[]>(Object.values(PhysicalConditionEnum));
   readonly behaviorList = signal<string[]>(Object.values(BehaviorEnum));
-
 
 
   readonly form = this.buildForm();
@@ -170,7 +166,7 @@ export class CreateAbandonedAnimalPage implements OnInit {
       reader.onload = () => {
         const result = reader.result as string;
         const base64 = result.split(',')[1];
-        this.form.patchValue({ photoBase64: base64 });
+        this.form.patchValue({photoBase64: base64});
         this.imagePreview = result;
         this.cdRef.detectChanges();
       };

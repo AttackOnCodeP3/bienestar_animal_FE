@@ -1,28 +1,18 @@
-import { Component, computed, inject, signal, viewChild } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
-import { MatIcon } from '@angular/material/icon';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import {
-  MatActionList,
-  MatListItem,
-  MatListItemIcon,
-  MatNavList,
-} from '@angular/material/list';
-import {
-  MatDrawerMode,
-  MatSidenav,
-  MatSidenavContainer,
-  MatSidenavContent,
-} from '@angular/material/sidenav';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { BreakpointsEnum, RolesEnum, RoutesUrlsEnum } from '@common/enums';
-import { IMenuItem, IMenuItemChild } from '@common/interfaces';
-import { I18nService, ThemeService } from '@services/general';
-import { I18nMenuEnum } from '@common/enums/i18n';
-import { Constants } from '@common/constants/constants';
-import { AuthHttpService } from '@services/http';
-import { NavbarComponent } from '@components/general';
+import {Component, computed, inject, signal, viewChild} from '@angular/core';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {TranslatePipe} from '@ngx-translate/core';
+import {MatIcon} from '@angular/material/icon';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {MatActionList, MatListItem, MatListItemIcon, MatNavList,} from '@angular/material/list';
+import {MatDrawerMode, MatSidenav, MatSidenavContainer, MatSidenavContent,} from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {BreakpointsEnum, RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {IMenuItem, IMenuItemChild} from '@common/interfaces';
+import {I18nService, ThemeService} from '@services/general';
+import {I18nMenuEnum} from '@common/enums/i18n';
+import {Constants} from '@common/constants/constants';
+import {AuthHttpService} from '@services/http';
+import {NavbarComponent} from '@components/general';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -92,12 +82,13 @@ export class DashboardLayoutComponent {
       },
       authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN],
     },
-  
+
     {
       icon: 'settings',
       label: I18nMenuEnum.USER_MANAGEMENT,
       route: `${RoutesUrlsEnum.SECURITY}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.SECURITY_USER_MANAGEMENT}`,
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.USER_MANAGEMENT,
@@ -122,7 +113,8 @@ export class DashboardLayoutComponent {
       icon: 'apartment',
       label: I18nMenuEnum.MUNICIPALITIES,
       authorities: [RolesEnum.SUPER_ADMIN],
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.VIEW_MUNICIPALITIES,
@@ -142,11 +134,18 @@ export class DashboardLayoutComponent {
       icon: 'pets',
       label: I18nMenuEnum.ANIMAL,
       authorities: [RolesEnum.COMMUNITY_USER],
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.CREATE_ANIMAL_PROFILE,
           route: `${RoutesUrlsEnum.ANIMAL}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.CREATE_ANIMAL_PROFILE}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        },
+        {
+          label: I18nMenuEnum.VIEW_ANIMAL_RECORD,
+          route: `${RoutesUrlsEnum.ANIMAL}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.VIEW_ANIMAL_RECORD}`,
           authorities: [RolesEnum.COMMUNITY_USER],
           click: () => this.closeSidenav(),
         },
@@ -163,17 +162,34 @@ export class DashboardLayoutComponent {
           route: `${RoutesUrlsEnum.ABANDONED_ANIMAL}/${RoutesUrlsEnum.CREATE_ABANDONED_ANIMAL}`,
           authorities: [RolesEnum.CENSISTA_USER],
           click: () => this.closeSidenav(),
-        }
+        },
       ],
     },
-     {
+
+    {
+      icon: 'pets',
+      label: I18nMenuEnum.COMMUNITY_CENSUS,
+      authorities: [RolesEnum.CENSISTA_USER],
+      click: () => {},
+      children: [
+        {
+          label: I18nMenuEnum.REGISTER_COMMUNITY_ANIMAL,
+          route: `${RoutesUrlsEnum.ANIMAL}/${RoutesUrlsEnum.REGISTER_COMMUNITY_ANIMAL_BY_CENSUS}`, // <-- ESTA ES LA CLAVE
+          authorities: [RolesEnum.CENSISTA_USER],
+          click: () => this.closeSidenav(),
+        },
+      ],
+    },
+
+    {
       icon: 'view_in_ar',
       label: I18nMenuEnum.MODEL_3D,
       authorities: [
         RolesEnum.SUPER_ADMIN,
         RolesEnum.COMMUNITY_USER,
       ],
-      click: () => {},
+      click: () => {
+      },
       children: [
         {
           label: I18nMenuEnum.VIEW_MODEL_3D,
@@ -195,7 +211,82 @@ export class DashboardLayoutComponent {
         },
       ],
     },
-
+    {
+  icon: 'medical_information',
+  label: I18nMenuEnum.ANIMAL_DIAGNOSIS, 
+  authorities: [
+    RolesEnum.COMMUNITY_USER,
+    RolesEnum.SUPER_ADMIN,
+  ],
+  click: () => {},
+  children: [
+    {
+      label: I18nMenuEnum.VIEW_ANIMAL_DIAGNOSIS, 
+      route: `${RoutesUrlsEnum.ANIMAL_DIAGNOSIS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANIMAL_DIAGNOSIS_LIST}`,
+      authorities: [
+        RolesEnum.COMMUNITY_USER,
+        RolesEnum.SUPER_ADMIN,
+      ],
+      click: () => this.closeSidenav(),
+    },
+    {
+      label: I18nMenuEnum.CREATE_ANIMAL_DIAGNOSIS,
+      route: `${RoutesUrlsEnum.ANIMAL_DIAGNOSIS}/${RoutesUrlsEnum.ANIMAL_DIAGNOSIS_CREATE}`,
+      authorities: [
+        RolesEnum.COMMUNITY_USER,
+        RolesEnum.SUPER_ADMIN,
+      ],
+      click: () => this.closeSidenav(),
+    },
+  ],
+},
+    {
+      icon: 'notification_settings',
+      label: I18nMenuEnum.NOTIFICATION_RULES,
+      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN],
+      click: () => this.closeSidenav(),
+      route: `${RoutesUrlsEnum.NOTIFICATION_RULES}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.NOTIFICATION_RULES_LIST}`,
+    },
+    {
+      icon: 'breaking_news',
+      label: I18nMenuEnum.ANNOUNCEMENTS,
+      authorities: [RolesEnum.MUNICIPAL_ADMIN],
+      click: () => this.closeSidenav(),
+      children: [
+        {
+          label: I18nMenuEnum.ANNOUNCEMENT_LIST,
+          route: `${RoutesUrlsEnum.ANNOUNCEMENTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANNOUNCEMENTS_LIST}`,
+          authorities: [RolesEnum.MUNICIPAL_ADMIN],
+          click: () => this.closeSidenav(),
+        },
+        {
+          label: I18nMenuEnum.ANNOUNCEMENT_CREATE,
+          route: `${RoutesUrlsEnum.ANNOUNCEMENTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.ANNOUNCEMENTS_CREATE}`,
+          authorities: [RolesEnum.MUNICIPAL_ADMIN],
+          click: () => this.closeSidenav(),
+        }
+      ],
+    },
+    {
+      icon: 'report',
+      label: I18nMenuEnum.COMPLAINTS,
+      authorities: [RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER],
+      click: () => this.closeSidenav(),
+      children: [
+        {
+          label: I18nMenuEnum.COMPLAINT_LIST,
+          route: `${RoutesUrlsEnum.COMPLAINTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.COMPLAINTS_LIST}`,
+          authorities: [RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        },
+        {
+          label: I18nMenuEnum.COMPLAINT_CREATE,
+          route: `${RoutesUrlsEnum.COMPLAINTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.COMPLAINTS_CREATE}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        }
+      ],
+    },
     {
       icon: 'logout',
       label: I18nMenuEnum.LOGOUT,

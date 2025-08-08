@@ -7,6 +7,17 @@
     }
     <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
     <div class="d-flex flex-grow-1 justify-content-end">
+      @if (authHttpService.isAuthenticated()) {
+        <button
+          matIconButton
+          [matBadge]="notificationHttpService.myUnreadCount()"
+          [matBadgeHidden]="notificationHttpService.showMyUnreadBadge()"
+          (click)="openNotificationsModal()">
+          <mat-icon class="icon-color-scheme">
+            notifications
+          </mat-icon>
+        </button>
+      }
       <button mat-icon-button [matMenuTriggerFor]="themeMenu">
         <mat-icon class="icon-color-scheme">{{ theme.selectedTheme()?.icon }}</mat-icon>
       </button>

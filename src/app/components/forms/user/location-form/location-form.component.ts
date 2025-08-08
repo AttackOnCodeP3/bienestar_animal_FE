@@ -1,4 +1,4 @@
-import {Component, input, model, OnInit, output, OnDestroy, computed} from '@angular/core';
+import {Component, input, model, OnInit, output, OnDestroy, computed, Input} from '@angular/core';
 import {Constants} from '@common/constants/constants';
 import {Canton, District, Neighborhood} from '@models';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -29,6 +29,7 @@ export class LocationFormComponent implements OnInit, OnDestroy {
 
   selectedCanton = output<Canton>();
   selectedDistrict = output<District>();
+  @Input() neighborhoodsList!: Neighborhood[];
 
   ngOnInit(): void {
     const cantonControl = this.formsService().getControl('canton', this.form());
@@ -84,6 +85,8 @@ export class LocationFormComponent implements OnInit, OnDestroy {
       this.neighbourhoodsList.set(null);
     }
   }
+
+
 
   /**
    * Handles changes in the district selection.

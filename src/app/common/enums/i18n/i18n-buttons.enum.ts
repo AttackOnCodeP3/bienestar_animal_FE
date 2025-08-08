@@ -25,4 +25,6 @@ export enum I18nButtonsEnum {
   BUTTON_UPDATE_MUNICIPALITY = I18nButtonsEnum.BUTTONS + "updateMunicipality",
   BUTTON_USER_MANAGEMENT = I18nButtonsEnum.BUTTONS + "userManagement",
   BUTTON_REGISTER_ANIMAL = I18nButtonsEnum.BUTTONS + "registerAnimal",
+  BUTTON_RULES_MANAGEMENT = I18nButtonsEnum.BUTTONS + "rulesManagement",
+  BUTTON_UPDATE_NOTIFICATION_RULE = I18nButtonsEnum.BUTTONS + "updateNotificationRule",
 }

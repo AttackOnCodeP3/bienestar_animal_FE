@@ -1,7 +1,8 @@
-import {  Routes  } from '@angular/router';
-import {  RolesEnum, RoutesUrlsEnum  } from '@common/enums';
-import {  authGuard, profileCompletedGuard, roleGuard, forgotPasswordGuard   } from '@core/guards';
-import { DashboardLayoutComponent } from '@components/layout';
+import {Routes} from '@angular/router';
+import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
+import {authGuard, forgotPasswordGuard, profileCompletedGuard, roleGuard} from '@core/guards';
+import {DashboardLayoutComponent} from '@components/layout';
+import {ANIMAL_ROUTES} from '@pages/animal/animal.routes';
 
 export const routes: Routes = [
   {
@@ -32,7 +33,7 @@ export const routes: Routes = [
             RolesEnum.MUNICIPAL_ADMIN,
             RolesEnum.VOLUNTEER_USER,
             RolesEnum.COMMUNITY_USER,
-          RolesEnum.CENSISTA_USER,
+            RolesEnum.CENSISTA_USER,
           ]),
         ],
         loadComponent: () =>
@@ -74,7 +75,12 @@ export const routes: Routes = [
       },
       {
         path: RoutesUrlsEnum.ANIMAL,
-        canActivate: [roleGuard([RolesEnum.COMMUNITY_USER])],
+        canActivate: [
+          roleGuard([
+            RolesEnum.COMMUNITY_USER,
+            RolesEnum.CENSISTA_USER,
+          ])
+        ],
         loadChildren: () => import('@pages/animal/animal.routes').then(m => m.ANIMAL_ROUTES),
       },
 
@@ -83,13 +89,33 @@ export const routes: Routes = [
         canActivate: [roleGuard([RolesEnum.CENSISTA_USER])],
         loadChildren: () => import('@pages/abandoned-animal/abandoned-animal.routes').then(m => m.ABANDONED_ANIMAL_ROUTES),
       },
-   {
-      path: RoutesUrlsEnum.MODEL_3D,
-      canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.COMMUNITY_USER])],
-      loadChildren: () =>
-        import('@pages/model-3d/model-3d.routes').then((m) => m.MODEL_3D_ROUTES),
-    },
 
+      {
+        path: RoutesUrlsEnum.MODEL_3D,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.COMMUNITY_USER])],
+        loadChildren: () =>
+          import('@pages/model-3d/model-3d.routes').then((m) => m.MODEL_3D_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.NOTIFICATION_RULES,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN])],
+        loadChildren: () => import('@pages/notification-rules/notification-rules.routes').then(m => m.NOTIFICATION_RULES_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.ANNOUNCEMENTS,
+        canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN])],
+        loadChildren: () => import('@pages/announcements/announcements.routes').then(m => m.ANNOUNCEMENTS_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.ANIMAL_DIAGNOSIS,
+        canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/animal-diagnosis/animal-diagnosis.routes').then(m => m.ANIMAL_DIAGNOSIS_ROUTES),
+      },
+      {
+        path: RoutesUrlsEnum.COMPLAINTS,
+        canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER])],
+        loadChildren: () => import('@pages/complaint/complaint.routes').then(m => m.COMPLAINTS_ROUTES),
+      }
     ]
   }
 ];

@@ -7,6 +7,7 @@ export enum I18nFormsEnum {
   INPUTS_LABELS = I18nFormsEnum.INPUTS + 'labels.',
   INPUTS_FORMS_VALIDATIONS = I18nFormsEnum.INPUTS + 'formValidations.',
   INPUTS_FORMS_PLACEHOLDERS = I18nFormsEnum.INPUTS + 'formPlaceholders.',
+  INPUTS_FORMS_UNITS = I18nFormsEnum.INPUTS + 'formUnits.',
 
   // Form validations
   FORM_VALIDATION_EMAIL = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'email',
@@ -17,6 +18,9 @@ export enum I18nFormsEnum {
   FORM_VALIDATION_REQUIRED = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'required',
   FORM_VALIDATION_MIN = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'min',
   FORM_VALIDATION_MAX = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'max',
+  FORM_VALIDATION_FILE_ACCEPT = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'acceptedMimeTypes',
+  FORM_VALIDATION_FILE_MAX_CONTENT_SIZE = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'maxContentSize',
+  FORM_VALIDATION_INVALID_SELECTION = I18nFormsEnum.INPUTS_FORMS_VALIDATIONS + 'invalidSelection',
 
 
   // Labels for form inputs
@@ -54,6 +58,7 @@ export enum I18nFormsEnum {
   STATUS_LABEL = I18nFormsEnum.INPUTS_LABELS + 'status',
   PRODUCT_USED_LABEL = I18nFormsEnum.INPUTS_LABELS + 'productUsed',
   APPLICATION_DATE_LABEL = I18nFormsEnum.INPUTS_LABELS + 'applicationDate',
+  VALUE_LABEL = I18nFormsEnum.INPUTS_LABELS + 'value',
 
   // Placeholders for form inputs
   ADDRESS_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'address',
@@ -86,4 +91,9 @@ export enum I18nFormsEnum {
   SEX_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'sex',
   PRODUCT_USED_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'productUsed',
   APPLICATION_DATE_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'applicationDate',
+  VALUE_PLACEHOLDER = I18nFormsEnum.INPUTS_FORMS_PLACEHOLDERS + 'value',
+
+  // Units for form inputs
+  FORM_UNIT_CHARACTERS = I18nFormsEnum.INPUTS_FORMS_UNITS + 'characters',
+  FORM_UNIT_DIGITS = I18nFormsEnum.INPUTS_FORMS_UNITS + 'digits',
 }
