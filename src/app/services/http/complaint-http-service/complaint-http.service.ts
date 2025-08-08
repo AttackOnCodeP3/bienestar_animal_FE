@@ -59,6 +59,72 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
   }
 
   /**
+   * Retrieves a complaint by ID for the authenticated MUNICIPAL_ADMIN.
+   * Only returns the complaint if it belongs to their municipality.
+   *
+   * @param id The complaint ID to retrieve.
+   * @param config Optional configuration for loading and callbacks.
+   * @author dgutierrez
+   */
+  getComplaintByIdForMunicipalityAdmin(
+    id: number,
+    config?: IHttpActionConfig
+  ): void {
+    this.isLoading.set(true);
+    config?.showLoading?.();
+
+    this.http
+      .get<IResponse<ComplaintDto>>(`${this.sourceUrl}/my-municipality/${id}`)
+      .pipe(finalize(() => {
+        this.isLoading.set(false);
+        config?.hideLoading?.();
+      }))
+      .subscribe({
+        next: (res) => {
+          this.selectedComplaint.set(res.data);
+          config?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error fetching complaint for municipal admin.',
+          context: `${this.constructor.name}#getComplaintByIdForMunicipalityAdmin`
+        }),
+      });
+  }
+
+  /**
+   * Retrieves a complaint by ID for the authenticated COMMUNITY_USER.
+   * Only returns the complaint if it was created by the user.
+   *
+   * @param id The complaint ID to retrieve.
+   * @param config Optional configuration for loading and callbacks.
+   * @author dgutierrez
+   */
+  getComplaintByIdForCommunityUser(
+    id: number,
+    config?: IHttpActionConfig
+  ): void {
+    this.isLoading.set(true);
+    config?.showLoading?.();
+
+    this.http
+      .get<IResponse<ComplaintDto>>(`${this.sourceUrl}/my-complaints/${id}`)
+      .pipe(finalize(() => {
+        this.isLoading.set(false);
+        config?.hideLoading?.();
+      }))
+      .subscribe({
+        next: (res) => {
+          this.selectedComplaint.set(res.data);
+          config?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error fetching complaint for community user.',
+          context: `${this.constructor.name}#getComplaintByIdForCommunityUser`
+        }),
+      });
+  }
+
+  /**
    * Creates a complaint for the authenticated COMMUNITY_USER.
    * @param config Configuration object with complaint DTO and loading/callback handlers.
    * @author dgutierrez
