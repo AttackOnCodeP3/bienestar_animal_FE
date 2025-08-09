@@ -126,34 +126,54 @@
     }
 
     @if (mode() === 'edit') {
+      @if (
+        complaintStateDTO()?.id !== complaintStateIdEnum().CLOSED &&
+        complaintStateDTO()?.id !== complaintStateIdEnum().CANCELLED
+        ) {
 
-      @if (authHttpService().isCommunityUser()) {
-        @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
-          <button class="me-3" matButton="tonal" (click)="onUpdate()">Actualizar denuncia</button>
-          <button matButton="outlined" (click)="onCancel()">Cancelar denuncia</button>
+        @if (authHttpService().isCommunityUser()) {
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
+            <button class="me-3" matButton="tonal" (click)="onUpdate()">Actualizar denuncia</button>
+            <button matButton="outlined" (click)="onCancel()">Cancelar denuncia</button>
+          }
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
+            <button matButton="tonal" (click)="onResubmit()">Actualizar y reenviar</button>
+          }
         }
-        @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
-          <button matButton="tonal" (click)="onResubmit()">Actualizar y reenviar</button>
+
+        @if (authHttpService().isMunicipalityAdmin()) {
+
+          @if (
+            complaintStateDTO()?.id === complaintStateIdEnum().OPEN ||
+            complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS ||
+            complaintStateDTO()?.id === complaintStateIdEnum().APPROVED
+            ) {
+            <button class="me-3" matButton="outlined" (click)="onCancelByAdmin()">Cancelar denuncia</button>
+          }
+
+          @if (
+            complaintStateDTO()?.id === complaintStateIdEnum().OPEN ||
+            complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS ||
+            complaintStateDTO()?.id === complaintStateIdEnum().APPROVED ||
+            complaintStateDTO()?.id === complaintStateIdEnum().COMPLETED
+            ) {
+            <button class="me-3" matButton="outlined" (click)="onCloseByAdmin()">Cerrar denuncia</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
+            <button class="me-3" matButton="filled" (click)="onWithObservations()">Con observaciones</button>
+            <button matButton="tonal" (click)="onApprove()">Aprobar</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
+            <button class="me-3" matButton="tonal" (click)="onWithObservations()">Con observaciones</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().APPROVED) {
+            <button matButton="tonal" (click)="onComplete()">Completar denuncia</button>
+          }
         }
       }
-
-      @if (authHttpService().isMunicipalityAdmin()) {
-        @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
-          <button class="me-3" matButton="filled" (click)="onWithObservations()">Con observaciones</button>
-          <button matButton="tonal" (click)="onApprove()">Aprobar</button>
-        }
-        @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
-          <button class="me-3" matButton="tonal" (click)="onWithObservations()">Con observaciones</button>
-          <button matButton="outlined" (click)="onClose()">Cerrar denuncia</button>
-        }
-        @if (complaintStateDTO()?.id === complaintStateIdEnum().APPROVED) {
-          <button matButton="tonal" (click)="onComplete()">Completar denuncia</button>
-        }
-        @if (complaintStateDTO()?.id === complaintStateIdEnum().COMPLETED) {
-          <button matButton="outlined" (click)="onClose()">Cerrar denuncia</button>
-        }
-      }
-
     }
   </div>
 </form>

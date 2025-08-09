@@ -61,7 +61,14 @@ export class ComplaintCreatePage implements OnInit {
    * Otherwise, triggers the complaint creation process.
    * @author dgutierrez
    */
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: "Confirmar envío",
+      message: "¿Estás seguro de que deseas enviar esta denuncia?",
+    })
+
+    if (!confirmAction?.isConfirmed) return;
+
     if (this.complaintCreateForm.invalid) {
       this.formsService.markFormTouchedAndDirty(this.complaintCreateForm);
       this.alertService.displayAlert({

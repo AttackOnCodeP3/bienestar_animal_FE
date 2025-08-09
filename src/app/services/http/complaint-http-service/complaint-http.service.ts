@@ -1,7 +1,7 @@
 import {computed, Injectable, signal} from '@angular/core';
 import {BaseHttpService} from '@services/http/base-http-service/base-http.service';
 import {Constants} from '@common/constants/constants';
-import {ComplaintDto, CreateComplaintMultipartDto, UpdateComplaintMultipartDto, ObservationsDto} from '@models/dto';
+import {ComplaintDto, CreateComplaintMultipartDto, ObservationsDto, UpdateComplaintMultipartDto} from '@models/dto';
 import {IHttpActionConfig, IResponse, ISearch, ISearchComplaint} from '@common/interfaces/http';
 import {finalize} from 'rxjs';
 import {AlertTypeEnum} from '@common/enums';
@@ -388,6 +388,62 @@ export class ComplaintHttpService extends BaseHttpService<ComplaintDto> {
         error: this.handleError({
           message: 'Error closing complaint.',
           context: `${this.constructor.name}#closeComplaint`
+        }),
+      });
+  }
+
+  /**
+   * Cancels a complaint as MUNICIPAL_ADMIN (forces state to CANCELLED).
+   * PUT /complaints/{id}/cancel
+   * @author dgutierrez
+   */
+  cancelComplaintAsAdmin(config: { id: number; handlers?: IHttpActionConfig }): void {
+    const {id, handlers} = config;
+    this.isLoading.set(true);
+    handlers?.showLoading?.();
+
+    this.http.put<IResponse<ComplaintDto>>(`${this.sourceUrl}/${id}/cancel/admin`, {})
+      .pipe(finalize(() => {
+        this.isLoading.set(false);
+        handlers?.hideLoading?.();
+      }))
+      .subscribe({
+        next: (res) => {
+          this.selectedComplaint.set(res.data);
+          this.alertService.displayAlert({type: AlertTypeEnum.SUCCESS, message: res.message});
+          handlers?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error cancelling complaint as admin.',
+          context: `${this.constructor.name}#cancelComplaintAsAdmin`
+        }),
+      });
+  }
+
+  /**
+   * Closes a complaint as MUNICIPAL_ADMIN (forces state to COMPLETED).
+   * PUT /complaints/{id}/close
+   * @author dgutierrez
+   */
+  closeComplaintAsAdmin(config: { id: number; handlers?: IHttpActionConfig }): void {
+    const {id, handlers} = config;
+    this.isLoading.set(true);
+    handlers?.showLoading?.();
+
+    this.http.put<IResponse<ComplaintDto>>(`${this.sourceUrl}/${id}/close`, {})
+      .pipe(finalize(() => {
+        this.isLoading.set(false);
+        handlers?.hideLoading?.();
+      }))
+      .subscribe({
+        next: (res) => {
+          this.selectedComplaint.set(res.data);
+          this.alertService.displayAlert({type: AlertTypeEnum.SUCCESS, message: res.message});
+          handlers?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error closing complaint as admin.',
+          context: `${this.constructor.name}#closeComplaintAsAdmin`
         }),
       });
   }

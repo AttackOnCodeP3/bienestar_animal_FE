@@ -311,7 +311,7 @@
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
     "alreadyHaveAnAccount": "¿Ya tiene una cuenta?",
-    "close": "Cerrar",
+    "cancel": "Cancelar",
     "closeSession": "Cerrar sesión",
     "completeProfile": "Completar perfil",
     "createMunicipality": "Crear municipalidad",
@@ -333,7 +333,10 @@
     "rulesManagement": "Gestión de reglas",
     "update": "Actualizar",
     "updateNotificationRule": "Actualizar regla de notificación",
-    "createAnimalDiagnosis": "Crear diagnóstico"
+    "createAnimalDiagnosis": "Crear diagnóstico",
+    "close": "Cerrar",
+    "accept": "Aceptar",
+    "confirm": "Confirmar"
   },
   "================== LOADING MESSAGES ==================": "",
   "loadingMessages": {

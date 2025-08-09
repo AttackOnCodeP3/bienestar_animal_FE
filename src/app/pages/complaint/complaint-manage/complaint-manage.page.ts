@@ -1,4 +1,9 @@
 import {Component, computed, effect, inject, OnInit} from '@angular/core';
+
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatChip} from '@angular/material/chips';
+
 import {Constants} from '@common/constants/constants';
 import {GeneralContainerComponent} from '@components/layout';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,10 +13,7 @@ import {LoadingModalService, ModalService} from '@services/modals';
 import {ComplaintFormService} from '@services/forms';
 import {AuthHttpService, ComplaintHttpService, ComplaintTypeHttpService} from '@services/http';
 import {ComplaintStateIdEnum, PagesUrlsEnum, RouteParamsEnum} from '@common/enums';
-import {MatChip} from '@angular/material/chips';
 import {ComplaintFormComponent} from '@components/forms/complaint';
-import {MatButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
 import {ObservationsDto, UpdateComplaintMultipartDto} from '@models/dto';
 
 /**
@@ -66,43 +68,73 @@ export class ComplaintManagePage implements OnInit {
   }
 
   /**
-   * Aprobar (ADMIN, estado OPEN)
-   * PUT /complaints/{id}/approve
-   * @author dg
+   * Completar (ADMIN, estado APPROVED)
+   * PUT /complaints/{id}/complete
+   * @author dgutierrez
    */
-  onApproveComplaint(): void {
+  async onApproveComplaint(): Promise<void> {
+    if (!this.authHttpService.isMunicipalityAdmin()) return;
+
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: 'Aprobar denuncia',
+      message: '¿Está seguro que desea aprobar la denuncia?'
+    });
+    if (!confirmAction?.isConfirmed) return;
+
     const id = this.getComplaintId();
     this.complaintHttpService.approveComplaint({
       id,
-      handlers: {
-        ...this.loadingModalService.httpHandlersLoading,
-        callback: () => this.onAfterTerminalAction()
-      }
+      handlers: { ...this.loadingModalService.httpHandlersLoading, callback: () => this.onAfterTerminalAction() }
     });
   }
 
   /**
-   * Cancelar (COMUNITARIO, estado OPEN)
-   * PUT /complaints/{id}/cancel
-   * @author dg
+   * @author dgutierrez
    */
-  onCancelComplaint(): void {
-    const id = this.getComplaintId();
-    this.complaintHttpService.cancelComplaint({
-      id,
-      handlers: {
-        ...this.loadingModalService.httpHandlersLoading,
-        callback: () => this.onAfterTerminalAction()
-      }
+  async onCancelComplaint(): Promise<void> {
+    const isAdmin = this.authHttpService.isMunicipalityAdmin();
+    if (!isAdmin && !this.isValidForm()) return;
+
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: 'Cancelar denuncia',
+      message: '¿Está seguro que desea cancelar la denuncia? Esta acción es irreversible.'
     });
+    if (!confirmAction?.isConfirmed) return;
+
+    const id = this.getComplaintId();
+
+    if (isAdmin) {
+      this.complaintHttpService.cancelComplaintAsAdmin({
+        id,
+        handlers: { ...this.loadingModalService.httpHandlersLoading, callback: () => this.onAfterTerminalAction() }
+      });
+    } else {
+      this.complaintHttpService.cancelComplaint({
+        id,
+        handlers: { ...this.loadingModalService.httpHandlersLoading, callback: () => this.onAfterTerminalAction() }
+      });
+    }
   }
 
   /**
    * Actualizar y reenviar (COMUNITARIO, estado WITH_OBSERVATIONS)
    * PUT /complaints/{id} (el backend la pasa a OPEN y limpia observaciones)
-   * @author dg
+   * @author dgutierrez
    */
-  onResubmitComplaint(): void {
+  async onResubmitComplaint(): Promise<void> {
+    if (!this.isValidForm()) {
+      return;
+    }
+
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: 'Reenviar denuncia',
+      message: '¿Está seguro que desea reenviar la denuncia? Se actualizará la denuncia y se eliminarán las observaciones.',
+    });
+
+    if (!confirmAction?.isConfirmed) {
+      return;
+    }
+
     const id = this.getComplaintId();
     const dto = this.buildUpdateDtoFromForm();
     this.complaintHttpService.updateComplaint({
@@ -118,9 +150,13 @@ export class ComplaintManagePage implements OnInit {
   /**
    * Con observaciones (ADMIN, estados OPEN o WITH_OBSERVATIONS)
    * PUT /complaints/{id}/observe
-   * @author dg
+   * @author dgutierrez
    */
-  onWithObservationsComplaint(): void {
+  async onWithObservationsComplaint(): Promise<void> {
+    if (!this.isValidForm()) {
+      return;
+    }
+
     const id = this.getComplaintId();
     const {observations} = this.complaintForm.getRawValue();
 
@@ -131,7 +167,16 @@ export class ComplaintManagePage implements OnInit {
       return;
     }
 
-    const dto: ObservationsDto = { observations: observations ?? '' };
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: 'Agregar observaciones',
+      message: '¿Está seguro que desea agregar observaciones a la denuncia? Las observaciones serán visibles para el denunciante.',
+    });
+
+    if (!confirmAction?.isConfirmed) {
+      return;
+    }
+
+    const dto: ObservationsDto = {observations: observations ?? ''};
 
     this.complaintHttpService.observeComplaint({
       id,
@@ -148,30 +193,35 @@ export class ComplaintManagePage implements OnInit {
    * PUT /complaints/{id}/close
    * @author dgutierrez
    */
-  onCloseComplaint(): void {
+  async onCloseComplaint(): Promise<void> {
+    if (!this.authHttpService.isMunicipalityAdmin()) return;
+
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: 'Cerrar denuncia',
+      message: '¿Está seguro que desea cerrar la denuncia? Esta acción es irreversible.'
+    });
+    if (!confirmAction?.isConfirmed) return;
+
     const id = this.getComplaintId();
-    this.complaintHttpService.closeComplaint({
+    this.complaintHttpService.closeComplaintAsAdmin({
       id,
-      handlers: {
-        ...this.loadingModalService.httpHandlersLoading,
-        callback: () => this.onAfterTerminalAction()
-      }
+      handlers: { ...this.loadingModalService.httpHandlersLoading, callback: () => this.onAfterTerminalAction() }
     });
   }
 
-  /**
-   * Completar (ADMIN, estado APPROVED)
-   * PUT /complaints/{id}/complete
-   * @author dgutierrez
-   */
-  onCompleteComplaint(): void {
+  async onCompleteComplaint(): Promise<void> {
+    if (!this.authHttpService.isMunicipalityAdmin()) return;
+
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: 'Completar denuncia',
+      message: '¿Está seguro que desea completar la denuncia?'
+    });
+    if (!confirmAction?.isConfirmed) return;
+
     const id = this.getComplaintId();
     this.complaintHttpService.completeComplaint({
       id,
-      handlers: {
-        ...this.loadingModalService.httpHandlersLoading,
-        callback: () => this.onAfterTerminalAction()
-      }
+      handlers: { ...this.loadingModalService.httpHandlersLoading, callback: () => this.onAfterTerminalAction() }
     });
   }
 
@@ -180,7 +230,20 @@ export class ComplaintManagePage implements OnInit {
    * PUT /complaints/{id}
    * @author dgutierrez
    */
-  onUpdateComplaint(): void {
+  async onUpdateComplaint(): Promise<void> {
+    if (!this.isValidForm()) {
+      return;
+    }
+
+    const confirmAction = await this.modalService.openConfirmActionModal({
+      title: 'Actualizar denuncia',
+      message: '¿Está seguro que desea actualizar la denuncia? Se actualizarán los datos de la denuncia.',
+    });
+
+    if (!confirmAction?.isConfirmed) {
+      return;
+    }
+
     const id = this.getComplaintId();
     const dto = this.buildUpdateDtoFromForm();
 
@@ -223,7 +286,6 @@ export class ComplaintManagePage implements OnInit {
   private getComplaintId(): number {
     return this.complaintToManage()?.id!;
   }
-
 
   /**
    * Initializes properties and fetches the complaint to manage.
@@ -313,6 +375,19 @@ export class ComplaintManagePage implements OnInit {
     }
 
     this.modalService.openPictureViewerModal({imageSource});
+  }
+
+  /**
+   * @author dgutierrez
+   */
+  isValidForm(): boolean {
+    if (this.complaintForm.invalid) {
+      this.alertService.displayAlert({
+        messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
+      });
+      return false;
+    }
+    return true;
   }
 
   /**
