@@ -162,11 +162,11 @@ export class AnnouncementEditPage implements OnInit, OnDestroy {
    * @author dgutierrez
    */
   private initializeAnnouncementToUpdate(): void {
-    const notificationRuleId = Number(this.route.snapshot.paramMap.get(RouteParamsEnum.ANNOUNCEMENT_ID));
-    if (!this.validateAnnouncementId(notificationRuleId)) {
+    const announcementId = Number(this.route.snapshot.paramMap.get(RouteParamsEnum.ANNOUNCEMENT_ID));
+    if (!this.validateAnnouncementId(announcementId)) {
       return;
     }
-    this.announcementHttpService.getMyMunicipalityAnnouncementById(notificationRuleId)
+    this.announcementHttpService.getMyMunicipalityAnnouncementById(announcementId)
   }
 
   /**

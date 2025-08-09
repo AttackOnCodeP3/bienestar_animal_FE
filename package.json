@@ -29,6 +29,7 @@
     "ngx-infinite-scroll": "^20.0.0",
     "ngx-lottie": "^20.0.0",
     "rxjs": "~7.8.0",
+    "swiper": "^11.2.10",
     "three": "^0.178.0",
     "tslib": "^2.3.0"
   },
