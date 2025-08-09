@@ -11,7 +11,7 @@ import { IViewAnimalRecord } from '@common/interfaces/view-animal-record.interfa
   selector: 'view-animal-record',
   templateUrl: './view-animal-record.component.html',
   styleUrls: ['./view-animal-record.component.scss'],
-  standalone: true,
+
   imports: [
     CommonModule,
     MatCardModule,
