@@ -10,7 +10,7 @@
     </button>
   </div>
   <mat-chip class="mat-chip-primary">
-    <h2>  {{ complaintToManage()?.complaintTypeDTO?.name }}</h2>
+    <h2> {{ complaintToManage()?.complaintStateDTO?.name }} </h2>
   </mat-chip>
 </app-general-container-component>
 
@@ -19,7 +19,16 @@
   [form]="complaintForm"
   [formsService]="formsService"
   (onViewImageChange)="onViewImage()"
-  (onSubmitChange)="onSubmit()"
   [imageUrl]="complaintToManage()?.imageUrl"
   [mode]="'edit'"
+  [authHttpService]="authHttpService"
+  [complaintStateDTO]="complaintToManage()?.complaintStateDTO"
+  [complaintStateIdEnum]="complaintStateIdEnum"
+  (approveComplaintChange)="onApproveComplaint()"
+  (cancelComplaintChange)="onCancelComplaint()"
+  (closeComplaintChange)="onCloseComplaint()"
+  (completeComplaintChange)="onCompleteComplaint()"
+  (resubmitComplaintChange)="onResubmitComplaint()"
+  (updateComplaintChange)="onUpdateComplaint()"
+  (withObservationsComplaintChange)="onWithObservationsComplaint()"
 />

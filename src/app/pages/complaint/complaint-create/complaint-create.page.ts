@@ -1,18 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Constants} from '@common/constants/constants';
-import {ComplaintHttpService, ComplaintTypeHttpService} from '@services/http';
+import {AuthHttpService, ComplaintHttpService, ComplaintTypeHttpService} from '@services/http';
 import {GeneralContainerComponent} from '@components/layout';
-import {AlertService, FormsService, I18nService, LocationService, LogService} from '@services/general';
-import {Validators} from '@angular/forms';
-import {notSelectOptionValidator} from '@common/forms';
+import {AlertService, FormsService, I18nService, LocationService} from '@services/general';
 import {ComplaintFormComponent} from '@components/forms/complaint';
 import {LoadingModalService, ModalService} from '@services/modals';
 import {FileUtilsService} from '@services/utils';
-import {FileInput} from 'ngx-custom-material-file-input';
-import {CreateComplaintMultipartDto} from '@models/dto';
-import {ComplaintType} from '@models';
 import {Router} from '@angular/router';
-import {PagesUrlsEnum} from '@common/enums';
+import {ComplaintStateIdEnum, PagesUrlsEnum} from '@common/enums';
 import {ComplaintFormService} from '@services/forms';
 
 /**
@@ -46,10 +41,15 @@ export class ComplaintCreatePage implements OnInit {
   private readonly locationService = inject(LocationService);
   private readonly modalService = inject(ModalService);
   private readonly router = inject(Router);
+  readonly authHttpService = inject(AuthHttpService);
   readonly complaintTypeHttpService = inject(ComplaintTypeHttpService);
   readonly formsService = inject(FormsService);
 
   readonly complaintCreateForm = this.complaintFormService.buildComplaintForm();
+
+  get complaintStateIdEnum() {
+    return ComplaintStateIdEnum
+  }
 
   async ngOnInit(): Promise<void> {
     this.complaintTypeHttpService.getAll();

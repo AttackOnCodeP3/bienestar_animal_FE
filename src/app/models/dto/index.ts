@@ -8,6 +8,7 @@ export * from "./complaint/complaint-state.dto";
 export * from "./complaint/complaint-type.dto";
 export * from "./complaint/complaint.dto";
 export * from "./complaint/create-complaint-multipart.dto";
+export * from "./complaint/update-complaint-multipart.dto";
 export * from "./generic/age.dto";
 export * from "./municipal-preventive-care-configuration/municipal-preventive-care-configuration.dto";
 export * from "./municipality/create-municipality-request.dto";

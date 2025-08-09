@@ -24,11 +24,19 @@ export class ComplaintFormService {
    * @returns A FormGroup representing the complaint form.
    * @author dgutierrez
    */
-  buildComplaintForm() {
+  buildComplaintForm(
+    {
+      isEditMode = false
+    }: {
+      isEditMode?: boolean
+    } = {
+      isEditMode: false
+    }) {
     const fb = this.formsService.formsBuilder;
-    return fb.group({
+    const formGroup = fb.group({
       complaintType: fb.control<ComplaintType | null>(null, [Validators.required, notSelectOptionValidator]),
       description: fb.control<string>('', [Validators.required, Validators.maxLength(1000)]),
+      observations: fb.control<string | null>(null, [Validators.maxLength(1000)]),
       file: fb.control<FileInput | null>(
         null,
         {
@@ -41,6 +49,13 @@ export class ComplaintFormService {
         }
       )
     });
+
+    if (isEditMode) {
+      formGroup.get('file')?.clearValidators();
+      formGroup.get('file')?.updateValueAndValidity();
+    }
+
+    return formGroup;
   }
 
   /**
@@ -78,6 +93,7 @@ export class ComplaintFormService {
         description: complaintTypeDTO?.description,
       }),
       description: complaintDto.description,
+      observations: complaintDto.observations ?? null,
       file: null
     });
   }
