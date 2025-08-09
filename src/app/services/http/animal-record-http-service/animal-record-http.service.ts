@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Constants } from '@common/constants/constants';
 import {BaseHttpService} from '@services/http/base-http-service/base-http.service';
+import{IViewAnimalRecord} from '@common/interfaces/view-animal-record.interface';
 
 @Injectable({
   providedIn: 'root'

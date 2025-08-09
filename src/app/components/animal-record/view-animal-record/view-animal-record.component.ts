@@ -1,32 +1,28 @@
 import { Component, Input } from '@angular/core';
-import {MatFormField, MatLabel, MatOption, MatSelect} from '@angular/material/select';
-import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
-import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
-import {MatTable, MatTableModule, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 import { GlbViewerComponent } from '@components/model3D';
 import { GoogleMapsComponent } from '@components/googleMaps';
+import { IViewAnimalRecord } from '@common/interfaces/view-animal-record.interface';
 
 @Component({
   selector: 'view-animal-record',
   templateUrl: './view-animal-record.component.html',
   styleUrls: ['./view-animal-record.component.scss'],
+  standalone: true,
   imports: [
-    MatCard,
-    MatCardContent,
-    MatCardTitle,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MatTable,
-    MatHeaderRowDef,
-    MatRowDef,
-    MatHeaderCellDef,
-    MatCellDef,    
+    CommonModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatTableModule,
     GlbViewerComponent,
     GoogleMapsComponent
-    ]
+  ]
 })
 export class AnimalRecordDetailsComponent {
-  @Input() animal: any;
-  @Input() formatAge: (age: any) => string = (age) => age; // Puedes sobreescribir si lo necesitas
+  @Input() animal!: IViewAnimalRecord;
+  @Input() formatAge!: (age: { years?: number; months?: number; days?: number } | undefined) => string;
+
 }
