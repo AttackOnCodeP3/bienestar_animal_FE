@@ -6,8 +6,11 @@
       </button>
     }
     <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
-    <div class="d-flex flex-grow-1 justify-content-end">
+    <div class="d-flex flex-grow-1 justify-content-end align-items-center">
       @if (authHttpService.isAuthenticated()) {
+        <span class="roboto me-3">
+        {{authHttpService.fullNameCurrentUser()}}
+      </span>
         <button
           matIconButton
           [matBadge]="notificationHttpService.myUnreadCount()"

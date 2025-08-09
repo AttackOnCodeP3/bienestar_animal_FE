@@ -1,21 +1,23 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Constants} from '@common/constants/constants';
-import {ComplaintHttpService, ComplaintTypeHttpService} from '@services/http';
+import {AuthHttpService, ComplaintHttpService, ComplaintTypeHttpService} from '@services/http';
 import {GeneralContainerComponent} from '@components/layout';
-import {AlertService, FormsService, I18nService, LocationService, LogService} from '@services/general';
-import {Validators} from '@angular/forms';
-import {notSelectOptionValidator} from '@common/forms';
+import {AlertService, FormsService, I18nService, LocationService} from '@services/general';
 import {ComplaintFormComponent} from '@components/forms/complaint';
 import {LoadingModalService, ModalService} from '@services/modals';
 import {FileUtilsService} from '@services/utils';
-import {FileInput} from 'ngx-custom-material-file-input';
-import {CreateComplaintMultipartDto} from '@models/dto';
-import {ComplaintType} from '@models';
 import {Router} from '@angular/router';
-import {PagesUrlsEnum} from '@common/enums';
+import {ComplaintStateIdEnum, PagesUrlsEnum} from '@common/enums';
+import {ComplaintFormService} from '@services/forms';
 
 /**
- * Page for creating a new complaint.
+ * Page component responsible for creating a new complaint.
+ * Handles form building, validation, geolocation retrieval,
+ * and submission via the ComplaintHttpService.
+ *
+ * This component delegates form logic to ComplaintFormService to
+ * ensure consistency and reusability across both create and edit flows.
+ *
  * @author dgutierrez
  */
 @Component({
@@ -30,34 +32,41 @@ import {PagesUrlsEnum} from '@common/enums';
 })
 export class ComplaintCreatePage implements OnInit {
 
-  readonly complaintHttpService = inject(ComplaintHttpService)
-  readonly complaintTypeHttpService = inject(ComplaintTypeHttpService)
-  readonly formsService = inject(FormsService);
-  readonly alertService = inject(AlertService);
-  readonly i18nService = inject(I18nService);
-  private readonly modalService = inject(ModalService);
+  private readonly alertService = inject(AlertService);
+  private readonly complaintFormService = inject(ComplaintFormService);
+  private readonly complaintHttpService = inject(ComplaintHttpService);
   private readonly fileUtilsService = inject(FileUtilsService);
-  private readonly locationService = inject(LocationService);
+  private readonly i18nService = inject(I18nService);
   private readonly loadingModalService = inject(LoadingModalService);
-  private readonly logService = inject(LogService);
+  private readonly locationService = inject(LocationService);
+  private readonly modalService = inject(ModalService);
   private readonly router = inject(Router);
+  readonly authHttpService = inject(AuthHttpService);
+  readonly complaintTypeHttpService = inject(ComplaintTypeHttpService);
+  readonly formsService = inject(FormsService);
 
-  readonly complaintCreateForm = this.buildCreateComplaintForm();
+  readonly complaintCreateForm = this.complaintFormService.buildComplaintForm();
 
-  async ngOnInit() {
+  get complaintStateIdEnum() {
+    return ComplaintStateIdEnum
+  }
+
+  async ngOnInit(): Promise<void> {
     this.complaintTypeHttpService.getAll();
   }
 
   /**
-   * Handles the form submission for creating a complaint.
+   * Handles the form submission.
+   * If the form is invalid, displays an alert and highlights the errors.
+   * Otherwise, triggers the complaint creation process.
    * @author dgutierrez
    */
-  onSubmit() {
+  onSubmit(): void {
     if (this.complaintCreateForm.invalid) {
       this.formsService.markFormTouchedAndDirty(this.complaintCreateForm);
       this.alertService.displayAlert({
         messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_INVALID_FIELDS
-      })
+      });
       return;
     }
 
@@ -65,124 +74,57 @@ export class ComplaintCreatePage implements OnInit {
   }
 
   /**
-   * Registers a new complaint.
+   * Registers a new complaint by building the DTO
+   * with user location and form values.
+   * Submits the complaint via the HTTP service.
    * @author dgutierrez
    */
-  private async registerComplaint() {
-    const dto = await this.buildCreateComplaintDto();
+  private async registerComplaint(): Promise<void> {
+    const {coordinates} = await this.locationService.getUserLocation();
+    const dto = this.complaintFormService.buildComplaintDtoFromForm(this.complaintCreateForm, coordinates);
 
     this.complaintHttpService.createComplaint({
-      dto, handlers: {
+      dto,
+      handlers: {
         ...this.loadingModalService.httpHandlersLoading,
         callback: () => this.onAfterCreateComplaint()
       }
-    })
+    });
   }
 
   /**
-   * Resets the complaint creation form after a successful complaint creation.
+   * Called after successful complaint creation.
+   * Resets the form and navigates back to the complaint list.
    * @author dgutierrez
    */
-  private async onAfterCreateComplaint() {
+  private onAfterCreateComplaint(): void {
     this.complaintCreateForm.reset();
     this.navigateToComplaintList();
   }
 
   /**
-   * Builds the DTO for creating a complaint by extracting form values
-   * and getting user geolocation.
-   * Displays a loading modal while the location is being fetched.
-   *
-   * @returns Promise<CreateComplaintMultipartDto> with populated values,
-   *          or an empty DTO with default coordinates if location fails.
+   * Opens a modal to preview the uploaded image from the form.
+   * If no image is selected, displays an alert.
    * @author dgutierrez
    */
-  private async buildCreateComplaintDto(): Promise<CreateComplaintMultipartDto> {
-    await this.loadingModalService.show();
-
-    try {
-      const {coordinates} = await this.locationService.getUserLocation();
-      const {complaintType, description} = this.complaintCreateForm.getRawValue();
-
-      return new CreateComplaintMultipartDto({
-        complaintTypeId: complaintType?.id ?? null,
-        description: description ?? null,
-        image: this.getImageFile(),
-        latitude: coordinates?.latitude ?? 0,
-        longitude: coordinates?.longitude ?? 0,
-      });
-    } catch (error) {
-      this.logService.error({
-        message: 'Error getting user location for complaint creation.',
-        error
-      });
-      return new CreateComplaintMultipartDto();
-    } finally {
-      this.loadingModalService.hide();
-    }
-  }
-
-
-  /**
-   * Opens a modal to view the selected image.
-   * @author dgutierrez
-   */
-  async onViewImage() {
-    const imageFile = this.getImageFile();
+  async onViewImage(): Promise<void> {
+    const imageFile = this.complaintFormService.getImageFile(this.complaintCreateForm);
     if (!imageFile) {
       this.alertService.displayAlert({
         messageKey: this.i18nService.i18nPagesValidationsEnum.GENERAL_NO_FILE_SELECTED
       });
       return;
     }
-    this.modalService.openPictureViewerModal({imageSource: await this.fileUtilsService.convertFileToBase64(imageFile) ?? ''});
+
+    const base64 = await this.fileUtilsService.convertFileToBase64(imageFile);
+    this.modalService.openPictureViewerModal({imageSource: base64 ?? ''});
   }
 
   /**
-   * Retrieves the image file from the form.
-   * @returns The image file if it exists, otherwise null.
+   * Navigates the user back to the list of complaints.
    * @author dgutierrez
    */
-  private getImageFile() {
-    const {file} = this.complaintCreateForm.getRawValue();
-    if (!file || !file?.files || file.files.length === 0) {
-      return null;
-    }
-    return file.files[0];
-  }
-
-  /**
-   * Builds the form for creating a complaint.
-   * @returns The form group for creating a complaint.
-   * @author dgutierrez
-   */
-  private buildCreateComplaintForm() {
-    const formsBuilder = this.formsService.formsBuilder;
-    return formsBuilder.group({
-      complaintType: formsBuilder.control<ComplaintType | null>(null, [Validators.required, notSelectOptionValidator]),
-      description: formsBuilder.control<string>('', [
-        Validators.required,
-        Validators.maxLength(1000)
-      ]),
-      file: this.formsService.formsBuilder.control<FileInput | null>(
-        null,
-        {
-          validators: this.formsService.getFileValidators({
-            acceptTypes: this.formsService.imageFileAcceptTypes.split(',').map(s => s.trim()),
-            maxSizeInMB: 1,
-            required: true
-          }),
-          nonNullable: true
-        }
-      )
-    })
-  }
-
-  /**
-   * Navigates to the complaint list page.
-   * @author dgutierrez
-   */
-  private navigateToComplaintList() {
-    this.router.navigate([PagesUrlsEnum.COMPLAINTS_LIST])
+  private navigateToComplaintList(): void {
+    this.router.navigate([PagesUrlsEnum.COMPLAINTS_LIST]);
   }
 }

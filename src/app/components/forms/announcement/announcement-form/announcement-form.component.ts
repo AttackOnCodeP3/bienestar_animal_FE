@@ -15,6 +15,7 @@ import {GeneralContainerComponent} from '@components/layout';
 import {FormsService} from '@services/general';
 import {Constants} from '@common/constants/constants';
 import {AnnouncementState} from '@models';
+import {ComponentModeType} from '@common/types';
 
 /**
  * Component for creating or editing announcements.
@@ -50,7 +51,7 @@ export class AnnouncementFormComponent {
   readonly formsService = input.required<FormsService>();
   readonly announcementStatesList = input.required<AnnouncementState[]>()
   readonly editor = input.required<Editor>();
-  readonly mode = input.required<'create' | 'edit'>();
+  readonly mode = input.required<ComponentModeType>();
   readonly imageUrl = input<string | null>();
 
   readonly onViewImageChange = output<void>();

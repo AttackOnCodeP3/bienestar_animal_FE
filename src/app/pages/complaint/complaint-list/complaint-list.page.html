@@ -81,11 +81,13 @@
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_DESCRIPTION | translate }}
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          @if (element.description) {
-            {{ element.description | stripHtml }}
-          } @else {
-            Sin descripción
-          }
+         <span class="text-truncate-3">
+            @if (element.description) {
+              {{ element.description | stripHtml }}
+            } @else {
+              Sin descripción
+            }
+         </span>
         </mat-cell>
       </ng-container>
 
@@ -93,11 +95,13 @@
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_OBSERVATIONS | translate }}
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          @if (element.observations) {
-            {{ element.observations }}
-          } @else {
-            <strong>Sin observaciones</strong>
-          }
+          <span class="text-truncate-3">
+            @if (element.observations) {
+              {{ element.observations }}
+            } @else {
+              <strong>Sin observaciones</strong>
+            }
+          </span>
         </mat-cell>
       </ng-container>
 
@@ -106,7 +110,7 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-chip>
-            {{ element.complaintStateName }}
+            {{ element?.complaintStateDTO?.name}}
           </mat-chip>
         </mat-cell>
       </ng-container>
@@ -116,7 +120,7 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-chip>
-            {{ element.complaintTypeName }}
+            {{ element?.complaintTypeDTO?.name }}
           </mat-chip>
         </mat-cell>
       </ng-container>

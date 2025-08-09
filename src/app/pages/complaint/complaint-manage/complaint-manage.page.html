@@ -1,1 +1,34 @@
-<p>complaint-manage works!</p>
+<app-general-container-component>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>
+      Gestionando denuncia
+    </h1>
+    <button matButton="elevated" (click)="navigateToComplaintList()">
+      <mat-icon>arrow_back</mat-icon>
+      Gestionar denuncias
+    </button>
+  </div>
+  <mat-chip class="mat-chip-primary">
+    <h2> {{ complaintToManage()?.complaintStateDTO?.name }} </h2>
+  </mat-chip>
+</app-general-container-component>
+
+<app-complaint-form-component
+  [complaintTypesList]="complaintTypeHttpService.complaintTypeList()"
+  [form]="complaintForm"
+  [formsService]="formsService"
+  (onViewImageChange)="onViewImage()"
+  [imageUrl]="complaintToManage()?.imageUrl"
+  [mode]="'edit'"
+  [authHttpService]="authHttpService"
+  [complaintStateDTO]="complaintToManage()?.complaintStateDTO"
+  [complaintStateIdEnum]="complaintStateIdEnum"
+  (approveComplaintChange)="onApproveComplaint()"
+  (cancelComplaintChange)="onCancelComplaint()"
+  (closeComplaintChange)="onCloseComplaint()"
+  (completeComplaintChange)="onCompleteComplaint()"
+  (resubmitComplaintChange)="onResubmitComplaint()"
+  (updateComplaintChange)="onUpdateComplaint()"
+  (withObservationsComplaintChange)="onWithObservationsComplaint()"
+/>

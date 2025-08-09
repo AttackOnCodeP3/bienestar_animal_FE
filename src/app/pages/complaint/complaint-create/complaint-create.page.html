@@ -1,11 +1,3 @@
-<!--
-<h1>
-  Lista de tipos de denuncias
-</h1>
-
-<pre><code>{{ complaintTypeHttpService.complaintTypeList() | json }}</code></pre>
--->
-
 <app-general-container-component>
   <h1>
     Crear denuncias
@@ -18,4 +10,6 @@
   [formsService]="formsService"
   (onViewImageChange)="onViewImage()"
   (onSubmitChange)="onSubmit()"
+  [complaintStateIdEnum]="complaintStateIdEnum"
+  [authHttpService]="authHttpService"
 />
