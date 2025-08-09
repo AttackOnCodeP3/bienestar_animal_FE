@@ -26,6 +26,7 @@
     "createAbandonedAnimal": "Crear animal abandonado",
     "create-animal-profile": "Crear perfil de animal",
     "view-animal-record": "Ver expediente animal",
+    "view-abandoned-animal-record": "Ver expediente de animal abandonado",
     "create-user": "Crear usuario",
     "createMunicipality": "Crear municipalidad",
     "gamification": "Gamificación",
@@ -49,7 +50,6 @@
     "complaintCreate": "Crear denuncia",
     "community-census": "Censo comunitario",
     "register-community-animal": "Registrar animal comunitario"
-
   },
   "notifications-modal-component": {
     "title": "Notificaciones",
