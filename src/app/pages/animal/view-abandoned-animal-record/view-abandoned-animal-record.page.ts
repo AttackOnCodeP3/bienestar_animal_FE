@@ -30,8 +30,8 @@ AnimalRecordDetailsComponent
 })
 export class ViewAbandonedAnimalRecordPage implements OnInit {
   animalList: IViewAnimalRecord[] = [];
-  selectedAnimalId: string | number | null = null;
-  selectedAnimal: IViewAnimalRecord | null = null;
+  selectedAbandonedAnimalId: string | number | null = null;
+  selectedAbandonedAnimal: IViewAnimalRecord | null = null;
 
   readonly animalService = inject(AnimalRecordHttpService);
   
@@ -55,8 +55,8 @@ export class ViewAbandonedAnimalRecordPage implements OnInit {
   }
 
   onAnimalSelect(animalId: string): void {
-    this.selectedAnimalId = animalId;
-    this.selectedAnimal = this.animalList.find(a => a.id === animalId) || null;
+    this.selectedAbandonedAnimalId = animalId;
+    this.selectedAbandonedAnimal = this.animalList.find(a => a.id === animalId) || null;
   }
     formatAge(age: any): string {
     if (!age) return '';

@@ -16,7 +16,7 @@ export class AnimalRecordHttpService extends BaseHttpService<IViewAnimalRecord> 
    */
 
   getAnimalsByOwnerId(ownerId: number): Observable<any[]> {
-    return this.findAllWithParams({ ownerId: ownerId }).pipe(
+    return this.findAllWithParams({ ownerId: ownerId, status: 'notAbandoned' }).pipe(
       map((response: any) => Array.isArray(response.data) ? response.data : [])
     );
   }
