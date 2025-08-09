@@ -325,7 +325,10 @@
     "rulesManagement": "Rules Management",
     "update": "Update",
     "updateNotificationRule": "Update Notification Rule",
-    "createAnimalDiagnosis": "Create diagnosis"
+    "createAnimalDiagnosis": "Create diagnosis",
+    "cancel": "Cancel",
+    "accept": "Accept",
+    "confirm": "Confirm"
   },
   "================== LOADING MESSAGES ==================": "",
   "loadingMessages": {

@@ -67,8 +67,18 @@ export class ComplaintFormComponent {
 
   readonly onViewImageChange = output<void>();
   readonly onSubmitChange = output<void>();
+  readonly onCancelByAdminChange = output<void>();
+  readonly onCloseByAdminChange = output<void>();
 
+  /**
+   * Effect to change the readonly state of form inputs based on the complaint state and user role.
+   * @author dgutierrez
+   */
   readonly changeReadonlyInputsWhenStateEffect = effect(() => {
+    // Es necesario tambien estar atento a los cambios del form porque ah se puede saber si ya esta disponible
+    // para proceder con la desactivacion de los controles
+    const form = this.form();
+    if (!form) return;
     const complaintStateId = this.complaintStateDTO()?.id;
     const complaintStateIdEnum = this.complaintStateIdEnum();
     if (complaintStateId === complaintStateIdEnum.CANCELLED || complaintStateId === complaintStateIdEnum.CLOSED) {
@@ -93,8 +103,6 @@ export class ComplaintFormComponent {
           this.disableObservationsControl();
           return
         }
-
-        this.disableAllControls()
       }
     }
   })
@@ -174,6 +182,22 @@ export class ComplaintFormComponent {
    */
   onClose(): void {
     this.closeComplaintChange.emit();
+  }
+
+  /**
+   * Method to handle the cancel by admin action.
+   * @author dgutierrez
+   */
+  onCancelByAdmin(): void {
+    this.onCancelByAdminChange.emit();
+  }
+
+  /**
+   * Method to handle the close by admin action.
+   * @author dgutierrez
+   */
+  onCloseByAdmin(): void {
+    this.onCloseByAdminChange.emit();
   }
 
   /**

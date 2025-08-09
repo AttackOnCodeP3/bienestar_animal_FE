@@ -2,13 +2,13 @@
   <mat-toolbar-row>
     @if (showMenuToggle()){
       <button mat-icon-button (click)="matSidenav()?.toggle()">
-        <mat-icon class="icon-color-scheme">menu</mat-icon>
+        <mat-icon class="color-scheme">menu</mat-icon>
       </button>
     }
     <img class="ms-2 logo" src="logo.png" alt="Logo de la aplicacion"/>
     <div class="d-flex flex-grow-1 justify-content-end align-items-center">
       @if (authHttpService.isAuthenticated()) {
-        <span class="roboto me-3">
+        <span class="roboto me-3 color-scheme">
         {{authHttpService.fullNameCurrentUser()}}
       </span>
         <button
@@ -16,13 +16,13 @@
           [matBadge]="notificationHttpService.myUnreadCount()"
           [matBadgeHidden]="notificationHttpService.showMyUnreadBadge()"
           (click)="openNotificationsModal()">
-          <mat-icon class="icon-color-scheme">
+          <mat-icon class="color-scheme">
             notifications
           </mat-icon>
         </button>
       }
       <button mat-icon-button [matMenuTriggerFor]="themeMenu">
-        <mat-icon class="icon-color-scheme">{{ theme.selectedTheme()?.icon }}</mat-icon>
+        <mat-icon class="color-scheme">{{ theme.selectedTheme()?.icon }}</mat-icon>
       </button>
     </div>
   </mat-toolbar-row>
