@@ -1,0 +1,24 @@
+<app-general-container-component>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Ver expediente de animal abandonado</h1>
+  </div>
+</app-general-container-component>
+
+<mat-form-field appearance="outline" class="w-100 mb-4">
+  <mat-label>Seleccione el animal</mat-label>
+  <mat-select
+    [(ngModel)]="selectedAnimalId"
+    (selectionChange)="onAnimalSelect($event.value)"
+  >
+    @for (animal of animalList ?? []; track animal.id) {
+    <mat-option [value]="animal.id"> {{ animal.name }} </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+@if (selectedAnimal) {
+<view-animal-record
+  [animal]="selectedAnimal"
+  [formatAge]="formatAge"
+></view-animal-record>
+}

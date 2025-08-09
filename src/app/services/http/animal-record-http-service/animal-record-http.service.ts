@@ -21,5 +21,11 @@ export class AnimalRecordHttpService extends BaseHttpService<IViewAnimalRecord> 
     );
   }
 
+  getAbandonedAnimalsByOwnerId(ownerId: number): Observable<any[]> {
+    return this.findAllWithParams({ ownerId: ownerId, status: 'abandoned' }).pipe(
+      map((response: any) => Array.isArray(response.data) ? response.data : [])
+    );
+  }
+
   // You can add more methods for animal record details, updates, etc.
 }
