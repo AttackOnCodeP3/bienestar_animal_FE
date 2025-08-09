@@ -37,7 +37,7 @@ import localeEs from '@angular/common/locales/es';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 registerLocaleData(localeEs);
- registerLocaleData(localeEn); // opcional
+registerLocaleData(localeEn);
 
 // AoT requires an exported function for factories
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
@@ -67,8 +67,7 @@ export const appConfig: ApplicationConfig = {
         useClass: MissingI18nService,
       },
     }),
-
-    // 👇 Esto es lo importante para que el date pipe salga en español
+    
     { provide: LOCALE_ID, useValue: 'es' },
 
     { provide: MAT_DATE_LOCALE, useValue: 'es-CR' },
