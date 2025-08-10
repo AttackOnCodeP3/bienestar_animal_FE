@@ -2,7 +2,7 @@ import {Injectable, signal} from '@angular/core';
 import {createPageArray} from '@common/utils';
 import {ISearch} from '@common/interfaces/http';
 import {Constants} from '@common/constants/constants';
-import {BaseHttpService} from '@services/http';
+import {BaseHttpService} from '../base-http-service/base-http.service';
 import {Sex} from '@models';
 
 /**

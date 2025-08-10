@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {BaseHttpService} from '@services/http';
+import {BaseHttpService} from '../base-http-service/base-http.service';
 import {User} from '@models';
 import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';

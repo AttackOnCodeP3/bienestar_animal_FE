@@ -1,5 +1,5 @@
 import {computed, Injectable, signal} from '@angular/core';
-import {BaseHttpService} from '@services/http';
+import { BaseHttpService } from "../base-http-service/base-http.service";
 import {Constants} from '@common/constants/constants';
 import {Announcement} from '@models';
 import {IHttpActionConfig, IResponse, ISearch, ISearchAnnouncement} from '@common/interfaces/http';

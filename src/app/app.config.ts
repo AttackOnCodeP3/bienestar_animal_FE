@@ -2,7 +2,7 @@ import {
   ApplicationConfig,
   LOCALE_ID,
   provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
+  provideZoneChangeDetection,
 } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { provideRouter } from '@angular/router';
@@ -52,7 +52,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([baseUrlInterceptor, accessTokenInterceptor, handleErrorsInterceptor]),
     ),
     provideRouter(routes),
-    provideZonelessChangeDetection(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideLottieOptions({
       player: () => import('lottie-web'),
     }),
@@ -67,7 +67,6 @@ export const appConfig: ApplicationConfig = {
         useClass: MissingI18nService,
       },
     }),
-    
     { provide: LOCALE_ID, useValue: 'es' },
 
     { provide: MAT_DATE_LOCALE, useValue: 'es-CR' },
