@@ -1,6 +1,6 @@
 import {computed, Injectable, signal} from '@angular/core';
 import {Constants} from '@common/constants/constants';
-import {BaseHttpService} from '@services/http';
+import {BaseHttpService} from '../base-http-service/base-http.service';
 import {createPageArray} from '@common/utils';
 import {IResponse, ISearch} from '@common/interfaces/http';
 import {MunicipalPreventiveCareConfigurationDTO} from '@models/dto';

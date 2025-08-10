@@ -1,12 +1,12 @@
 import {Injectable, signal} from '@angular/core';
-import {BaseHttpService} from '@services/http';
+import {BaseHttpService} from '../base-http-service/base-http.service';
 import {Constants} from '@common/constants/constants';
 import {AlertTypeEnum} from '@common/enums';
 import {FormGroup} from '@angular/forms';
-import {AbandonedAnimal} from '../../../models/abandoned-animal';
+import {AbandonedAnimal} from '@models';
 import {
   CreateAbandonedAnimalRequestDTO
-} from '../../../models/dto/abandoned-animal/create-abandoned-animal-request.dto';
+} from '@models/dto';
 
 
 /**

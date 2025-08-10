@@ -72,13 +72,14 @@ export enum RoutesUrlsEnum {
   ANNOUNCEMENTS_LIST = 'announcements-list',
   ANNOUNCEMENTS_CREATE = 'announcements-create',
   ANNOUNCEMENTS_EDIT = 'announcements-edit',
+  ANNOUNCEMENT_DETAIL = 'announcement-detail',
 
   //Complaints
   COMPLAINTS = 'complaints',
   COMPLAINTS_LIST = 'complaints-list',
   COMPLAINTS_CREATE = 'complaints-create',
   COMPLAINT_MANAGE = 'complaint-manage',
-  
+
   //Animal Diagnosis
   ANIMAL_DIAGNOSIS = 'animal-diagnosis',
   ANIMAL_DIAGNOSIS_LIST = 'animal-diagnosis-list',

@@ -5,11 +5,11 @@ import { of } from 'rxjs';
 
 import { BaseHttpService } from '@services/http/base-http-service/base-http.service';
 import { AlertService } from '@services/general';
-import { ComplaintType } from '@models';
-import {ComplaintTypeHttpService} from '@services/http';
+import { AnimalType } from '@models';
+import {AnimalTypesHttpService} from '@services/http';
 
-describe('ComplaintTypeHttpService (Jasmine/Karma, Angular 20)', () => {
-  let service: ComplaintTypeHttpService;
+describe('AnimalTypesHttpService (Jasmine/Karma, Angular 20)', () => {
+  let service: AnimalTypesHttpService;
 
   const alertServiceMock = {
     displayAlert: () => {},
@@ -18,27 +18,26 @@ describe('ComplaintTypeHttpService (Jasmine/Karma, Angular 20)', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ComplaintTypeHttpService,
+        AnimalTypesHttpService,
         { provide: AlertService, useValue: alertServiceMock },
         provideHttpClient(),
         provideHttpClientTesting(),
       ],
     });
 
-    service = TestBed.inject(ComplaintTypeHttpService);
+    service = TestBed.inject(AnimalTypesHttpService);
   });
 
   it('getAll() debe delegar en fetchAllPaginated y actualizar signals/meta/paginación', () => {
-    const sample: ComplaintType[] = [
-      { id: 1, name: 'Ruido' } as unknown as ComplaintType,
-      { id: 2, name: 'Basura' } as unknown as ComplaintType,
-      { id: 3, name: 'Obstrucción' } as unknown as ComplaintType,
+    const sample: AnimalType[] = [
+      { id: 1, name: 'Perro' } as unknown as AnimalType,
+      { id: 2, name: 'Gato' } as unknown as AnimalType,
     ];
 
-    const fetchSpy = spyOn<any>(service as BaseHttpService<ComplaintType>, 'fetchAllPaginated')
+    const fetchSpy = spyOn<any>(service as BaseHttpService<AnimalType>, 'fetchAllPaginated')
       .and.callFake((opts: any) => {
         opts.updateSignal.set(sample);
-        const meta = { page: 2, size: 50, totalPages: 4 };
+        const meta = { page: 2, size: 10, totalPages: 4 };
         opts.setSearchMeta(meta);
         opts.setTotalItems(meta.totalPages);
       });
@@ -46,21 +45,21 @@ describe('ComplaintTypeHttpService (Jasmine/Karma, Angular 20)', () => {
     service.getAll();
 
     expect(fetchSpy).toHaveBeenCalled();
-    expect(service.complaintTypeList()).toEqual(sample);
+    expect(service.animalTypesList()).toEqual(sample);
     expect(service.search.page).toBe(2);
-    expect(service.search.size).toBe(50);
+    expect(service.search.size).toBe(10);
     expect(service.totalItems.length).toBe(4);
     expect(service.totalItems[0]).toBe(1);
     expect(service.totalItems[3]).toBe(4);
   });
 
   it('getOneById() debe delegar en getOne y retornar el valor', (done) => {
-    const item: ComplaintType = { id: 9, name: 'Maltrato animal' } as unknown as ComplaintType;
+    const item: AnimalType = { id: 7, name: 'Ave' } as unknown as AnimalType;
 
     const getOneSpy = spyOn<any>(service as any, 'getOne').and.returnValue(of(item));
 
-    service.getOneById(9).subscribe((res: ComplaintType) => {
-      expect(getOneSpy).toHaveBeenCalledWith(9);
+    service.getOneById(7).subscribe((res: AnimalType) => {
+      expect(getOneSpy).toHaveBeenCalledWith(7);
       expect(res).toEqual(item);
       done();
     });

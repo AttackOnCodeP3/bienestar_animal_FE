@@ -2,7 +2,6 @@ import {Routes} from '@angular/router';
 import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {authGuard, forgotPasswordGuard, profileCompletedGuard, roleGuard} from '@core/guards';
 import {DashboardLayoutComponent} from '@components/layout';
-import {ANIMAL_ROUTES} from '@pages/animal/animal.routes';
 
 export const routes: Routes = [
   {
@@ -103,7 +102,7 @@ export const routes: Routes = [
       },
       {
         path: RoutesUrlsEnum.ANNOUNCEMENTS,
-        canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN])],
+        canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER])],
         loadChildren: () => import('@pages/announcements/announcements.routes').then(m => m.ANNOUNCEMENTS_ROUTES),
       },
       {
