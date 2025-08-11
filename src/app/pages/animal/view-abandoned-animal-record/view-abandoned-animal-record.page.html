@@ -39,7 +39,7 @@
     </div>
     <div class="mb-2">
       <strong>Condicion fisica:</strong>
-      {{ selectedAbandonedAnimal.physicalCondition }} kg
+      {{ selectedAbandonedAnimal.physicalCondition }}
     </div>
     <div class="mb-2">
       <strong>Comportamiento:</strong>
@@ -52,6 +52,18 @@
     </div>
   </mat-card-content>
 </mat-card>
+<mat-expansion-panel expanded="false" class="mb-4">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Foto del animal</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <img
+    [src]="'data:image/jpeg;base64,' + selectedAbandonedAnimal.photoUrl"
+    alt="Foto del animal abandonado"
+    style="max-width: 100%; height: auto"
+  />
+</mat-expansion-panel>
 
 <mat-expansion-panel expanded="false" class="mb-4">
   <mat-expansion-panel-header>

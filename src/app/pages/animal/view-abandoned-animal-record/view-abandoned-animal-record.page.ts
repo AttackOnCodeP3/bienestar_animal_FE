@@ -4,16 +4,22 @@ import {
 } from '@services/http';
 import {MatFormField, MatLabel, MatOption, MatSelect} from '@angular/material/select';
 import {GeneralContainerComponent} from '@components/layout';
-
 import {MatTableModule } from '@angular/material/table';
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { GoogleMapsComponent } from '@components/googleMaps';
 import { Constants } from '@common/constants/constants';
-import { AnimalRecordDetailsComponent } from '@components/animal-record';
 import{IViewAnimalRecord} from '@common/interfaces/view-animal-record.interface';
 import { MatCardModule } from '@angular/material/card';
 
+/**
+ * Component for viewing the records of abandoned animals associated with the current user.
+ * 
+ * This page fetches and displays a list of abandoned animals for the authenticated owner.
+ * It allows selecting an animal to view its details and formats the animal's age for display.
+ * 
+ * @author @aBlancoC
+ */
 @Component({
   selector: 'app-view-animal-record-page',
   templateUrl: './view-abandoned-animal-record.page.html',
