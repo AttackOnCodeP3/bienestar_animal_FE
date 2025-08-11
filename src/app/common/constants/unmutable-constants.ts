@@ -158,6 +158,8 @@ export abstract class UnmutableConstants {
   // =================================================================
   private static readonly ANIMAL_RECORDS: string = '/animals/records';
   static readonly ANIMAL_RECORDS_URL: string = UnmutableConstants.ANIMAL_RECORDS;
+  static readonly COMMUNITY_ANIMAL_RECORDS: string = UnmutableConstants.ANIMAL_RECORDS + '/community';
+  static readonly ABANDONED_ANIMAL_RECORDS: string = UnmutableConstants.ANIMAL_RECORDS + '/abandoned';
 
   // ==================================================================
   // ROUTES FOR SEX SERVICES

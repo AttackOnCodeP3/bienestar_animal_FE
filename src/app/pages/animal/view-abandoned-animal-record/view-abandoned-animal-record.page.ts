@@ -6,12 +6,13 @@ import {MatFormField, MatLabel, MatOption, MatSelect} from '@angular/material/se
 import {GeneralContainerComponent} from '@components/layout';
 
 import {MatTableModule } from '@angular/material/table';
+import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
-
+import { GoogleMapsComponent } from '@components/googleMaps';
 import { Constants } from '@common/constants/constants';
 import { AnimalRecordDetailsComponent } from '@components/animal-record';
 import{IViewAnimalRecord} from '@common/interfaces/view-animal-record.interface';
-
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-view-animal-record-page',
@@ -24,14 +25,18 @@ import{IViewAnimalRecord} from '@common/interfaces/view-animal-record.interface'
     MatOption,
     FormsModule,
     MatTableModule,
-AnimalRecordDetailsComponent
+    MatCardModule,
+    GoogleMapsComponent,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle
   ],
   styleUrls: ['./view-abandoned-animal-record.page.scss']
 })
 export class ViewAbandonedAnimalRecordPage implements OnInit {
   animalList: IViewAnimalRecord[] = [];
   selectedAbandonedAnimalId: string | number | null = null;
-  selectedAbandonedAnimal: IViewAnimalRecord | null = null;
+  selectedAbandonedAnimal: any | null = null;
 
   readonly animalService = inject(AnimalRecordHttpService);
   

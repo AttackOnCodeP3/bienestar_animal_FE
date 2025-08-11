@@ -11,14 +11,58 @@
     (selectionChange)="onAnimalSelect($event.value)"
   >
     @for (animal of animalList ?? []; track animal.id) {
-    <mat-option [value]="animal.id"> {{ animal.name }} </mat-option>
+    <mat-option [value]="animal.id">
+      {{ `#${animal.id} - ${animal.observations} - ${animal.neighborhood}` }}
+    </mat-option>
     }
   </mat-select>
 </mat-form-field>
-
 @if (selectedAbandonedAnimal) {
-<view-animal-record
-  [animal]="selectedAbandonedAnimal"
-  [formatAge]="formatAge"
-></view-animal-record>
+
+<mat-card class="mb-4">
+  <mat-card-title>
+    {{ `${selectedAbandonedAnimal.species?.name} # ${selectedAbandonedAnimal.id}
+    en el barrio ${selectedAbandonedAnimal.neighborhood}` }}
+  </mat-card-title>
+  <mat-card-content>
+    <div class="mb-2">
+      <strong>Tipo de animal:</strong>
+      {{ selectedAbandonedAnimal.animalType?.name }}
+    </div>
+    <div class="mb-2">
+      <strong>Edad:</strong>
+      {{ formatAge(selectedAbandonedAnimal.estimatedAge) }}
+    </div>
+    <div class="mb-2">
+      <strong>Sexo:</strong>
+      {{ selectedAbandonedAnimal.sex?.name }}
+    </div>
+    <div class="mb-2">
+      <strong>Condicion fisica:</strong>
+      {{ selectedAbandonedAnimal.physicalCondition }} kg
+    </div>
+    <div class="mb-2">
+      <strong>Comportamiento:</strong>
+      {{ selectedAbandonedAnimal.behavior}}
+    </div>
+
+    <div class="mb-2">
+      <strong>Observaciones:</strong>
+      {{ selectedAbandonedAnimal.observations }}
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-expansion-panel expanded="false" class="mb-4">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Ubicación en mapa</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-google-maps
+    [lat]="selectedAbandonedAnimal.latitude"
+    [lng]="selectedAbandonedAnimal.longitude"
+  ></app-google-maps>
+</mat-expansion-panel>
+
 }
