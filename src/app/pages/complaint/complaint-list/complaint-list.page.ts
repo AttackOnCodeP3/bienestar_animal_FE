@@ -14,24 +14,27 @@ import {GeneralContainerComponent} from '@components/layout';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {PagesUrlsEnum} from '@common/enums';
-import {DatePipe} from '@angular/common';
 import {
   MatCell,
-  MatCellDef, MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
   MatHeaderRow,
-  MatHeaderRowDef, MatNoDataRow,
+  MatHeaderRowDef,
+  MatNoDataRow,
   MatRow,
-  MatRowDef, MatTable
+  MatRowDef,
+  MatTable
 } from '@angular/material/table';
 import {MatChip} from '@angular/material/chips';
-import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel} from '@angular/material/input';
 import {ReactiveFormsModule, Validators} from '@angular/forms';
 import {StripHtmlPipe} from '@core/pipes';
 import {TranslatePipe} from '@ngx-translate/core';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {IHttpActionConfig, ISearchComplaint} from '@common/interfaces/http';
+import {ISearchComplaint} from '@common/interfaces/http';
 
 /**
  * @author dgutierrez
@@ -41,19 +44,20 @@ import {IHttpActionConfig, ISearchComplaint} from '@common/interfaces/http';
   imports: [
     GeneralContainerComponent,
     MatButton,
-    MatIcon,
-    DatePipe,
     MatCell,
     MatCellDef,
     MatChip,
+    MatColumnDef,
     MatError,
     MatFormField,
     MatHeaderCell,
+    MatHeaderCellDef,
     MatHeaderRow,
     MatHeaderRowDef,
+    MatIcon,
     MatIconButton,
-    MatInput,
     MatLabel,
+    MatNoDataRow,
     MatOption,
     MatPaginator,
     MatRow,
@@ -63,9 +67,6 @@ import {IHttpActionConfig, ISearchComplaint} from '@common/interfaces/http';
     ReactiveFormsModule,
     StripHtmlPipe,
     TranslatePipe,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatNoDataRow
   ],
   templateUrl: './complaint-list.page.html',
   styleUrl: './complaint-list.page.scss',

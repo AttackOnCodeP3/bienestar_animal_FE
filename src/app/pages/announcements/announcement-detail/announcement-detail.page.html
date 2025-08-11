@@ -1,0 +1,73 @@
+<div class="container py-5">
+  @let selectedAnnouncement = announcementHttpService.selectedAnnouncement();
+
+  @if (!selectedAnnouncement && !announcementHttpService.isAnnouncementsLoading()) {
+    <div class="text-center my-5">
+      <mat-icon fontIcon="info" class="d-block mb-3 fs-1"></mat-icon>
+      <p>No se encontró el anuncio.</p>
+      <button mat-stroked-button color="primary" (click)="navigateToHome()">
+        <mat-icon fontIcon="arrow_back" class="me-1"></mat-icon>
+        Volver
+      </button>
+    </div>
+  }
+
+  @if (selectedAnnouncement) {
+    <mat-card class="rounded-4 shadow overflow-hidden">
+
+      <div class="position-relative bg-body-secondary">
+        <div class="ratio ratio-16x9">
+          @if (selectedAnnouncement.imageUrl) {
+            <img
+              [src]="selectedAnnouncement.imageUrl"
+              [alt]="selectedAnnouncement.title"
+              class="w-100 h-100 object-fit-cover"
+              loading="lazy">
+          } @else {
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+              <mat-icon fontIcon="image" class="fs-1"></mat-icon>
+            </div>
+          }
+        </div>
+
+        <div class="position-absolute top-0 end-0 m-3">
+          <button mat-mini-fab matTooltip="Volver" (click)="navigateToHome()">
+            <mat-icon>
+              arrow_back
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <mat-card-content class="p-3 p-md-4">
+        <h1 class="h3 mb-2">{{ selectedAnnouncement.title }}</h1>
+
+        <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+          <div class="d-flex align-items-center">
+            <mat-icon class="me-2">
+              event
+            </mat-icon>
+            <span>
+              {{ selectedAnnouncement.startDate | date:'longDate' }}
+              &nbsp;—&nbsp;
+              {{ selectedAnnouncement.endDate   | date:'longDate' }}
+            </span>
+          </div>
+        </div>
+
+        <mat-divider class="my-3"></mat-divider>
+
+        <div class="prose lh-base" [innerHTML]="safeDescription()"></div>
+
+        <div class="d-flex flex-wrap gap-2 mt-4">
+          <button mat-stroked-button color="primary" (click)="navigateToHome()">
+            <mat-icon class="me-1">
+              arrow_back
+            </mat-icon>
+            Volver
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

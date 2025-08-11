@@ -60,6 +60,30 @@
     </mat-form-field>
   </app-general-container-component>
 
+  @if (isEditMode() && showObservations()) {
+    <app-general-container-component>
+      <mat-form-field class="w-100" appearance="outline" hintLabel="Máximo 1000 caracteres">
+        <mat-label>Observaciónes</mat-label>
+        <textarea
+          formControlName="observations"
+          matInput
+          rows="5"
+          maxlength="1000"
+          minlength="10"
+          placeholder="Ingrese observaciones de la denuncia"
+          #textAreaObservations
+          [errorStateMatcher]="formsService().matcher"
+        >
+      </textarea>
+        <mat-hint align="end">{{ textAreaObservations.value.length }}/1000</mat-hint>
+        @let observationsControl = form().get('observations');
+        @if (formsService().isFieldInvalid(observationsControl)) {
+          <mat-error>{{ formsService().getErrorMessage(observationsControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </app-general-container-component>
+  }
+
   <app-general-container-component>
     @let fileControl = form().get('file');
     <div class="row">
@@ -95,9 +119,61 @@
   </app-general-container-component>
 
   <div class="text-end">
-    <button matButton="tonal">
-      Realizar denuncia
-    </button>
-  </div>
+    @if (mode() === "create") {
+      <button matButton="tonal">
+        Realizar denuncia
+      </button>
+    }
 
+    @if (mode() === 'edit') {
+      @if (
+        complaintStateDTO()?.id !== complaintStateIdEnum().CLOSED &&
+        complaintStateDTO()?.id !== complaintStateIdEnum().CANCELLED
+        ) {
+
+        @if (authHttpService().isCommunityUser()) {
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
+            <button class="me-3" matButton="tonal" (click)="onUpdate()">Actualizar denuncia</button>
+            <button matButton="outlined" (click)="onCancel()">Cancelar denuncia</button>
+          }
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
+            <button matButton="tonal" (click)="onResubmit()">Actualizar y reenviar</button>
+          }
+        }
+
+        @if (authHttpService().isMunicipalityAdmin()) {
+
+          @if (
+            complaintStateDTO()?.id === complaintStateIdEnum().OPEN ||
+            complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS ||
+            complaintStateDTO()?.id === complaintStateIdEnum().APPROVED
+            ) {
+            <button class="me-3" matButton="outlined" (click)="onCancelByAdmin()">Cancelar denuncia</button>
+          }
+
+          @if (
+            complaintStateDTO()?.id === complaintStateIdEnum().OPEN ||
+            complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS ||
+            complaintStateDTO()?.id === complaintStateIdEnum().APPROVED ||
+            complaintStateDTO()?.id === complaintStateIdEnum().COMPLETED
+            ) {
+            <button class="me-3" matButton="outlined" (click)="onCloseByAdmin()">Cerrar denuncia</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
+            <button class="me-3" matButton="filled" (click)="onWithObservations()">Con observaciones</button>
+            <button matButton="tonal" (click)="onApprove()">Aprobar</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
+            <button class="me-3" matButton="tonal" (click)="onWithObservations()">Con observaciones</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().APPROVED) {
+            <button matButton="tonal" (click)="onComplete()">Completar denuncia</button>
+          }
+        }
+      }
+    }
+  </div>
 </form>

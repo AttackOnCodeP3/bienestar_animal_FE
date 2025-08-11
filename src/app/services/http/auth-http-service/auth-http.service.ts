@@ -25,6 +25,7 @@ export class AuthHttpService {
 
   readonly isAuthenticated = computed(() => !!this.accessTokenSignal());
   readonly currentUser = computed(() => this.userSignal());
+  readonly fullNameCurrentUser = computed(() => this.currentUser().name + ' ' + this.currentUser().lastname);
   readonly userAuthorities = computed(() => this.currentUser().authorities ?? []);
   readonly accessToken = computed(() => this.accessTokenSignal());
 

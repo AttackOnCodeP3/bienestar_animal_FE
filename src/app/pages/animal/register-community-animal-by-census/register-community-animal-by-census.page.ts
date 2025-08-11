@@ -70,7 +70,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatChipsModule,
     GeneralContainerComponent,
     MatExpansionModule,
-    TranslatePipe,
     PersonalDataUserRegistrationFormComponent,
     LocationFormComponent,
     InterestsFormComponent,
