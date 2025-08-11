@@ -11,9 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { GlbViewerComponent } from '@components/model3D';
 import { GoogleMapsComponent } from '@components/googleMaps';
 import { Constants } from '@common/constants/constants';
-import { AnimalRecordDetailsComponent } from '@components/animal-record';
-import{IViewAnimalRecord} from '@common/interfaces/view-animal-record.interface';
-
+import { IViewAnimalRecord } from '@common/interfaces';
 
 @Component({
   selector: 'app-view-animal-record-page',
@@ -24,9 +22,21 @@ import{IViewAnimalRecord} from '@common/interfaces/view-animal-record.interface'
     MatFormField,
     MatLabel,
     MatOption,
+    MatCard,
+    MatCardContent,
+    MatCardTitle,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatTable,
     FormsModule,
     MatTableModule,
-AnimalRecordDetailsComponent
+    MatHeaderRowDef,
+    MatRowDef,
+    MatHeaderCellDef,
+    MatCellDef,
+    GlbViewerComponent,
+    GoogleMapsComponent
   ],
   styleUrls: ['./view-animal-record.page.scss']
 })
