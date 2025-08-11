@@ -3,6 +3,7 @@ import {RolesEnum, RoutesUrlsEnum} from '@common/enums';
 import {authGuard, forgotPasswordGuard, profileCompletedGuard, roleGuard} from '@core/guards';
 import {DashboardLayoutComponent} from '@components/layout';
 
+
 export const routes: Routes = [
   {
     path: '',
@@ -114,7 +115,13 @@ export const routes: Routes = [
         path: RoutesUrlsEnum.COMPLAINTS,
         canActivate: [roleGuard([RolesEnum.MUNICIPAL_ADMIN, RolesEnum.COMMUNITY_USER])],
         loadChildren: () => import('@pages/complaint/complaint.routes').then(m => m.COMPLAINTS_ROUTES),
-      }
+      },
+      {
+  path: RoutesUrlsEnum.ABANDONADOS_REPORT,
+  canActivate: [roleGuard([RolesEnum.SUPER_ADMIN, RolesEnum.MUNICIPAL_ADMIN])],
+  loadChildren: () => import('@pages/abandonados-report/abandonados-report.routes').then(m => m.ABANDONADOS_REPORT_ROUTES),
+},
+
     ]
   }
 ];

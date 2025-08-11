@@ -1,4 +1,13 @@
 {
+   "/api/reportes/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/reportes": "/reportes"
+    },
+    "logLevel": "debug"
+  },
   "/api/fal-media/*": {
     "target": "https://v3.fal.media",
     "secure": true,
