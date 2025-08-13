@@ -89,3 +89,16 @@
     height: func.to-rem($px-size);
   }
 }
+
+@for $size from 16 through 200 {
+  .mat-icon.icon-#{$size} {
+    --size: #{$size}px;
+    font-size: var(--size);
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

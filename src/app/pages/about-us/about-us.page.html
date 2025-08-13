@@ -1,0 +1,58 @@
+
+<div class="container mt-5">
+  <div class="m-4 text-start">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="'/dashboard'"
+      routerLinkActive="active"
+      class="btn p-2"
+    >
+      Volver al inicio
+    </button>
+  </div>
+
+  <div class="text-center mb-4">
+    <img
+      src="logo_attack_on_code.png"
+      alt="Logo Attack on Code"
+      width="120"
+      height="120"
+      class="mb-3"
+    />
+    <h1 class="display-5 fw-bold">Attack on Code</h1>
+    <p class="lead">Equipo de desarrollo de software</p>
+  </div>
+
+  @for (member of groupMembers; track member.email) {
+  <mat-card class="mb-3 p-3">
+    <div class="row g-0 align-items-start">
+      <div class="col-md-2 text-center">
+        <img
+          [src]="member.photo"
+          alt="{{ member.name }}"
+          class="img-fluid rounded-circle m-2"
+          width="80"
+          height="80"
+        />
+      </div>
+
+      <div class="col-md-10">
+        <mat-card-content>
+          <h3 class="mb-1">{{ member.name }}</h3>
+          <p class="mb-1 fw-semibold">{{ member.role }}</p>
+          <small class="d-block mb-2">{{ member.email }}</small>
+
+          <h4 class="mt-2">Responsabilidades</h4>
+          <ul class="mb-0 ps-3">
+            @for (resp of member.responsibilities; track $index) {
+            <li class="mb-1">{{ resp }}</li>
+            }
+          </ul>
+        </mat-card-content>
+      </div>
+    </div>
+  </mat-card>
+  }
+</div>
+

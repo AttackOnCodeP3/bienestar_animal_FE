@@ -1,5 +1,5 @@
 import {computed, Injectable, signal} from '@angular/core';
-import {BaseHttpService} from '@services/http';
+import { BaseHttpService } from "../base-http-service/base-http.service";
 import {Constants} from '@common/constants/constants';
 import {Announcement} from '@models';
 import {IHttpActionConfig, IResponse, ISearch, ISearchAnnouncement} from '@common/interfaces/http';
@@ -204,6 +204,84 @@ export class AnnouncementHttpService extends BaseHttpService<Announcement> {
         complete: () => {
           this.isLoading.set(false);
         },
+      });
+  }
+
+  /**
+   * Carga anuncios VISIBLES (PUBLISHED y vigentes por fecha) de la municipalidad del
+   * usuario autenticado (COMMUNITY_USER o MUNICIPAL_ADMIN).
+   *
+   * @param options Control de paginación (page | nextPage | previousPage)
+   * @author dgutierrez
+   */
+  getVisibleAnnouncementsByMunicipality(
+    options: { page?: number; nextPage?: boolean; previousPage?: boolean } = {}
+  ): void {
+    this.search = this.updatePageState(this.search, options);
+    this.fetchVisibleAnnouncements();
+  }
+
+  /**
+   * Obtiene anuncios visibles de la municipalidad del usuario.
+   * Interno: maneja paginación, señales y errores.
+   * @author dgutierrez
+   */
+  private fetchVisibleAnnouncements(): void {
+    const params = {
+      page: this.search.page,
+      size: this.search.size,
+    };
+
+    this.isLoading.set(true);
+
+    this.http
+      .get<IResponse<Announcement[]>>(
+        `${this.sourceUrl}/my-municipality/visible`,
+        { params: this.buildUrlParams(params) }
+      )
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (res) => {
+          this.announcementList.set(res.data);
+          this.search = { ...this.search, ...res.meta };
+          this.updatePagination(res.meta?.totalPages ?? 0);
+          this.hasSearched.set(true);
+        },
+        error: this.handleError({
+          message: 'Error fetching visible announcements.',
+          context: `${this.constructor.name}#fetchVisibleAnnouncements`,
+        }),
+      });
+  }
+
+  /**
+   * Fetches a VISIBLE announcement (PUBLISHED y vigente) by ID
+   * for the authenticated user's municipality (COMMUNITY_USER o MUNICIPAL_ADMIN).
+   *
+   * @param id Announcement ID
+   * @param config Optional callbacks and loading handlers
+   * @author dgutierrez
+   */
+  getVisibleAnnouncementById(id: number, config?: IHttpActionConfig): void {
+    this.isLoading.set(true);
+    config?.showLoading?.();
+
+    this.http.get<IResponse<Announcement>>(`${this.sourceUrl}/my-municipality/visible/${id}`)
+      .pipe(
+        finalize(() => {
+          this.isLoading.set(false);
+          config?.hideLoading?.();
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.selectedAnnouncement.set(res.data);
+          config?.callback?.();
+        },
+        error: this.handleError({
+          message: 'Error fetching visible announcement by id.',
+          context: `${this.constructor.name}#getVisibleAnnouncementById`,
+        }),
       });
   }
 

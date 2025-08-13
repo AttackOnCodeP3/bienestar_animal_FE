@@ -79,11 +79,13 @@
       <ng-container [matColumnDef]="tableService.announcementManagementDisplayedColumnsTableEnum.DESCRIPTION">
         <mat-header-cell *matHeaderCellDef>{{ i18nService.i18nTablesEnum.COLUMN_DESCRIPTION | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          @if (element.description) {
-            {{ element.description | stripHtml }}
-          } @else {
-            Sin descripción
-          }
+          <span class="limit-lines-3">
+            @if (element.description) {
+              {{ element.description | stripHtml }}
+            } @else {
+              Sin descripción
+            }
+          </span>
         </mat-cell>
       </ng-container>
 

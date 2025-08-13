@@ -12,7 +12,7 @@ import {I18nService, ThemeService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
 import {Constants} from '@common/constants/constants';
 import {AuthHttpService} from '@services/http';
-import {NavbarComponent} from '@components/general';
+import { NavbarComponent, FooterComponent } from '@components/general';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -31,7 +31,8 @@ import {NavbarComponent} from '@components/general';
     RouterLinkActive,
     RouterOutlet,
     TranslatePipe,
-  ],
+    FooterComponent
+],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.scss',
   changeDetection: Constants.changeDetectionStrategy,
@@ -161,6 +162,12 @@ export class DashboardLayoutComponent {
           label: I18nMenuEnum.CREATE_ABANDONED_ANIMAL,
           route: `${RoutesUrlsEnum.ABANDONED_ANIMAL}/${RoutesUrlsEnum.CREATE_ABANDONED_ANIMAL}`,
           authorities: [RolesEnum.CENSISTA_USER],
+          click: () => this.closeSidenav(),
+        },
+        {
+          label: I18nMenuEnum.VIEW_ABANDONED_ANIMAL_RECORD,
+          route: `${RoutesUrlsEnum.ANIMAL}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.VIEW_ABANDONED_ANIMAL_RECORD}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
           click: () => this.closeSidenav(),
         },
       ],

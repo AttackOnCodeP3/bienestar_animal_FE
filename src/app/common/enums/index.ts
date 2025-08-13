@@ -3,6 +3,7 @@ export * from "./alert-panel-class.enum";
 export * from "./alert-type.enum";
 export * from "./behavior.enum";
 export * from "./breakpoints.enum";
+export * from "./complaint-state-id.enum";
 export * from "./estimated-age.enum";
 export * from "./filter-option.enum";
 export * from "./lottie-animations-paths.enum";

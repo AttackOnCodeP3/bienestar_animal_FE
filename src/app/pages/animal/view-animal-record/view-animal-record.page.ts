@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { GlbViewerComponent } from '@components/model3D';
 import { GoogleMapsComponent } from '@components/googleMaps';
 import { Constants } from '@common/constants/constants';
+import { IViewAnimalRecord } from '@common/interfaces';
 
 @Component({
   selector: 'app-view-animal-record-page',

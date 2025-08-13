@@ -18,4 +18,14 @@ export class ValidationsService {
   isDefined<T>(value: T | null | undefined): value is T {
     return value !== null && value !== undefined;
   }
+
+  /**
+   * Checks if a string is defined and not empty (after trimming).
+   * @param value The string to check.
+   * @returns True if the string is defined and not empty, false otherwise.
+   * @author dgutierrez
+   */
+  isStringDefined(value: string | null | undefined): value is string {
+    return this.isDefined(value) && value.trim() !== '';
+  }
 }

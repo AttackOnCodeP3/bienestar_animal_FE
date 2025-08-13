@@ -26,7 +26,7 @@ export class App {
     this.setDefaultLanguage();
     this.setDefaultFontSetClass();
     this.configureSvgsIconRegistry();
-    this.loadGoogleMapsScript(); 
+    this.loadGoogleMapsScript();
 
   }
 

@@ -1,3 +1,6 @@
+import {ComplaintTypeDTO} from './complaint-type.dto';
+import {ComplaintStateDTO} from './complaint-state.dto';
+
 /**
  * Complaint Data Transfer Object
  * @author dgutierrez
@@ -9,8 +12,8 @@ export class ComplaintDto {
   latitude: number | null;
   longitude: number | null;
   observations: string | null;
-  complaintTypeName: string | null;
-  complaintStateName: string | null;
+  complaintTypeDTO: ComplaintTypeDTO | null;
+  complaintStateDTO: ComplaintStateDTO | null;
 
   constructor(values: Partial<ComplaintDto> = {}) {
     this.id = values.id ??= null;
@@ -19,7 +22,7 @@ export class ComplaintDto {
     this.latitude = values.latitude ??= null;
     this.longitude = values.longitude ??= null;
     this.observations = values.observations ??= null;
-    this.complaintTypeName = values.complaintTypeName ??= null;
-    this.complaintStateName = values.complaintStateName ??= null;
+    this.complaintTypeDTO = values.complaintTypeDTO ??= null;
+    this.complaintStateDTO = values.complaintStateDTO ??= null;
   }
 }
