@@ -1,0 +1,20 @@
+@use '@angular/material' as material;
+@use "theme-colors" as theme;
+@use "mixins" as mixins;
+@use 'sass:map';
+
+@include mixins.light-mode {
+  .mat-chip-primary {
+    @include material.chips-overrides((
+      outline-color: map.get(theme.$primary-palette, 60),
+    ));
+  }
+}
+
+@include mixins.dark-mode {
+  .mat-chip-primary {
+    @include material.chips-overrides((
+      outline-color: map.get(theme.$primary-palette, 50),
+    ));
+  }
+}

@@ -8,4 +8,7 @@
 export enum RouteParamsEnum {
   USER_ID = 'userId',
   MUNICIPALITY_ID = 'id',
+  NOTIFICATION_RULE_ID = 'id',
+  ANNOUNCEMENT_ID = 'id',
+  COMPLAINT_ID = 'id',
 }

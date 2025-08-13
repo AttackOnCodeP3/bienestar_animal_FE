@@ -1,0 +1,18 @@
+<h2 mat-dialog-title
+    class="mat-sys-headline-medium-imp">{{ i18nService.i18nComponentsEnum.MODAL_VIEWER_PICTURE_TITLE | translate }}</h2>
+
+<mat-dialog-content
+  class="mat-typography"
+>
+  <img class="img-fluid" [src]="data.imageSource" alt="" />
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    matButton="filled"
+    cdkFocusInitial
+    mat-dialog-close
+  >
+    {{ i18nService.i18nButtonsEnum.BUTTON_CLOSE | translate }}
+  </button>
+</mat-dialog-actions>

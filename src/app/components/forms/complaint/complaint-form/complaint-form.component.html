@@ -1,0 +1,179 @@
+<form [formGroup]="form()" (ngSubmit)="onSubmit()">
+  <app-general-container-component>
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>
+            Tipo de denuncia
+          </mat-label>
+          <mat-select
+            formControlName="complaintType"
+            [errorStateMatcher]="formsService().matcher"
+            placeholder="Seleccione un tipo de denuncia"
+            [compareWith]="formsService().genericCompare"
+          >
+            <mat-option [value]="formsService().filterOptionEnum.SELECT_OPTION">
+              Seleccione un tipo de denuncia
+            </mat-option>
+            @for (complaintType of complaintTypesList(); track complaintType.id) {
+              <mat-option [value]="complaintType">{{ complaintType.name }}</mat-option>
+            }
+          </mat-select>
+          @let complaintTypeControl = form().get('complaintType');
+          @if (formsService().isFieldInvalid(complaintTypeControl)) {
+            <mat-error>{{ formsService().getErrorMessage(complaintTypeControl) }}</mat-error>
+          }
+        </mat-form-field>
+        @if (complaintTypeControl?.value) {
+          <div class="text-end">
+            <mat-icon
+              [matTooltip]="complaintTypeControl?.value.description"
+              class="ms-2"
+            >
+              info
+            </mat-icon>
+          </div>
+        }
+      </div>
+    </div>
+  </app-general-container-component>
+
+  <app-general-container-component>
+    <mat-form-field class="w-100" appearance="outline" hintLabel="Máximo 1000 caracteres">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        formControlName="description"
+        matInput
+        rows="5"
+        maxlength="1000"
+        minlength="10"
+        placeholder="Ingrese una descripción de la denuncia"
+        #textAreaDescription
+        [errorStateMatcher]="formsService().matcher"
+      >
+      </textarea>
+      <mat-hint align="end">{{ textAreaDescription.value.length }}/1000</mat-hint>
+      @let descriptionControl = form().get('description');
+      @if (formsService().isFieldInvalid(descriptionControl)) {
+        <mat-error>{{ formsService().getErrorMessage(descriptionControl) }}</mat-error>
+      }
+    </mat-form-field>
+  </app-general-container-component>
+
+  @if (isEditMode() && showObservations()) {
+    <app-general-container-component>
+      <mat-form-field class="w-100" appearance="outline" hintLabel="Máximo 1000 caracteres">
+        <mat-label>Observaciónes</mat-label>
+        <textarea
+          formControlName="observations"
+          matInput
+          rows="5"
+          maxlength="1000"
+          minlength="10"
+          placeholder="Ingrese observaciones de la denuncia"
+          #textAreaObservations
+          [errorStateMatcher]="formsService().matcher"
+        >
+      </textarea>
+        <mat-hint align="end">{{ textAreaObservations.value.length }}/1000</mat-hint>
+        @let observationsControl = form().get('observations');
+        @if (formsService().isFieldInvalid(observationsControl)) {
+          <mat-error>{{ formsService().getErrorMessage(observationsControl) }}</mat-error>
+        }
+      </mat-form-field>
+    </app-general-container-component>
+  }
+
+  <app-general-container-component>
+    @let fileControl = form().get('file');
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>
+            Evidencia
+          </mat-label>
+          <ngx-mat-file-input
+            placeholder="Seleccione una fotografía"
+            formControlName="file"
+            [errorStateMatcher]="formsService().matcher"
+            [accept]="formsService().imageFileAcceptTypes"
+          >
+          </ngx-mat-file-input>
+          <mat-icon matSuffix>folder</mat-icon>
+          @if (formsService().isFieldInvalid(fileControl)) {
+            <mat-error>{{ formsService().getErrorMessage(fileControl) }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      @if (showButtonSeeImage) {
+        <div class="mt-3 text-end">
+          <button matButton="outlined" type="button" (click)="onViewImage()">
+            <mat-icon>
+              visibility
+            </mat-icon>
+            Ver imagen
+          </button>
+        </div>
+      }
+    </div>
+  </app-general-container-component>
+
+  <div class="text-end">
+    @if (mode() === "create") {
+      <button matButton="tonal">
+        Realizar denuncia
+      </button>
+    }
+
+    @if (mode() === 'edit') {
+      @if (
+        complaintStateDTO()?.id !== complaintStateIdEnum().CLOSED &&
+        complaintStateDTO()?.id !== complaintStateIdEnum().CANCELLED
+        ) {
+
+        @if (authHttpService().isCommunityUser()) {
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
+            <button class="me-3" matButton="tonal" (click)="onUpdate()">Actualizar denuncia</button>
+            <button matButton="outlined" (click)="onCancel()">Cancelar denuncia</button>
+          }
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
+            <button matButton="tonal" (click)="onResubmit()">Actualizar y reenviar</button>
+          }
+        }
+
+        @if (authHttpService().isMunicipalityAdmin()) {
+
+          @if (
+            complaintStateDTO()?.id === complaintStateIdEnum().OPEN ||
+            complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS ||
+            complaintStateDTO()?.id === complaintStateIdEnum().APPROVED
+            ) {
+            <button class="me-3" matButton="outlined" (click)="onCancelByAdmin()">Cancelar denuncia</button>
+          }
+
+          @if (
+            complaintStateDTO()?.id === complaintStateIdEnum().OPEN ||
+            complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS ||
+            complaintStateDTO()?.id === complaintStateIdEnum().APPROVED ||
+            complaintStateDTO()?.id === complaintStateIdEnum().COMPLETED
+            ) {
+            <button class="me-3" matButton="outlined" (click)="onCloseByAdmin()">Cerrar denuncia</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().OPEN) {
+            <button class="me-3" matButton="filled" (click)="onWithObservations()">Con observaciones</button>
+            <button matButton="tonal" (click)="onApprove()">Aprobar</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().WITH_OBSERVATIONS) {
+            <button class="me-3" matButton="tonal" (click)="onWithObservations()">Con observaciones</button>
+          }
+
+          @if (complaintStateDTO()?.id === complaintStateIdEnum().APPROVED) {
+            <button matButton="tonal" (click)="onComplete()">Completar denuncia</button>
+          }
+        }
+      }
+    }
+  </div>
+</form>

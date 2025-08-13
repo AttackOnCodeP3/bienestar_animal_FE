@@ -26,6 +26,8 @@ export class App {
     this.setDefaultLanguage();
     this.setDefaultFontSetClass();
     this.configureSvgsIconRegistry();
+    this.loadGoogleMapsScript();
+
   }
 
   /**
@@ -80,7 +82,21 @@ export class App {
       });
     })
   }
-
+  /**
+   * Dynamically loads the Google Maps JavaScript API script into the document if it has not already been loaded.
+   * This method checks for an existing script tag with the Google Maps API source and, if not found,
+   * creates and appends a new script element to the document head using the API key from the environment configuration.
+   *
+   * @author @aBlancoC
+   */
+  private loadGoogleMapsScript(): void {
+    if (!document.querySelector('script[src^="https://maps.googleapis.com/maps/api/js"]')) {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.NG_APP_API_KEY_GOOGLE_MAPS2}`;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  }
   /**
    * Configures the custom SVG icons for the application.
    * This method registers the Google Sign-In icon using the MatIconRegistry.

@@ -3,7 +3,7 @@ import {createPageArray} from '@common/utils';
 import {ISearch} from '@common/interfaces/http';
 import {Constants} from '@common/constants/constants';
 import {Species} from '@models';
-import {BaseHttpService} from '@services/http';
+import {BaseHttpService} from '../base-http-service/base-http.service';
 
 /**
  * Service for handling HTTP requests related to species of animals.

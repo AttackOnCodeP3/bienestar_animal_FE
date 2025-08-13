@@ -1,10 +1,12 @@
 import {effect, inject, Injectable} from '@angular/core';
 import {CustomErrorStateMatcher} from '@common/forms';
-import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {InputType} from '@common/types';
 import {I18nService, LogService} from '@services/general';
 import {I18nFormsEnum} from '@common/enums/i18n';
 import {IIdentifiable} from '@common/interfaces';
+import {FilterOptionEnum} from '@common/enums';
+import {FileValidator} from 'ngx-custom-material-file-input';
 
 /**
  * Service for managing forms, including validation and error handling.
@@ -23,6 +25,39 @@ export class FormsService {
   readonly matcher = new CustomErrorStateMatcher();
 
   /**
+   * Maximum file size for uploads, set to 1 MB.
+   * This is used to restrict file uploads in file input components.
+   * @author dgutierrez
+   */
+  readonly maxFileSize1MBInBytes = 1024 * 1024;
+
+  /**
+   * Accept types for image file inputs used in file upload components.
+   * Restricts the selectable file types to commonly used image formats.
+   * Used in <input type="file"> or compatible components like ngx-mat-file-input.
+   *
+   * Examples: .jpg, .jpeg, .png, image/jpeg, image/png
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
+   * @author dgutierrez
+   */
+  readonly imageFileAcceptTypes = '.jpg, .jpeg, .png, image/jpeg, image/png';
+
+  /**
+   * Minimum date allowed for date inputs, set to 100 years ago.
+   * This is used to restrict date pickers to not allow dates older than 100 years.
+   * @author dgutierrez
+   */
+  readonly minDate100YearsAgo = new Date(new Date().setFullYear(new Date().getFullYear() - 100));
+
+  /**
+   * Minimum date allowed for date inputs, set to 3 months ago.
+   * This is used to restrict date pickers to not allow dates older than 3 months.
+   * @author dgutierrez
+   */
+  readonly minDate3MonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 3));
+
+  /**
    * Maximum date allowed for date inputs, set to today.
    * This is used to restrict date pickers to not allow future dates.
    * @author dgutierrez
@@ -30,17 +65,32 @@ export class FormsService {
   readonly maxTodayDate = new Date();
 
   /**
-   * Map of input types to their corresponding text representation for error messages.
-   * This is used to provide localized error messages based on the type of input field.
+   * Maximum date allowed for endDate fields, set to 3 years from now.
+   * Useful for announcement duration restrictions.
    * @author dgutierrez
    */
-  private readonly inputTextMap: Map<InputType, string> = new Map([
-    ['text', 'characters'],
-    ['number', 'digits'],
-    ['email', 'characters'],
-    ['password', 'characters'],
-    ['tel', 'digits'],
-  ]);
+  readonly maxDate3YearsFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 3));
+
+  /**
+   * Map that associates input types (`InputType`) with their localized textual representation,
+   * such as "characters" or "digits", used to generate dynamic validation error messages.
+   *
+   * This map is initialized at runtime using the `i18nService`, so its values depend on
+   * the current application language.
+   *
+   * @example
+   * // Example in English:
+   * inputTextMap.get('text'); // 'characters'
+   * inputTextMap.get('number'); // 'digits'
+   *
+   * // Example in Spanish:
+   * inputTextMap.get('text'); // 'caracteres'
+   * inputTextMap.get('number'); // 'dígitos'
+   *
+   * @see initializeErrorMessages
+   * @author dgutierrez
+   */
+  private inputTextMap: Map<InputType, string> = new Map([]);
 
   /**
    * Map of error messages for form validation.
@@ -55,13 +105,17 @@ export class FormsService {
     this.initializeErrorMessages();
     this.logService.debug({
       message: `FormsService initialized with language:`,
-      data: { currentLanguaje },
+      data: {currentLanguaje},
       className: this.constructor.name,
     });
   });
 
   constructor() {
     this.initializeErrorMessages();
+  }
+
+  get filterOptionEnum() {
+    return FilterOptionEnum;
   }
 
   /**
@@ -79,6 +133,11 @@ export class FormsService {
       required,
       min,
       max,
+      acceptedMimeTypes,
+      maxContentSize,
+      invalidSelection,
+      charactersUnit,
+      digitsUnit
     ] = await Promise.all([
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MUST_MATCH),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_EMAIL),
@@ -88,6 +147,11 @@ export class FormsService {
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_REQUIRED),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MIN),
       this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_MAX),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_FILE_ACCEPT),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_FILE_MAX_CONTENT_SIZE),
+      this.i18nService.get(I18nFormsEnum.FORM_VALIDATION_INVALID_SELECTION),
+      this.i18nService.get(I18nFormsEnum.FORM_UNIT_CHARACTERS),
+      this.i18nService.get(I18nFormsEnum.FORM_UNIT_DIGITS)
     ]);
 
     this.errorMessages.set('mustMatch', () => mustMatch);
@@ -98,6 +162,17 @@ export class FormsService {
     this.errorMessages.set('required', () => required);
     this.errorMessages.set('min', type => `${min} {{min}}`);
     this.errorMessages.set('max', type => `${max} {{max}}`);
+    this.errorMessages.set('acceptedMimeTypes', () => acceptedMimeTypes);
+    this.errorMessages.set('maxContentSize', () => maxContentSize);
+    this.errorMessages.set('invalidSelection', () => invalidSelection);
+
+    this.inputTextMap = new Map<InputType, string>([
+      ['text', charactersUnit],
+      ['number', digitsUnit],
+      ['email', charactersUnit],
+      ['password', charactersUnit],
+      ['tel', digitsUnit],
+    ]);
   }
 
   /**
@@ -127,10 +202,6 @@ export class FormsService {
   /**
    * Retrieves the error message corresponding to the first validation error
    * found in the control.
-   * @param control The form control to evaluate.
-   * @param type The input type associated with the field (e.g. 'text', 'email').
-   * @returns A formatted error message or an empty string if no errors.
-   * @author dgutierrez
    */
   getErrorMessage(control: AbstractControl | null, type: InputType = 'text'): string {
     if (!control?.errors) return '';
@@ -139,20 +210,74 @@ export class FormsService {
       const templateFn = this.errorMessages.get(errorKey);
       if (!templateFn) continue;
 
-      let message = templateFn(type);
+      const rawMessage = templateFn(type);
       const errorValue = control.getError(errorKey);
 
       if (errorValue && typeof errorValue === 'object') {
-        for (const param in errorValue) {
-          message = message.replace(`{{${param}}}`, errorValue[param]);
-        }
+        return this.formatTemplate(rawMessage, errorValue);
       }
 
-      return message;
+      return rawMessage;
     }
 
     return '';
   }
+
+  /**
+   * Replaces placeholders in a message template with actual parameter values.
+   * Supports special cases like maxSizeMB and array formatting.
+   */
+  private formatTemplate(template: string, params: Record<string, any>): string {
+    let message = template;
+
+    for (const key in params) {
+      let value = params[key];
+
+      if (key === 'maxSize') {
+        const maxSizeMB = (value / 1024 / 1024).toFixed(2);
+        message = message.replace(`{{maxSizeMB}}`, maxSizeMB);
+      }
+
+      if (Array.isArray(value)) {
+        value = value.join(', ');
+      }
+
+      message = message.replace(`{{${key}}}`, value);
+    }
+
+    return message;
+  }
+
+
+  getFileValidators(options: {
+    acceptTypes?: string[],
+    maxSizeInMB?: number,
+    required?: boolean,
+  }): ValidatorFn[] {
+    const validators: ValidatorFn[] = [];
+
+    if (options.acceptTypes?.length) {
+      const baseValidator = FileValidator.acceptedMimeTypes(options.acceptTypes);
+      validators.push((control: AbstractControl) => {
+        const result = baseValidator(control);
+        if (result?.['acceptedMimeTypes']) {
+          result['acceptedMimeTypes']['allowedExtensions'] = options.acceptTypes?.join(', ');
+        }
+        return result;
+      });
+    }
+
+    if (options.maxSizeInMB !== undefined) {
+      validators.push(FileValidator.maxContentSize(options.maxSizeInMB * 1024 * 1024));
+    }
+
+    if (options.required) {
+      validators.push(Validators.required);
+    }
+
+    return validators;
+  }
+
 
   /**
    * Returns the form control for a given name within a FormGroup.
@@ -231,16 +356,16 @@ export class FormsService {
       return;
     }
 
-    const invalidFields = this.getInvalidFields(form);
-    if (!invalidFields.length) {
-      this.logService.info({
-        message: 'FormsService: logFormErrors: All fields are valid.',
-      });
-      return;
-    }
-
-    this.logService.error({
-      message: `FormsService: logFormErrors: Invalid fields: ${invalidFields.join(', ')}`,
+    Object.entries(form.controls).forEach(([field, control]) => {
+      if (control.invalid) {
+        const errors = control.errors;
+        this.logService.error({
+          message: `FormsService: Field "${field}" is invalid.`,
+          data: {
+            errors
+          }
+        });
+      }
     });
   }
 

@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { ILocationResult } from '@common/interfaces';
+import {Constants} from '@common/constants/constants';
+import {LoadingModalService} from '@services/modals';
 
 /**
  * Service responsible for obtaining the user's geographic location.
@@ -21,6 +23,8 @@ import { ILocationResult } from '@common/interfaces';
 })
 export class LocationService {
 
+  private readonly loadingModalService = inject(LoadingModalService)
+
   /**
    * Gets the user's current geographic coordinates.
    * Returns a detailed result indicating success or the type of error.
@@ -29,6 +33,7 @@ export class LocationService {
    * @author dgutierrez
    */
   async getUserLocation(): Promise<ILocationResult> {
+    await this.loadingModalService.show();
     try {
       const position = await this.requestUserLocation();
       return {
@@ -41,6 +46,8 @@ export class LocationService {
       };
     } catch (error) {
       return this.handleLocationError(error);
+    } finally {
+      this.loadingModalService.hide();
     }
   }
 
@@ -65,8 +72,8 @@ export class LocationService {
         error => reject(error),
         {
           enableHighAccuracy: true,
-          timeout: 10000, // 10 seconds to obtain location
-          maximumAge: 0   // Do not use cached position
+          timeout: Constants.LOCATION_TIMEOUT_MS,
+          maximumAge: Constants.LOCATION_MAX_AGE
         }
       );
     });
@@ -89,13 +96,13 @@ export class LocationService {
       originalError = error;
       errorCode = error.code;
       switch (error.code) {
-        case error.PERMISSION_DENIED: // Code 1
+        case error.PERMISSION_DENIED:
           errorMessage = 'User denied permission to access location. Please enable it in your browser settings.';
           break;
-        case error.POSITION_UNAVAILABLE: // Code 2
+        case error.POSITION_UNAVAILABLE:
           errorMessage = 'Location information is unavailable (e.g., weak GPS signal). Ensure you have good signal or internet connection.';
           break;
-        case error.TIMEOUT: // Code 3
+        case error.TIMEOUT:
           errorMessage = 'The request to get location timed out. Please try again.';
           break;
         default:

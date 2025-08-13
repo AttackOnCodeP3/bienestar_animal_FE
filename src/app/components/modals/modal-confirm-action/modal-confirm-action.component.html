@@ -1,0 +1,25 @@
+<h2 mat-dialog-title class="mat-typography">
+  <span class="roboto">{{ title() }}</span>
+</h2>
+
+<mat-dialog-content>
+  <p>
+    {{ message() }}
+  </p>
+  <div class="text-center">
+    <mat-icon class="icon-100">
+      warning
+    </mat-icon>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  @if (showCancelButton()) {
+    <button matButton (click)="onCancel()" cdkFocusInitial>
+      {{ cancelButtonText() | translate }}
+    </button>
+  }
+  <button matButton (click)="onConfirm()">
+    {{ confirmButtonText() | translate }}
+  </button>
+</mat-dialog-actions>

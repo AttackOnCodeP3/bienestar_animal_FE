@@ -6,6 +6,7 @@ const PATH_DASHBOARD_ROUTES = 'dashboard';
 const PATH_SECURITY_ROUTES = 'security';
 const PATH_MUNICIPALITIES = 'municipalities';
 const PATH_ANIMAL_ROUTES = 'animal';
+const PATH_NOTIFICATION_RULES = 'notification-rules';
 const VOID_PATH = '';
 
 export enum RoutesUrlsEnum {
@@ -15,13 +16,18 @@ export enum RoutesUrlsEnum {
   DASHBOARD = PATH_DASHBOARD_ROUTES,
   SECURITY = PATH_SECURITY_ROUTES,
   ANIMAL = PATH_ANIMAL_ROUTES,
+  NOTIFICATION_RULES = PATH_NOTIFICATION_RULES,
 
   // Main routes
+
   HOME = PATH_HOME_ROUTES,
   AUTH = PATH_AUTH_ROUTES,
   GAMIFICATION = PATH_GAMIFICATION_ROUTES,
   REPORTS = PATH_REPORTS_ROUTES,
   MUNICIPALITIES = PATH_MUNICIPALITIES,
+
+  //Other
+  ABOUT_US = 'about-us',
 
   // Auth
   LOGIN = 'login',
@@ -53,10 +59,38 @@ export enum RoutesUrlsEnum {
   CREATE_ANIMAL_PROFILE = 'create-animal-profile',
   ABANDONED_ANIMAL = 'abandoned-animal',
   CREATE_ABANDONED_ANIMAL = 'create-abandoned-animal',
+  VIEW_ABANDONED_ANIMAL_RECORD = 'view-abandoned-animal-record',
+  VIEW_ANIMAL_RECORD = 'view-animal-record',
+  REGISTER_COMMUNITY_ANIMAL_BY_CENSUS = 'register-community-animal-by-census',
 
   //model 3d
   MODEL_3D = 'model-3d',
   MODEL_3D_LIST = 'model-3d-list',
   MODEL_3D_CREATE = 'model-3d-create',
+
+  //Notification Rules Municipality
+  NOTIFICATION_RULES_EDIT = 'notification-rules-edit',
+  NOTIFICATION_RULES_LIST = 'notification-rules-list',
+
+  //Anouncements
+  ANNOUNCEMENTS = 'announcements',
+  ANNOUNCEMENTS_LIST = 'announcements-list',
+  ANNOUNCEMENTS_CREATE = 'announcements-create',
+  ANNOUNCEMENTS_EDIT = 'announcements-edit',
+  ANNOUNCEMENT_DETAIL = 'announcement-detail',
+
+  //Complaints
+  COMPLAINTS = 'complaints',
+  COMPLAINTS_LIST = 'complaints-list',
+  COMPLAINTS_CREATE = 'complaints-create',
+  COMPLAINT_MANAGE = 'complaint-manage',
+
+  //Animal Diagnosis
+  ANIMAL_DIAGNOSIS = 'animal-diagnosis',
+  ANIMAL_DIAGNOSIS_LIST = 'animal-diagnosis-list',
+  ANIMAL_DIAGNOSIS_CREATE = 'animal-diagnosis-create',
+
+  // Reports
+    ABANDONADOS_REPORT = 'abandonados-report',
 
 }

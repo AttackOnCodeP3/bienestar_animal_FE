@@ -18,7 +18,7 @@ export class BaseHttpService<T> {
 
   get sourceUrl(): string {
     return Constants.apiBaseUrl + this.source;
-    
+
   }
 
   /** Returns IResponse with metadata */
@@ -74,6 +74,10 @@ export class BaseHttpService<T> {
         });
         setSearchMeta(res.meta);
         setTotalItems(res.meta?.totalPages ?? 0);
+        this.logService.debug({
+          message: `Total items from ${context}`,
+          data: res.meta?.totalItems,
+        })
         updateSignal.set(res.data);
       },
       error: this.handleError({
@@ -166,4 +170,25 @@ export class BaseHttpService<T> {
       });
     };
   }
+
+  protected updatePageState(
+    search: ISearch,
+    options: { page?: number; nextPage?: boolean; previousPage?: boolean }
+  ): ISearch {
+    let updatedPage = search.page ?? 1;
+
+    if (typeof options.page === 'number') {
+      updatedPage = options.page;
+    } else if (options.nextPage) {
+      updatedPage += 1;
+    } else if (options.previousPage) {
+      updatedPage -= 1;
+    }
+
+    return {
+      ...search,
+      page: Math.max(1, updatedPage),
+    };
+  }
+
 }

@@ -1,0 +1,21 @@
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.mat-sys-headline-medium {
+  font-family: var(--mat-sys-headline-medium), serif;
+
+  &-imp {
+    font-family: var(--mat-sys-headline-medium-imp), serif !important;
+  }
+}
+
+@for $i from 1 through 6 {
+  .text-truncate-#{$i} {
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

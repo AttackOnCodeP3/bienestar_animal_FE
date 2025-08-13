@@ -2,7 +2,7 @@ import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from '@services/general';
 import { AlertTypeEnum } from '@common/enums';
-import { Constants } from '@common/constants/constants'; 
+import { Constants } from '@common/constants/constants';
 import { IAnimalBasic } from '@common/interfaces/animal-basic';
 
 
@@ -12,7 +12,7 @@ export class Model3DCreateHttpService {
   private readonly http = inject(HttpClient);
   private readonly alertService = inject(AlertService);
   private readonly createTaskV25Endpoint = Constants.createTaskV25;
-  private readonly communityAnimalsMine = Constants.communityAnimalsMine;
+  private readonly communityAnimalsMine = Constants.COMMUNITY_ANIMALS_MINE;
 
   readonly animals = signal<IAnimalBasic[]>([]);
   readonly loadingAnimals = signal(false);
@@ -44,7 +44,7 @@ export class Model3DCreateHttpService {
           this.createSuccess.set(true);
           this.alertService.displayAlert({ type: AlertTypeEnum.SUCCESS, messageKey: 'Modelo 3D enviado correctamente.' });
         },
-        error: (err: any) => { 
+        error: (err: any) => {
           this.createError.set('Error creando modelo 3D');
           this.alertService.displayAlert({ type: AlertTypeEnum.ERROR, messageKey: 'Error creando modelo 3D' });
         }
@@ -60,7 +60,7 @@ createModel3DTaskV25(animalId: number, imageUrl: string) {
   this.createError.set(null);
   this.http.post(
     `${this.baseUrl}/model3d-animal/createTaskV25?${params.toString()}`,
-    null 
+    null
   ).subscribe({
     next: () => {
       this.createSuccess.set(true);

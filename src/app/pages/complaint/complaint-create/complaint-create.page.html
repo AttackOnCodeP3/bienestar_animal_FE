@@ -1,0 +1,15 @@
+<app-general-container-component>
+  <h1>
+    Crear denuncias
+  </h1>
+</app-general-container-component>
+
+<app-complaint-form-component
+  [complaintTypesList]="complaintTypeHttpService.complaintTypeList()"
+  [form]="complaintCreateForm"
+  [formsService]="formsService"
+  (onViewImageChange)="onViewImage()"
+  (onSubmitChange)="onSubmit()"
+  [complaintStateIdEnum]="complaintStateIdEnum"
+  [authHttpService]="authHttpService"
+/>

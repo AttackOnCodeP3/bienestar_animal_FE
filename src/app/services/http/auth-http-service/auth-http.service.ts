@@ -25,6 +25,7 @@ export class AuthHttpService {
 
   readonly isAuthenticated = computed(() => !!this.accessTokenSignal());
   readonly currentUser = computed(() => this.userSignal());
+  readonly fullNameCurrentUser = computed(() => this.currentUser().name + ' ' + this.currentUser().lastname);
   readonly userAuthorities = computed(() => this.currentUser().authorities ?? []);
   readonly accessToken = computed(() => this.accessTokenSignal());
 
@@ -180,6 +181,24 @@ export class AuthHttpService {
    */
   isSuperAdmin(): boolean {
     return this.hasRole(RolesEnum.SUPER_ADMIN);
+  }
+
+  /**
+   * Checks if current user has municipal Community Role.
+   * @returns True if user is Community User
+   * @author dgutierrez
+   */
+  isCommunityUser(): boolean {
+    return this.hasRole(RolesEnum.COMMUNITY_USER);
+  }
+
+  /**
+   * Checks if current user has municipal admin privileges.
+   * @returns True if user is municipal admin
+   * @author dgutierrez
+   */
+  isMunicipalityAdmin(): boolean {
+    return this.hasRole(RolesEnum.MUNICIPAL_ADMIN);
   }
 
   /**

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
+  AnnouncementManagementDisplayedColumnsTableEnum, ComplaintManagementDisplayedColumnsTableEnum,
   MunicipalityManagementDisplayedColumnsTableEnum,
+  NotificationRulesManagementDisplayedColumnsTableEnum,
   UserManagementDisplayedColumnsTableEnum
 } from 'common/enums/tables';
 import {PageEvent} from '@angular/material/paginator';
 import {ISearch} from '@common/interfaces/http';
+
 
 /**
  * Service for managing table-related functionality, specifically for common logic across tables.
@@ -28,6 +31,18 @@ export class TableService {
 
   get municipalityManagementDisplayedColumnsTableEnum() {
     return MunicipalityManagementDisplayedColumnsTableEnum
+  }
+
+  get notificationRulesDisplayedColumnsTableEnum() {
+    return NotificationRulesManagementDisplayedColumnsTableEnum;
+  }
+
+  get announcementManagementDisplayedColumnsTableEnum() {
+    return AnnouncementManagementDisplayedColumnsTableEnum;
+  }
+
+  get complaintManagementDisplayedColumnsTableEnum() {
+    return ComplaintManagementDisplayedColumnsTableEnum;
   }
 
   /**

@@ -7,6 +7,9 @@ export enum I18nButtonsEnum {
 
   BUTTON_ALREADY_HAVE_AN_ACCOUNT = I18nButtonsEnum.BUTTONS + "alreadyHaveAnAccount",
   BUTTON_CLOSE = I18nButtonsEnum.BUTTONS + "close",
+  BUTTON_CANCEL = I18nButtonsEnum.BUTTONS + "cancel",
+  BUTTON_ACCEPT = I18nButtonsEnum.BUTTONS + "accept",
+  BUTTON_CONFIRM = I18nButtonsEnum.BUTTONS + "confirm",
   BUTTON_CLOSE_SESSION = I18nButtonsEnum.BUTTONS + "closeSession",
   BUTTON_COMPLETE_PROFILE = I18nButtonsEnum.BUTTONS + "completeProfile",
   BUTTON_CREATE_MUNICIPALITY = I18nButtonsEnum.BUTTONS + "createMunicipality",
@@ -25,4 +28,6 @@ export enum I18nButtonsEnum {
   BUTTON_UPDATE_MUNICIPALITY = I18nButtonsEnum.BUTTONS + "updateMunicipality",
   BUTTON_USER_MANAGEMENT = I18nButtonsEnum.BUTTONS + "userManagement",
   BUTTON_REGISTER_ANIMAL = I18nButtonsEnum.BUTTONS + "registerAnimal",
+  BUTTON_RULES_MANAGEMENT = I18nButtonsEnum.BUTTONS + "rulesManagement",
+  BUTTON_UPDATE_NOTIFICATION_RULE = I18nButtonsEnum.BUTTONS + "updateNotificationRule",
 }

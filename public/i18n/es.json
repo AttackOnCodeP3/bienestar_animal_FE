@@ -25,6 +25,8 @@
     "abandonedAnimal": "Animal abandonado",
     "createAbandonedAnimal": "Crear animal abandonado",
     "create-animal-profile": "Crear perfil de animal",
+    "view-animal-record": "Ver expediente animal",
+    "view-abandoned-animal-record": "Ver expediente de animal abandonado",
     "create-user": "Crear usuario",
     "createMunicipality": "Crear municipalidad",
     "gamification": "Gamificación",
@@ -34,9 +36,30 @@
     "reports": "Reportes",
     "user-management": "Gestión de usuarios",
     "viewMunicipalities": "Ver municipalidades",
-     "model-3d": "Modelo 3D",
-      "viewModel3D": "Ver modelos 3D",
-      "createModel3D": "Crear modelo 3D"
+    "model-3d": "Modelo 3D",
+    "viewModel3D": "Ver modelos 3D",
+    "createModel3D": "Crear modelo 3D",
+    "notificationRules": "Reglas de notificación",
+    "notificationRulesEdit": "Editar reglas",
+    "notificationRulesList": "Lista de reglas",
+    "announcements": "Gestión de anuncios",
+    "announcementCreate": "Crear anuncio",
+    "announcementList": "Lista de anuncios",
+    "complaints": "Gestión de denuncias",
+    "complaintList": "Lista de denuncias",
+    "complaintCreate": "Crear denuncia",
+    "community-census": "Censo comunitario",
+    "register-community-animal": "Registrar animal comunitario",
+    "animalDiagnosis": "Diagnóstico animal",
+    "viewAnimalDiagnosis": "Ver diagnósticos",
+    "createAnimalDiagnosis": "Crear diagnóstico"
+  },
+  "notifications-modal-component": {
+    "title": "Notificaciones",
+    "noNotifications": "No hay notificaciones disponibles"
+  },
+  "modal-viewer-picture-component": {
+    "title": "Vista previa de imagen"
   },
   "it-worked-as-nursery-home-form-component": {
     "currentlyWorksAsNurseryHome": "Actualmente funciono como casa cuna",
@@ -57,7 +80,6 @@
     "title": "Reset Password",
     "subtitle": "Enter your new password"
   },
-
   "animal-basic-info-form-component": {
     "title": "Información básica general"
   },
@@ -109,7 +131,11 @@
       "species": "Especie",
       "status": "Estado",
       "productUsed": "Producto utilizado",
-      "applicationDate": "Fecha de aplicación"
+      "applicationDate": "Fecha de aplicación",
+      "value": "Valor",
+      "animal": "Animal",
+      "image": "Imagen",
+      "description": "Descripción"
     },
     "================== FORM VALIDATIONS ==================": "",
     "formValidations": {
@@ -120,7 +146,11 @@
       "pattern": "El formato no es correcto",
       "required": "Campo requerido",
       "min": "Debe ser mayor o igual a",
-      "max": "Debe ser menor o igual a"
+      "max": "Debe ser menor o igual a",
+      "acceptedMimeTypes": "Tipo de archivo no permitido. Por favor, suba un archivo con una de las siguientes extensiones: {{allowedExtensions}}.",
+      "maxContentSize": "El archivo excede el tamaño máximo permitido de {{maxSizeMB}} MB.",
+      "invalidSelection": "Selección inválida. Por favor, seleccione una opción válida.",
+      "required": "Campo requerido"
     },
     "================== FORM PLACEHOLDERS ==================": "",
     "formPlaceholders": {
@@ -153,7 +183,13 @@
       "status": "Seleccione el estado",
       "sex": "Seleccione el sexo",
       "productUsed": "Digite el producto utilizado",
-      "applicationDate": "Seleccione la fecha de aplicación"
+      "applicationDate": "Seleccione la fecha de aplicación",
+      "value": "Ingrese el valor"
+    },
+    "================== FORM UNITS ==================": "",
+    "formUnits": {
+      "characters": "caracteres",
+      "digits": "dígitos"
     }
   },
   "================== PAGES LABELS ==================": "",
@@ -172,7 +208,6 @@
     "title": "Recuperar contraseña",
     "subtitle": "Ingrese su correo electrónico para recuperar su contraseña"
   },
-
   "user-management-page": {
     "title": "Gestión de usuarios"
   },
@@ -194,12 +229,19 @@
   "create-animal-profile-page": {
     "title": "Creando perfil de animal"
   },
+  "notification-rules-page-list": {
+    "title": "Reglas de notificación"
+  },
+  "notification-rules-page-edit": {
+    "title": "Editando regla de notificación"
+  },
   "================== VALIDATIONS ==================": "",
   "validations": {
     "general": {
       "invalidFields": "Hay campos inválidos. Por favor revise los datos ingresados.",
       "invalidIdToUpdate": "No fue posible encontrar los datos. Serás redirigido para intentarlo nuevamente.",
-      "locationNotAvailable": "La ubicación no está disponible."
+      "locationNotAvailable": "La ubicación no está disponible.",
+      "noFileSelected": "No se ha seleccionado ningún archivo."
     },
     "register-page": {
       "registeredSuccessfully": "Registrado exitosamente, por favor inicie sesión"
@@ -242,16 +284,27 @@
   "================== TABLES ==================": "",
   "tables": {
     "columns": {
-      "name": "Nombre",
-      "lastname": "Apellido",
-      "email": "Correo electrónico",
-      "phoneNumber": "Número de teléfono",
-      "status": "Estado",
       "actions": "Acciones",
-      "active": "Activo",
       "activateDesactivate": "Activar/Desactivar",
-      "block": "Bloquear"
+      "active": "Activo",
+      "block": "Bloquear",
+      "description": "Descripción",
+      "email": "Correo electrónico",
+      "endDate": "Fecha de finalización",
+      "imageUrl": "URL de la imagen",
+      "lastname": "Apellido",
+      "name": "Nombre",
+      "phoneNumber": "Número de teléfono",
+      "startDate": "Fecha de inicio",
+      "state": "Estado",
+      "status": "Estado",
+      "title": "Título",
+      "value": "Valor",
+      "observations": "Observaciones",
+      "complaintState": "Estado de la denuncia",
+      "complaintType": "Tipo de denuncia"
     },
+    "noDataAvailable": "No hay datos disponibles",
     "emptyMessage": {
       "noDataAvailable": "No hay datos disponibles"
     }
@@ -259,7 +312,7 @@
   "================== BUTTON TEXT ===========================": "",
   "buttons": {
     "alreadyHaveAnAccount": "¿Ya tiene una cuenta?",
-    "close": "Cerrar",
+    "cancel": "Cancelar",
     "closeSession": "Cerrar sesión",
     "completeProfile": "Completar perfil",
     "createMunicipality": "Crear municipalidad",
@@ -277,7 +330,18 @@
     "updateMunicipality": "Actualizar municipalidad",
     "updateUser": "Actualizar usuario",
     "userManagement": "Gestión de usuarios",
-    "registerAnimal": "Registrar animal"
+    "registerAnimal": "Registrar animal",
+    "rulesManagement": "Gestión de reglas",
+    "update": "Actualizar",
+    "updateNotificationRule": "Actualizar regla de notificación",
+    "createAnimalDiagnosis": "Crear diagnóstico",
+    "close": "Cerrar",
+    "accept": "Aceptar",
+    "confirm": "Confirmar"
+  },
+  "================== LOADING MESSAGES ==================": "",
+  "loadingMessages": {
+    "loading": "Cargando..."
   },
   "================== MAT SNACK BAR MESSAGES ==================": "",
   "matSnackBarMessages": {

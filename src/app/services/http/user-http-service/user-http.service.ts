@@ -1,11 +1,12 @@
 import {Injectable, signal} from '@angular/core';
-import {BaseHttpService} from '@services/http';
+import {BaseHttpService} from '../base-http-service/base-http.service';
 import {User} from '@models';
 import {AlertTypeEnum} from '@common/enums';
 import {createPageArray} from '@common/utils';
 import {Constants} from '@common/constants/constants';
 import {ISearch} from '@common/interfaces/http';
 import {RegisterUserRequestDTO, UpdateUserRequestDto} from '@models/dto';
+import {IResponse} from '@common/interfaces/http';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,20 @@ export class UserHttpService extends BaseHttpService<User> {
   }
 
   /**
+   * Fetches a user by their identification card (cedula).
+   * Used by the census taker to verify if a user already exists.
+   * On success, updates the selectedUserById signal.
+   * On failure, shows an alert and clears the signal.
+   *
+   * @param cedula The identification card number to search.
+   * @author gjimenez
+   */
+  getByIdentificationCard(cedula: string) {
+    const url = `${Constants.apiBaseUrl}/users/cedula/${cedula}`;
+    return this.http.get<IResponse<User>>(url);
+  }
+
+  /**
    * Saves a new user to the server.
    * @param registerUserRequestDto The user registration request DTO containing user details.
    * @return Observable<User> The observable for the HTTP request.
@@ -83,7 +98,7 @@ export class UserHttpService extends BaseHttpService<User> {
    */
   adminRegisterUser(registerUserRequestDto:RegisterUserRequestDTO){
     const url = Constants.apiBaseUrl + Constants.ADMIN_REGISTER_USER_URL
-    return this.http.post<RegisterUserRequestDTO>(url, registerUserRequestDto);
+    return this.http.post<User>(url, registerUserRequestDto);
   }
 
   /**

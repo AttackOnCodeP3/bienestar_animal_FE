@@ -2,6 +2,7 @@
  * Enum for internationalization menu labels.
  * @author dgutierrez
  * modify by nav
+ * @modifiedBy gjimenez 08/02/2025
  */
 export enum I18nMenuEnum {
   MENU = 'menu',
@@ -16,10 +17,26 @@ export enum I18nMenuEnum {
   CREATE_USER = I18nMenuEnum.MENU + '.create-user',
   ANIMAL = I18nMenuEnum.MENU + '.animal',
   ABANDONED_ANIMAL = "menu.abandonedAnimal",
+  VIEW_ABANDONED_ANIMAL_RECORD = I18nMenuEnum.MENU + '.view-abandoned-animal-record',
   CREATE_ABANDONED_ANIMAL = "menu.createAbandonedAnimal",
   CREATE_ANIMAL_PROFILE = I18nMenuEnum.MENU + '.create-animal-profile',
+  VIEW_ANIMAL_RECORD = I18nMenuEnum.MENU + '.view-animal-record',
   LOGOUT = I18nMenuEnum.MENU + '.logout',
   MODEL_3D = I18nMenuEnum.MENU + '.model-3d',
   VIEW_MODEL_3D = I18nMenuEnum.MENU + '.viewModel3D',
   CREATE_MODEL_3D = I18nMenuEnum.MENU + '.createModel3D',
+  NOTIFICATION_RULES = I18nMenuEnum.MENU + '.notificationRules',
+  NOTIFICATION_RULES_EDIT = I18nMenuEnum.MENU + '.notificationRulesEdit',
+  NOTIFICATION_RULES_LIST = I18nMenuEnum.MENU + '.notificationRulesList',
+  ANNOUNCEMENTS = I18nMenuEnum.MENU + '.announcements',
+  ANNOUNCEMENT_CREATE = I18nMenuEnum.MENU + '.announcementCreate',
+  ANNOUNCEMENT_LIST = I18nMenuEnum.MENU + '.announcementList',
+  COMPLAINTS = I18nMenuEnum.MENU + '.complaints',
+  COMPLAINT_LIST = I18nMenuEnum.MENU + '.complaintList',
+  COMPLAINT_CREATE = I18nMenuEnum.MENU + '.complaintCreate',
+  COMMUNITY_CENSUS = 'menu.community-census',
+  REGISTER_COMMUNITY_ANIMAL = 'menu.register-community-animal',
+  ANIMAL_DIAGNOSIS = I18nMenuEnum.MENU + '.animalDiagnosis',
+  VIEW_ANIMAL_DIAGNOSIS = I18nMenuEnum.MENU + '.viewAnimalDiagnosis',
+  CREATE_ANIMAL_DIAGNOSIS = I18nMenuEnum.MENU + '.createAnimalDiagnosis',
 }

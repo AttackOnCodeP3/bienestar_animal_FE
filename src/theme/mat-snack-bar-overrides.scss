@@ -26,9 +26,9 @@
 
 .mat-snack-success {
   @include material.snack-bar-overrides((
-    button-color: var(--mat-sys-on-primary),
-    supporting-text-color: var(--mat-sys-on-primary),
-    container-color: var(--mat-sys-secondary),
+    button-color: var(--mat-sys-on-primary-container),
+    supporting-text-color: var(--mat-sys-on-primary-container),
+    container-color: var(--mat-sys-primary-container),
   ));
 }
 
