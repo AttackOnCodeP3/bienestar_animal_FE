@@ -19,7 +19,6 @@ export class Report1Component {
     { value: ReportType.MASCOTAS_POR_MUNICIPALIDAD, label: '1-Mascotas por Municipalidad' },
     { value: ReportType.ANIMALES_CALLEJEROS, label: '2-Control de Animales Callejeros o sin Dueño' },
     { value: ReportType.ESTERILIZACION_MUNICIPIO, label: '3-Esterilización por Municipalidad y Sexo' },
-    { value: ReportType.INDICADORES_ABANDONO, label: '4-Indicadores de maltrato o abandono detectados' },
   ];
 
   selectedType = this.reports.selectedType;

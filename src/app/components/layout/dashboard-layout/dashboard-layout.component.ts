@@ -65,15 +65,7 @@ export class DashboardLayoutComponent {
         RolesEnum.COMMUNITY_USER,
       ],
     },
-    {
-      icon: 'pets',
-      label: I18nMenuEnum.GAMIFICATION,
-      route: RoutesUrlsEnum.GAMIFICATION,
-      click: () => {
-        this.closeSidenav();
-      },
-      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER],
-    },
+  
     {
       icon: 'analytics',
       label: I18nMenuEnum.REPORTS,
