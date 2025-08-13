@@ -1,3 +1,4 @@
+
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
@@ -85,3 +86,4 @@ export class AboutUsPage {
     }
   ];
 }
+
