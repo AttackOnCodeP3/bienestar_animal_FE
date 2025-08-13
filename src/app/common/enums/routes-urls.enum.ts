@@ -89,4 +89,8 @@ export enum RoutesUrlsEnum {
   ANIMAL_DIAGNOSIS = 'animal-diagnosis',
   ANIMAL_DIAGNOSIS_LIST = 'animal-diagnosis-list',
   ANIMAL_DIAGNOSIS_CREATE = 'animal-diagnosis-create',
+
+  // Reports
+    ABANDONADOS_REPORT = 'abandonados-report',
+
 }

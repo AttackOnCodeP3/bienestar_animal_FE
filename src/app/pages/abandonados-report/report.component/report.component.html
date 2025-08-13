@@ -1,0 +1,52 @@
+<form [formGroup]="form" (ngSubmit)="fetchReport()" class="mb-4">
+  <div class="row">
+    <div class="col-md-3">
+      <label>Desde</label>
+      <input type="date" formControlName="from" class="form-control" />
+    </div>
+    <div class="col-md-3">
+      <label>Hasta</label>
+      <input type="date" formControlName="to" class="form-control" />
+    </div>
+    <div class="col-md-2">
+      <label>Cantón</label>
+      <input type="number" formControlName="cantonId" class="form-control" />
+    </div>
+    <div class="col-md-2">
+      <label>Municipio</label>
+      <input type="number" formControlName="municipalityId" class="form-control" />
+    </div>
+    <div class="col-md-2">
+      <label>Especie</label>
+      <input type="text" formControlName="speciesId" class="form-control" />
+    </div>
+    <div class="col-md-2">
+      <label>Distrito</label>
+      <input type="text" formControlName="district" class="form-control" />
+    </div>
+    <div class="col-md-2 align-self-end">
+      <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </div>
+    <div class="col-md-2 align-self-end">
+      <button type="button" class="btn btn-secondary w-100" (click)="downloadCsv()">Descargar CSV</button>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="loading()">Cargando...</div>
+<div *ngIf="error()">{{ error() }}</div>
+
+<table class="table table-bordered" *ngIf="rows().length">
+  <thead>
+    <tr>
+      <th>Cantón</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows()">
+      <td>{{ row.canton }}</td>
+      <td>{{ row.total }}</td>
+    </tr>
+  </tbody>
+</table>
