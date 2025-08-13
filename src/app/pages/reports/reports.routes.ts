@@ -22,6 +22,6 @@ export const REPORTS_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.REPORT_1,
-    loadComponent: () => import('@pages/abandonados-report/report.component/report.component').then(m => m.AbandonadosReportComponent),
+  loadComponent: () => import('../../dashboard/reports/report-1/report-1.component').then(m => m.Report1Component),
   }
 ] as const;
