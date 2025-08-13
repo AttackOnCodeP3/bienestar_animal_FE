@@ -14,7 +14,8 @@ import {PagesUrlsEnum} from '@common/enums';
 import {Constants} from '@common/constants/constants';
 import {AuthHttpService} from '@services/http';
 import {I18nPagesValidationsEnum} from '@common/enums/i18n';
-import {NavbarComponent} from '@components/general';
+import { NavbarComponent, FooterComponent } from '@components/general';
+
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ import {NavbarComponent} from '@components/general';
     MatDivider,
     MatTooltip,
     NavbarComponent,
-  ],
+    FooterComponent
+],
   templateUrl: './login.page.html',
   styleUrl: './login.page.scss',
   changeDetection: Constants.changeDetectionStrategy

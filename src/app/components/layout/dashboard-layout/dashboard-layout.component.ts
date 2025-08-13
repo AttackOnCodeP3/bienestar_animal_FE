@@ -12,7 +12,7 @@ import {I18nService, ThemeService} from '@services/general';
 import {I18nMenuEnum} from '@common/enums/i18n';
 import {Constants} from '@common/constants/constants';
 import {AuthHttpService} from '@services/http';
-import {NavbarComponent} from '@components/general';
+import { NavbarComponent, FooterComponent } from '@components/general';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -31,7 +31,8 @@ import {NavbarComponent} from '@components/general';
     RouterLinkActive,
     RouterOutlet,
     TranslatePipe,
-  ],
+    FooterComponent
+],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.scss',
   changeDetection: Constants.changeDetectionStrategy,
