@@ -127,6 +127,7 @@
           formControlName="phoneNumber"
           inputmode="numeric"
           pattern="[0-9]*"
+          maxlength="8"
           [errorStateMatcher]="formsService().matcher"
           [placeholder]="
             i18nService().i18nFormsEnum.PHONE_NUMBER_PLACEHOLDER | translate
