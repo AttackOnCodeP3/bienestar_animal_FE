@@ -1,0 +1,28 @@
+.footer {
+  background: #222;
+  color: #fff;
+  a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover {
+      color: #90caf9; 
+    }
+  }
+  .project-title {
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .mat-icon {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  .min-h{
+    min-height: 100px;
+  }
+  .logo-aoc{
+    max-width: 100px;
+    height: auto;
+  }
+}
+

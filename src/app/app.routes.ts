@@ -15,6 +15,11 @@ export const routes: Routes = [
       import('@pages/auth/auth.routes').then((m) => m.AUTH_ROUTES),
   },
   {
+    path: RoutesUrlsEnum.ABOUT_US,
+    loadComponent: () =>
+      import('@pages/about-us/about-us.page').then((m) => m.AboutUsPage),
+  },
+  {
     path: RoutesUrlsEnum.DASHBOARD,
     component: DashboardLayoutComponent,
     canActivate: [authGuard, profileCompletedGuard, forgotPasswordGuard],
