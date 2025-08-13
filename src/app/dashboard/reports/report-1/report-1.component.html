@@ -1,0 +1,25 @@
+<div class="reportes-container">
+  <h2>Reportes de Bienestar Animal</h2>
+  <div class="reportes-list">
+    <label for="reportType">Seleccione un reporte:</label>
+    <select id="reportType" [value]="selectedType()" (change)="onTypeChange($event.target.value)">
+      @for (option of reportTypes; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </div>
+
+  @if (loading()) {
+    <div class="loading">Cargando...</div>
+  } @else if (error()) {
+    <div class="error">{{ error() }}</div>
+  } @else if (showNoDataMessage) {
+    <div class="empty">No hay datos para el periodo/criterio seleccionado.</div>
+  } @else {
+    <apx-chart [series]="chartOptions().series" [chart]="chartOptions().chart" [xaxis]="chartOptions().xaxis" [title]="chartOptions().title"></apx-chart>
+    <div class="descarga-reporte">
+      <button type="button" class="btn btn-primary me-2 mt-3" (click)="download('csv')">Descargar CSV</button>
+      <button type="button" class="btn btn-secondary mt-3" (click)="download('pdf')">Descargar PDF</button>
+    </div>
+  }
+</div>

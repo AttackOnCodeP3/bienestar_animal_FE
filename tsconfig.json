@@ -24,6 +24,8 @@
       "@services/forms": ["app/services/forms/index.ts"], // Alias for forms index file
       "@services/utils": ["app/services/utils/index.ts"], // Alias for utils index file
       "@services/modals": ["app/services/modals/index.ts"], // Alias for modals index file
+      "@services/reportes": ["app/services/reportes.service.ts"],
+      "@services/*": ["src/app/services/*"],
 
       "@common/enums": ["app/common/enums/index.ts"], // Alias for enums index file
       "@common/enums/*": ["app/common/enums/*"],

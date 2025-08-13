@@ -65,19 +65,11 @@ export class DashboardLayoutComponent {
         RolesEnum.COMMUNITY_USER,
       ],
     },
-    {
-      icon: 'pets',
-      label: I18nMenuEnum.GAMIFICATION,
-      route: RoutesUrlsEnum.GAMIFICATION,
-      click: () => {
-        this.closeSidenav();
-      },
-      authorities: [RolesEnum.SUPER_ADMIN, RolesEnum.VOLUNTEER_USER],
-    },
+  
     {
       icon: 'analytics',
       label: I18nMenuEnum.REPORTS,
-      route: RoutesUrlsEnum.REPORTS,
+  route: `${RoutesUrlsEnum.REPORTS}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.REPORT_1}`,
       click: () => {
         this.closeSidenav();
       },
@@ -181,7 +173,7 @@ export class DashboardLayoutComponent {
       children: [
         {
           label: I18nMenuEnum.REGISTER_COMMUNITY_ANIMAL,
-          route: `${RoutesUrlsEnum.ANIMAL}/${RoutesUrlsEnum.REGISTER_COMMUNITY_ANIMAL_BY_CENSUS}`, // <-- ESTA ES LA CLAVE
+          route: `${RoutesUrlsEnum.ANIMAL}/${RoutesUrlsEnum.REGISTER_COMMUNITY_ANIMAL_BY_CENSUS}`,
           authorities: [RolesEnum.CENSISTA_USER],
           click: () => this.closeSidenav(),
         },

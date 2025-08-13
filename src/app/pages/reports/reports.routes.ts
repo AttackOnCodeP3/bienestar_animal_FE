@@ -1,5 +1,6 @@
 import {Routes} from '@angular/router';
 import {RoutesUrlsEnum} from '@common/enums/routes-urls.enum';
+import { AbandonadosReportComponent } from '@pages/abandonados-report/report.component/report.component';
 
 
 /**
@@ -11,6 +12,7 @@ import {RoutesUrlsEnum} from '@common/enums/routes-urls.enum';
  * @type {Routes}
  *
  * @author dgutierrez
+ * modify by @author nav
  */
 export const REPORTS_ROUTES: Routes = [
   {
@@ -20,6 +22,6 @@ export const REPORTS_ROUTES: Routes = [
   },
   {
     path: RoutesUrlsEnum.REPORT_1,
-    loadComponent: () => import('@pages/reports/report-1/report-1.page').then(m => m.Report1Page),
+  loadComponent: () => import('../../dashboard/reports/report-1/report-1.component').then(m => m.Report1Component),
   }
 ] as const;
