@@ -163,6 +163,12 @@ export class DashboardLayoutComponent {
           authorities: [RolesEnum.CENSISTA_USER],
           click: () => this.closeSidenav(),
         },
+        {
+          label: I18nMenuEnum.VIEW_ABANDONED_ANIMAL_RECORD,
+          route: `${RoutesUrlsEnum.ANIMAL}${RoutesUrlsEnum.SLASH}${RoutesUrlsEnum.VIEW_ABANDONED_ANIMAL_RECORD}`,
+          authorities: [RolesEnum.COMMUNITY_USER],
+          click: () => this.closeSidenav(),
+        },
       ],
     },
 

@@ -4,46 +4,45 @@ import {
 } from '@services/http';
 import {MatFormField, MatLabel, MatOption, MatSelect} from '@angular/material/select';
 import {GeneralContainerComponent} from '@components/layout';
-import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
+import {MatTableModule } from '@angular/material/table';
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
-import {MatTable, MatTableModule, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
-import { GlbViewerComponent } from '@components/model3D';
 import { GoogleMapsComponent } from '@components/googleMaps';
 import { Constants } from '@common/constants/constants';
-import { IViewAnimalRecord } from '@common/interfaces';
+import{IViewAnimalRecord} from '@common/interfaces/view-animal-record.interface';
+import { MatCardModule } from '@angular/material/card';
 
+/**
+ * Component for viewing the records of abandoned animals associated with the current user.
+ * 
+ * This page fetches and displays a list of abandoned animals for the authenticated owner.
+ * It allows selecting an animal to view its details and formats the animal's age for display.
+ * 
+ * @author @aBlancoC
+ */
 @Component({
   selector: 'app-view-animal-record-page',
-  templateUrl: './view-animal-record.page.html',
+  templateUrl: './view-abandoned-animal-record.page.html',
   imports: [
     MatSelect,
     GeneralContainerComponent,
     MatFormField,
     MatLabel,
     MatOption,
-    MatCard,
-    MatCardContent,
-    MatCardTitle,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MatTable,
     FormsModule,
     MatTableModule,
-    MatHeaderRowDef,
-    MatRowDef,
-    MatHeaderCellDef,
-    MatCellDef,
-    GlbViewerComponent,
-    GoogleMapsComponent
+    MatCardModule,
+    GoogleMapsComponent,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle
   ],
-  styleUrls: ['./view-animal-record.page.scss']
+  styleUrls: ['./view-abandoned-animal-record.page.scss']
 })
-export class ViewAnimalRecordPage implements OnInit {
+export class ViewAbandonedAnimalRecordPage implements OnInit {
   animalList: IViewAnimalRecord[] = [];
-  selectedAnimalId: string | number | null = null;
-  selectedAnimal: IViewAnimalRecord | null = null;
+  selectedAbandonedAnimalId: string | number | null = null;
+  selectedAbandonedAnimal: any | null = null;
 
   readonly animalService = inject(AnimalRecordHttpService);
   
@@ -61,14 +60,14 @@ export class ViewAnimalRecordPage implements OnInit {
       this.animalList = [];
       return;
     }
-    this.animalService.getAnimalsByOwnerId(ownerId).subscribe((response: any) => {
+    this.animalService.getAbandonedAnimalsByOwnerId(ownerId).subscribe((response: any) => {
       this.animalList = response || [];
     });
   }
 
   onAnimalSelect(animalId: string): void {
-    this.selectedAnimalId = animalId;
-    this.selectedAnimal = this.animalList.find(a => a.id === animalId) || null;
+    this.selectedAbandonedAnimalId = animalId;
+    this.selectedAbandonedAnimal = this.animalList.find(a => a.id === animalId) || null;
   }
     formatAge(age: any): string {
     if (!age) return '';

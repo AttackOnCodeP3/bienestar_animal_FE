@@ -8,3 +8,4 @@ export * from "./supported-language.interface";
 export * from "./vaccine-applied.interface";
 export * from "./coordinates.interface";
 export * from "./location-result.interface";
+export * from "./view-animal-record.interface";
