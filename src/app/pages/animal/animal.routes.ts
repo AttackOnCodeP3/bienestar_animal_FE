@@ -23,6 +23,12 @@ export const ANIMAL_ROUTES: Routes = [
     loadComponent: () => import('@pages/animal/view-animal-record/view-animal-record.page').then(m => m.ViewAnimalRecordPage)
   },
   {
+    path: RoutesUrlsEnum.VIEW_ABANDONED_ANIMAL_RECORD,
+    loadComponent: () =>
+      import('@pages/animal/view-abandoned-animal-record/view-abandoned-animal-record.page')
+        .then(m => m.ViewAbandonedAnimalRecordPage),
+  },
+  {
     path: RoutesUrlsEnum.CREATE_ANIMAL_PROFILE,
     loadComponent: () =>
       import('@pages/animal/create-animal-profile/create-animal-profile.page')
