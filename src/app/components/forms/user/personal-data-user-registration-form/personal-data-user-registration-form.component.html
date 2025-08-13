@@ -31,6 +31,7 @@
           type="text"
           matInput
           formControlName="name"
+          pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
           [errorStateMatcher]="formsService().matcher"
           [placeholder]="
             i18nService().i18nFormsEnum.NAME_PLACEHOLDER | translate
@@ -51,6 +52,7 @@
         <input
           type="text"
           matInput
+          pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
           formControlName="lastname"
           [errorStateMatcher]="formsService().matcher"
           [placeholder]="
