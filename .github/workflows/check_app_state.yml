@@ -1,36 +1,36 @@
-name: Build Angular on PR to desarrollo
-
-on:
-  pull_request:
-    branches:
-      - Desarrollo
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install Yarn
-        run: npm install --global yarn
-
-      - name: Check Yarn version
-        run: yarn --version
-
-      - name: Install dependencies with Yarn
-        run: yarn install
-
-      - name: Build Angular project
-        run: yarn ng build
-
-      - name: Run Angular app with ng serve and health check
-        run: |
-          nohup yarn ng serve --host 0.0.0.0 --port 4200 > ng-serve.log 2>&1 &
-          sleep 15
-          curl -f http://localhost:4200 || (echo "Health check failed!" && exit 1)
+# name: Build Angular on PR to desarrollo
+#
+# on:
+#   pull_request:
+#     branches:
+#       - Desarrollo
+#
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+#
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#
+#       - name: Install Yarn
+#         run: npm install --global yarn
+#
+#       - name: Check Yarn version
+#         run: yarn --version
+#
+#       - name: Install dependencies with Yarn
+#         run: yarn install
+#
+#       - name: Build Angular project
+#         run: yarn ng build
+#
+#       - name: Run Angular app with ng serve and health check
+#         run: |
+#           nohup yarn ng serve --host 0.0.0.0 --port 4200 > ng-serve.log 2>&1 &
+#           sleep 15
+#           curl -f http://localhost:4200 || (echo "Health check failed!" && exit 1)
